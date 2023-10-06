@@ -3,6 +3,7 @@ return {
   "AstroNvim/astrocommunity",
   -- Packs
   { import = "astrocommunity.pack.nix" },
+  { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.svelte" },
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.json" },
