@@ -32,7 +32,7 @@
           ".mix"
         ];
         files = [
-          ".local/share/fish/fish_history.txt"
+          ".local/share/fish/fish_history"
         ];
         allowOther = true;
       };
