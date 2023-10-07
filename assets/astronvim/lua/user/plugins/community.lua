@@ -10,6 +10,7 @@ return {
   { import = "astrocommunity.pack.html-css" },
   { import = "astrocommunity.pack.tailwindcss" },
   { import = "astrocommunity.pack.yaml" },
+  { import = "astrocommunity.pack.zig" },
   -- { import = "astrocommunity.pack.lua" },
   -- Motion
   { import = "astrocommunity.motion.leap-nvim" },
