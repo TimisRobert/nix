@@ -19,6 +19,7 @@
           "projects"
           "documents"
           ".cache/nix"
+          ".cache/elixir-tools"
           ".config/chromium"
           ".config/containers"
           ".config/Bitwarden CLI"
@@ -27,12 +28,12 @@
           ".local/state/nvim"
           ".local/share/Steam"
           ".local/share/zoxide"
+          ".local/share/fish"
           ".ssh"
           ".aws"
           ".mix"
         ];
         files = [
-          ".local/share/fish/fish_history"
         ];
         allowOther = true;
       };
