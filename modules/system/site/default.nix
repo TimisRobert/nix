@@ -166,6 +166,7 @@
           "$6$8vuSs91NJ39SZy.b$b2ujBj2.iq9pPpZD0XL4yS7oJ0ODG2eGfGf7YVLt5OLkthe1tgKyEYPzRDTNO9J0Om1mVPIdpCWE7MIwKspDa/";
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBvR28lwcOKIk7VRo/bXzxQGnA5evdsGcNZCy3BA6DDR rob@RobertTimis"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII/Uq1z6b6ITxQv6YhjTV6kNoOiQWAqDiJivnPPByM4q root@nixos"
         ];
       };
     };
