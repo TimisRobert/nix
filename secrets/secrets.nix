@@ -11,7 +11,8 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHfhp9bKaG+uebgNQQgDWsaALneiLASDU5eVSBqHHKnK root@site";
 
   keys = [ laptop desktop charon mail site ];
-in {
+in
+{
   "wireguard/charon.age".publicKeys = keys;
   "wireguard/laptop.age".publicKeys = keys;
   "wireguard/desktop.age".publicKeys = keys;
@@ -19,6 +20,7 @@ in {
   "hetznerDns.age".publicKeys = keys;
   "pgadmin.age".publicKeys = keys;
   "gitea.age".publicKeys = keys;
+  "giteaRunner.age".publicKeys = keys;
   "personal_site.age".publicKeys = keys;
   "infoPassword.age".publicKeys = keys;
   "borg/id_ed25519.age".publicKeys = keys;

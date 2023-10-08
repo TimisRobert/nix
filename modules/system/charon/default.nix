@@ -49,6 +49,20 @@
     };
   };
 
+  virtualisation = {
+    podman = {
+      enable = true;
+      dockerSocket.enable = true;
+      dockerCompat = true;
+      autoPrune = {
+        enable = true;
+        dates = "weekly";
+        flags = [ "--all" ];
+      };
+      defaultNetwork.settings = { dns_enabled = true; };
+    };
+  };
+
   age = {
     identityPaths = [ "/nix/persist/etc/ssh/ssh_host_ed25519_key" ];
     secrets = {
@@ -69,6 +83,14 @@
       };
       borgSsh = { file = ../../../secrets/borg/id_ed25519.age; };
       borgPassphrase = { file = ../../../secrets/borg/passphrase.age; };
+      infoPassword = {
+        file = ../../../secrets/infoPassword.age;
+        owner = "gitea";
+        group = "gitea";
+      };
+      giteaRunner = {
+        file = ../../../secrets/giteaRunner.age;
+      };
     };
   };
 
@@ -137,7 +159,21 @@
     gitea = {
       enable = true;
       database = { type = "postgres"; };
+      mailerPasswordFile = config.age.secrets.infoPassword.path;
       settings = {
+        actions = {
+          ENABLED = true;
+        };
+        ui = {
+          DEFAULT_THEME = "arc-green";
+        };
+        mailer = {
+          ENABLED = true;
+          PROTOCOL = "smtps";
+          SMTP_ADDR = "mail.roberttimis.com";
+          USER = "info@roberttimis.com";
+          FROM = "Gitea <info@roberttimis.com>";
+        };
         service = {
           DISABLE_REGISTRATION = true;
         };
@@ -147,6 +183,16 @@
           ROOT_URL = "https://git.roberttimis.com";
         };
       };
+    };
+    gitea-actions-runner.instances.runner = {
+      enable = true;
+      name = "runner";
+      url = config.services.gitea.settings.server.ROOT_URL;
+      tokenFile = config.age.secrets.giteaRunner.path;
+      labels = [
+        "self-hosted:host"
+        "ubuntu-latest:docker://catthehacker/ubuntu:act-latest"
+      ];
     };
     openssh = {
       enable = true;
