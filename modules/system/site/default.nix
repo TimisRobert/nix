@@ -42,10 +42,10 @@
             passwordFile = config.age.secrets.gitea.path;
           };
           autoStart = true;
-          image = "git.roberttimis.com/roberttimis/personal_site:latest";
+          image = "git.roberttimis.com/roberttimis/personal_site:master";
           extraOptions = [
             "--network=slirp4netns:allow_host_loopback=true"
-            "--pull=always"
+            "--pull=newer"
           ];
           ports = [ "4000:4000" ];
           environmentFiles = [ config.age.secrets.personal_site.path ];

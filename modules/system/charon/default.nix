@@ -34,7 +34,9 @@
         directories = [
           "/var/log"
           "/var/lib/acme"
+          "/var/lib/containers"
           "/var/lib/gitea"
+          "/var/lib/gitea-runner/runner"
           "/var/lib/bitwarden_rs"
           "/var/lib/postgresql"
         ];
