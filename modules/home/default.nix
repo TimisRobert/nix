@@ -170,6 +170,9 @@
       enable = true;
       userName = "RobertTimis";
       userEmail = "roberttimis@gmail.com";
+      extraConfig = {
+        init.defaultBranch = "main";
+      };
     };
     alacritty = {
       enable = true;

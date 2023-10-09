@@ -166,6 +166,9 @@
         actions = {
           ENABLED = true;
         };
+        repository = {
+          DEFAULT_BRANCH = "main";
+        };
         ui = {
           DEFAULT_THEME = "arc-green";
         };
