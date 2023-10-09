@@ -42,7 +42,7 @@
             passwordFile = config.age.secrets.gitea.path;
           };
           autoStart = true;
-          image = "git.roberttimis.com/roberttimis/personal_site:master";
+          image = "git.roberttimis.com/roberttimis/personal_site:main";
           extraOptions = [
             "--network=slirp4netns:allow_host_loopback=true"
             "--pull=newer"
