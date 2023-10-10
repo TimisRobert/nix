@@ -198,7 +198,7 @@
         tokenFile = config.age.secrets.forgejoRunner.path;
         labels = [
           "self-hosted:host"
-          "ubuntu-latest:docker://node:20"
+          "ubuntu-latest:docker://catthehacker/ubuntu:act-latest"
         ];
       };
 
