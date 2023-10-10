@@ -19,8 +19,8 @@ in
   "vaultwarden.age".publicKeys = keys;
   "hetznerDns.age".publicKeys = keys;
   "pgadmin.age".publicKeys = keys;
-  "gitea.age".publicKeys = keys;
-  "giteaRunner.age".publicKeys = keys;
+  "forgejo.age".publicKeys = keys;
+  "forgejoRunner.age".publicKeys = keys;
   "personal_site.age".publicKeys = keys;
   "infoPassword.age".publicKeys = keys;
   "borg/id_ed25519.age".publicKeys = keys;

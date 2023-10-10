@@ -35,8 +35,8 @@
           "/var/log"
           "/var/lib/acme"
           "/var/lib/containers"
-          "/var/lib/gitea"
-          "/var/lib/gitea-runner/runner"
+          "/var/lib/forgejo"
+          # "/var/lib/gitea-runner/runner"
           "/var/lib/bitwarden_rs"
           "/var/lib/postgresql"
         ];
@@ -87,11 +87,11 @@
       borgPassphrase = { file = ../../../secrets/borg/passphrase.age; };
       infoPassword = {
         file = ../../../secrets/infoPassword.age;
-        owner = "gitea";
-        group = "gitea";
+        owner = "forgejo";
+        group = "forgejo";
       };
-      giteaRunner = {
-        file = ../../../secrets/giteaRunner.age;
+      forgejoRunner = {
+        file = ../../../secrets/forgejoRunner.age;
       };
     };
   };
@@ -119,7 +119,7 @@
     resolved.enable = true;
     borgbackup.jobs."charon" = {
       paths =
-        [ "/var/lib/gitea" "/var/lib/bitwarden_rs" "/var/backup/postgresql" ];
+        [ "/var/lib/forgejo" "/var/lib/bitwarden_rs" "/var/backup/postgresql" ];
       exclude = [ ];
       repo = "u354949@u354949.your-storagebox.de:/home/charon";
       encryption = {
@@ -132,8 +132,8 @@
     };
     postgresql = {
       enable = true;
-      ensureUsers = [{ name = "gitea"; } { name = "vaultwarden"; }];
-      ensureDatabases = [ "gitea" "vaultwarden" ];
+      ensureUsers = [{ name = "vaultwarden"; } { name = "forgejo"; }];
+      ensureDatabases = [ "vaultwarden" "forgejo" ];
       authentication = ''
         local all postgres peer map=root
       '';
@@ -158,7 +158,7 @@
       dbBackend = "postgresql";
       environmentFile = config.age.secrets.vaultwarden.path;
     };
-    gitea = {
+    forgejo = {
       enable = true;
       database = { type = "postgres"; };
       mailerPasswordFile = config.age.secrets.infoPassword.path;
@@ -170,14 +170,14 @@
           DEFAULT_BRANCH = "main";
         };
         ui = {
-          DEFAULT_THEME = "arc-green";
+          DEFAULT_THEME = "forgejo-dark";
         };
         mailer = {
           ENABLED = true;
           PROTOCOL = "smtps";
           SMTP_ADDR = "mail.roberttimis.com";
           USER = "info@roberttimis.com";
-          FROM = "Gitea <info@roberttimis.com>";
+          FROM = "Forgejo <info@roberttimis.com>";
         };
         service = {
           DISABLE_REGISTRATION = true;
@@ -189,15 +189,19 @@
         };
       };
     };
-    gitea-actions-runner.instances.runner = {
-      enable = true;
-      name = "runner";
-      url = config.services.gitea.settings.server.ROOT_URL;
-      tokenFile = config.age.secrets.giteaRunner.path;
-      labels = [
-        "self-hosted:host"
-        "ubuntu-latest:docker://catthehacker/ubuntu:act-latest"
-      ];
+    gitea-actions-runner = {
+      package = pkgs.forgejo-actions-runner;
+      instances.runner = {
+        enable = false;
+        name = "runner";
+        url = config.services.forgejo.settings.server.ROOT_URL;
+        tokenFile = config.age.secrets.forgejoRunner.path;
+        labels = [
+          "self-hosted:host"
+          "ubuntu-latest:docker://catthehacker/ubuntu:act-latest"
+        ];
+      };
+
     };
     openssh = {
       enable = true;
@@ -215,7 +219,7 @@
         "git.roberttimis.com" = {
           forceSSL = true;
           useACMEHost = "wildcard.roberttimis.com";
-          locations."/".proxyPass = "http://unix:/run/gitea/gitea.sock";
+          locations."/".proxyPass = "http://unix:/run/forgejo/forgejo.sock";
         };
         "vault.roberttimis.com" = {
           forceSSL = true;

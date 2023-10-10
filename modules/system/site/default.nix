@@ -39,7 +39,7 @@
         personal_site = {
           login = {
             username = "RobertTimis";
-            passwordFile = config.age.secrets.gitea.path;
+            passwordFile = config.age.secrets.forgejo.path;
           };
           autoStart = true;
           image = "git.roberttimis.com/roberttimis/personal_site:main";
@@ -78,7 +78,7 @@
         owner = "acme";
         group = "acme";
       };
-      gitea = { file = ../../../secrets/gitea.age; };
+      forgejo = { file = ../../../secrets/forgejo.age; };
       personal_site = { file = ../../../secrets/personal_site.age; };
     };
   };
