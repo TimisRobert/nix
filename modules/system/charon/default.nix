@@ -36,7 +36,7 @@
           "/var/lib/acme"
           "/var/lib/containers"
           "/var/lib/forgejo"
-          # "/var/lib/gitea-runner/runner"
+          "/var/lib/gitea-runner/ci"
           "/var/lib/bitwarden_rs"
           "/var/lib/postgresql"
         ];
@@ -191,14 +191,14 @@
     };
     gitea-actions-runner = {
       package = pkgs.forgejo-actions-runner;
-      instances.runner = {
-        enable = false;
-        name = "runner";
+      instances.ci = {
+        enable = true;
+        name = "ci";
         url = config.services.forgejo.settings.server.ROOT_URL;
         tokenFile = config.age.secrets.forgejoRunner.path;
         labels = [
           "self-hosted:host"
-          "ubuntu-latest:docker://catthehacker/ubuntu:act-latest"
+          "ubuntu-latest:docker://node:20"
         ];
       };
 

@@ -25,4 +25,5 @@ in
   "infoPassword.age".publicKeys = keys;
   "borg/id_ed25519.age".publicKeys = keys;
   "borg/passphrase.age".publicKeys = keys;
+  "site/id_ed25519.age".publicKeys = keys;
 }
