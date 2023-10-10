@@ -168,8 +168,8 @@
     };
     git = {
       enable = true;
-      userName = "RobertTimis";
-      userEmail = "roberttimis@gmail.com";
+      userName = "roberttimis";
+      userEmail = "info@roberttimis.com";
       extraConfig = {
         init.defaultBranch = "main";
       };
