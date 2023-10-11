@@ -8,7 +8,6 @@ return {
       opts = {
         multiline_threshold = 5,
         trim_scope = "inner",
-        mode = "topline",
       },
     },
   },
