@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
@@ -16,6 +16,7 @@
 
       perSystem = { config, pkgs, lib, self', inputs', ... }:
         let
+          pname = "app";
           beamPkgs = with pkgs.beam_minimal;
             packagesWith
               (interpreters.erlang.override { installTargets = [ "install" ]; });
@@ -29,8 +30,8 @@
           buildImage = inputs'.nix2container.packages.nix2container.buildImage;
 
           default = mixRelease rec {
+            inherit pname;
             src = ./.;
-            pname = "app";
             version = "0.0.1";
 
             tailwindcss = pkgs.nodePackages.tailwindcss.overrideAttrs
@@ -54,13 +55,13 @@
           };
 
           container = buildImage {
-            name = "exscale";
+            name = pname;
             copyToRoot = pkgs.buildEnv {
               name = "root";
               paths = [ pkgs.busybox ];
               pathsToLink = [ "/bin" ];
             };
-            config = { entrypoint = [ "${default}/bin/exscale" "start" ]; };
+            config = { entrypoint = [ "${default}/bin/${pname}" "start" ]; };
           };
 
         in

@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    zig.url = "github:mitchellh/zig-overlay";
 
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
@@ -12,10 +13,10 @@
       imports = [ inputs.devshell.flakeModule ];
       systems = [ "x86_64-linux" "aarch64-darwin" ];
 
-      perSystem = { config, pkgs, lib, ... }: {
+      perSystem = { config, pkgs, inputs', ... }: {
         devshells.default = {
           packages = [
-            pkgs.elixir
+            inputs'.zig.packages.master
           ];
         };
       };

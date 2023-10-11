@@ -123,6 +123,10 @@
             description = "base elixir template";
             path = ./templates/elixir;
           };
+          zig = {
+            description = "base zig template";
+            path = ./templates/zig;
+          };
           svelte = {
             path = ./templates/svelte;
             description = "base svelte template with tailwind";
