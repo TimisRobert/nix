@@ -120,7 +120,12 @@
       };
       gaps.inner = 10;
       bars = [{ command = "waybar"; }];
-      input = { "type:keyboard" = { xkb_options = "caps:ctrl_modifier"; }; };
+      input = {
+        "type:keyboard" = {
+          xkb_layout = "us";
+          xkb_variant = "colemak";
+        };
+      };
       keybindings = lib.mkOptionDefault {
         "XF86MonBrightnessDown" = "exec light -U 5";
         "XF86MonBrightnessUp" = "exec light -A 5";
