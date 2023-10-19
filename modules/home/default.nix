@@ -177,6 +177,7 @@
       userEmail = "info@roberttimis.com";
       extraConfig = {
         init.defaultBranch = "main";
+        push.autoSetupRemote = true;
       };
     };
     alacritty = {
