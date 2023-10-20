@@ -123,6 +123,7 @@
       input = {
         "type:keyboard" = {
           xkb_layout = "us";
+          xkb_options = "caps:ctrl_modifier";
           # xkb_variant = "colemak";
         };
       };
