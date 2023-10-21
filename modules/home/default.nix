@@ -260,6 +260,13 @@
       interactiveShellInit = ''
         set fish_greeting
       '';
+      plugins = [
+        {
+          name = "forgit";
+          src =
+            pkgs.fishPlugins.forgit.src;
+        }
+      ];
       functions = {
         printscreen = "grim -g $(slurp -d) - | wl-copy -t image/png";
         screenshot = "grim -g $(slurp) $argv";
