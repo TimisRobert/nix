@@ -11,6 +11,8 @@ return {
   { import = "astrocommunity.pack.tailwindcss" },
   { import = "astrocommunity.pack.yaml" },
   { import = "astrocommunity.pack.zig" },
+  { import = "astrocommunity.pack.java" },
+  -- { import = "astrocommunity.pack.kotlin" },
   -- { import = "astrocommunity.pack.lua" },
   -- Motion
   { import = "astrocommunity.motion.leap-nvim" },

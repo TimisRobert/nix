@@ -44,7 +44,6 @@
       pkgs.stylua
       pkgs.selene
       # 
-      pkgs.upwork
       pkgs.lazygit
       pkgs.fzf
       pkgs.bitwarden-cli
