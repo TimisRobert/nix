@@ -1,8 +1,9 @@
-{ pkgs
-, inputs
-, config
-, hostName
-, ...
+{
+  pkgs,
+  inputs,
+  config,
+  hostName,
+  ...
 }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
@@ -26,7 +27,7 @@
   boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
-    kernel.sysctl = { "fs.inotify.max_user_watches" = 524288; };
+    kernel.sysctl = {"fs.inotify.max_user_watches" = 524288;};
   };
 
   powerManagement.cpuFreqGovernor = "performance";
@@ -37,7 +38,7 @@
   };
 
   age = {
-    identityPaths = [ "/nix/persist/home/rob/.ssh/id_ed25519 " ];
+    identityPaths = ["/nix/persist/home/rob/.ssh/id_ed25519 "];
     secrets = {
       wireguard = {
         file = ../../secrets/wireguard/${hostName}.age;
@@ -60,9 +61,9 @@
       autoPrune = {
         enable = true;
         dates = "weekly";
-        flags = [ "--all" ];
+        flags = ["--all"];
       };
-      defaultNetwork.settings = { dns_enabled = true; };
+      defaultNetwork.settings = {dns_enabled = true;};
     };
   };
 
@@ -84,7 +85,7 @@
             {
               wireguardPeerConfig = {
                 PublicKey = "5H2n+1A+GJtBjG6dRFK92Iu1QdnSL4ABvu66EvZ7aBk=";
-                AllowedIPs = [ "10.0.0.0/24" ];
+                AllowedIPs = ["10.0.0.0/24"];
                 Endpoint = "49.13.14.55:51820";
                 PersistentKeepalive = 25;
               };
@@ -99,7 +100,7 @@
     hostName = hostName;
     networkmanager.enable = true;
     nftables.enable = true;
-    firewall.allowedUDPPorts = [ 51820 ];
+    firewall.allowedUDPPorts = [51820];
     extraHosts = ''
       10.0.0.1 vault.roberttimis.com
     '';
@@ -112,7 +113,10 @@
   programs = {
     light.enable = true;
     fuse.userAllowOther = true;
-    fish.enable = true;
+    fish = {
+      enable = true;
+      vendor.config.enable = false;
+    };
   };
 
   users = {
@@ -123,7 +127,7 @@
     users.rob = {
       shell = pkgs.fish;
       isNormalUser = true;
-      extraGroups = [ "wheel" "video" ];
+      extraGroups = ["wheel" "video"];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBvR28lwcOKIk7VRo/bXzxQGnA5evdsGcNZCy3BA6DDR rob@RobertTimis"
       ];
@@ -132,10 +136,10 @@
   };
 
   environment = {
-    systemPackages = [ pkgs.vim ];
+    systemPackages = [pkgs.vim];
     persistence = {
       "/nix/persist" = {
-        directories = [ "/var/log" "/etc/NetworkManager/system-connections" ];
+        directories = ["/var/log" "/etc/NetworkManager/system-connections"];
         files = [
           "/etc/machine-id"
           "/etc/ssh/ssh_host_rsa_key"
@@ -172,7 +176,7 @@
       pulse.enable = true;
     };
     blueman.enable = true;
-    openssh = { enable = true; };
+    openssh = {enable = true;};
   };
 
   hardware.opengl.enable = true;
@@ -181,9 +185,9 @@
 
   fonts = {
     enableDefaultPackages = true;
-    packages = [ (pkgs.nerdfonts.override { fonts = [ "Mononoki" ]; }) ];
+    packages = [(pkgs.nerdfonts.override {fonts = ["Mononoki"];})];
     fontconfig = {
-      defaultFonts = { monospace = [ "Mononoki Nerd Font Mono" ]; };
+      defaultFonts = {monospace = ["Mononoki Nerd Font Mono"];};
     };
   };
 

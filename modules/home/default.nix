@@ -1,11 +1,12 @@
-{ config
-, age
-, pkgs
-, lib
-, inputs
-, ...
+{
+  config,
+  age,
+  pkgs,
+  lib,
+  inputs,
+  ...
 }: {
-  imports = [ inputs.impermanence.nixosModules.home-manager.impermanence ];
+  imports = [inputs.impermanence.nixosModules.home-manager.impermanence];
 
   home = {
     username = "rob";
@@ -25,7 +26,6 @@
           "projects"
           "documents"
           ".cache/nix"
-          ".cache/elixir-tools"
           ".config/chromium"
           ".config/containers"
           ".config/Bitwarden CLI"
@@ -147,7 +147,7 @@
         titlebar = false;
       };
       gaps.inner = 10;
-      bars = [{ command = "waybar"; }];
+      bars = [{command = "waybar";}];
       input = {
         "type:keyboard" = {
           xkb_layout = "us";
@@ -170,7 +170,7 @@
     pueue = {
       enable = true;
       settings = {
-        shared = { };
+        shared = {};
       };
     };
     swayidle = {
@@ -198,8 +198,8 @@
     chromium = {
       enable = true;
       extensions = [
-        { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; }
-        { id = "nngceckbapebfimnlniiiahkandclblb"; }
+        {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";}
+        {id = "nngceckbapebfimnlniiiahkandclblb";}
       ];
     };
     git = {
@@ -214,18 +214,16 @@
     alacritty = {
       enable = true;
       settings = {
-        import = [ ../../assets/kanagawa.yml ];
-        window = { opacity = 0.95; };
-        font = { size = 12.0; };
+        import = [../../assets/kanagawa.yml];
+        window = {opacity = 0.95;};
+        font = {size = 12.0;};
       };
     };
     zoxide = {
       enable = true;
-      enableFishIntegration = true;
     };
     starship = {
       enable = true;
-      enableFishIntegration = true;
       enableTransience = true;
       settings = {
         "$schema" = "https://starship.rs/config-schema.json";
@@ -244,7 +242,6 @@
     };
     fzf = {
       enable = true;
-      enableFishIntegration = true;
     };
     lazygit = {
       enable = true;
