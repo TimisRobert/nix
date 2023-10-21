@@ -20,12 +20,17 @@
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
 
-    simple-nixos-mailserver.url =
-      "gitlab:simple-nixos-mailserver/nixos-mailserver";
+    simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
     simple-nixos-mailserver.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nixpkgs, flake-parts, deploy-rs, ... }:
+  outputs =
+    inputs @ { self
+    , nixpkgs
+    , flake-parts
+    , deploy-rs
+    , ...
+    }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "aarch64-linux" "x86_64-linux" ];
       imports = [ inputs.devshell.flakeModule ];
@@ -85,24 +90,27 @@
               hostname = "49.13.14.55";
               profiles.system = {
                 sshUser = "root";
-                path = deploy-rs.lib.aarch64-linux.activate.nixos
-                  self.nixosConfigurations.charon;
+                path =
+                  deploy-rs.lib.aarch64-linux.activate.nixos
+                    self.nixosConfigurations.charon;
               };
             };
             mail = {
               hostname = "49.13.17.69";
               profiles.system = {
                 sshUser = "root";
-                path = deploy-rs.lib.aarch64-linux.activate.nixos
-                  self.nixosConfigurations.mail;
+                path =
+                  deploy-rs.lib.aarch64-linux.activate.nixos
+                    self.nixosConfigurations.mail;
               };
             };
             site = {
               hostname = "49.13.78.96";
               profiles.system = {
                 sshUser = "root";
-                path = deploy-rs.lib.aarch64-linux.activate.nixos
-                  self.nixosConfigurations.site;
+                path =
+                  deploy-rs.lib.aarch64-linux.activate.nixos
+                    self.nixosConfigurations.site;
               };
             };
           };
@@ -114,7 +122,7 @@
             path = ./templates/phoenix;
             description = "base phoenix liveview template";
             welcomeText = ''
-              To install the rest run the following commands: 
+              To install the rest run the following commands:
                 - mix archive.install hex phx_new
                 - mix phx.new .
             '';
@@ -139,7 +147,7 @@
         };
       };
 
-      perSystem = { config, pkgs, lib, self', inputs', ... }: {
+      perSystem = { inputs', ... }: {
         devshells.default = {
           packages = [
             inputs'.agenix.packages.default

@@ -1,4 +1,10 @@
-{ config, age, pkgs, lib, inputs, ... }: {
+{ config
+, age
+, pkgs
+, lib
+, inputs
+, ...
+}: {
   imports = [ inputs.impermanence.nixosModules.home-manager.impermanence ];
 
   home = {
@@ -39,22 +45,45 @@
       };
     };
     packages = [
+      # Java
+      pkgs.jdt-language-server
+      pkgs.lemminx
+      pkgs.clang-tools
+      # Zig
+      pkgs.zls
+      # Yaml
+      pkgs.yaml-language-server
+      # HTML CSS
+      pkgs.nodePackages."@tailwindcss/language-server"
+      pkgs.emmet-ls
+      pkgs.vscode-langservers-extracted
+      # Typescript
+      pkgs.nodePackages.typescript-language-server
+      pkgs.prettierd
+      # Svelte
+      pkgs.nodePackages.svelte-language-server
+      # Bash
+      pkgs.nodePackages.bash-language-server
+      pkgs.shellcheck
+      pkgs.shfmt
+      # Nix
+      pkgs.statix
+      pkgs.alejandra
+      pkgs.deadnix
+      pkgs.rnix-lsp
       # Lua
       pkgs.lua-language-server
       pkgs.stylua
       pkgs.selene
-      # 
-      pkgs.lazygit
-      pkgs.fzf
-      pkgs.bitwarden-cli
+      # Elixir
+      pkgs.beamPackages.elixir-ls
+      # System
       pkgs.xdg-utils
-      pkgs.simp1e-cursors
       pkgs.pamixer
       pkgs.wl-clipboard
       pkgs.grim
       pkgs.slurp
       pkgs.swayimg
-      pkgs.ripgrep
       pkgs.gnumake
       pkgs.unzip
       pkgs.gcc
@@ -146,11 +175,13 @@
     };
     swayidle = {
       enable = true;
-      timeouts = [{
-        timeout = 600;
-        command = ''${pkgs.sway}/bin/swaymsg "output * dpms off"'';
-        resumeCommand = ''${pkgs.sway}/bin/swaymsg "output * dpms on"'';
-      }];
+      timeouts = [
+        {
+          timeout = 600;
+          command = ''${pkgs.sway}/bin/swaymsg "output * dpms off"'';
+          resumeCommand = ''${pkgs.sway}/bin/swaymsg "output * dpms on"'';
+        }
+      ];
     };
     mako.enable = true;
   };
@@ -204,13 +235,30 @@
         };
       };
     };
+    rbw = {
+      enable = true;
+      settings = {
+        email = "info@roberttimis.com";
+        base_url = "https://vault.roberttimis.com";
+      };
+    };
+    fzf = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+    lazygit = {
+      enable = true;
+    };
     direnv = {
+      enable = true;
+    };
+    ripgrep = {
       enable = true;
     };
     fish = {
       enable = true;
       interactiveShellInit = ''
-        set fish_greeting 
+        set fish_greeting
       '';
       functions = {
         printscreen = "grim -g $(slurp -d) - | wl-copy -t image/png";

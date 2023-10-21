@@ -1,4 +1,9 @@
-{ pkgs, inputs, config, hostName, ... }: {
+{ pkgs
+, inputs
+, config
+, hostName
+, ...
+}: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.agenix.nixosModules.default
@@ -75,14 +80,16 @@
             ListenPort = 51820;
             PrivateKeyFile = config.age.secrets.wireguard.path;
           };
-          wireguardPeers = [{
-            wireguardPeerConfig = {
-              PublicKey = "5H2n+1A+GJtBjG6dRFK92Iu1QdnSL4ABvu66EvZ7aBk=";
-              AllowedIPs = [ "10.0.0.0/24" ];
-              Endpoint = "49.13.14.55:51820";
-              PersistentKeepalive = 25;
-            };
-          }];
+          wireguardPeers = [
+            {
+              wireguardPeerConfig = {
+                PublicKey = "5H2n+1A+GJtBjG6dRFK92Iu1QdnSL4ABvu66EvZ7aBk=";
+                AllowedIPs = [ "10.0.0.0/24" ];
+                Endpoint = "49.13.14.55:51820";
+                PersistentKeepalive = 25;
+              };
+            }
+          ];
         };
       };
     };
@@ -111,8 +118,7 @@
   users = {
     mutableUsers = false;
     users.root = {
-      initialHashedPassword =
-        "$6$j/pzPQRWiXIb13xT$KWBX22k/90J1RWpB8iUjeqTHpPO0Ip8eGE4K8UOfJYqLgbvzhK1reLBJfIUWAVc6rhRN1i7VeF4v8prrVOUzx/";
+      initialHashedPassword = "$6$j/pzPQRWiXIb13xT$KWBX22k/90J1RWpB8iUjeqTHpPO0Ip8eGE4K8UOfJYqLgbvzhK1reLBJfIUWAVc6rhRN1i7VeF4v8prrVOUzx/";
     };
     users.rob = {
       shell = pkgs.fish;
@@ -121,8 +127,7 @@
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBvR28lwcOKIk7VRo/bXzxQGnA5evdsGcNZCy3BA6DDR rob@RobertTimis"
       ];
-      initialHashedPassword =
-        "$6$j/pzPQRWiXIb13xT$KWBX22k/90J1RWpB8iUjeqTHpPO0Ip8eGE4K8UOfJYqLgbvzhK1reLBJfIUWAVc6rhRN1i7VeF4v8prrVOUzx/";
+      initialHashedPassword = "$6$j/pzPQRWiXIb13xT$KWBX22k/90J1RWpB8iUjeqTHpPO0Ip8eGE4K8UOfJYqLgbvzhK1reLBJfIUWAVc6rhRN1i7VeF4v8prrVOUzx/";
     };
   };
 

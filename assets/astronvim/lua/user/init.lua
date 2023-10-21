@@ -50,8 +50,25 @@ return {
     -- enable servers that you already have installed without mason
     servers = {
       "lua_ls",
+      "rnix",
+      "bashls",
+      "svelte",
+      "tsserver",
+      "jsonls",
+      "html",
+      "cssls",
+      "emmet_ls",
+      "tailwindcss",
+      "yamlls",
+      "zls",
+      "jdtls",
+      "lemminx",
+      "elixirls",
     },
     config = {
+      elixirls = {
+        cmd = { "elixir-ls" },
+      },
       tailwindcss = {
         root_dir = function(fname)
           local util = require "lspconfig.util"

@@ -9,10 +9,19 @@ return {
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
     config.sources = {
       -- Set a formatter
+      -- Lua
       null_ls.builtins.formatting.stylua,
       null_ls.builtins.diagnostics.selene,
-      -- null_ls.builtins.formatting.prettierd,
-      -- null_ls.builtins.formatting.nixfmt,
+      -- Nix
+      null_ls.builtins.code_actions.statix,
+      null_ls.builtins.formatting.alejandra,
+      null_ls.builtins.diagnostics.deadnix,
+      -- Bash
+      null_ls.builtins.diagnostics.shellcheck,
+      null_ls.builtins.formatting.shfmt,
+      -- Typescript
+      null_ls.builtins.formatting.prettierd,
+      null_ls.builtins.diagnostics.eslint,
       -- null_ls.builtins.formatting.mix.with {
       --   extra_filetypes = { "heex" },
       -- },
