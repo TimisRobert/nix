@@ -263,6 +263,10 @@
           src =
             pkgs.fishPlugins.forgit.src;
         }
+        {
+          name = "plugin-git";
+          src = pkgs.fishPlugins.plugin-git.src;
+        }
       ];
       functions = {
         printscreen = "grim -g $(slurp -d) - | wl-copy -t image/png";
