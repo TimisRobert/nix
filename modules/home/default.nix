@@ -25,6 +25,7 @@
           "projects"
           "documents"
           ".cache/nix"
+          ".config/qmk"
           ".config/chromium"
           ".config/containers"
           ".config/Bitwarden CLI"
