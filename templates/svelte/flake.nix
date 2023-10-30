@@ -6,12 +6,16 @@
     devshell.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ flake-parts, ... }:
+  outputs = inputs @ { flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } ({ moduleWithSystem, ... }: {
       imports = [ inputs.devshell.flakeModule ];
       systems = [ "x86_64-linux" "aarch64-darwin" ];
 
-      perSystem = { config, pkgs, ... }:
+      perSystem =
+        { config
+        , pkgs
+        , ...
+        }:
         let
           default = pkgs.buildNpmPackage {
             name = "svelte";
@@ -29,7 +33,6 @@
               cp -r build/. $out
             '';
           };
-
         in
         {
           packages.default = { inherit default; };
@@ -51,17 +54,18 @@
               }
             ];
 
-            commands = [{
-              name = "codegen";
-              help = "generate kysely types";
-              command = "npm run codegen";
-            }];
+            commands = [
+              {
+                name = "codegen";
+                help = "generate kysely types";
+                command = "npm run codegen";
+              }
+            ];
 
             serviceGroups = {
               webserver = {
                 services.svelte.command = "npm run dev";
-                services.postgres.command =
-                  "postgres -c unix_socket_directories=$PGDATA";
+                services.postgres.command = "postgres -c unix_socket_directories=$PGDATA";
               };
             };
 

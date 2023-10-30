@@ -9,12 +9,24 @@
     nix2container.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ flake-parts, nixpkgs, nix2container, ... }:
+  outputs =
+    inputs @ { flake-parts
+    , nixpkgs
+    , nix2container
+    , ...
+    }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "aarch64-linux" "x86_64-linux" ];
       imports = [ inputs.devshell.flakeModule ];
 
-      perSystem = { config, pkgs, lib, self', inputs', ... }:
+      perSystem =
+        { config
+        , pkgs
+        , lib
+        , self'
+        , inputs'
+        , ...
+        }:
         let
           pname = "app";
           beamPkgs = with pkgs.beam_minimal;
@@ -34,10 +46,11 @@
             src = ./.;
             version = "0.0.1";
 
-            tailwindcss = pkgs.nodePackages.tailwindcss.overrideAttrs
-              (oldAttrs: {
-                plugins = [ pkgs.nodePackages."@tailwindcss/forms" ];
-              });
+            tailwindcss =
+              pkgs.nodePackages.tailwindcss.overrideAttrs
+                (oldAttrs: {
+                  plugins = [ pkgs.nodePackages."@tailwindcss/forms" ];
+                });
 
             mixFodDeps = fetchMixDeps {
               inherit pname version src;
@@ -63,7 +76,6 @@
             };
             config = { entrypoint = [ "${default}/bin/${pname}" "start" ]; };
           };
-
         in
         {
           packages = { inherit default container; };
@@ -75,16 +87,17 @@
               pkgs.elixir
             ];
 
-            env = [{
-              name = "PGDATA";
-              eval = "$PRJ_DATA_DIR/.db";
-            }];
+            env = [
+              {
+                name = "PGDATA";
+                eval = "$PRJ_DATA_DIR/.db";
+              }
+            ];
 
             serviceGroups = {
               webserver = {
                 services.phoenix.command = "mix setup && mix phx.server";
-                services.postgres.command =
-                  "postgres -c unix_socket_directories=$PGDATA";
+                services.postgres.command = "postgres -c unix_socket_directories=$PGDATA";
               };
             };
 

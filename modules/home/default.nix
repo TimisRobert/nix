@@ -84,10 +84,7 @@
       pkgs.grim
       pkgs.slurp
       pkgs.swayimg
-      pkgs.gnumake
       pkgs.unzip
-      pkgs.gcc
-      pkgs.fd
     ];
   };
 
