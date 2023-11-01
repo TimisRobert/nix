@@ -88,27 +88,6 @@
     ];
   };
 
-  accounts.email.accounts = {
-    info = {
-      realName = "Robert Timis";
-      address = "info@roberttimis.com";
-      userName = "info@roberttimis.com";
-      primary = true;
-      imap = {
-        host = "mail.roberttimis.com";
-        port = 993;
-        tls.enable = true;
-      };
-      smtp = {
-        host = "mail.roberttimis.com";
-        port = 465;
-        tls.enable = true;
-      };
-      passwordCommand = "cat ${age.secrets.infoPassword.path}";
-      himalaya.enable = true;
-    };
-  };
-
   xdg = {
     enable = true;
     userDirs = {
@@ -201,8 +180,8 @@
     };
     git = {
       enable = true;
-      userName = "roberttimis";
-      userEmail = "info@roberttimis.com";
+      userName = "TimisRobert";
+      userEmail = "roberttimis@gmail.com";
       extraConfig = {
         init.defaultBranch = "main";
         push.autoSetupRemote = true;
@@ -233,7 +212,7 @@
     rbw = {
       enable = true;
       settings = {
-        email = "info@roberttimis.com";
+        email = "roberttimis@gmail.com";
         base_url = "https://vault.roberttimis.com";
       };
     };
@@ -266,6 +245,5 @@
         screenshot = "grim -g $(slurp) $argv";
       };
     };
-    himalaya.enable = true;
   };
 }

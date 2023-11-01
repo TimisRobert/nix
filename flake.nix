@@ -19,9 +19,6 @@
 
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
-
-    simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
-    simple-nixos-mailserver.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -67,14 +64,6 @@
             };
             modules = [ ./modules/system/charon ./modules/hardware/charon ];
           };
-          mail = nixpkgs.lib.nixosSystem {
-            system = "aarch64-linux";
-            specialArgs = {
-              inherit inputs;
-              hostName = "mail";
-            };
-            modules = [ ./modules/system/mail ./modules/hardware/mail ];
-          };
           site = nixpkgs.lib.nixosSystem {
             system = "aarch64-linux";
             specialArgs = {
@@ -93,15 +82,6 @@
                 path =
                   deploy-rs.lib.aarch64-linux.activate.nixos
                     self.nixosConfigurations.charon;
-              };
-            };
-            mail = {
-              hostname = "49.13.17.69";
-              profiles.system = {
-                sshUser = "root";
-                path =
-                  deploy-rs.lib.aarch64-linux.activate.nixos
-                    self.nixosConfigurations.mail;
               };
             };
             site = {
@@ -158,11 +138,6 @@
               name = "deploy-charon";
               help = "deploy to node charon";
               command = "deploy .#charon";
-            }
-            {
-              name = "deploy-mail";
-              help = "deploy to node mail";
-              command = "deploy .#mail";
             }
             {
               name = "deploy-site";

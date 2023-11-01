@@ -1,4 +1,11 @@
-{ pkgs, config, inputs, modulesPath, lib, hostName, ... }: {
+{ pkgs
+, config
+, inputs
+, modulesPath
+, lib
+, hostName
+, ...
+}: {
   imports = [
     "${modulesPath}/profiles/hardened.nix"
     inputs.agenix.nixosModules.default
@@ -118,8 +125,7 @@
   services = {
     resolved.enable = true;
     borgbackup.jobs."charon" = {
-      paths =
-        [ "/var/lib/forgejo" "/var/lib/bitwarden_rs" "/var/backup/postgresql" ];
+      paths = [ "/var/lib/forgejo" "/var/lib/bitwarden_rs" "/var/backup/postgresql" ];
       exclude = [ ];
       repo = "u354949@u354949.your-storagebox.de:/home/charon";
       encryption = {
@@ -161,7 +167,6 @@
     forgejo = {
       enable = true;
       database = { type = "postgres"; };
-      mailerPasswordFile = config.age.secrets.infoPassword.path;
       settings = {
         actions = {
           ENABLED = true;
@@ -171,13 +176,6 @@
         };
         ui = {
           DEFAULT_THEME = "forgejo-dark";
-        };
-        mailer = {
-          ENABLED = true;
-          PROTOCOL = "smtps";
-          SMTP_ADDR = "mail.roberttimis.com";
-          USER = "info@roberttimis.com";
-          FROM = "Forgejo <info@roberttimis.com>";
         };
         service = {
           DISABLE_REGISTRATION = true;
@@ -201,7 +199,6 @@
           "ubuntu-latest:docker://catthehacker/ubuntu:act-latest"
         ];
       };
-
     };
     openssh = {
       enable = true;
@@ -269,10 +266,12 @@
       "20-wg" = {
         matchConfig.Name = "wg0";
         networkConfig = { Address = [ "10.0.0.1/32" ]; };
-        routes = [{
-          routeConfig.Gateway = "10.0.0.1";
-          routeConfig.Destination = "10.0.0.0/24";
-        }];
+        routes = [
+          {
+            routeConfig.Gateway = "10.0.0.1";
+            routeConfig.Destination = "10.0.0.0/24";
+          }
+        ];
         DHCP = "no";
       };
     };
@@ -302,8 +301,7 @@
     users = {
       nginx = { extraGroups = [ "acme" ]; };
       root = {
-        initialHashedPassword =
-          "$6$8vuSs91NJ39SZy.b$b2ujBj2.iq9pPpZD0XL4yS7oJ0ODG2eGfGf7YVLt5OLkthe1tgKyEYPzRDTNO9J0Om1mVPIdpCWE7MIwKspDa/";
+        initialHashedPassword = "$6$8vuSs91NJ39SZy.b$b2ujBj2.iq9pPpZD0XL4yS7oJ0ODG2eGfGf7YVLt5OLkthe1tgKyEYPzRDTNO9J0Om1mVPIdpCWE7MIwKspDa/";
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBvR28lwcOKIk7VRo/bXzxQGnA5evdsGcNZCy3BA6DDR rob@RobertTimis"
         ];
