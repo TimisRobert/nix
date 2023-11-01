@@ -61,8 +61,6 @@ return {
       "tailwindcss",
       "yamlls",
       "zls",
-      "jdtls",
-      "lemminx",
       "elixirls",
     },
     config = {

@@ -45,10 +45,6 @@
       };
     };
     packages = [
-      # Java
-      pkgs.jdt-language-server
-      pkgs.lemminx
-      pkgs.clang-tools
       # Zig
       pkgs.zls
       # Yaml
