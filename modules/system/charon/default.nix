@@ -41,7 +41,7 @@
         directories = [
           "/var/log"
           "/var/lib/acme"
-          "/var/lib/containers"
+          "/var/lib/docker"
           "/var/lib/forgejo"
           "/var/lib/gitea-runner/ci"
           "/var/lib/bitwarden_rs"
@@ -59,16 +59,17 @@
   };
 
   virtualisation = {
-    podman = {
+    docker = {
       enable = true;
-      dockerSocket.enable = true;
-      dockerCompat = true;
+      rootless = {
+        enable = true;
+        setSocketVariable = true;
+      };
       autoPrune = {
         enable = true;
         dates = "weekly";
         flags = [ "--all" ];
       };
-      defaultNetwork.settings = { dns_enabled = true; };
     };
   };
 
@@ -196,7 +197,7 @@
         tokenFile = config.age.secrets.forgejoRunner.path;
         labels = [
           "self-hosted:host"
-          "ubuntu-latest:docker://catthehacker/ubuntu:act-latest"
+          "ubuntu:docker://catthehacker/ubuntu:act-22.04"
         ];
       };
     };
