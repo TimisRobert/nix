@@ -2,11 +2,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    devshell.url = "github:numtide/devshell";
-    devshell.inputs.nixpkgs.follows = "nixpkgs";
-
-    nix2container.url = "github:nlewo/nix2container";
-    nix2container.inputs.nixpkgs.follows = "nixpkgs";
+    devenv.url = "github:cachix/devenv";
+    devenv.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -16,14 +13,13 @@
     , ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "aarch64-linux" "x86_64-linux" ];
-      imports = [ inputs.devshell.flakeModule ];
+      systems = nixpkgs.lib.system.flakeExposed;
+      imports = [ inputs.devenv.flakeModule ];
 
       perSystem =
         { config
         , pkgs
         , lib
-        , self'
         , inputs'
         , ...
         }:
@@ -48,7 +44,7 @@
 
             tailwindcss =
               pkgs.nodePackages.tailwindcss.overrideAttrs
-                (oldAttrs: {
+                (_oldAttrs: {
                   plugins = [ pkgs.nodePackages."@tailwindcss/forms" ];
                 });
 
@@ -80,33 +76,14 @@
         {
           packages = { inherit default container; };
 
-          devshells.default = {
+          devenv.shells.default = {
             packages = [
-              pkgs.postgresql
               pkgs.inotify-tools
               pkgs.elixir
             ];
 
-            env = [
-              {
-                name = "PGDATA";
-                eval = "$PRJ_DATA_DIR/.db";
-              }
-            ];
-
-            serviceGroups = {
-              webserver = {
-                services.phoenix.command = "mix setup && mix phx.server";
-                services.postgres.command = "postgres -c unix_socket_directories=$PGDATA";
-              };
-            };
-
-            devshell.startup.setup_database.text = ''
-              if [[ ! -d "$PGDATA" ]]; then
-                mkdir -p $PGDATA
-                initdb -U postgres
-              fi
-            '';
+            services.postgres.enable = true;
+            processes .phoenix.exec = "mix setup && mix phx.server";
           };
         };
     };

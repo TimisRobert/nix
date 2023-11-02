@@ -2,26 +2,25 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    devshell.url = "github:numtide/devshell";
-    devshell.inputs.nixpkgs.follows = "nixpkgs";
+    devenv.url = "github:cachix/devenv";
+    devenv.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs @ { flake-parts, ... }:
+  outputs =
+    inputs @ { flake-parts
+    , nixpkgs
+    , ...
+    }:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [ inputs.devshell.flakeModule ];
-      systems = [ "x86_64-linux" "aarch64-darwin" ];
+      imports = [ inputs.devenv.flakeModule ];
+      systems = nixpkgs.lib.system.flakeExposed;
 
-      perSystem =
-        { config
-        , pkgs
-        , lib
-        , ...
-        }: {
-          devshells.default = {
-            packages = [
-              pkgs.elixir
-            ];
-          };
+      perSystem = { pkgs, ... }: {
+        devenv.shells.default = {
+          packages = [
+            pkgs.elixir
+          ];
         };
+      };
     };
 }
