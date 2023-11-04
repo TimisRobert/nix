@@ -55,6 +55,7 @@
       pkgs.vscode-langservers-extracted
       # Typescript
       pkgs.nodePackages.typescript-language-server
+      pkgs.nodePackages.eslint_d
       pkgs.prettierd
       # Svelte
       pkgs.nodePackages.svelte-language-server

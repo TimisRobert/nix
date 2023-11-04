@@ -13,7 +13,7 @@
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [ inputs.devenv.flakeModule ];
-      systems = nixpkgs.lib.system.flakeExposed;
+      systems = nixpkgs.lib.systems.flakeExposed;
 
       perSystem = { pkgs, ... }:
         let

@@ -17,8 +17,8 @@
     astronvim.url = "github:AstroNvim/AstroNvim";
     astronvim.flake = false;
 
-    devshell.url = "github:numtide/devshell";
-    devshell.inputs.nixpkgs.follows = "nixpkgs";
+    devenv.url = "github:cachix/devenv";
+    devenv.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -29,8 +29,8 @@
     , ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "aarch64-linux" "x86_64-linux" ];
-      imports = [ inputs.devshell.flakeModule ];
+      systems = nixpkgs.lib.systems.flakeExposed;
+      imports = [ inputs.devenv.flakeModule ];
       flake = {
         nixosConfigurations = {
           desktop = nixpkgs.lib.nixosSystem {
@@ -128,23 +128,16 @@
       };
 
       perSystem = { inputs', ... }: {
-        devshells.default = {
+        devenv.shells.default = {
           packages = [
             inputs'.agenix.packages.default
             inputs'.deploy-rs.packages.default
           ];
-          commands = [
-            {
-              name = "deploy-charon";
-              help = "deploy to node charon";
-              command = "deploy .#charon";
-            }
-            {
-              name = "deploy-site";
-              help = "deploy to node site";
-              command = "deploy .#site";
-            }
-          ];
+
+          scripts = {
+            deploy-charon.exec = "deploy .#charon";
+            deploy-site.exec = "deploy .#site";
+          };
         };
       };
     };

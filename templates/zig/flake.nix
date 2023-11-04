@@ -7,10 +7,14 @@
     devenv.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs @ { flake-parts, ... }:
+  outputs =
+    inputs @ { flake-parts
+    , nixpkgs
+    , ...
+    }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [ inputs.devenv.flakeModule ];
-      systems = [ "x86_64-linux" "aarch64-darwin" ];
+      systems = nixpkgs.lib.systems.flakeExposed;
 
       perSystem = { inputs', ... }: {
         devenv.shells.default = {
