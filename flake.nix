@@ -34,6 +34,7 @@
       flake = {
         nixosConfigurations = {
           desktop = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
             specialArgs = {
               inherit inputs;
               hostName = "desktop";
@@ -73,6 +74,7 @@
             modules = [ ./modules/system/site ./modules/hardware/site ];
           };
         };
+
         deploy = {
           nodes = {
             charon = {
@@ -97,6 +99,9 @@
           remoteBuild = true;
           fastConnection = true;
         };
+
+        # checks = builtins.mapAttrs (_system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+
         templates = {
           phoenix = {
             path = ./templates/phoenix;
@@ -127,18 +132,23 @@
         };
       };
 
-      perSystem = { inputs', ... }: {
-        devenv.shells.default = {
-          packages = [
-            inputs'.agenix.packages.default
-            inputs'.deploy-rs.packages.default
-          ];
+      perSystem =
+        { inputs'
+        , pkgs
+        , ...
+        }: {
+          devenv.shells.default = {
+            containers = pkgs.lib.mkForce { };
+            packages = [
+              inputs'.agenix.packages.default
+              inputs'.deploy-rs.packages.default
+            ];
 
-          scripts = {
-            deploy-charon.exec = "deploy .#charon";
-            deploy-site.exec = "deploy .#site";
+            scripts = {
+              deploy-charon.exec = "deploy .#charon -- --impure";
+              deploy-site.exec = "deploy .#site -- --impure";
+            };
           };
         };
-      };
     };
 }
