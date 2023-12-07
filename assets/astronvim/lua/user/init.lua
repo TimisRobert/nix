@@ -64,6 +64,9 @@ return {
       "elixirls",
     },
     config = {
+      emmet_ls = {
+        filetypes = { "html", "css", "svelte", "javascript", "elixir", "eelixir", "heex" },
+      },
       elixirls = {
         cmd = { "elixir-ls" },
       },
