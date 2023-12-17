@@ -41,6 +41,7 @@ return {
       },
       disabled = { -- disable formatting capabilities for the listed language servers
         "lua_ls",
+        "html",
       },
       timeout_ms = 10000, -- default format timeout
       -- filter = function(client) -- fully override the default formatting function
@@ -64,9 +65,6 @@ return {
       "elixirls",
     },
     config = {
-      emmet_ls = {
-        filetypes = { "html", "css", "svelte", "javascript", "elixir", "eelixir", "heex" },
-      },
       elixirls = {
         cmd = { "elixir-ls" },
       },
