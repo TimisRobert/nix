@@ -189,20 +189,19 @@
         };
       };
     };
-    # gitea-actions-runner = {
-    #   enable = false;
-    #   package = pkgs.forgejo-actions-runner;
-    #   instances.ci = {
-    #     enable = true;
-    #     name = "ci";
-    #     url = config.services.forgejo.settings.server.ROOT_URL;
-    #     tokenFile = config.age.secrets.forgejoRunner.path;
-    #     labels = [
-    #       "self-hosted:host"
-    #       "ubuntu:docker://catthehacker/ubuntu:act-22.04"
-    #     ];
-    #   };
-    # };
+    gitea-actions-runner = {
+      package = pkgs.forgejo-actions-runner;
+      instances.ci = {
+        enable = true;
+        name = "ci";
+        url = config.services.forgejo.settings.server.ROOT_URL;
+        tokenFile = config.age.secrets.forgejoRunner.path;
+        labels = [
+          "self-hosted:host"
+          "ubuntu:docker://catthehacker/ubuntu:act-22.04"
+        ];
+      };
+    };
     openssh = {
       enable = true;
       settings.PermitRootLogin = "prohibit-password";
