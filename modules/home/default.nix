@@ -44,6 +44,8 @@
       };
     };
     packages = [
+      # Astro
+      pkgs.nodePackages."@astrojs/language-server"
       # Zig
       pkgs.zls
       # Yaml

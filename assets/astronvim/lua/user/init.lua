@@ -63,6 +63,7 @@ return {
       "yamlls",
       "zls",
       "elixirls",
+      "astro",
     },
     config = {
       elixirls = {
