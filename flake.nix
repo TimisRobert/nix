@@ -26,6 +26,7 @@
     , nixpkgs
     , flake-parts
     , deploy-rs
+    , agenix
     , ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -100,7 +101,7 @@
           fastConnection = true;
         };
 
-        # checks = builtins.mapAttrs (_system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+        # checks = builtins.mapAttrs (_system: deployLib: deployLib.deployChecks self.deploy) deployPkgs.deploy-rs.lib;
 
         templates = {
           phoenix = {
@@ -133,15 +134,21 @@
       };
 
       perSystem =
-        { inputs'
-        , pkgs
+        { pkgs
+        , system
         , ...
         }: {
+          _module.args.pkgs = import inputs.nixpkgs {
+            inherit system;
+            overlays = [
+              agenix.overlays.default
+            ];
+          };
           devenv.shells.default = {
             containers = pkgs.lib.mkForce { };
             packages = [
-              inputs'.agenix.packages.default
-              inputs'.deploy-rs.packages.default
+              pkgs.agenix
+              pkgs.deploy-rs
             ];
 
             scripts = {
