@@ -6,7 +6,6 @@
 }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    inputs.agenix.nixosModules.default
     inputs.impermanence.nixosModules.impermanence
   ];
 
@@ -37,22 +36,6 @@
     configPackages = [ pkgs.xdg-desktop-portal-wlr ];
   };
 
-  age = {
-    identityPaths = [ "/nix/persist/home/rob/.ssh/id_ed25519 " ];
-    secrets = {
-      wireguard = {
-        file = ../../secrets/wireguard/${hostName}.age;
-        owner = "systemd-network";
-        group = "systemd-network";
-      };
-      infoPassword = {
-        file = ../../secrets/infoPassword.age;
-        owner = "rob";
-        group = "users";
-      };
-    };
-  };
-
   virtualisation = {
     podman = {
       enable = true;
@@ -69,31 +52,6 @@
 
   systemd = {
     services.NetworkManager-wait-online.enable = false;
-    network = {
-      enable = true;
-      netdevs = {
-        "wg0" = {
-          netdevConfig = {
-            Name = "wg0";
-            Kind = "wireguard";
-          };
-          wireguardConfig = {
-            ListenPort = 51820;
-            PrivateKeyFile = config.age.secrets.wireguard.path;
-          };
-          wireguardPeers = [
-            {
-              wireguardPeerConfig = {
-                PublicKey = "5H2n+1A+GJtBjG6dRFK92Iu1QdnSL4ABvu66EvZ7aBk=";
-                AllowedIPs = [ "10.0.0.0/24" ];
-                Endpoint = "49.13.14.55:51820";
-                PersistentKeepalive = 25;
-              };
-            }
-          ];
-        };
-      };
-    };
   };
 
   networking = {

@@ -8,30 +8,18 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    deploy-rs.url = "github:serokell/deploy-rs";
-    deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
-
-    agenix.url = "github:ryantm/agenix";
-    agenix.inputs.nixpkgs.follows = "nixpkgs";
-
     astronvim.url = "github:AstroNvim/AstroNvim";
     astronvim.flake = false;
-
-    devenv.url = "github:cachix/devenv";
-    devenv.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
-    inputs @ { self
-    , nixpkgs
+    inputs @ { nixpkgs
     , flake-parts
-    , deploy-rs
-    , agenix
     , ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = nixpkgs.lib.systems.flakeExposed;
-      imports = [ inputs.devenv.flakeModule ];
+      imports = [ ];
       flake = {
         nixosConfigurations = {
           desktop = nixpkgs.lib.nixosSystem {
@@ -58,50 +46,7 @@
               ./modules/hardware/laptop
             ];
           };
-          charon = nixpkgs.lib.nixosSystem {
-            system = "aarch64-linux";
-            specialArgs = {
-              inherit inputs;
-              hostName = "charon";
-            };
-            modules = [ ./modules/system/charon ./modules/hardware/charon ];
-          };
-          site = nixpkgs.lib.nixosSystem {
-            system = "aarch64-linux";
-            specialArgs = {
-              inherit inputs;
-              hostName = "site";
-            };
-            modules = [ ./modules/system/site ./modules/hardware/site ];
-          };
         };
-
-        deploy = {
-          nodes = {
-            charon = {
-              hostname = "49.13.14.55";
-              profiles.system = {
-                sshUser = "root";
-                path =
-                  deploy-rs.lib.aarch64-linux.activate.nixos
-                    self.nixosConfigurations.charon;
-              };
-            };
-            site = {
-              hostname = "49.13.78.96";
-              profiles.system = {
-                sshUser = "root";
-                path =
-                  deploy-rs.lib.aarch64-linux.activate.nixos
-                    self.nixosConfigurations.site;
-              };
-            };
-          };
-          remoteBuild = true;
-          fastConnection = true;
-        };
-
-        # checks = builtins.mapAttrs (_system: deployLib: deployLib.deployChecks self.deploy) deployPkgs.deploy-rs.lib;
 
         templates = {
           phoenix = {
@@ -132,30 +77,5 @@
           };
         };
       };
-
-      perSystem =
-        { pkgs
-        , system
-        , ...
-        }: {
-          _module.args.pkgs = import inputs.nixpkgs {
-            inherit system;
-            overlays = [
-              agenix.overlays.default
-            ];
-          };
-          devenv.shells.default = {
-            containers = pkgs.lib.mkForce { };
-            packages = [
-              pkgs.agenix
-              pkgs.deploy-rs
-            ];
-
-            scripts = {
-              deploy-charon.exec = "deploy .#charon -- --impure";
-              deploy-site.exec = "deploy .#site -- --impure";
-            };
-          };
-        };
     };
 }

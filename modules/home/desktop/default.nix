@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, ... }: {
+{ ... }: {
   imports = [ ../default.nix ];
 
   programs = {
@@ -103,81 +103,83 @@
           padding-left: 10px;
         }
       '';
-      settings = [{
-        modules-left = [ "sway/workspaces" ];
-        modules-center = [ "clock" ];
-        modules-right = [
-          "pulseaudio"
-          "backlight"
-          "memory"
-          "cpu"
-          "network"
-          "battery"
-          "temperature"
-          "tray"
-        ];
-        "sway/workspaces" = { "disable-scroll" = true; };
-        "backlight" = {
-          "device" = "intel_backlight";
-          "on-scroll-up" = "light -A 5";
-          "on-scroll-down" = "light -U 5";
-          "format" = "{icon} {percent}%";
-          "format-icons" = [ "󰃝" "󰃞" "󰃟" "󰃠" ];
-        };
-        "pulseaudio" = {
-          "scroll-step" = 1;
-          "format" = "{icon} {volume}%";
-          "format-muted" = "󰖁 Muted";
-          "format-icons" = { "default" = [ "" "" "" ]; };
-          "on-click" = "pamixer -t";
-          "tooltip" = false;
-        };
-        "battery" = {
-          "interval" = 10;
-          "states" = {
-            "warning" = 20;
-            "critical" = 10;
+      settings = [
+        {
+          modules-left = [ "sway/workspaces" ];
+          modules-center = [ "clock" ];
+          modules-right = [
+            "pulseaudio"
+            "backlight"
+            "memory"
+            "cpu"
+            "network"
+            "battery"
+            "temperature"
+            "tray"
+          ];
+          "sway/workspaces" = { "disable-scroll" = true; };
+          "backlight" = {
+            "device" = "intel_backlight";
+            "on-scroll-up" = "light -A 5";
+            "on-scroll-down" = "light -U 5";
+            "format" = "{icon} {percent}%";
+            "format-icons" = [ "󰃝" "󰃞" "󰃟" "󰃠" ];
           };
-          "format" = "{icon} {capacity}%";
-          "format-icons" = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
-          "format-full" = "{icon} {capacity}%";
-          "format-charging" = "󰂄 {capacity}%";
-          "tooltip" = false;
-        };
-        "clock" = {
-          "interval" = 1;
-          "format" = "{:%I:%M %p  %A %b %d}";
-          "tooltip" = true;
-          "tooltip-format" = ''
-            <big>{:%Y %B}</big>
-            <tt><small>{calendar}</small></tt>'';
-        };
-        "memory" = {
-          "interval" = 1;
-          "format" = "󰍛 {percentage}%";
-          "states" = { "warning" = 85; };
-        };
-        "cpu" = {
-          "interval" = 1;
-          "format" = "󰻠 {usage}%";
-        };
-        "network" = {
-          "interval" = 5;
-          "format-wifi" = "󰖩 {essid} {signalStrength}%";
-          "format-ethernet" = "󰀂 {ifname} {ipaddr}";
-          "format-linked" = "󰖪 {essid} (No IP)";
-          "format-disconnected" = "󰯡 Disconnected";
-          "tooltip" = false;
-        };
-        "temperature" = {
-          "tooltip" = false;
-          "format" = " {temperatureC}°C";
-        };
-        "tray" = {
-          "icon-size" = 15;
-          "spacing" = 5;
-        };
-      }];
+          "pulseaudio" = {
+            "scroll-step" = 1;
+            "format" = "{icon} {volume}%";
+            "format-muted" = "󰖁 Muted";
+            "format-icons" = { "default" = [ "" "" "" ]; };
+            "on-click" = "pamixer -t";
+            "tooltip" = false;
+          };
+          "battery" = {
+            "interval" = 10;
+            "states" = {
+              "warning" = 20;
+              "critical" = 10;
+            };
+            "format" = "{icon} {capacity}%";
+            "format-icons" = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
+            "format-full" = "{icon} {capacity}%";
+            "format-charging" = "󰂄 {capacity}%";
+            "tooltip" = false;
+          };
+          "clock" = {
+            "interval" = 1;
+            "format" = "{:%I:%M %p  %A %b %d}";
+            "tooltip" = true;
+            "tooltip-format" = ''
+              <big>{:%Y %B}</big>
+              <tt><small>{calendar}</small></tt>'';
+          };
+          "memory" = {
+            "interval" = 1;
+            "format" = "󰍛 {percentage}%";
+            "states" = { "warning" = 85; };
+          };
+          "cpu" = {
+            "interval" = 1;
+            "format" = "󰻠 {usage}%";
+          };
+          "network" = {
+            "interval" = 5;
+            "format-wifi" = "󰖩 {essid} {signalStrength}%";
+            "format-ethernet" = "󰀂 {ifname} {ipaddr}";
+            "format-linked" = "󰖪 {essid} (No IP)";
+            "format-disconnected" = "󰯡 Disconnected";
+            "tooltip" = false;
+          };
+          "temperature" = {
+            "tooltip" = false;
+            "format" = " {temperatureC}°C";
+          };
+          "tray" = {
+            "icon-size" = 15;
+            "spacing" = 5;
+          };
+        }
+      ];
     };
   };
 }
