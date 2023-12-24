@@ -58,10 +58,6 @@
     hostName = hostName;
     networkmanager.enable = true;
     nftables.enable = true;
-    firewall.allowedUDPPorts = [ 51820 ];
-    extraHosts = ''
-      10.0.0.1 vault.roberttimis.com
-    '';
   };
 
   time.timeZone = "Europe/Rome";

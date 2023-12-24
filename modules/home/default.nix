@@ -207,13 +207,6 @@
         };
       };
     };
-    rbw = {
-      enable = true;
-      settings = {
-        email = "roberttimis@gmail.com";
-        base_url = "https://vault.roberttimis.com";
-      };
-    };
     fzf = {
       enable = true;
     };
