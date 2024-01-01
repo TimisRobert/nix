@@ -21,7 +21,9 @@ return {
       null_ls.builtins.formatting.shfmt,
       -- Typescript
       null_ls.builtins.formatting.prettierd,
-      null_ls.builtins.diagnostics.eslint_d,
+      null_ls.builtins.diagnostics.eslint_d.with {
+        condition = function(utils) return utils.root_has_file { ".eslintrc.js", ".eslintrc.cjs" } end,
+      },
       -- null_ls.builtins.formatting.mix.with {
       --   extra_filetypes = { "heex" },
       -- },
