@@ -1,5 +1,5 @@
-{ ... }: {
-  imports = [ ../default.nix ];
+{...}: {
+  imports = [../default.nix];
 
   programs = {
     waybar = {
@@ -105,8 +105,8 @@
       '';
       settings = [
         {
-          modules-left = [ "sway/workspaces" ];
-          modules-center = [ "clock" ];
+          modules-left = ["sway/workspaces"];
+          modules-center = ["clock"];
           modules-right = [
             "pulseaudio"
             "backlight"
@@ -117,19 +117,19 @@
             "temperature"
             "tray"
           ];
-          "sway/workspaces" = { "disable-scroll" = true; };
+          "sway/workspaces" = {"disable-scroll" = true;};
           "backlight" = {
             "device" = "intel_backlight";
             "on-scroll-up" = "light -A 5";
             "on-scroll-down" = "light -U 5";
             "format" = "{icon} {percent}%";
-            "format-icons" = [ "󰃝" "󰃞" "󰃟" "󰃠" ];
+            "format-icons" = ["󰃝" "󰃞" "󰃟" "󰃠"];
           };
           "pulseaudio" = {
             "scroll-step" = 1;
             "format" = "{icon} {volume}%";
             "format-muted" = "󰖁 Muted";
-            "format-icons" = { "default" = [ "" "" "" ]; };
+            "format-icons" = {"default" = ["" "" ""];};
             "on-click" = "pamixer -t";
             "tooltip" = false;
           };
@@ -140,7 +140,7 @@
               "critical" = 10;
             };
             "format" = "{icon} {capacity}%";
-            "format-icons" = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
+            "format-icons" = ["󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
             "format-full" = "{icon} {capacity}%";
             "format-charging" = "󰂄 {capacity}%";
             "tooltip" = false;
@@ -156,7 +156,7 @@
           "memory" = {
             "interval" = 1;
             "format" = "󰍛 {percentage}%";
-            "states" = { "warning" = 85; };
+            "states" = {"warning" = 85;};
           };
           "cpu" = {
             "interval" = 1;

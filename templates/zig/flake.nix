@@ -7,16 +7,16 @@
     devenv.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs =
-    inputs @ { flake-parts
-    , nixpkgs
-    , ...
-    }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [ inputs.devenv.flakeModule ];
+  outputs = inputs @ {
+    flake-parts,
+    nixpkgs,
+    ...
+  }:
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      imports = [inputs.devenv.flakeModule];
       systems = nixpkgs.lib.systems.flakeExposed;
 
-      perSystem = { inputs', ... }: {
+      perSystem = {inputs', ...}: {
         devenv.shells.default = {
           packages = [
             inputs'.zig.packages.master

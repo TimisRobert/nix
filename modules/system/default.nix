@@ -1,8 +1,9 @@
-{ pkgs
-, inputs
-, config
-, hostName
-, ...
+{
+  pkgs,
+  inputs,
+  config,
+  hostName,
+  ...
 }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
@@ -25,7 +26,6 @@
   boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
-    kernel.sysctl = { "fs.inotify.max_user_watches" = 524288; };
   };
 
   powerManagement.cpuFreqGovernor = "performance";
@@ -33,7 +33,7 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    configPackages = [ pkgs.xdg-desktop-portal-wlr ];
+    configPackages = [pkgs.xdg-desktop-portal-wlr];
   };
 
   virtualisation = {
@@ -44,9 +44,9 @@
       autoPrune = {
         enable = true;
         dates = "weekly";
-        flags = [ "--all" ];
+        flags = ["--all"];
       };
-      defaultNetwork.settings = { dns_enabled = true; };
+      defaultNetwork.settings = {dns_enabled = true;};
     };
   };
 
@@ -81,7 +81,7 @@
     users.rob = {
       shell = pkgs.fish;
       isNormalUser = true;
-      extraGroups = [ "wheel" "video" ];
+      extraGroups = ["wheel" "video"];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBvR28lwcOKIk7VRo/bXzxQGnA5evdsGcNZCy3BA6DDR rob@RobertTimis"
       ];
@@ -90,10 +90,10 @@
   };
 
   environment = {
-    systemPackages = [ pkgs.vim ];
+    systemPackages = [pkgs.vim];
     persistence = {
       "/nix/persist" = {
-        directories = [ "/var/log" "/etc/NetworkManager/system-connections" ];
+        directories = ["/var/log" "/etc/NetworkManager/system-connections"];
         files = [
           "/etc/machine-id"
           "/etc/ssh/ssh_host_rsa_key"
@@ -131,7 +131,7 @@
       pulse.enable = true;
     };
     blueman.enable = true;
-    openssh = { enable = true; };
+    openssh = {enable = true;};
   };
 
   hardware.opengl.enable = true;
@@ -141,9 +141,9 @@
 
   fonts = {
     enableDefaultPackages = true;
-    packages = [ (pkgs.nerdfonts.override { fonts = [ "Mononoki" ]; }) ];
+    packages = [(pkgs.nerdfonts.override {fonts = ["Mononoki"];})];
     fontconfig = {
-      defaultFonts = { monospace = [ "Mononoki Nerd Font Mono" ]; };
+      defaultFonts = {monospace = ["Mononoki Nerd Font Mono"];};
     };
   };
 

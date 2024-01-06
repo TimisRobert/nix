@@ -1,8 +1,8 @@
-{ inputs, ... }: {
+{inputs, ...}: {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {inherit inputs;};
     users.rob = import ../../home/laptop;
   };
 
@@ -13,7 +13,7 @@
 
   environment = {
     persistence = {
-      "/nix/persist/laptop" = { directories = [ "/var/cache/powertop" ]; };
+      "/nix/persist/laptop" = {directories = ["/var/cache/powertop"];};
     };
   };
 }

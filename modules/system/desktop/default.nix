@@ -1,15 +1,14 @@
-{ inputs
-, pkgs
-, ...
-}:
-let
-  proton-ge = pkgs.callPackage ../../../pkgs/proton-ge.nix { };
-in
 {
+  inputs,
+  pkgs,
+  ...
+}: let
+  proton-ge = pkgs.callPackage ../../../pkgs/proton-ge.nix {};
+in {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {inherit inputs;};
     users.rob = import ../../home/desktop;
   };
 
