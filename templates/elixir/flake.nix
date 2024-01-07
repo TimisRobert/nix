@@ -18,7 +18,7 @@
       perSystem = {pkgs, ...}: {
         devenv.shells.default = {
           packages = [
-            pkgs.elixir
+            pkgs.elixir_1_16
           ];
         };
       };
