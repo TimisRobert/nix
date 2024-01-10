@@ -131,7 +131,6 @@
       pulse.enable = true;
     };
     blueman.enable = true;
-    openssh = {enable = true;};
   };
 
   hardware.opengl.enable = true;
