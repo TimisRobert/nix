@@ -24,7 +24,7 @@
         devenv.shells.default = {
           packages = [
             pkgs.inotify-tools
-            pkgs.elixir_1_16
+            pkgs.elixir
           ];
 
           services.postgres = {

@@ -18,6 +18,7 @@
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
       EDITOR = "nvim";
+      ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
     };
     persistence = {
       "/nix/persist/home/rob" = {
@@ -27,20 +28,17 @@
           ".cache/nix"
           ".config/qmk"
           ".config/chromium"
-          ".config/containers"
           ".config/Bitwarden CLI"
           ".local/share/nvim"
-          ".local/share/direnv"
           ".local/state/nvim"
-          ".local/share/Steam"
+          ".local/share/direnv"
           ".local/share/zoxide"
           ".local/share/fish"
           ".ssh"
           ".aws"
           ".mix"
         ];
-        files = [
-        ];
+        files = [];
         allowOther = true;
       };
     };
@@ -142,12 +140,6 @@
   };
 
   services = {
-    pueue = {
-      enable = true;
-      settings = {
-        shared = {};
-      };
-    };
     swayidle = {
       enable = true;
       timeouts = [
@@ -227,9 +219,9 @@
       '';
       plugins = [
         {
-          name = "forgit";
+          name = "plugin-git";
           src =
-            pkgs.fishPlugins.forgit.src;
+            pkgs.fishPlugins.plugin-git.src;
         }
       ];
       functions = {
