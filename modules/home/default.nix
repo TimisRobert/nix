@@ -28,7 +28,6 @@
           ".cache/nix"
           ".config/qmk"
           ".config/chromium"
-          ".config/Bitwarden CLI"
           ".local/share/nvim"
           ".local/state/nvim"
           ".local/share/direnv"
