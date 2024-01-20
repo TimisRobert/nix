@@ -37,12 +37,16 @@
   };
 
   virtualisation = {
-    docker = {
+    podman = {
       enable = true;
-      rootless = {
+      dockerSocket.enable = true;
+      dockerCompat = true;
+      autoPrune = {
         enable = true;
-        setSocketVariable = true;
+        dates = "weekly";
+        flags = ["--all"];
       };
+      defaultNetwork.settings = {dns_enabled = true;};
     };
   };
 
