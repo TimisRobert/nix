@@ -17,6 +17,7 @@
     };
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
+      XDG_CURRENT_DESKTOP = "sway";
       EDITOR = "nvim";
       ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
     };
@@ -27,7 +28,7 @@
           "documents"
           ".cache/nix"
           ".config/qmk"
-          ".config/chromium"
+          ".mozilla"
           ".local/share/nvim"
           ".local/state/nvim"
           ".local/share/direnv"
@@ -156,18 +157,12 @@
     neovim = {
       enable = true;
       defaultEditor = true;
-
       vimAlias = true;
       withPython3 = true;
       withNodeJs = true;
     };
-    chromium = {
+    firefox = {
       enable = true;
-      extensions = [
-        {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";}
-        {id = "ghmbeldphafepmbegfdlkpapadhbakde";}
-        {id = "jplgfhpmjnbigmhklmmbgecoobifkmpa";}
-      ];
     };
     git = {
       enable = true;

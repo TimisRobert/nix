@@ -33,7 +33,10 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    configPackages = [pkgs.xdg-desktop-portal-wlr];
+    configPackages = [
+      pkgs.xdg-desktop-portal-wlr
+      pkgs.xdg-desktop-portal-gtk
+    ];
   };
 
   virtualisation = {
