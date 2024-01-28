@@ -165,13 +165,14 @@
       enable = true;
       extensions = [
         {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";}
-        {id = "nngceckbapebfimnlniiiahkandclblb";}
+        {id = "ghmbeldphafepmbegfdlkpapadhbakde";}
+        {id = "jplgfhpmjnbigmhklmmbgecoobifkmpa";}
       ];
     };
     git = {
       enable = true;
       userName = "TimisRobert";
-      userEmail = "roberttimis@gmail.com";
+      userEmail = "roberttimis@proton.me";
       extraConfig = {
         init.defaultBranch = "main";
         push.autoSetupRemote = true;
