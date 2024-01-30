@@ -3,7 +3,6 @@
 # to /etc/nixos/configuration.nix instead.
 {
   config,
-  pkgs,
   lib,
   modulesPath,
   ...
@@ -46,7 +45,6 @@
   # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  hardware.cpu.intel.updateMicrocode =
+  hardware.cpu.amd.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

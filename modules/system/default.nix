@@ -136,9 +136,13 @@
     blueman.enable = true;
   };
 
-  hardware.opengl.enable = true;
-  hardware.keyboard.qmk.enable = true;
-  hardware.bluetooth.enable = true;
+  hardware = {
+    opengl.enable = true;
+    keyboard.qmk.enable = true;
+    bluetooth.enable = true;
+    enableRedistributableFirmware = true;
+  };
+
   zramSwap.enable = true;
 
   fonts = {
@@ -149,5 +153,5 @@
     };
   };
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "24.05";
 }
