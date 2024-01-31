@@ -6,5 +6,10 @@
     users.rob = import ../../home/desktop;
   };
 
-  boot.swraid.enable = true;
+  boot.swraid = {
+    enable = true;
+    mdadmConf = ''
+      MAILADDR nobody@example.com
+    '';
+  };
 }

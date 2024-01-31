@@ -1,5 +1,3 @@
-local utils = require "astronvim.utils"
-
 return {
   "nvim-treesitter/nvim-treesitter",
   dependencies = {
@@ -12,32 +10,30 @@ return {
     },
   },
   opts = function(_, opts)
-    if opts.ensure_installed ~= "all" then
+    opts.ensure_installed = require("astronvim.utils").list_insert_unique(opts.ensure_installed, {
       -- Elixir
-      opts.ensure_installed = utils.list_insert_unique(opts.ensure_installed, "elixir")
-      opts.ensure_installed = utils.list_insert_unique(opts.ensure_installed, "heex")
+      "elixir",
+      "heex",
       -- Nix
-      opts.ensure_installed = utils.list_insert_unique(opts.ensure_installed, "nix")
+      "nix",
       -- Bash
-      opts.ensure_installed = utils.list_insert_unique(opts.ensure_installed, "bash")
+      "bash",
       -- Svelte
-      opts.ensure_installed = utils.list_insert_unique(opts.ensure_installed, "svelte")
+      "svelte",
       -- Typescript
-      opts.ensure_installed = utils.list_insert_unique(opts.ensure_installed, "javascript")
-      opts.ensure_installed = utils.list_insert_unique(opts.ensure_installed, "typescript")
-      opts.ensure_installed = utils.list_insert_unique(opts.ensure_installed, "tsx")
+      "javascript",
+      "typescript",
+      "tsx",
       -- Json
-      opts.ensure_installed = utils.list_insert_unique(opts.ensure_installed, "json")
-      opts.ensure_installed = utils.list_insert_unique(opts.ensure_installed, "jsonc")
+      "json",
+      "jsonc",
       -- HTML CSS
-      opts.ensure_installed = utils.list_insert_unique(opts.ensure_installed, "html")
-      opts.ensure_installed = utils.list_insert_unique(opts.ensure_installed, "css")
+      "html",
+      "css",
       -- Yaml
-      opts.ensure_installed = utils.list_insert_unique(opts.ensure_installed, "yaml")
+      "yaml",
       -- Zig
-      opts.ensure_installed = utils.list_insert_unique(opts.ensure_installed, "zig")
-      -- Java
-      opts.ensure_installed = utils.list_insert_unique(opts.ensure_installed, "java")
-    end
+      "zig",
+    })
   end,
 }
