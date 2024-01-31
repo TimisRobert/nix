@@ -111,11 +111,7 @@
   security.rtkit.enable = true;
   security.polkit.enable = true;
 
-  # i18n.consoleUseXkbConfig = true;
-
   services = {
-    # xserver.layout = "us,ua";
-    # xserver.xkbVariant = "colemak";
     devmon.enable = true;
     udisks2.enable = true;
     greetd = {

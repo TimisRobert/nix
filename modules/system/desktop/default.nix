@@ -5,4 +5,6 @@
     extraSpecialArgs = {inherit inputs;};
     users.rob = import ../../home/desktop;
   };
+
+  boot.swraid.enable = true;
 }
