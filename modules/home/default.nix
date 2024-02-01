@@ -5,12 +5,14 @@
   inputs,
   ...
 }: {
-  imports = [inputs.impermanence.nixosModules.home-manager.impermanence];
+  imports = [
+    inputs.impermanence.nixosModules.home-manager.impermanence
+  ];
 
   home = {
     username = "rob";
     homeDirectory = "/home/rob";
-    stateVersion = "23.05";
+    stateVersion = "23.11";
     pointerCursor = {
       package = pkgs.simp1e-cursors;
       name = "Simp1e";
@@ -43,38 +45,6 @@
       };
     };
     packages = [
-      # Astro
-      pkgs.nodePackages."@astrojs/language-server"
-      # Zig
-      pkgs.zls
-      # Yaml
-      pkgs.yaml-language-server
-      # HTML CSS
-      pkgs.nodePackages."@tailwindcss/language-server"
-      pkgs.emmet-ls
-      pkgs.vscode-langservers-extracted
-      # Typescript
-      pkgs.nodePackages.typescript-language-server
-      pkgs.nodePackages.eslint_d
-      pkgs.prettierd
-      # Svelte
-      pkgs.nodePackages.svelte-language-server
-      # Bash
-      pkgs.nodePackages.bash-language-server
-      pkgs.shellcheck
-      pkgs.shfmt
-      # Nix
-      pkgs.statix
-      pkgs.alejandra
-      pkgs.deadnix
-      pkgs.rnix-lsp
-      # Lua
-      pkgs.lua-language-server
-      pkgs.stylua
-      pkgs.selene
-      # Elixir
-      pkgs.beamPackages.elixir-ls
-      # System
       pkgs.xdg-utils
       pkgs.pamixer
       pkgs.wl-clipboard
@@ -158,8 +128,42 @@
       enable = true;
       defaultEditor = true;
       vimAlias = true;
-      withPython3 = true;
       withNodeJs = true;
+      withPython3 = true;
+      extraPackages = [
+        pkgs.gcc
+        # Astro
+        pkgs.nodePackages."@astrojs/language-server"
+        # Zig
+        pkgs.zls
+        # Yaml
+        pkgs.yaml-language-server
+        # HTML CSS
+        pkgs.nodePackages."@tailwindcss/language-server"
+        pkgs.emmet-ls
+        pkgs.vscode-langservers-extracted
+        # Typescript
+        pkgs.nodePackages.typescript-language-server
+        pkgs.nodePackages.eslint_d
+        pkgs.prettierd
+        # Svelte
+        pkgs.nodePackages.svelte-language-server
+        # Bash
+        pkgs.nodePackages.bash-language-server
+        pkgs.shellcheck
+        pkgs.shfmt
+        # Nix
+        pkgs.statix
+        pkgs.alejandra
+        pkgs.deadnix
+        pkgs.rnix-lsp
+        # Lua
+        pkgs.lua-language-server
+        pkgs.stylua
+        pkgs.selene
+        # Elixir
+        pkgs.beamPackages.elixir-ls
+      ];
     };
     firefox = {
       enable = true;
