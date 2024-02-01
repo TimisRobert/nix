@@ -4,10 +4,12 @@ return {
     opts = {
       overrides = function(colors)
         return {
-          ["@string.regexp"] = { link = "@string.regex" },
           ["@variable.parameter"] = { link = "@parameter" },
-          ["@exception"] = { link = "@exception" },
+          ["@variable.member"] = { link = "@field" },
+          ["@module"] = { link = "@namespace" },
+          ["@number.float"] = { link = "@float" },
           ["@string.special.symbol"] = { link = "@symbol" },
+          ["@string.regexp"] = { link = "@string.regex" },
           ["@markup.strong"] = { link = "@text.strong" },
           ["@markup.italic"] = { link = "@text.emphasis" },
           ["@markup.heading"] = { link = "@text.title" },
@@ -16,8 +18,9 @@ return {
           ["@markup.math"] = { link = "@text.math" },
           ["@markup.environment"] = { link = "@text.environment" },
           ["@markup.environment.name"] = { link = "@text.environment.name" },
-          ["@markup.link.url"] = { link = "Special" },
-          ["@markup.link.label"] = { link = "Identifier" },
+          ["@markup.link.url"] = { link = "@text.uri" },
+          ["@markup.link.label"] = { link = "@string.special" },
+          ["@markup.list"] = { link = "@punctuation.special" },
           ["@comment.note"] = { link = "@text.note" },
           ["@comment.warning"] = { link = "@text.warning" },
           ["@comment.danger"] = { link = "@text.danger" },
