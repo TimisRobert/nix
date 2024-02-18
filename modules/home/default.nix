@@ -78,6 +78,7 @@
       for_window [class=".*"] inhibit_idle fullscreen
       for_window [app_id=".*"] inhibit_idle fullscreen
       seat * hide_cursor when-typing enable
+      workspace 1
     '';
     config = {
       modifier = "Mod4";
@@ -131,6 +132,7 @@
       withNodeJs = true;
       withPython3 = true;
       extraPackages = [
+        pkgs.gnumake
         pkgs.gcc
         # Astro
         pkgs.nodePackages."@astrojs/language-server"
