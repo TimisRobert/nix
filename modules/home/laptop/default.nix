@@ -44,6 +44,9 @@
           margin-top: 10px;
           background-color: rgb(30, 30, 46);
         }
+        #mode {
+          color: rgb(217, 224, 238);
+        }
         #workspaces {
           padding-left: 0px;
           padding-right: 4px;
@@ -114,7 +117,7 @@
       '';
       settings = [
         {
-          modules-left = ["sway/workspaces"];
+          modules-left = ["sway/workspaces" "sway/mode"];
           modules-center = ["clock"];
           modules-right = [
             "pulseaudio"
@@ -127,6 +130,7 @@
             "tray"
           ];
           "sway/workspaces" = {"disable-scroll" = true;};
+          "sway/mode" = {format = ''<span style="italic">{}</span>'';};
           "backlight" = {
             "device" = "intel_backlight";
             "on-scroll-up" = "light -A 5";
