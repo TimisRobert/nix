@@ -27,14 +27,12 @@
         directories = [
           "projects"
           "documents"
-          ".cache/nix"
-          ".config/qmk"
-          ".mozilla"
-          ".local/share/nvim"
           ".local/state/nvim"
+          ".local/share/nvim"
           ".local/share/direnv"
           ".local/share/zoxide"
           ".local/share/fish"
+          ".mozilla"
           ".ssh"
           ".aws"
         ];
