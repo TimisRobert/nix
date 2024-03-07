@@ -27,9 +27,9 @@ return {
       -- null_ls.builtins.formatting.mix.with {
       --   extra_filetypes = { "heex" },
       -- },
-      null_ls.builtins.diagnostics.credo.with {
-        condition = function(utils) return utils.root_has_file { ".credo.exs" } end,
-      },
+      -- null_ls.builtins.diagnostics.credo.with {
+      --   condition = function(utils) return utils.root_has_file { ".credo.exs" } end,
+      -- },
     }
     return config -- return final config table
   end,
