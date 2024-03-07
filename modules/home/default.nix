@@ -37,7 +37,6 @@
           ".local/share/fish"
           ".ssh"
           ".aws"
-          ".mix"
         ];
         files = [];
         allowOther = true;
