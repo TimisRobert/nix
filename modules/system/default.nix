@@ -16,7 +16,7 @@
     '';
     gc = {
       automatic = true;
-      dates = "00:00";
+      dates = "12:00";
       options = "--delete-older-than 14d";
     };
     settings.trusted-users = ["rob"];
