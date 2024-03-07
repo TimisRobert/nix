@@ -63,12 +63,12 @@ return {
       "tailwindcss",
       "yamlls",
       "zls",
-      "elixirls",
+      "lexical",
       "astro",
     },
     config = {
-      elixirls = {
-        cmd = { "elixir-ls" },
+      lexical = {
+        cmd = { "lexical" },
       },
       tailwindcss = {
         root_dir = function(fname)

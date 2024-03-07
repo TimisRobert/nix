@@ -155,7 +155,7 @@
         pkgs.stylua
         pkgs.selene
         # Elixir
-        pkgs.elixir-ls
+        # pkgs.elixir-ls
       ];
     };
     firefox = {
