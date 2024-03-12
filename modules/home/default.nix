@@ -146,7 +146,7 @@
         pkgs.statix
         pkgs.alejandra
         pkgs.deadnix
-        pkgs.rnix-lsp
+        # pkgs.rnix-lsp
         # Lua
         pkgs.lua-language-server
         pkgs.stylua

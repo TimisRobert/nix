@@ -42,7 +42,7 @@ return {
       disabled = { -- disable formatting capabilities for the listed language servers
         "lua_ls",
         "html",
-        "rnix",
+        -- "rnix",
       },
       timeout_ms = 10000, -- default format timeout
       -- filter = function(client) -- fully override the default formatting function
@@ -52,7 +52,7 @@ return {
     -- enable servers that you already have installed without mason
     servers = {
       "lua_ls",
-      "rnix",
+      -- "rnix",
       "bashls",
       "svelte",
       "tsserver",
