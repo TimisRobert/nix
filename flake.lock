@@ -3,11 +3,11 @@
     "astronvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1709734677,
-        "narHash": "sha256-rsLYS2Q5Z6mdR5rtUadre65+ck6kREWOV3Yp75PQ5yI=",
+        "lastModified": 1710338857,
+        "narHash": "sha256-CT8G6ACh8Y6gM+zUyhQUsDziMoCa/Fx6I7PPrd12LfM=",
         "owner": "AstroNvim",
         "repo": "AstroNvim",
-        "rev": "34208f8fed7521380930cea3ec4f65f993fe22d2",
+        "rev": "2741ce4a6834cb7fde1213aa9c5bf19ac5851ea9",
         "type": "github"
       },
       "original": {
@@ -40,11 +40,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1710281778,
-        "narHash": "sha256-bvWr9vvBrAxb44kHM3H3cY/uQg+4pYP1BM/Nu3e/7V8=",
+        "lastModified": 1710401383,
+        "narHash": "sha256-jskq7uDpKXrRoY4hDpNqykmSSKHUXYlo7ZFc/se7fus=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "49a266d2ca59df8a03249550e73a54626181b65d",
+        "rev": "1ab3cec3a1bbb065b2d52b913d1431366028d5b5",
         "type": "github"
       },
       "original": {
