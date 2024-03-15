@@ -22,6 +22,7 @@
         pkgs,
         lib,
         config,
+        inputs',
         ...
       }: let
         devenvEnv = config.devenv.shells.default.env;

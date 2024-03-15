@@ -18,7 +18,12 @@
       imports = [inputs.devenv.flakeModule];
       systems = nixpkgs.lib.systems.flakeExposed;
 
-      perSystem = {pkgs, ...}: let
+      perSystem = {
+        pkgs,
+        config,
+        inputs',
+        ...
+      }: let
         devenvEnv = config.devenv.shells.default.env;
       in {
         devenv.shells.default = {
