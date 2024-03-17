@@ -92,7 +92,6 @@
         "type:keyboard" = {
           xkb_layout = "us";
           xkb_options = "caps:ctrl_modifier";
-          # xkb_variant = "colemak";
         };
       };
     };
@@ -122,37 +121,25 @@
       extraPackages = [
         pkgs.gnumake
         pkgs.gcc
-        # Astro
         pkgs.nodePackages."@astrojs/language-server"
-        # Zig
         pkgs.zls
-        # Yaml
         pkgs.yaml-language-server
-        # HTML CSS
         pkgs.nodePackages."@tailwindcss/language-server"
         pkgs.emmet-ls
         pkgs.vscode-langservers-extracted
-        # Typescript
         pkgs.nodePackages.typescript-language-server
         pkgs.nodePackages.eslint_d
         pkgs.prettierd
-        # Svelte
         pkgs.nodePackages.svelte-language-server
-        # Bash
         pkgs.nodePackages.bash-language-server
         pkgs.shellcheck
         pkgs.shfmt
-        # Nix
         pkgs.statix
         pkgs.alejandra
         pkgs.deadnix
-        # pkgs.rnix-lsp
-        # Lua
         pkgs.lua-language-server
         pkgs.stylua
         pkgs.selene
-        # Elixir
-        # pkgs.elixir-ls
       ];
     };
     firefox = {
