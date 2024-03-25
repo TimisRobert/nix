@@ -34,10 +34,7 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    configPackages = [
-      pkgs.xdg-desktop-portal-wlr
-      pkgs.xdg-desktop-portal-gtk
-    ];
+    config.common.default = "*";
   };
 
   virtualisation = {
@@ -137,6 +134,7 @@
       alsa.support32Bit = true;
       pulse.enable = true;
     };
+    dbus.enable = true;
     blueman.enable = true;
   };
 

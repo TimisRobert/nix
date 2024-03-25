@@ -18,6 +18,7 @@
     };
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
+      GTK_USE_PORTAL = "1";
       XDG_CURRENT_DESKTOP = "sway";
       EDITOR = "nvim";
       ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
@@ -144,6 +145,7 @@
     };
     firefox = {
       enable = true;
+      package = pkgs.wrapFirefox (pkgs.firefox-unwrapped.override {pipewireSupport = true;}) {};
     };
     git = {
       enable = true;
