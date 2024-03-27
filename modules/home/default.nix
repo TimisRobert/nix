@@ -42,6 +42,7 @@
       };
     };
     packages = [
+      pkgs.devenv
       pkgs.xdg-utils
       pkgs.pamixer
       pkgs.wl-clipboard

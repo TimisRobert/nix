@@ -19,7 +19,9 @@
       dates = "12:00";
       options = "--delete-older-than 14d";
     };
-    settings.trusted-users = ["rob"];
+    settings = {
+      trusted-users = ["rob"];
+    };
   };
 
   nixpkgs.config.allowUnfree = true;
