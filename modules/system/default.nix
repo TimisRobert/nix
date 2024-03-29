@@ -94,7 +94,11 @@
     systemPackages = [pkgs.vim];
     persistence = {
       "/nix/persist" = {
-        directories = ["/var/log" "/etc/NetworkManager/system-connections"];
+        directories = [
+          "/var/log"
+          "/var/lib/bluetooth"
+          "/etc/NetworkManager/system-connections"
+        ];
         files = [
           "/etc/machine-id"
           "/etc/ssh/ssh_host_rsa_key"
