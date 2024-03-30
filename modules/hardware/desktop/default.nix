@@ -24,11 +24,6 @@
     fsType = "zfs";
   };
 
-  fileSystems."/home" = {
-    device = "zpool/home";
-    fsType = "zfs";
-  };
-
   fileSystems."/persist" = {
     device = "zpool/persist";
     fsType = "zfs";
