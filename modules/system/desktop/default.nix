@@ -6,5 +6,5 @@
     users.rob = import ../../home/desktop;
   };
 
-  networking.hostId = "6a42465f";
+  networking.hostId = "d5a63149";
 }

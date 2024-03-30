@@ -160,8 +160,6 @@
     enableRedistributableFirmware = true;
   };
 
-  zramSwap.enable = true;
-
   fonts = {
     enableDefaultPackages = true;
     packages = [(pkgs.nerdfonts.override {fonts = ["Mononoki"];})];
