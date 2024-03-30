@@ -24,7 +24,7 @@
       ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
     };
     persistence = {
-      "/nix/persist/home/rob" = {
+      "/persist/home/rob" = {
         directories = [
           "projects"
           "documents"
