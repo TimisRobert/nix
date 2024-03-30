@@ -93,7 +93,7 @@
   environment = {
     systemPackages = [pkgs.vim];
     persistence = {
-      "/nix/persist" = {
+      "/persist" = {
         directories = [
           "/var/log"
           "/var/lib/bluetooth"

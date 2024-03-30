@@ -6,10 +6,5 @@
     users.rob = import ../../home/desktop;
   };
 
-  boot.swraid = {
-    enable = true;
-    mdadmConf = ''
-      MAILADDR nobody@example.com
-    '';
-  };
+  boot.supportedFilesystems = ["zfs"];
 }
