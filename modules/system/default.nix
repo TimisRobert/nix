@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   inputs,
   config,
   hostName,
@@ -29,6 +30,10 @@
   boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
+    supportedFilesystems = ["zfs"];
+    initrd.postDeviceCommands = lib.mkAfter ''
+      zfs rollback -r zpool/root@blank
+    '';
   };
 
   powerManagement.cpuFreqGovernor = "performance";
@@ -114,6 +119,10 @@
   security.polkit.enable = true;
 
   services = {
+    zfs = {
+      autoScrub.enable = true;
+      trim.enable = true;
+    };
     resolved = {
       enable = true;
       dnssec = "true";
