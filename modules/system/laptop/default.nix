@@ -13,7 +13,7 @@
 
   environment = {
     persistence = {
-      "/nix/persist/laptop" = {directories = ["/var/cache/powertop"];};
+      "/persist/laptop" = {directories = ["/var/cache/powertop"];};
     };
   };
 }
