@@ -6,6 +6,8 @@
     users.rob = import ../../home/laptop;
   };
 
+  networking.hostId = "f7c80e5b";
+
   powerManagement = {
     enable = true;
     powertop.enable = true;
