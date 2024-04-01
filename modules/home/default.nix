@@ -4,9 +4,8 @@
   inputs,
   ...
 }: {
-  imports = [
-    inputs.impermanence.nixosModules.home-manager.impermanence
-  ];
+  imports = [inputs.impermanence.nixosModules.home-manager.impermanence];
+  nixpkgs.overlays = [inputs.neovim-nightly-overlay.overlay];
 
   home = {
     username = "rob";
@@ -113,6 +112,7 @@
   programs = {
     neovim = {
       enable = true;
+      package = pkgs.neovim-nightly;
       defaultEditor = true;
       vimAlias = true;
       withNodeJs = true;
