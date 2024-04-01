@@ -40,7 +40,6 @@
       };
     };
     packages = [
-      pkgs.steam
       pkgs.devenv
       pkgs.xdg-utils
       pkgs.pamixer
