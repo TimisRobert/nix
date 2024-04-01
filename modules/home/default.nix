@@ -26,8 +26,6 @@
     persistence = {
       "/persist/home/rob" = {
         directories = [
-          "projects"
-          "documents"
           ".local/state/nvim"
           ".local/share/nvim"
           ".local/share/direnv"
