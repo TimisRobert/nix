@@ -119,6 +119,19 @@
   security.polkit.enable = true;
 
   services = {
+    sanoid = {
+      enable = true;
+      datasets = {
+        "zpool/projects" = {
+          autosnap = true;
+          autoprune = true;
+        };
+        "zpool/documents" = {
+          autosnap = true;
+          autoprune = true;
+        };
+      };
+    };
     zfs = {
       autoScrub.enable = true;
       trim.enable = true;
