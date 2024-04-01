@@ -53,6 +53,7 @@ return {
       "zls",
       "lexical",
       "astro",
+      "eslint"
     },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields

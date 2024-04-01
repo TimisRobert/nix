@@ -127,11 +127,9 @@
         pkgs.emmet-ls
         pkgs.vscode-langservers-extracted
         pkgs.nodePackages.typescript-language-server
-        pkgs.nodePackages.eslint
         pkgs.prettierd
         pkgs.nodePackages.svelte-language-server
         pkgs.nodePackages.bash-language-server
-        pkgs.shellcheck
         pkgs.shfmt
         pkgs.statix
         pkgs.alejandra
