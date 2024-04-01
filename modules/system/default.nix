@@ -102,7 +102,7 @@
         directories = [
           "/var/log"
           "/var/lib/bluetooth"
-          "/etc/NetworkManager/system-connections"
+          "/etc/NetworkManager"
         ];
         files = [
           "/etc/machine-id"
