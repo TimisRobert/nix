@@ -58,12 +58,12 @@
       download = "${config.home.homeDirectory}/downloads";
     };
     configFile = {
-      astronvim = {
-        source = ../../assets/astronvim;
-      };
-      nvim = {
-        source = inputs.astronvim;
-      };
+      #nvim = {
+      #  source = ../../assets/astronvim;
+      #};
+      #nvim = {
+      #  source = inputs.astronvim;
+      #};
     };
     mimeApps.enable = true;
   };
@@ -127,7 +127,7 @@
         pkgs.emmet-ls
         pkgs.vscode-langservers-extracted
         pkgs.nodePackages.typescript-language-server
-        pkgs.nodePackages.eslint_d
+        pkgs.nodePackages.eslint
         pkgs.prettierd
         pkgs.nodePackages.svelte-language-server
         pkgs.nodePackages.bash-language-server

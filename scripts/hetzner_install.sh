@@ -21,7 +21,7 @@ mount /dev/sda2 /mnt/nix
 
 mkdir -p /mnt/nix/persist/{etc/nixos,var/log}
 
-cat > /mnt/etc/nixos/configuration.nix << EOL
+cat >/mnt/etc/nixos/configuration.nix <<EOL
 { pkgs, config, inputs, modulesPath, lib, hostName, ... }: {
   imports = [
     ./hardware-configuration.nix
@@ -52,7 +52,7 @@ cat > /mnt/etc/nixos/configuration.nix << EOL
 }
 EOL
 
-cat > /mnt/etc/nixos/hardware-configuration.nix << EOL
+cat >/mnt/etc/nixos/hardware-configuration.nix <<EOL
 { config, lib, modulesPath, ... }:
 
 {
