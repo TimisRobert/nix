@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [inputs.impermanence.nixosModules.home-manager.impermanence];
-  nixpkgs.overlays = [inputs.neovim-nightly-overlay.overlay];
+  #nixpkgs.overlays = [inputs.neovim-nightly-overlay.overlay];
 
   home = {
     username = "rob";
@@ -22,6 +22,7 @@
       EDITOR = "nvim";
       ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
     };
+    file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "/home/rob/projects/nix/assets/astronvim";
     persistence = {
       "/persist/home/rob" = {
         directories = [
@@ -55,14 +56,6 @@
     userDirs = {
       documents = "${config.home.homeDirectory}/documents";
       download = "${config.home.homeDirectory}/downloads";
-    };
-    configFile = {
-      #nvim = {
-      #  source = ../../assets/astronvim;
-      #};
-      #nvim = {
-      #  source = inputs.astronvim;
-      #};
     };
     mimeApps.enable = true;
   };
@@ -112,7 +105,7 @@
   programs = {
     neovim = {
       enable = true;
-      package = pkgs.neovim-nightly;
+      #package = pkgs.neovim-nightly;
       defaultEditor = true;
       vimAlias = true;
       withNodeJs = true;
