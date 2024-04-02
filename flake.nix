@@ -9,9 +9,6 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     #neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-
-    astronvim.url = "github:AstroNvim/AstroNvim";
-    astronvim.flake = false;
   };
 
   outputs = inputs @ {
