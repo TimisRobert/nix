@@ -23,7 +23,7 @@ in {
   services.postgres = {
     enable = true;
     package = pkgs.postgresql_16;
-    initialDatabases = [{name = "sardgo";}];
+    initialDatabases = [{name = "";}];
     initialScript = ''
       create user postgres superuser;
     '';
