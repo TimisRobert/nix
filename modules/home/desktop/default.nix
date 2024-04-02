@@ -1,6 +1,12 @@
 {...}: {
   imports = [../default.nix];
 
+  # home.persistence."/persist/home/rob" = {
+  #   directories = [
+  #     ".local/share/Steam"
+  #   ];
+  # };
+
   programs = {
     waybar = {
       enable = true;
