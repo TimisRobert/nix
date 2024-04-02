@@ -84,7 +84,7 @@
     users.rob = {
       shell = pkgs.fish;
       isNormalUser = true;
-      extraGroups = ["wheel" "video"];
+      extraGroups = ["wheel" "podman"];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBvR28lwcOKIk7VRo/bXzxQGnA5evdsGcNZCy3BA6DDR rob@RobertTimis"
       ];
@@ -116,17 +116,34 @@
   security.polkit.enable = true;
 
   services = {
-    sanoid = {
+    zrepl = {
       enable = true;
-      datasets = {
-        "zpool/projects" = {
-          autosnap = true;
-          autoprune = true;
-        };
-        "zpool/documents" = {
-          autosnap = true;
-          autoprune = true;
-        };
+      settings = {
+        jobs = [
+          {
+            name = "snapshot";
+            type = "snap";
+            filesystems = {
+              "zpool/projects" = true;
+              "zpool/documents" = true;
+            };
+            snapshotting = {
+              type = "periodic";
+              prefix = "zrepl_";
+              interval = "30m";
+              timestamp_format = "iso-8601";
+            };
+            pruning = {
+              keep = [
+                {
+                  type = "grid";
+                  grid = "1x1h(keep=all) | 24x1h | 14x1d";
+                  regex = "^zrepl_.*";
+                }
+              ];
+            };
+          }
+        ];
       };
     };
     zfs = {
