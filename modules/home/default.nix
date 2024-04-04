@@ -130,6 +130,7 @@
         pkgs.lua-language-server
         pkgs.stylua
         pkgs.selene
+        pkgs.lexical
       ];
     };
     firefox = {

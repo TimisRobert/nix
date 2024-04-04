@@ -53,7 +53,7 @@ return {
       "zls",
       "lexical",
       "astro",
-      "eslint"
+      "eslint",
     },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
@@ -62,21 +62,19 @@ return {
         cmd = { "lexical" },
       },
       tailwindcss = {
-        root_dir = function(fname)
-          local util = require "lspconfig.util"
-          return util.root_pattern(
-            "tailwind.config.js",
-            "tailwind.config.cjs",
-            "tailwind.config.mjs",
-            "tailwind.config.ts",
-            "assets/tailwind.config.js"
-          )(fname)
-        end,
         init_options = {
           userLanguages = {
-            elixir = "html-eex",
             heex = "html-eex",
-            eruby = "erb",
+            elixir = "html-eex",
+          },
+        },
+        settings = {
+          tailwindCSS = {
+            experimental = {
+              classRegex = {
+                'class[:]\\s*"([^"]*)"',
+              },
+            },
           },
         },
       },
@@ -134,7 +132,7 @@ return {
     },
     -- A custom `on_attach` function to be run after the default `on_attach` function
     -- takes two parameters `client` and `bufnr`  (`:h lspconfig-setup`)
-    on_attach = function(client, bufnr)
+    on_attach = function(_client, _bufnr)
       -- this would disable semanticTokensProvider for all clients
       -- client.server_capabilities.semanticTokensProvider = nil
     end,
