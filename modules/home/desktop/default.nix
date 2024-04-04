@@ -1,11 +1,11 @@
 {...}: {
   imports = [../default.nix];
 
-  # home.persistence."/persist/home/rob" = {
-  #   directories = [
-  #     ".local/share/Steam"
-  #   ];
-  # };
+  home.persistence."/persist/home/rob" = {
+    directories = [
+      ".local/share/Steam"
+    ];
+  };
 
   programs = {
     waybar = {
