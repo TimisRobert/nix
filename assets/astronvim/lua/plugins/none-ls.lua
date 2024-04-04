@@ -1,5 +1,3 @@
--- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
 -- Customize None-ls sources
 
 ---@type LazySpec
@@ -21,9 +19,9 @@ return {
       null_ls.builtins.diagnostics.deadnix,
       null_ls.builtins.formatting.shfmt,
       null_ls.builtins.formatting.prettierd,
-      null_ls.builtins.diagnostics.credo.with {
-        condition = function(utils) return utils.root_has_file { ".credo.exs" } end,
-      },
+      -- null_ls.builtins.diagnostics.credo.with {
+      --   condition = function(utils) return utils.root_has_file { ".credo.exs" } end,
+      -- },
     }
     return config -- return final config table
   end,
