@@ -1,8 +1,3 @@
 inputs:
   nixpkgs:
     url: github:cachix/devenv-nixpkgs/rolling
-  lexical:
-    url: github:lexical-lsp/lexical/v0.5.2
-    inputs:
-      nixpkgs:
-        follows: nixpkgs
