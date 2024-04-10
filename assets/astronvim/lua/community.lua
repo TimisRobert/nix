@@ -7,4 +7,5 @@ return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.motion.nvim-surround" },
   { import = "astrocommunity.colorscheme.kanagawa-nvim", enabled = true },
+  { import = "astrocommunity.editing-support.nvim-treesitter-context" },
 }
