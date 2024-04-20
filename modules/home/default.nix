@@ -70,9 +70,7 @@
     config = {
       modifier = "Mod4";
       terminal = "alacritty";
-      output = {
-        "*".bg = "${config.home.homeDirectory}/documents/images/bg.png fill";
-      };
+      output."*".bg = "${../../assets/bg.png} fill";
       window = {
         border = 1;
         titlebar = false;
