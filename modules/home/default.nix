@@ -101,6 +101,12 @@
   };
 
   programs = {
+    nnn = {
+      enable = true;
+    };
+    zathura = {
+      enable = true;
+    };
     neovim = {
       enable = true;
       #package = pkgs.neovim-nightly;
