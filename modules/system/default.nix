@@ -122,6 +122,60 @@
       settings = {
         jobs = [
           {
+            name = "backuppool_sink";
+            type = "sink";
+            root_fs = "backuppool";
+            recv = {
+              placeholder = {
+                encryption = "inherit";
+              };
+            };
+            serve = {
+              type = "local";
+              listener_name = "backuppool_sink";
+            };
+          }
+          {
+            name = "push_to_drive";
+            type = "push";
+            send = {
+              encrypted = false;
+            };
+            connect = {
+              type = "local";
+              listener_name = "backuppool_sink";
+              client_identity = hostName;
+            };
+            filesystems = {
+              "zpool/projects" = true;
+              "zpool/documents" = true;
+            };
+            replication = {
+              protection = {
+                initial = "guarantee_resumability";
+                incremental = "guarantee_incremental";
+              };
+            };
+            snapshotting = {
+              type = "manual";
+            };
+            pruning = {
+              keep_sender = [
+                {
+                  type = "regex";
+                  regex = ".*";
+                }
+              ];
+              keep_receiver = [
+                {
+                  type = "grid";
+                  grid = "1x1h(keep=all) | 24x1h | 14x1d | 3x30d";
+                  regex = "^zrepl_.*";
+                }
+              ];
+            };
+          }
+          {
             name = "snapshot";
             type = "snap";
             filesystems = {
