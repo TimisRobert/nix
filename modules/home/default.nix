@@ -126,7 +126,7 @@
         pkgs.nodePackages.typescript-language-server
         pkgs.prettierd
         pkgs.nodePackages.svelte-language-server
-        pkgs.nodePackages.bash-language-server
+        pkgs.bash-language-server
         pkgs.shfmt
         pkgs.statix
         pkgs.alejandra
