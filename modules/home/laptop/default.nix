@@ -6,7 +6,7 @@
     "XF86MonBrightnessUp" = "exec light -A 5";
     "XF86AudioRaiseVolume" = "exec pamixer -i 5";
     "XF86AudioLowerVolume" = "exec pamixer -d 5";
-    "XF86AudioMicMute" = "exec pamixer --source 70 -t";
+    "XF86AudioMicMute" = "exec pamixer --source 59 -t";
     "XF86AudioMute" = "exec pamixer -t";
   };
 
