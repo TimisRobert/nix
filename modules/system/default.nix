@@ -44,16 +44,17 @@
   };
 
   virtualisation = {
-    podman = {
+    docker = {
       enable = true;
-      dockerSocket.enable = true;
-      dockerCompat = true;
+      rootless = {
+        enable = true;
+        setSocketVariable = true;
+      };
       autoPrune = {
         enable = true;
         dates = "weekly";
         flags = ["--all"];
       };
-      defaultNetwork.settings = {dns_enabled = true;};
     };
   };
 
@@ -85,7 +86,7 @@
     users.rob = {
       shell = pkgs.fish;
       isNormalUser = true;
-      extraGroups = ["wheel" "podman"];
+      extraGroups = ["video" "wheel" "docker"];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBvR28lwcOKIk7VRo/bXzxQGnA5evdsGcNZCy3BA6DDR rob@RobertTimis"
       ];
@@ -234,7 +235,7 @@
   };
 
   hardware = {
-    opengl.enable = true;
+    graphics.enable = true;
     keyboard.qmk.enable = true;
     bluetooth.enable = true;
     enableRedistributableFirmware = true;

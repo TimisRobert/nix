@@ -115,6 +115,7 @@
       withNodeJs = true;
       withPython3 = true;
       extraPackages = [
+        pkgs.ruby-lsp
         pkgs.gnumake
         pkgs.gcc
         pkgs.nodePackages."@astrojs/language-server"
