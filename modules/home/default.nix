@@ -87,6 +87,11 @@
   };
 
   services = {
+    redshift = {
+      enable = true;
+      latitude = 45.30;
+      longitude = 9.5;
+    };
     swayidle = {
       enable = true;
       timeouts = [
