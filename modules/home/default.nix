@@ -89,6 +89,7 @@
   services = {
     gammastep = {
       enable = true;
+      provider = "manual";
       latitude = 45.30;
       longitude = 9.5;
     };

@@ -44,23 +44,21 @@
   };
 
   virtualisation = {
-    docker = {
+    podman = {
       enable = true;
-      rootless = {
-        enable = true;
-        setSocketVariable = true;
-      };
+      dockerSocket.enable = true;
+      dockerCompat = true;
       autoPrune = {
         enable = true;
         dates = "weekly";
         flags = ["--all"];
       };
+      defaultNetwork.settings = {dns_enabled = true;};
     };
   };
 
   networking = {
     hostName = hostName;
-    # nameservers = ["1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one"];
     networkmanager.enable = true;
     nftables.enable = true;
   };
@@ -210,8 +208,6 @@
       enable = true;
       dnssec = "true";
       domains = ["~."];
-      # fallbackDns = ["1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one"];
-      # dnsovertls = "true";
     };
     devmon.enable = true;
     udisks2.enable = true;
