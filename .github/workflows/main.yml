@@ -1,0 +1,22 @@
+name: Bump flake.lock
+
+on:
+  schedule:
+    - cron: "daily"
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: DeterminateSystems/nix-installer-action@main
+      - run: nix flake update
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Bump flake.lock
+          branch: main
+          file_pattern: flake.lock
+          skip_dirty_check: false
+          skip_fetch: true

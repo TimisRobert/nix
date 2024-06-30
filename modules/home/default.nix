@@ -5,7 +5,6 @@
   ...
 }: {
   imports = [inputs.impermanence.nixosModules.home-manager.impermanence];
-  #nixpkgs.overlays = [inputs.neovim-nightly-overlay.overlay];
 
   home = {
     username = "rob";
@@ -65,7 +64,6 @@
     extraConfig = ''
       for_window [class=".*"] inhibit_idle fullscreen
       for_window [app_id=".*"] inhibit_idle fullscreen
-      seat * hide_cursor when-typing enable
     '';
     config = {
       modifier = "Mod4";
@@ -119,7 +117,6 @@
     };
     neovim = {
       enable = true;
-      #package = pkgs.neovim-nightly;
       defaultEditor = true;
       vimAlias = true;
       withNodeJs = true;

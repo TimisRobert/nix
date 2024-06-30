@@ -246,4 +246,12 @@
   };
 
   system.stateVersion = "23.11";
+  system.autoUpgrade = {
+    enable = true;
+    flake = "github:TimisRobert/nix";
+    dates = "daily";
+    flags = [
+      "--no-write-lock-file"
+    ];
+  };
 }
