@@ -64,6 +64,7 @@
     extraConfig = ''
       for_window [class=".*"] inhibit_idle fullscreen
       for_window [app_id=".*"] inhibit_idle fullscreen
+      seat * hide_cursor when-typing enable
     '';
     config = {
       modifier = "Mod4";
