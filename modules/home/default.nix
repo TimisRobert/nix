@@ -129,10 +129,10 @@
         pkgs.nodePackages."@astrojs/language-server"
         pkgs.zls
         pkgs.yaml-language-server
-        pkgs.nodePackages."@tailwindcss/language-server"
+        pkgs.tailwindcss-language-server
         pkgs.emmet-ls
         pkgs.vscode-langservers-extracted
-        pkgs.nodePackages.typescript-language-server
+        pkgs.typescript-language-server
         pkgs.prettierd
         pkgs.nodePackages.svelte-language-server
         pkgs.bash-language-server
