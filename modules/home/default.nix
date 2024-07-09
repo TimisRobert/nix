@@ -140,6 +140,7 @@
         pkgs.statix
         pkgs.alejandra
         pkgs.deadnix
+        pkgs.nixd
         pkgs.lua-language-server
         pkgs.stylua
         pkgs.selene

@@ -53,6 +53,7 @@ return {
       "zls",
       "lexical",
       "ruby_lsp",
+      "nixd",
       "astro",
       "eslint",
     },
