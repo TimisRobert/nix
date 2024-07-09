@@ -120,13 +120,11 @@
       enable = true;
       defaultEditor = true;
       vimAlias = true;
-      withNodeJs = true;
-      withPython3 = true;
       extraPackages = [
         pkgs.ruby-lsp
         pkgs.gnumake
         pkgs.gcc
-        pkgs.nodePackages."@astrojs/language-server"
+        pkgs.astrojs-language-server
         pkgs.zls
         pkgs.yaml-language-server
         pkgs.tailwindcss-language-server
