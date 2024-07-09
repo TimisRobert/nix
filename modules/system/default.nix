@@ -27,8 +27,13 @@
 
   boot = {
     binfmt.emulatedSystems = ["aarch64-linux"];
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
+    loader = {
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 3;
+      };
+      efi.canTouchEfiVariables = true;
+    };
     supportedFilesystems = ["zfs"];
     initrd.postDeviceCommands = lib.mkAfter ''
       zfs rollback -r zpool/root@blank
