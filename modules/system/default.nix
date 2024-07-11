@@ -250,13 +250,15 @@
     };
   };
 
-  system.stateVersion = "23.11";
-  system.autoUpgrade = {
-    enable = true;
-    flake = "github:TimisRobert/nix";
-    dates = "daily";
-    flags = [
-      "--no-write-lock-file"
-    ];
+  system = {
+    stateVersion = "23.11";
+    autoUpgrade = {
+      enable = true;
+      flake = "github:TimisRobert/nix";
+      dates = "12:00";
+      flags = [
+        "--no-write-lock-file"
+      ];
+    };
   };
 }

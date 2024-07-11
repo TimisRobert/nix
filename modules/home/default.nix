@@ -124,7 +124,7 @@
         pkgs.ruby-lsp
         pkgs.gnumake
         pkgs.gcc
-        pkgs.astrojs-language-server
+        pkgs.nodePackages."@astrojs/language-server"
         pkgs.zls
         pkgs.yaml-language-server
         pkgs.tailwindcss-language-server
