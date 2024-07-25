@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   imports = [inputs.impermanence.nixosModules.home-manager.impermanence];
@@ -142,7 +143,12 @@
         pkgs.lua-language-server
         pkgs.stylua
         pkgs.selene
-        pkgs.lexical
+        (pkgs.callPackage ./packages/lexical.nix {
+          inherit lib;
+          elixir = pkgs.elixir;
+          beamPackages = pkgs.beamPackages;
+          fetchFromGitHub = pkgs.fetchFromGitHub;
+        })
       ];
     };
     firefox = {
