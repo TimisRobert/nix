@@ -11,8 +11,8 @@ beamPackages.mixRelease rec {
   src = fetchFromGitHub {
     owner = "lexical-lsp";
     repo = "lexical";
-    rev = "6572a6a04a083e4857efad3dadef46200a70f5db";
-    hash = "sha256-/FAS9VPPMMW7pKoMlYj8YU3i43LX3utUM5xTgSt9lBM=";
+    rev = "2360c344820ecda0000de948c22bc6323a776e44";
+    hash = "sha256-KS46meMq/WUHjOoN1KGXz1PMVxM+Sl8SwmnYjxjszo8=";
   };
 
   mixFodDeps = beamPackages.fetchMixDeps {
@@ -35,11 +35,11 @@ beamPackages.mixRelease rec {
     makeWrapper "$out/libexec/start_lexical.sh" "$out/bin/lexical" --set RELEASE_COOKIE lexical
   '';
 
-  meta = with lib; {
+  meta = {
     description = "Lexical is a next-generation elixir language server";
     homepage = "https://github.com/lexical-lsp/lexical";
-    license = licenses.asl20;
-    maintainers = with maintainers; [GaetanLepage];
+    license = lib.licenses.asl20;
+    maintainers = with lib.maintainers; [GaetanLepage];
     mainProgram = "lexical";
     platforms = beamPackages.erlang.meta.platforms;
   };
