@@ -1,12 +1,9 @@
 {
   config,
   pkgs,
-  inputs,
   lib,
   ...
 }: {
-  imports = [inputs.impermanence.nixosModules.home-manager.impermanence];
-
   home = {
     username = "rob";
     homeDirectory = "/home/rob";
@@ -22,7 +19,7 @@
       EDITOR = "nvim";
       ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
     };
-    file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/nix/assets/astronvim";
+    file.".config/nvim".source = let astronvimPath = ../../assets/astronvim; in config.lib.file.mkOutOfStoreSymlink "${astronvimPath}";
     persistence = {
       "/persist/home/rob" = {
         directories = [
@@ -214,6 +211,88 @@
         printscreen = "grim -g $(slurp -d) - | wl-copy -t image/png";
         screenshot = "grim -g $(slurp) $argv";
       };
+    };
+    waybar = {
+      enable = true;
+      style = ../../assets/waybar.css;
+      settings = [
+        {
+          modules-left = ["sway/workspaces" "sway/mode"];
+          modules-center = ["clock"];
+          modules-right = [
+            "pulseaudio"
+            "backlight"
+            "memory"
+            "cpu"
+            "network"
+            "battery"
+            "temperature"
+            "tray"
+          ];
+          "sway/workspaces" = {"disable-scroll" = true;};
+          "sway/mode" = {format = ''<span style="italic">{}</span>'';};
+          "backlight" = {
+            "device" = "intel_backlight";
+            "on-scroll-up" = "light -A 5";
+            "on-scroll-down" = "light -U 5";
+            "format" = "{icon} {percent}%";
+            "format-icons" = ["󰃝" "󰃞" "󰃟" "󰃠"];
+          };
+          "pulseaudio" = {
+            "scroll-step" = 1;
+            "format" = "{icon} {volume}%";
+            "format-muted" = "󰖁 Muted";
+            "format-icons" = {"default" = ["" "" ""];};
+            "on-click" = "pamixer -t";
+            "tooltip" = false;
+          };
+          "battery" = {
+            "interval" = 10;
+            "states" = {
+              "warning" = 20;
+              "critical" = 10;
+            };
+            "format" = "{icon} {capacity}%";
+            "format-icons" = ["󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
+            "format-full" = "{icon} {capacity}%";
+            "format-charging" = "󰂄 {capacity}%";
+            "tooltip" = false;
+          };
+          "clock" = {
+            "interval" = 1;
+            "format" = "{:%I:%M %p  %A %b %d}";
+            "tooltip" = true;
+            "tooltip-format" = ''
+              <big>{:%Y %B}</big>
+              <tt><small>{calendar}</small></tt>'';
+          };
+          "memory" = {
+            "interval" = 1;
+            "format" = "󰍛 {percentage}%";
+            "states" = {"warning" = 85;};
+          };
+          "cpu" = {
+            "interval" = 1;
+            "format" = "󰻠 {usage}%";
+          };
+          "network" = {
+            "interval" = 5;
+            "format-wifi" = "󰖩 {essid} {signalStrength}%";
+            "format-ethernet" = "󰀂 {ifname} {ipaddr}";
+            "format-linked" = "󰖪 {essid} (No IP)";
+            "format-disconnected" = "󰯡 Disconnected";
+            "tooltip" = false;
+          };
+          "temperature" = {
+            "tooltip" = false;
+            "format" = " {temperatureC}°C";
+          };
+          "tray" = {
+            "icon-size" = 15;
+            "spacing" = 5;
+          };
+        }
+      ];
     };
   };
 }

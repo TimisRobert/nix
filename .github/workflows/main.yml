@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@main
-      - run: nix flake update
+      - run: nix run .#update
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Bump flake.lock

@@ -7,42 +7,67 @@
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    nixos-flake.url = "github:srid/nixos-flake";
   };
 
   outputs = inputs @ {
     nixpkgs,
-    flake-parts,
+    self,
     ...
   }:
-    flake-parts.lib.mkFlake {inherit inputs;} {
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       systems = nixpkgs.lib.systems.flakeExposed;
-      imports = [];
+      imports = [
+        inputs.nixos-flake.flakeModule
+      ];
       flake = {
         nixosConfigurations = {
-          desktop = nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            specialArgs = {
-              inherit inputs;
-              hostName = "desktop";
-            };
-            modules = [
-              ./modules/system
-              ./modules/system/desktop
-              ./modules/hardware/desktop
+          desktop = self.nixos-flake.lib.mkLinuxSystem {
+            imports = [
+              self.nixosModules.desktop
+              self.nixosModules.home-manager
+              {home-manager.users.rob.imports = [self.homeModules.desktop];}
             ];
           };
-          laptop = nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            specialArgs = {
-              inherit inputs;
-              hostName = "laptop";
-            };
-            modules = [
-              ./modules/system
-              ./modules/system/laptop
-              ./modules/hardware/laptop
+          laptop = self.nixos-flake.lib.mkLinuxSystem {
+            imports = [
+              self.nixosModules.laptop
+              self.nixosModules.home-manager
+              {home-manager.users.rob.imports = [self.homeModules.laptop];}
             ];
           };
+        };
+
+        nixosModules = {
+          desktop.imports = [
+            inputs.impermanence.nixosModules.impermanence
+            ./modules/system
+            ./modules/system/desktop
+            ./modules/hardware/desktop
+          ];
+          laptop.imports = [
+            inputs.impermanence.nixosModules.impermanence
+            ./modules/system
+            ./modules/system/laptop
+            ./modules/hardware/laptop
+          ];
+        };
+
+        bababoy = {};
+
+        homeModules = {
+          desktop.imports = [
+            inputs.impermanence.nixosModules.home-manager.impermanence
+            ./modules/home
+            ./modules/home/desktop
+          ];
+          laptop.imports = [
+            inputs.impermanence.nixosModules.home-manager.impermanence
+            ./modules/home
+            ./modules/home/laptop
+          ];
         };
 
         templates = {
@@ -73,6 +98,11 @@
             '';
           };
         };
+      };
+
+      perSystem = {self', ...}: {
+        packages.default = self'.packages.activate;
+        nixos-flake.primary-inputs = ["nixpkgs" "home-manager"];
       };
     };
 }

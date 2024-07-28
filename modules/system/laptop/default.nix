@@ -1,11 +1,4 @@
-{inputs, ...}: {
-  home-manager = {
-    extraSpecialArgs = {inherit inputs;};
-    users.rob = import ../../home/laptop;
-  };
-
-  networking.hostId = "f7c80e5b";
-
+{...}: {
   powerManagement = {
     enable = true;
     powertop.enable = true;
@@ -15,5 +8,10 @@
     persistence = {
       "/persist/laptop" = {directories = ["/var/cache/powertop"];};
     };
+  };
+
+  networking = {
+    hostId = "f7c80e5b";
+    hostName = "laptop";
   };
 }

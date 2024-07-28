@@ -1,14 +1,8 @@
 {
-  inputs,
   lib,
   pkgs,
   ...
 }: {
-  home-manager = {
-    extraSpecialArgs = {inherit inputs;};
-    users.rob = import ../../home/desktop;
-  };
-
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "steam"
@@ -25,5 +19,8 @@
     ];
   };
 
-  networking.hostId = "d5a63149";
+  networking = {
+    hostId = "d5a63149";
+    hostName = "desktop";
+  };
 }

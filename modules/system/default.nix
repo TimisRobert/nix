@@ -1,16 +1,9 @@
 {
+  config,
   pkgs,
   lib,
-  inputs,
-  config,
-  hostName,
   ...
 }: {
-  imports = [
-    inputs.home-manager.nixosModules.home-manager
-    inputs.impermanence.nixosModules.impermanence
-  ];
-
   nix = {
     extraOptions = ''
       experimental-features = nix-command flakes
@@ -63,7 +56,6 @@
   };
 
   networking = {
-    hostName = hostName;
     networkmanager.enable = true;
     nftables.enable = true;
   };
@@ -148,7 +140,7 @@
             connect = {
               type = "local";
               listener_name = "backuppool_sink";
-              client_identity = hostName;
+              client_identity = config.networking.hostName;
             };
             filesystems = {
               "zpool/projects" = true;
