@@ -19,7 +19,10 @@
       EDITOR = "nvim";
       ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
     };
-    file.".config/nvim".source = let astronvimPath = ../../assets/astronvim; in config.lib.file.mkOutOfStoreSymlink "${astronvimPath}";
+    file.".config/nvim".source = let
+      astronvimPath = ../../assets/astronvim;
+    in
+      config.lib.file.mkOutOfStoreSymlink "${astronvimPath}";
     persistence = {
       "/persist/home/rob" = {
         directories = [
