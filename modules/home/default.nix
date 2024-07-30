@@ -154,6 +154,7 @@
     firefox = {
       enable = true;
       package = pkgs.wrapFirefox (pkgs.firefox-unwrapped.override {pipewireSupport = true;}) {};
+      profiles.default.extraConfig = builtins.readFile ../../assets/user.js;
     };
     git = {
       enable = true;
