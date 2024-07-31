@@ -1,4 +1,4 @@
-name: Bump flake.lock
+name: update deps
 
 on:
   schedule:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  deps:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
