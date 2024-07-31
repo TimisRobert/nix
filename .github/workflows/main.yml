@@ -15,8 +15,19 @@ jobs:
       - run: nix run .#update
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: Bump flake.lock
+          commit_message: "chore: bump flake.lock"
           branch: main
           file_pattern: flake.lock
+          skip_dirty_check: false
+          skip_fetch: true
+      - run: |
+          nix shell nixpkgs#neovim
+          ln -s ./assets/astronvim ~/.config/nvim
+          nvim --headless "+Lazy! update" +qa
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: bump lazy-lock.json"
+          branch: main
+          file_pattern: assets/astronvim/lazy-lock.json
           skip_dirty_check: false
           skip_fetch: true
