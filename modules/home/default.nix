@@ -27,6 +27,7 @@
           ".local/share/direnv"
           ".local/share/zoxide"
           ".local/share/fish"
+          ".local/share/DBeaverData"
           ".mozilla"
           ".ssh"
           ".aws"
@@ -44,6 +45,7 @@
       pkgs.slurp
       pkgs.swayimg
       pkgs.unzip
+      pkgs.dbeaver-bin
     ];
   };
 
