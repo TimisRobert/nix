@@ -118,6 +118,7 @@
       defaultEditor = true;
       vimAlias = true;
       extraPackages = [
+        pkgs.terraform-ls
         pkgs.ruby-lsp
         pkgs.gnumake
         pkgs.gcc

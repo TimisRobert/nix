@@ -12,6 +12,7 @@ return {
     -- https://github.com/nvimtools/none-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
     config.sources = {
       -- Set a formatter
+      null_ls.builtins.formatting.opentofu_fmt,
       null_ls.builtins.formatting.stylua,
       null_ls.builtins.diagnostics.selene,
       null_ls.builtins.code_actions.statix,

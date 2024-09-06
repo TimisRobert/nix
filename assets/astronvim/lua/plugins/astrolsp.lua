@@ -56,6 +56,7 @@ return {
       "nixd",
       "astro",
       "eslint",
+      "terraformls",
     },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
