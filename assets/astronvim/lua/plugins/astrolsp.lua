@@ -43,7 +43,7 @@ return {
       "lua_ls",
       "bashls",
       "svelte",
-      "tsserver",
+      "ts_ls",
       "jsonls",
       "html",
       "cssls",

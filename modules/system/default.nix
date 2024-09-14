@@ -28,9 +28,18 @@
       efi.canTouchEfiVariables = true;
     };
     supportedFilesystems = ["zfs"];
-    initrd.postDeviceCommands = lib.mkAfter ''
-      zfs rollback -r zpool/root@blank
-    '';
+
+    initrd.systemd.enable = lib.mkDefault true;
+    initrd.systemd.services.rollback = {
+      wantedBy = ["initrd.target"];
+      after = ["zfs-import-zpool.service"];
+      before = ["sysroot.mount"];
+      path = [pkgs.zfs];
+      description = "Rollback ZFS datasets";
+      serviceConfig.Type = "oneshot";
+      unitConfig.DefaultDependencies = "no";
+      script = ''zfs rollback -r zpool/root@blank && echo "rollback complete"'';
+    };
   };
 
   powerManagement.cpuFreqGovernor = "performance";
