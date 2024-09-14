@@ -6,7 +6,7 @@
   home = {
     username = "rob";
     homeDirectory = "/home/rob";
-    stateVersion = "23.11";
+    stateVersion = "24.05";
     pointerCursor = {
       package = pkgs.simp1e-cursors;
       name = "Simp1e";
@@ -137,7 +137,7 @@
         pkgs.vscode-langservers-extracted
         pkgs.typescript-language-server
         pkgs.prettierd
-        pkgs.nodePackages.svelte-language-server
+        pkgs.svelte-language-server
         pkgs.bash-language-server
         pkgs.shfmt
         pkgs.statix
