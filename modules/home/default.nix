@@ -66,7 +66,14 @@
     config = {
       modifier = "Mod4";
       terminal = "alacritty";
-      output."*".bg = "${../../assets/bg.png} fill";
+      output."*" = {
+        bg = "${../../assets/bg.png} fill";
+        adaptive_sync = "on";
+      };
+      input."type:pointer" = {
+        accel_profile = "flat";
+        pointer_accel = "0";
+      };
       window = {
         border = 1;
         titlebar = false;
