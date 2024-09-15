@@ -68,7 +68,7 @@
       terminal = "alacritty";
       output."*" = {
         bg = "${../../assets/bg.png} fill";
-        adaptive_sync = "on";
+        adaptive_sync = "off";
       };
       input."type:pointer" = {
         accel_profile = "flat";

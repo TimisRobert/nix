@@ -245,6 +245,7 @@
     graphics = {
       enable = true;
       enable32Bit = true;
+      extraPackages = [pkgs.amdvlk];
     };
     keyboard.qmk.enable = true;
     bluetooth.enable = true;
