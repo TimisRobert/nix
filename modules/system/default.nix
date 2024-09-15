@@ -127,6 +127,7 @@
   };
 
   services = {
+    fwupd.enable = true;
     zrepl = {
       enable = true;
       settings = {
