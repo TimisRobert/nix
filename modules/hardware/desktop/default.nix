@@ -10,7 +10,7 @@
   imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid"];
-  boot.initrd.kernelModules = [];
+  boot.initrd.kernelModules = ["amdgpu"];
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 

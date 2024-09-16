@@ -68,7 +68,6 @@
       terminal = "alacritty";
       output."*" = {
         bg = "${../../assets/bg.png} fill";
-        adaptive_sync = "on";
       };
       input."type:pointer" = {
         accel_profile = "flat";
@@ -100,16 +99,16 @@
       latitude = 45.30;
       longitude = 9.5;
     };
-    # swayidle = {
-    #   enable = true;
-    #   timeouts = [
-    #     {
-    #       timeout = 600;
-    #       command = ''${pkgs.sway}/bin/swaymsg "output * dpms off"'';
-    #       resumeCommand = ''${pkgs.sway}/bin/swaymsg "output * dpms on"'';
-    #     }
-    #   ];
-    # };
+    swayidle = {
+      enable = true;
+      timeouts = [
+        {
+          timeout = 600;
+          command = ''${pkgs.sway}/bin/swaymsg "output * dpms off"'';
+          resumeCommand = ''${pkgs.sway}/bin/swaymsg "output * dpms on"'';
+        }
+      ];
+    };
     mako.enable = true;
   };
 
