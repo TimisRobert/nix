@@ -15,9 +15,8 @@
     enable = true;
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
-    extraCompatPackages = [
-      pkgs.proton-ge-bin
-    ];
+    localNetworkGameTransfers.openFirewall = true;
+    extraCompatPackages = [pkgs.proton-ge-bin];
   };
 
   boot.extraModulePackages = [config.boot.kernelPackages.v4l2loopback];

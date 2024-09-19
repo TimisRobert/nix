@@ -5,6 +5,10 @@
     ];
   };
 
+  home.packages = [
+    pkgs.gamemode
+  ];
+
   programs.obs-studio = {
     enable = true;
     plugins = [
