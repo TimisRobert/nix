@@ -27,6 +27,7 @@
           ".local/share/direnv"
           ".local/share/zoxide"
           ".local/share/fish"
+          ".config/discord"
           ".mozilla"
           ".ssh"
           ".aws"
@@ -36,6 +37,7 @@
       };
     };
     packages = [
+      pkgs.discord
       pkgs.devenv
       pkgs.xdg-utils
       pkgs.pamixer
@@ -56,12 +58,12 @@
     mimeApps.enable = true;
   };
 
+  # seat * hide_cursor when-typing enable
   wayland.windowManager.sway = {
     enable = true;
     extraConfig = ''
       for_window [class=".*"] inhibit_idle fullscreen
       for_window [app_id=".*"] inhibit_idle fullscreen
-      seat * hide_cursor when-typing enable
     '';
     config = {
       modifier = "Mod4";

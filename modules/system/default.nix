@@ -18,6 +18,14 @@
     };
   };
 
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "discord"
+      "steam"
+      "steam-original"
+      "steam-run"
+    ];
+
   boot = {
     binfmt.emulatedSystems = ["aarch64-linux"];
     loader = {
@@ -124,6 +132,14 @@
   security = {
     rtkit.enable = true;
     polkit.enable = true;
+    pam.loginLimits = [
+      {
+        domain = "*";
+        type = "soft";
+        item = "nofile";
+        value = "16384";
+      }
+    ];
   };
 
   services = {
