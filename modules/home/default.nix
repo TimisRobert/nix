@@ -126,6 +126,7 @@
       defaultEditor = true;
       vimAlias = true;
       extraPackages = [
+        pkgs.python312Packages.python-lsp-server
         pkgs.terraform-ls
         pkgs.ruby-lsp
         pkgs.gnumake

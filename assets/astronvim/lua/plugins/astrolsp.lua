@@ -39,6 +39,7 @@ return {
     },
     -- enable servers that you already have installed without mason
     servers = {
+      "pylsp",
       "clangd",
       "lua_ls",
       "bashls",
