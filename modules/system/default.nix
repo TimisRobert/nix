@@ -110,7 +110,7 @@
   };
 
   environment = {
-    systemPackages = [pkgs.vim];
+    systemPackages = [pkgs.vim pkgs.podman-compose];
     persistence = {
       "/persist" = {
         directories = [
