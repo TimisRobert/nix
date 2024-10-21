@@ -37,6 +37,7 @@
       };
     };
     packages = [
+      pkgs.miru
       pkgs.discord
       pkgs.devenv
       pkgs.xdg-utils
@@ -126,7 +127,6 @@
       defaultEditor = true;
       vimAlias = true;
       extraPackages = [
-        pkgs.miru
         pkgs.python312Packages.python-lsp-server
         pkgs.terraform-ls
         pkgs.ruby-lsp
