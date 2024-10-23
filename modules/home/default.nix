@@ -128,6 +128,7 @@
       vimAlias = true;
       extraPackages = [
         pkgs.python312Packages.python-lsp-server
+        pkgs.black
         pkgs.terraform-ls
         pkgs.ruby-lsp
         pkgs.gnumake
