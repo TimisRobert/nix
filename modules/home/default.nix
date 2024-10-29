@@ -171,7 +171,7 @@
     alacritty = {
       enable = true;
       settings = {
-        import = [../../assets/kanagawa.toml];
+        general.import = [../../assets/kanagawa.toml];
         window = {opacity = 0.95;};
         font = {size = 12.0;};
       };
