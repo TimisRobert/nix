@@ -151,6 +151,7 @@
         pkgs.lua-language-server
         pkgs.stylua
         pkgs.selene
+        pkgs.rust-analyzer
         pkgs.lexical
       ];
     };
