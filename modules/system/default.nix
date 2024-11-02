@@ -60,9 +60,8 @@
   };
 
   virtualisation = {
-    containers = {
-      enable = true;
-    };
+    libvirtd.enable = true;
+    containers.enable = true;
     podman = {
       enable = true;
       dockerSocket.enable = true;
@@ -86,6 +85,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   programs = {
+    virt-manager.enable = true;
     light.enable = true;
     fuse.userAllowOther = true;
     fish = {
@@ -102,7 +102,7 @@
     users.rob = {
       shell = pkgs.fish;
       isNormalUser = true;
-      extraGroups = ["video" "wheel" "docker"];
+      extraGroups = ["video" "wheel" "docker" "libvirtd"];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBvR28lwcOKIk7VRo/bXzxQGnA5evdsGcNZCy3BA6DDR rob@RobertTimis"
       ];
@@ -118,6 +118,7 @@
           "/var/log"
           "/var/lib/bluetooth"
           "/etc/NetworkManager"
+          "/etc/libvirt"
         ];
         files = [
           "/etc/machine-id"
