@@ -153,6 +153,7 @@
         pkgs.selene
         pkgs.rust-analyzer
         pkgs.lexical
+        pkgs.clang-tools
       ];
     };
     firefox = {
