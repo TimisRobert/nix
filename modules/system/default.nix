@@ -39,6 +39,7 @@
     supportedFilesystems = ["zfs"];
 
     initrd.systemd.enable = lib.mkDefault true;
+    initrd.systemd.suppressedUnits = ["systemd-machine-id-commit.service"];
     initrd.systemd.services.rollback = {
       wantedBy = ["initrd.target"];
       after = ["zfs-import-zpool.service"];
@@ -50,6 +51,8 @@
       script = ''zfs rollback -r zpool/root@blank && echo "rollback complete"'';
     };
   };
+
+  systemd.suppressedSystemUnits = ["systemd-machine-id-commit.service"];
 
   powerManagement.cpuFreqGovernor = "performance";
 
