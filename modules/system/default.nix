@@ -137,14 +137,6 @@
   security = {
     rtkit.enable = true;
     polkit.enable = true;
-    wrappers = {
-      cloud-hypervisor = {
-        owner = "rob";
-        group = "users";
-        capabilities = "cap_net_admin+ep";
-        source = "${pkgs.cloud-hypervisor}/bin/cloud-hypervisor";
-      };
-    };
   };
 
   services = {
