@@ -10,6 +10,9 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixos-flake.url = "github:srid/nixos-flake";
+
+    microvm.url = "github:astro/microvm.nix";
+    microvm.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
@@ -43,6 +46,7 @@
         nixosModules = {
           desktop.imports = [
             inputs.impermanence.nixosModules.impermanence
+            inputs.microvm.nixosModules.host
             ./modules/system
             ./modules/system/desktop
             ./modules/hardware/desktop
