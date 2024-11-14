@@ -38,21 +38,26 @@
     };
     supportedFilesystems = ["zfs"];
 
-    initrd.systemd.enable = lib.mkDefault true;
-    initrd.systemd.suppressedUnits = ["systemd-machine-id-commit.service"];
-    initrd.systemd.services.rollback = {
-      wantedBy = ["initrd.target"];
-      after = ["zfs-import-zpool.service"];
-      before = ["sysroot.mount"];
-      path = [pkgs.zfs];
-      description = "Rollback ZFS datasets";
-      serviceConfig.Type = "oneshot";
-      unitConfig.DefaultDependencies = "no";
-      script = ''zfs rollback -r zpool/root@blank && echo "rollback complete"'';
+    initrd.systemd = {
+      enable = lib.mkDefault true;
+      suppressedUnits = ["systemd-machine-id-commit.service"];
+      services.rollback = {
+        wantedBy = ["initrd.target"];
+        after = ["zfs-import-zpool.service"];
+        before = ["sysroot.mount"];
+        path = [pkgs.zfs];
+        description = "Rollback ZFS datasets";
+        serviceConfig.Type = "oneshot";
+        unitConfig.DefaultDependencies = "no";
+        script = ''zfs rollback -r zpool/root@blank && echo "rollback complete"'';
+      };
     };
   };
 
-  systemd.suppressedSystemUnits = ["systemd-machine-id-commit.service"];
+  systemd = {
+    suppressedSystemUnits = ["systemd-machine-id-commit.service"];
+    network.wait-online.enable = false;
+  };
 
   powerManagement.cpuFreqGovernor = "performance";
 
@@ -119,6 +124,11 @@
         directories = [
           "/var/log"
           "/var/lib/bluetooth"
+          {
+            directory = "/var/lib/microvms";
+            user = "microvm";
+            group = "kvm";
+          }
           "/etc/NetworkManager"
         ];
         files = [

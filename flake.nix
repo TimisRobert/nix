@@ -13,6 +13,9 @@
 
     microvm.url = "github:astro/microvm.nix";
     microvm.inputs.nixpkgs.follows = "nixpkgs";
+
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
@@ -62,11 +65,13 @@
         homeModules = {
           desktop.imports = [
             inputs.impermanence.nixosModules.home-manager.impermanence
+            inputs.nix-index-database.hmModules.nix-index
             ./modules/home
             ./modules/home/desktop
           ];
           laptop.imports = [
             inputs.impermanence.nixosModules.home-manager.impermanence
+            inputs.nix-index-database.hmModules.nix-index
             ./modules/home
             ./modules/home/laptop
           ];
