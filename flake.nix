@@ -76,35 +76,6 @@
             ./modules/home/laptop
           ];
         };
-
-        templates = {
-          phoenix = {
-            path = ./templates/phoenix;
-            description = "base phoenix liveview template";
-            welcomeText = ''
-              To install the rest run the following commands:
-                - mix archive.install hex phx_new
-                - mix phx.new .
-            '';
-          };
-          elixir = {
-            description = "base elixir template";
-            path = ./templates/elixir;
-          };
-          zig = {
-            description = "base zig template";
-            path = ./templates/zig;
-          };
-          svelte = {
-            path = ./templates/svelte;
-            description = "base svelte template with tailwind";
-            welcomeText = ''
-              To install the rest run the following commands:
-                - pnpm create svelte
-                - pnpm i
-            '';
-          };
-        };
       };
 
       perSystem = {self', ...}: {
