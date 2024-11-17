@@ -1,13 +1,16 @@
 {pkgs, ...}: {
-  home.persistence."/persist/home/rob" = {
-    directories = [
-      ".local/share/Steam"
+  imports = [../.];
+
+  home = {
+    persistence."/persist/home/rob" = {
+      directories = [
+        ".local/share/Steam"
+      ];
+    };
+    packages = [
+      pkgs.gamemode
     ];
   };
-
-  home.packages = [
-    pkgs.gamemode
-  ];
 
   programs.obs-studio = {
     enable = true;

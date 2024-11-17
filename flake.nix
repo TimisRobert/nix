@@ -9,7 +9,6 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
-    nixos-flake.url = "github:srid/nixos-flake";
 
     microvm.url = "github:astro/microvm.nix";
     microvm.inputs.nixpkgs.follows = "nixpkgs";
@@ -18,69 +17,56 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs @ {
-    nixpkgs,
-    self,
-    ...
-  }:
+  outputs = inputs @ {nixpkgs, ...}:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       systems = nixpkgs.lib.systems.flakeExposed;
-      imports = [
-        inputs.nixos-flake.flakeModule
-      ];
+      imports = [];
       flake = {
         nixosConfigurations = {
-          desktop = self.nixos-flake.lib.mkLinuxSystem {
-            imports = [
-              self.nixosModules.desktop
-              self.nixosModules.home-manager
-              {home-manager.users.rob.imports = [self.homeModules.desktop];}
+          desktop = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            specialArgs = {
+              inherit inputs;
+            };
+            modules = [
+              inputs.impermanence.nixosModules.impermanence
+              inputs.home-manager.nixosModules.home-manager
+              inputs.microvm.nixosModules.host
+              ./modules/system
+              ./modules/system/desktop
+              ./modules/hardware/desktop
+              {
+                home-manager = {
+                  extraSpecialArgs = {inherit inputs;};
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  users.rob = import ./modules/home/desktop;
+                };
+              }
             ];
           };
-          laptop = self.nixos-flake.lib.mkLinuxSystem {
-            imports = [
-              self.nixosModules.laptop
-              self.nixosModules.home-manager
-              {home-manager.users.rob.imports = [self.homeModules.laptop];}
+          laptop = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            specialArgs = {
+              inherit inputs;
+            };
+            modules = [
+              inputs.impermanence.nixosModules.impermanence
+              inputs.home-manager.nixosModules.home-manager
+              ./modules/system
+              ./modules/system/laptop
+              ./modules/hardware/laptop
+              {
+                home-manager = {
+                  extraSpecialArgs = {inherit inputs;};
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  users.rob = import ./modules/home/laptop;
+                };
+              }
             ];
           };
         };
-
-        nixosModules = {
-          desktop.imports = [
-            inputs.impermanence.nixosModules.impermanence
-            inputs.microvm.nixosModules.host
-            ./modules/system
-            ./modules/system/desktop
-            ./modules/hardware/desktop
-          ];
-          laptop.imports = [
-            inputs.impermanence.nixosModules.impermanence
-            ./modules/system
-            ./modules/system/laptop
-            ./modules/hardware/laptop
-          ];
-        };
-
-        homeModules = {
-          desktop.imports = [
-            inputs.impermanence.nixosModules.home-manager.impermanence
-            inputs.nix-index-database.hmModules.nix-index
-            ./modules/home
-            ./modules/home/desktop
-          ];
-          laptop.imports = [
-            inputs.impermanence.nixosModules.home-manager.impermanence
-            inputs.nix-index-database.hmModules.nix-index
-            ./modules/home
-            ./modules/home/laptop
-          ];
-        };
-      };
-
-      perSystem = {self', ...}: {
-        packages.default = self'.packages.activate;
-        nixos-flake.primary-inputs = ["nixpkgs" "home-manager"];
       };
     };
 }

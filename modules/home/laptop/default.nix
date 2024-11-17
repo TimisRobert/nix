@@ -1,4 +1,6 @@
 {lib, ...}: {
+  imports = [../.];
+
   wayland.windowManager.sway.config.keybindings = lib.mkOptionDefault {
     "XF86MonBrightnessDown" = "exec light -U 5";
     "XF86MonBrightnessUp" = "exec light -A 5";

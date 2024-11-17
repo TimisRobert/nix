@@ -1,12 +1,18 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
+  imports = [
+    inputs.impermanence.nixosModules.home-manager.impermanence
+    inputs.nix-index-database.hmModules.nix-index
+  ];
+
   home = {
     username = "rob";
     homeDirectory = "/home/rob";
-    stateVersion = "24.05";
+    stateVersion = "25.05";
     pointerCursor = {
       package = pkgs.simp1e-cursors;
       name = "Simp1e";
@@ -164,7 +170,6 @@
     };
     firefox = {
       enable = true;
-      package = pkgs.wrapFirefox (pkgs.firefox-unwrapped.override {pipewireSupport = true;}) {};
       profiles.default.extraConfig = builtins.readFile ../../assets/user.js;
     };
     git = {

@@ -40,7 +40,6 @@
 
     initrd.systemd = {
       enable = lib.mkDefault true;
-      suppressedUnits = ["systemd-machine-id-commit.service"];
       services.rollback = {
         wantedBy = ["initrd.target"];
         after = ["zfs-import-zpool.service"];
@@ -55,7 +54,6 @@
   };
 
   systemd = {
-    suppressedSystemUnits = ["systemd-machine-id-commit.service"];
     network.wait-online.enable = false;
   };
 
@@ -124,6 +122,7 @@
         directories = [
           "/var/log"
           "/var/lib/bluetooth"
+          "/var/lib/nixos"
           {
             directory = "/var/lib/microvms";
             user = "microvm";
