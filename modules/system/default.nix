@@ -90,7 +90,6 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   programs = {
-    virt-manager.enable = true;
     light.enable = true;
     fuse.userAllowOther = true;
     fish = {
