@@ -39,7 +39,7 @@
     supportedFilesystems = ["zfs"];
 
     initrd.systemd = {
-      enable = lib.mkDefault true;
+      enable = true;
       services.rollback = {
         wantedBy = ["initrd.target"];
         after = ["zfs-import-zpool.service"];
@@ -48,7 +48,7 @@
         description = "Rollback ZFS datasets";
         serviceConfig.Type = "oneshot";
         unitConfig.DefaultDependencies = "no";
-        script = ''zfs rollback -r zpool/root@blank && echo "rollback complete"'';
+        script = "zfs rollback -r zpool/root@blank";
       };
     };
   };
@@ -265,10 +265,7 @@
     graphics = {
       enable = true;
       enable32Bit = true;
-      extraPackages = [pkgs.amdvlk];
-      extraPackages32 = [pkgs.driversi686Linux.amdvlk];
     };
-    keyboard.qmk.enable = true;
     bluetooth.enable = true;
     enableRedistributableFirmware = true;
   };
