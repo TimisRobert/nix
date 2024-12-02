@@ -272,7 +272,7 @@
 
   fonts = {
     enableDefaultPackages = true;
-    packages = [(pkgs.nerdfonts.override {fonts = ["Mononoki"];})];
+    packages = [pkgs.nerd-fonts.mononoki];
     fontconfig = {
       defaultFonts = {monospace = ["Mononoki Nerd Font Mono"];};
     };
