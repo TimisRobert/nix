@@ -122,11 +122,6 @@
           "/var/log"
           "/var/lib/bluetooth"
           "/var/lib/nixos"
-          {
-            directory = "/var/lib/microvms";
-            user = "microvm";
-            group = "kvm";
-          }
           "/etc/NetworkManager"
         ];
         files = [
@@ -279,7 +274,7 @@
   };
 
   system = {
-    stateVersion = "24.05";
+    stateVersion = "25.05";
     autoUpgrade = {
       enable = true;
       flake = "github:TimisRobert/nix";
