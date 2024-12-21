@@ -49,7 +49,7 @@ return {
       "html",
       "cssls",
       "emmet_ls",
-      -- "tailwindcss",
+      "tailwindcss",
       "yamlls",
       "zls",
       "lexical",
