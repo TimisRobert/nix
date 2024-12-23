@@ -55,6 +55,8 @@
 
   powerManagement.cpuFreqGovernor = "performance";
 
+  systemd.services.systemd-logind.wants = ["network.target"];
+
   xdg.portal = {
     enable = true;
     wlr.enable = true;
