@@ -53,10 +53,6 @@
     };
   };
 
-  systemd = {
-    network.wait-online.enable = false;
-  };
-
   powerManagement.cpuFreqGovernor = "performance";
 
   xdg.portal = {
