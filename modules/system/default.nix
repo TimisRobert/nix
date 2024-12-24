@@ -54,7 +54,6 @@
   };
 
   powerManagement.cpuFreqGovernor = "performance";
-
   systemd.services.systemd-logind.wants = ["network.target"];
 
   xdg.portal = {
@@ -114,7 +113,7 @@
   };
 
   environment = {
-    systemPackages = [pkgs.vim pkgs.podman-compose];
+    systemPackages = [pkgs.vim];
     persistence = {
       "/persist" = {
         directories = [
@@ -267,9 +266,7 @@
   fonts = {
     enableDefaultPackages = true;
     packages = [pkgs.nerd-fonts.mononoki];
-    fontconfig = {
-      defaultFonts = {monospace = ["Mononoki Nerd Font Mono"];};
-    };
+    fontconfig.defaultFonts = {monospace = ["Mononoki Nerd Font Mono"];};
   };
 
   system = {
