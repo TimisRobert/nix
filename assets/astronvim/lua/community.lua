@@ -9,4 +9,5 @@ return {
   { import = "astrocommunity.colorscheme.kanagawa-nvim", enabled = true },
   { import = "astrocommunity.editing-support.nvim-treesitter-context" },
   { import = "astrocommunity.editing-support.telescope-undo-nvim" },
+  { import = "astrocommunity.note-taking.neorg" },
 }
