@@ -142,7 +142,7 @@
         pkgs.python312Packages.python-lsp-server
         pkgs.black
         pkgs.terraform-ls
-        pkgs.ruby-lsp
+        # pkgs.ruby-lsp
         pkgs.gnumake
         pkgs.gcc
         pkgs.nodePackages."@astrojs/language-server"

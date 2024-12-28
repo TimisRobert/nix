@@ -53,7 +53,7 @@ return {
       "yamlls",
       "zls",
       "lexical",
-      "ruby_lsp",
+      -- "ruby_lsp",
       "nixd",
       "astro",
       "eslint",
