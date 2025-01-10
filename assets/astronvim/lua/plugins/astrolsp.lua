@@ -49,7 +49,7 @@ return {
       "html",
       "cssls",
       "emmet_ls",
-      -- "tailwindcss",
+      "tailwindcss",
       "yamlls",
       "zls",
       "lexical",
@@ -83,13 +83,13 @@ return {
           },
         },
         settings = {
-          -- tailwindCSS = {
-          --   experimental = {
-          --     classRegex = {
-          --       'class[:]\\s*"([^"]*)"',
-          --     },
-          --   },
-          -- },
+          tailwindCSS = {
+            experimental = {
+              classRegex = {
+                'class[:]\\s*"([^"]*)"',
+              },
+            },
+          },
         },
       },
     },
