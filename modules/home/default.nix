@@ -164,8 +164,8 @@
         pkgs.stylua
         pkgs.selene
         pkgs.rust-analyzer
-        # (pkgs.lexical.override {elixir = pkgs.elixir_1_17;})
-        pkgs.lexical
+        (pkgs.lexical.override {elixir = pkgs.elixir_1_17;})
+        # pkgs.lexical
         pkgs.clang-tools
       ];
     };
