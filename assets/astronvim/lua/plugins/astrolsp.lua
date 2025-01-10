@@ -38,6 +38,7 @@ return {
       -- end
     },
     -- enable servers that you already have installed without mason
+    -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
     servers = {
       "pylsp",
       "clangd",
@@ -52,8 +53,9 @@ return {
       "tailwindcss",
       "yamlls",
       "zls",
-      "lexical",
+      -- "lexical",
       -- "ruby_lsp",
+      "elixirls",
       "nixd",
       "astro",
       "eslint",
@@ -74,6 +76,9 @@ return {
       },
       lexical = {
         cmd = { "lexical" },
+      },
+      elixirls = {
+        cmd = { "elixir-ls" },
       },
       tailwindcss = {
         init_options = {

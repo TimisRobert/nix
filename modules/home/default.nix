@@ -165,6 +165,7 @@
         pkgs.selene
         pkgs.rust-analyzer
         (pkgs.lexical.override {elixir = pkgs.elixir_1_17;})
+        pkgs.elixir-ls
         pkgs.clang-tools
       ];
     };
