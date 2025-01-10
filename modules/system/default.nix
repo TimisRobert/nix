@@ -225,7 +225,10 @@
       };
     };
     zfs = {
-      autoScrub.enable = true;
+      autoScrub = {
+        enable = true;
+        interval = "14:00 Europe/Rome";
+      };
       trim.enable = true;
     };
     resolved = {
