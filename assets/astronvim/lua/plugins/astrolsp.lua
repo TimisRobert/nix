@@ -83,13 +83,13 @@ return {
           },
         },
         settings = {
-          tailwindCSS = {
-            experimental = {
-              classRegex = {
-                'class[:]\\s*"([^"]*)"',
-              },
-            },
-          },
+          -- tailwindCSS = {
+          --   experimental = {
+          --     classRegex = {
+          --       'class[:]\\s*"([^"]*)"',
+          --     },
+          --   },
+          -- },
         },
       },
     },
