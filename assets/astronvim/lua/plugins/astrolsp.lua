@@ -82,7 +82,7 @@ return {
       },
       tailwindcss = {
         init_options = {
-          userLanguages = {
+          includeLanguages = {
             heex = "html-eex",
             elixir = "html-eex",
           },
