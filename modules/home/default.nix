@@ -150,7 +150,6 @@
         pkgs.yaml-language-server
         pkgs.tailwindcss-language-server
         pkgs.emmet-ls
-        pkgs.vscode-langservers-extracted
         pkgs.typescript-language-server
         pkgs.prettierd
         pkgs.svelte-language-server
@@ -165,7 +164,6 @@
         pkgs.selene
         pkgs.rust-analyzer
         (pkgs.lexical.override {elixir = pkgs.elixir_1_17;})
-        # pkgs.lexical
         pkgs.clang-tools
       ];
     };

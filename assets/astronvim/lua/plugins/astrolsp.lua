@@ -46,16 +46,11 @@ return {
       "bashls",
       "svelte",
       "ts_ls",
-      "jsonls",
-      "html",
-      "cssls",
       "emmet_ls",
       "tailwindcss",
       "yamlls",
       "zls",
       "lexical",
-      -- "ruby_lsp",
-      -- "elixirls",
       "nixd",
       "astro",
       "eslint",
@@ -65,6 +60,26 @@ return {
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
+      html = {
+        filetypes = { "html", "edge" },
+      },
+      emmet_ls = {
+        filetypes = {
+          "css",
+          "eruby",
+          "html",
+          "javascript",
+          "javascriptreact",
+          "less",
+          "sass",
+          "scss",
+          "svelte",
+          "pug",
+          "typescriptreact",
+          "vue",
+          "edge",
+        },
+      },
       cssls = {
         settings = {
           css = {
@@ -76,9 +91,6 @@ return {
       },
       lexical = {
         cmd = { "lexical" },
-      },
-      elixirls = {
-        cmd = { "elixir-ls" },
       },
       tailwindcss = {
         init_options = {
