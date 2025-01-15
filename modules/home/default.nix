@@ -139,10 +139,13 @@
       defaultEditor = true;
       vimAlias = true;
       extraPackages = [
+        pkgs.nodejs
+        pkgs.ripgrep
+        pkgs.lazygit
+        pkgs.bottom
         pkgs.python312Packages.python-lsp-server
         pkgs.black
         pkgs.terraform-ls
-        # pkgs.ruby-lsp
         pkgs.gnumake
         pkgs.gcc
         pkgs.nodePackages."@astrojs/language-server"
