@@ -150,6 +150,7 @@
         pkgs.yaml-language-server
         pkgs.tailwindcss-language-server
         pkgs.emmet-ls
+        pkgs.vscode-langservers-extracted
         pkgs.typescript-language-server
         pkgs.prettierd
         pkgs.svelte-language-server
