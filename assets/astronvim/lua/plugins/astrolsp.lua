@@ -50,6 +50,7 @@ return {
       "tailwindcss",
       "yamlls",
       "zls",
+      "cssls",
       "lexical",
       "nixd",
       "astro",
@@ -93,14 +94,14 @@ return {
         cmd = { "lexical" },
       },
       tailwindcss = {
-        init_options = {
-          includeLanguages = {
-            heex = "html-eex",
-            elixir = "html-eex",
-          },
-        },
         settings = {
           tailwindCSS = {
+            includeLanguages = {
+              elixir = "html-eex",
+              eelixir = "html-eex",
+              heex = "html-eex",
+            },
+
             experimental = {
               classRegex = {
                 'class[:]\\s*"([^"]*)"',
