@@ -167,7 +167,13 @@
         pkgs.stylua
         pkgs.selene
         pkgs.rust-analyzer
-        (pkgs.lexical.override {elixir = pkgs.elixir_1_17;})
+        (pkgs.lexical.overrideAttrs (old: {
+          src = old.src.override {
+            rev = "support_1_18";
+            tag = null;
+            hash = "sha256-FzURIHhuB00In4rOxWcZAmG1BXCUqJVAH5E68WJzm5g=";
+          };
+        }))
         pkgs.clang-tools
       ];
     };
