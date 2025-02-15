@@ -185,7 +185,12 @@
       enable = true;
       userName = "TimisRobert";
       userEmail = "roberttimis@proton.me";
+      signing = {
+        format = "ssh";
+        signByDefault = true;
+      };
       extraConfig = {
+        user.signingKey = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
         init.defaultBranch = "main";
         push.autoSetupRemote = true;
       };
