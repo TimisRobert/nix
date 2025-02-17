@@ -53,7 +53,6 @@
   };
 
   powerManagement.cpuFreqGovernor = "performance";
-  systemd.services.systemd-logind.wants = ["network.target"];
 
   xdg.portal = {
     enable = true;
@@ -79,6 +78,7 @@
   networking = {
     networkmanager.enable = true;
     nftables.enable = true;
+    nameservers = ["1.1.1.1" "2606:4700:4700::1111"];
   };
 
   time.timeZone = "Europe/Rome";
