@@ -140,6 +140,7 @@
       vimAlias = true;
       extraPackages = [
         pkgs.nodejs
+        pkgs.typescript
         pkgs.ripgrep
         pkgs.lazygit
         pkgs.bottom
@@ -154,7 +155,7 @@
         pkgs.tailwindcss-language-server
         pkgs.emmet-ls
         pkgs.vscode-langservers-extracted
-        pkgs.typescript-language-server
+        pkgs.vtsls
         pkgs.prettierd
         pkgs.svelte-language-server
         pkgs.bash-language-server
@@ -169,9 +170,9 @@
         pkgs.rust-analyzer
         (pkgs.lexical.overrideAttrs (old: {
           src = old.src.override {
-            rev = "support_1_18";
+            rev = "main";
             tag = null;
-            hash = "sha256-FzURIHhuB00In4rOxWcZAmG1BXCUqJVAH5E68WJzm5g=";
+            hash = "sha256-p8XSJBX1igwC+ssEJGD8wb/ZYaEgLGozlY8N6spo3cA=";
           };
         }))
         pkgs.clang-tools
