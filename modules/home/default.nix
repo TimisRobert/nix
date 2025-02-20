@@ -21,7 +21,6 @@
       WLR_RENDERER = "vulkan";
       MOZ_ENABLE_WAYLAND = "1";
       NIXOS_OZONE_WL = "1";
-      EDITOR = "nvim";
       ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
     };
     file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/nix/assets/astronvim";
@@ -140,7 +139,6 @@
       vimAlias = true;
       extraPackages = [
         pkgs.nodejs
-        pkgs.typescript
         pkgs.ripgrep
         pkgs.lazygit
         pkgs.bottom
