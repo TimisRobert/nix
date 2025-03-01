@@ -42,8 +42,6 @@
       };
     };
     packages = [
-      pkgs.miru
-      pkgs.discord
       pkgs.devenv
       pkgs.xdg-utils
       pkgs.pamixer
