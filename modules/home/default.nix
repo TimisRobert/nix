@@ -164,13 +164,7 @@
         pkgs.stylua
         pkgs.selene
         pkgs.rust-analyzer
-        (pkgs.lexical.overrideAttrs (old: {
-          src = old.src.override {
-            rev = "main";
-            tag = null;
-            hash = "sha256-p8XSJBX1igwC+ssEJGD8wb/ZYaEgLGozlY8N6spo3cA=";
-          };
-        }))
+        pkgs.lexical
         pkgs.clang-tools
       ];
     };
