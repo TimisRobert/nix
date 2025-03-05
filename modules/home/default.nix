@@ -33,6 +33,7 @@
           ".local/share/zoxide"
           ".local/share/fish"
           ".config/discord"
+          ".config/teams-for-linux"
           ".mozilla"
           ".ssh"
           ".aws"
@@ -42,6 +43,7 @@
       };
     };
     packages = [
+      pkgs.teams-for-linux
       pkgs.devenv
       pkgs.xdg-utils
       pkgs.pamixer
