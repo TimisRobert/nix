@@ -24,6 +24,7 @@
       ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
     };
     file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/nix/assets/astronvim";
+    file.".config/fish/themes/kanagawa.fish".source = ../../assets/kanagawa.fish;
     persistence = {
       "/persist/home/rob" = {
         directories = [
@@ -191,7 +192,7 @@
     alacritty = {
       enable = true;
       settings = {
-        general.import = [../../assets/kanagawa.toml];
+        general.import = [../../assets/kanagawa_wave.toml];
         window = {opacity = 0.95;};
         font = {size = 12.0;};
       };
