@@ -24,7 +24,7 @@
       ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
     };
     file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/nix/assets/astronvim";
-    file.".config/fish/themes/kanagawa.fish".source = ../../assets/kanagawa.fish;
+    file.".config/fish/themes/Kanagawa.theme".source = ../../assets/kanagawa.theme;
     persistence = {
       "/persist/home/rob" = {
         directories = [
@@ -53,6 +53,7 @@
       pkgs.slurp
       pkgs.swayimg
       pkgs.unzip
+      pkgs.lsd
     ];
   };
 
@@ -227,7 +228,11 @@
       enable = true;
       interactiveShellInit = ''
         set fish_greeting
+        fish_config theme choose Kanagawa
       '';
+      shellAliases = {
+        ls = "lsd";
+      };
       plugins = [
         {
           name = "plugin-git";
