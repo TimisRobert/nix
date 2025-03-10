@@ -35,6 +35,7 @@
           ".local/share/fish"
           ".config/discord"
           ".config/teams-for-linux"
+          ".config/obs-studio"
           ".mozilla"
           ".ssh"
           ".aws"
