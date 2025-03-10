@@ -232,6 +232,7 @@
       '';
       shellAliases = {
         ls = "lsd";
+        lg = "lazygit";
       };
       plugins = [
         {
