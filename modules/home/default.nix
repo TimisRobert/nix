@@ -54,6 +54,7 @@
       pkgs.slurp
       pkgs.swayimg
       pkgs.unzip
+      pkgs.zip
       pkgs.lsd
     ];
   };
