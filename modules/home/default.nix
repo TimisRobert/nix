@@ -144,7 +144,6 @@
       extraPackages = [
         pkgs.nodejs
         pkgs.ripgrep
-        pkgs.lazygit
         pkgs.bottom
         pkgs.python312Packages.python-lsp-server
         pkgs.black
@@ -221,6 +220,9 @@
     };
     lazygit = {
       enable = true;
+      settings = {
+        disableStartupPopups = false;
+      };
     };
     direnv = {
       enable = true;
