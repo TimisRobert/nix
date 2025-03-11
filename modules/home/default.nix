@@ -187,6 +187,7 @@
       };
       extraConfig = {
         user.signingKey = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
+        fetch.prune = true;
         init.defaultBranch = "main";
         push.autoSetupRemote = true;
         rebase.updateRefs = true;
