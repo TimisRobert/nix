@@ -190,6 +190,7 @@
         fetch.prune = true;
         init.defaultBranch = "main";
         push.autoSetupRemote = true;
+        pull.rebase = true;
         rebase.updateRefs = true;
       };
     };
@@ -221,7 +222,7 @@
     lazygit = {
       enable = true;
       settings = {
-        disableStartupPopups = false;
+        disableStartupPopups = true;
       };
     };
     direnv = {
