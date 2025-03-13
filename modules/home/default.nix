@@ -193,7 +193,7 @@
         push.autoSetupRemote = true;
         pull.rebase = true;
         rebase.updateRefs = true;
-        credential.helper = "cache";
+        credential.helper = "cache --timeout 604800";
       };
     };
     alacritty = {
