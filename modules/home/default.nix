@@ -45,6 +45,7 @@
       };
     };
     packages = [
+      pkgs.riffdiff
       pkgs.teams-for-linux
       pkgs.devenv
       pkgs.xdg-utils
@@ -192,6 +193,7 @@
         push.autoSetupRemote = true;
         pull.rebase = true;
         rebase.updateRefs = true;
+        credential.helper = "cache";
       };
     };
     alacritty = {
@@ -240,6 +242,7 @@
       shellAliases = {
         ls = "lsd";
         lg = "lazygit";
+        diff = "riff";
       };
       plugins = [
         {
