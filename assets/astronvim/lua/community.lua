@@ -10,4 +10,5 @@ return {
   { import = "astrocommunity.editing-support.nvim-treesitter-context" },
   { import = "astrocommunity.editing-support.telescope-undo-nvim" },
   { import = "astrocommunity.note-taking.neorg" },
+  { import = "astrocommunity.search.grug-far-nvim" },
 }
