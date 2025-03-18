@@ -93,6 +93,11 @@
       enable = true;
       vendor.config.enable = false;
     };
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+      withUWSM = true;
+    };
   };
 
   users = {
@@ -157,7 +162,7 @@
       enable = true;
       settings = {
         default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd hyprland";
           user = "greeter";
         };
       };

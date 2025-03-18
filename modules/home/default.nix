@@ -53,7 +53,6 @@
       pkgs.wl-clipboard
       pkgs.grim
       pkgs.slurp
-      pkgs.swayimg
       pkgs.unzip
       pkgs.zip
       pkgs.lsd
@@ -69,35 +68,74 @@
     mimeApps.enable = true;
   };
 
-  # seat * hide_cursor when-typing enable
-  wayland.windowManager.sway = {
+  wayland.windowManager.hyprland = {
     enable = true;
-    extraConfig = ''
-      for_window [class=".*"] inhibit_idle fullscreen
-      for_window [app_id=".*"] inhibit_idle fullscreen
-    '';
-    config = {
-      modifier = "Mod4";
-      terminal = "alacritty";
-      output."*" = {
-        bg = "${../../assets/bg.png} fill";
+    xwayland.enable = true;
+    systemd.enable = false;
+
+    settings = {
+      "$mainMod" = "SUPER";
+      "$terminal" = "alacritty";
+      "$menu" = "wofi --show drun";
+      "$fileManager" = "dolphin";
+      monitor = ",preferred,auto,auto";
+
+      general = {
+        border_size = 1;
       };
-      input."type:pointer" = {
-        accel_profile = "flat";
-        pointer_accel = "0";
+
+      cursor = {
+        inactive_timeout = 3;
+        no_warps = true;
       };
-      window = {
-        border = 1;
-        titlebar = false;
-      };
-      gaps.inner = 10;
-      bars = [{command = "waybar";}];
+
       input = {
-        "type:keyboard" = {
-          xkb_layout = "us";
-          xkb_options = "caps:ctrl_modifier";
-        };
+        kb_layout = "us";
+        accel_profile = "flat";
       };
+
+      bind = [
+        "$mainMod, Return, exec, $terminal"
+        "$mainMod, r, exec, $menu"
+
+        "$mainMod, c, killactive,"
+
+        # Move focus with mainMod + arrow keys
+        "$mainMod, h, movefocus, l"
+        "$mainMod, l, movefocus, r"
+        "$mainMod, k, movefocus, u"
+        "$mainMod, j, movefocus, d"
+
+        # Move window
+        "$mainMod SHIFT, h, movewindow, l"
+        "$mainMod SHIFT, l, movewindow, r"
+        "$mainMod SHIFT, k, movewindow, u"
+        "$mainMod SHIFT, j, movewindow, d"
+
+        # Switch workspaces with mainMod + [0-9]
+        "$mainMod, 1, workspace, 1"
+        "$mainMod, 2, workspace, 2"
+        "$mainMod, 3, workspace, 3"
+        "$mainMod, 4, workspace, 4"
+        "$mainMod, 5, workspace, 5"
+        "$mainMod, 6, workspace, 6"
+        "$mainMod, 7, workspace, 7"
+        "$mainMod, 8, workspace, 8"
+        "$mainMod, 9, workspace, 9"
+        "$mainMod, 0, workspace, 10"
+
+        # Move active window to a workspace with mainMod + SHIFT + [0-9]
+        "$mainMod SHIFT, 1, movetoworkspace, 1"
+        "$mainMod SHIFT, 2, movetoworkspace, 2"
+        "$mainMod SHIFT, 3, movetoworkspace, 3"
+        "$mainMod SHIFT, 4, movetoworkspace, 4"
+        "$mainMod SHIFT, 5, movetoworkspace, 5"
+        "$mainMod SHIFT, 6, movetoworkspace, 6"
+        "$mainMod SHIFT, 7, movetoworkspace, 7"
+        "$mainMod SHIFT, 8, movetoworkspace, 8"
+        "$mainMod SHIFT, 9, movetoworkspace, 9"
+        "$mainMod SHIFT, 0, movetoworkspace, 10"
+      ];
     };
   };
 
@@ -112,15 +150,27 @@
       latitude = 45.30;
       longitude = 9.5;
     };
-    swayidle = {
+    hypridle = {
       enable = true;
-      timeouts = [
-        {
-          timeout = 600;
-          command = ''${pkgs.sway}/bin/swaymsg "output * dpms off"'';
-          resumeCommand = ''${pkgs.sway}/bin/swaymsg "output * dpms on"'';
-        }
-      ];
+      settings = {
+        general = {
+          after_sleep_cmd = "hyprctl dispatch dpms on";
+          ignore_dbus_inhibit = false;
+          lock_cmd = "hyprlock";
+        };
+
+        listener = [
+          {
+            timeout = 900;
+            on-timeout = "hyprlock";
+          }
+          {
+            timeout = 1200;
+            on-timeout = "hyprctl dispatch dpms off";
+            on-resume = "hyprctl dispatch dpms on";
+          }
+        ];
+      };
     };
     mako.enable = true;
   };
@@ -218,6 +268,9 @@
         };
       };
     };
+    wofi = {
+      enable = true;
+    };
     fzf = {
       enable = true;
     };
@@ -256,12 +309,16 @@
         screenshot = "grim -g $(slurp) $argv";
       };
     };
+    hyprlock = {
+      enable = true;
+    };
     waybar = {
       enable = true;
+      systemd.enable = true;
       style = ../../assets/waybar.css;
       settings = [
         {
-          modules-left = ["sway/workspaces" "sway/mode"];
+          modules-left = ["hyprland/workspaces" "hyprland/submap"];
           modules-center = ["clock"];
           modules-right = [
             "pulseaudio"
@@ -273,8 +330,8 @@
             "temperature"
             "tray"
           ];
-          "sway/workspaces" = {"disable-scroll" = true;};
-          "sway/mode" = {format = ''<span style="italic">{}</span>'';};
+          "hyprland/workspaces" = {"disable-scroll" = true;};
+          "hyprland/submap" = {format = ''<span style="italic">{}</span>'';};
           "backlight" = {
             "device" = "intel_backlight";
             "on-scroll-up" = "light -A 5";
