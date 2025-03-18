@@ -340,9 +340,9 @@
           layer = "top";
           position = "top";
           reload_style_on_change = true;
-          modules-left = ["clock" "tray"];
-          modules-center = ["hyprland/workspaces"];
-          modules-right = ["group/expand" "pulseaudio" "bluetooth" "network" "battery"];
+          modules-left = ["hyprland/workspaces"];
+          modules-center = ["clock"];
+          modules-right = ["group/expand" "pulseaudio" "bluetooth" "network" "battery" "tray"];
           "hyprland/workspaces" = {
             "format" = "{icon}";
             "format-icons" = {
