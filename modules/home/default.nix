@@ -75,18 +75,23 @@
 
     settings = {
       "$mainMod" = "SUPER";
-      "$terminal" = "alacritty";
-      "$menu" = "wofi --show drun";
+      "$terminal" = "kitty";
+      "$menu" = "rofi -show drun";
       "$fileManager" = "dolphin";
       monitor = ",preferred,auto,auto";
 
       general = {
-        border_size = 1;
+        border_size = 0;
+      };
+
+      misc = {
+        disable_hyprland_logo = true;
+        disable_splash_rendering = true;
       };
 
       cursor = {
-        inactive_timeout = 3;
-        no_warps = true;
+        inactive_timeout = 5;
+        persistent_warps = true;
       };
 
       input = {
@@ -96,7 +101,7 @@
 
       bind = [
         "$mainMod, Return, exec, $terminal"
-        "$mainMod, r, exec, $menu"
+        "$mainMod, d, exec, $menu"
 
         "$mainMod, c, killactive,"
 
@@ -169,6 +174,15 @@
             on-timeout = "hyprctl dispatch dpms off";
             on-resume = "hyprctl dispatch dpms on";
           }
+        ];
+      };
+    };
+    hyprpaper = {
+      enable = true;
+      settings = {
+        preload = ["/home/rob/projects/nix/assets/bg.png"];
+        wallpaper = [
+          ",/home/rob/projects/nix/assets/bg.png"
         ];
       };
     };
@@ -246,12 +260,16 @@
         credential.helper = "cache --timeout 604800";
       };
     };
-    alacritty = {
+    kitty = {
       enable = true;
+      themeFile = "kanagawa";
+      font = {
+        name = "Mononoki Mono";
+        size = 12;
+      };
       settings = {
-        general.import = [../../assets/kanagawa_wave.toml];
-        window = {opacity = 0.95;};
-        font = {size = 12.0;};
+        background_opacity = 0.95;
+        modify_font = "cell_height +1px";
       };
     };
     zoxide = {
@@ -268,8 +286,9 @@
         };
       };
     };
-    wofi = {
+    rofi = {
       enable = true;
+      theme = ../../assets/rofi.rasi;
     };
     fzf = {
       enable = true;
@@ -318,26 +337,57 @@
       style = ../../assets/waybar.css;
       settings = [
         {
-          modules-left = ["hyprland/workspaces" "hyprland/submap"];
-          modules-center = ["clock"];
-          modules-right = [
-            "pulseaudio"
-            "backlight"
-            "memory"
-            "cpu"
-            "network"
-            "battery"
-            "temperature"
-            "tray"
-          ];
-          "hyprland/workspaces" = {"disable-scroll" = true;};
-          "hyprland/submap" = {format = ''<span style="italic">{}</span>'';};
-          "backlight" = {
-            "device" = "intel_backlight";
-            "on-scroll-up" = "light -A 5";
-            "on-scroll-down" = "light -U 5";
-            "format" = "{icon} {percent}%";
-            "format-icons" = ["󰃝" "󰃞" "󰃟" "󰃠"];
+          layer = "top";
+          position = "top";
+          reload_style_on_change = true;
+          modules-left = ["clock" "tray"];
+          modules-center = ["hyprland/workspaces"];
+          modules-right = ["group/expand" "pulseaudio" "bluetooth" "network" "battery"];
+          "hyprland/workspaces" = {
+            "format" = "{icon}";
+            "format-icons" = {
+              "active" = "";
+              "default" = "";
+              "empty" = "";
+            };
+            persistent-workspaces = {
+              "*" = [1 2 3 4 5];
+            };
+          };
+          "clock" = {
+            "format" = "{:%I:%M:%S %p  %A %b %d}";
+            "interval" = 1;
+            "tooltip-format" = "<tt>{calendar}</tt>";
+            "calendar" = {
+              "format" = {
+                "today" = "<span color='#fAfBfC'><b>{}</b></span>";
+              };
+            };
+            "actions" = {
+              "on-click-right" = "shift_down";
+              "on-click" = "shift_up";
+            };
+          };
+          "network" = {
+            "format-wifi" = "";
+            "format-ethernet" = "";
+            "format-disconnected" = "";
+            "tooltip-format-disconnected" = "Error";
+            "tooltip-format-wifi" = "{essid} ({signalStrength}%) ";
+            "tooltip-format-ethernet" = "{ifname} {ipaddr}";
+            "on-click" = "kitty nmtui";
+          };
+          "bluetooth" = {
+            "format-on" = "󰂯";
+            "format-off" = "BT-off";
+            "format-disabled" = "󰂲";
+            "format-connected-battery" = "{device_battery_percentage}% 󰂯";
+            "format-alt" = "{device_alias} 󰂯";
+            "tooltip-format" = "{controller_alias}\t{controller_address}\n\n{num_connections} connected";
+            "tooltip-format-connected" = "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}";
+            "tooltip-format-enumerate-connected" = "{device_alias}\n{device_address}";
+            "tooltip-format-enumerate-connected-battery" = "{device_alias}\n{device_address}\n{device_battery_percentage}%";
+            "on-click-right" = "blueman-manager";
           };
           "pulseaudio" = {
             "scroll-step" = 1;
@@ -348,49 +398,49 @@
             "tooltip" = false;
           };
           "battery" = {
-            "interval" = 10;
+            "interval" = 30;
             "states" = {
-              "warning" = 20;
-              "critical" = 10;
+              "good" = 95;
+              "warning" = 30;
+              "critical" = 20;
             };
-            "format" = "{icon} {capacity}%";
-            "format-icons" = ["󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
-            "format-full" = "{icon} {capacity}%";
-            "format-charging" = "󰂄 {capacity}%";
+            "format" = "{capacity}% {icon}";
+            "format-charging" = "{capacity}% 󰂄";
+            "format-plugged" = "{capacity}% 󰂄 ";
+            "format-alt" = "{time} {icon}";
+            "format-icons" = ["󰁻" "󰁼" "󰁾" "󰂀" "󰂂" "󰁹"];
+          };
+          "custom/expand" = {
+            "format" = "";
             "tooltip" = false;
           };
-          "clock" = {
-            "interval" = 1;
-            "format" = "{:%I:%M %p  %A %b %d}";
-            "tooltip" = true;
-            "tooltip-format" = ''
-              <big>{:%Y %B}</big>
-              <tt><small>{calendar}</small></tt>'';
-          };
-          "memory" = {
-            "interval" = 1;
-            "format" = "󰍛 {percentage}%";
-            "states" = {"warning" = 85;};
-          };
-          "cpu" = {
-            "interval" = 1;
-            "format" = "󰻠 {usage}%";
-          };
-          "network" = {
-            "interval" = 5;
-            "format-wifi" = "󰖩 {essid} {signalStrength}%";
-            "format-ethernet" = "󰀂 {ifname} {ipaddr}";
-            "format-linked" = "󰖪 {essid} (No IP)";
-            "format-disconnected" = "󰯡 Disconnected";
+          "custom/endpoint" = {
+            "format" = "|";
             "tooltip" = false;
           };
-          "temperature" = {
-            "tooltip" = false;
-            "format" = " {temperatureC}°C";
+          "group/expand" = {
+            "orientation" = "horizontal";
+            "drawer" = {
+              "transition-duration" = 600;
+              "transition-to-left" = true;
+              "click-to-reveal" = true;
+            };
+            "modules" = ["custom/expand" "custom/colorpicker" "cpu" "memory" "temperature" "custom/endpoint"];
           };
-          "tray" = {
-            "icon-size" = 15;
-            "spacing" = 5;
+          cpu = {
+            format = "󰻠";
+            tooltip = true;
+          };
+          memory = {
+            format = "";
+          };
+          temperature = {
+            critical-threshold = 80;
+            format = "";
+          };
+          tray = {
+            icon-size = 14;
+            spacing = 10;
           };
         }
       ];

@@ -188,7 +188,7 @@
 
   fonts = {
     enableDefaultPackages = true;
-    packages = [pkgs.nerd-fonts.mononoki];
+    packages = [pkgs.mononoki pkgs.nerd-fonts.mononoki];
     fontconfig.defaultFonts = {monospace = ["Mononoki Nerd Font Mono"];};
   };
 

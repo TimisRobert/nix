@@ -1,137 +1,213 @@
+@define-color background #1F1F28;
+@define-color foreground #DCD7BA;
+@define-color color1 #16161D;
+@define-color color2 #C34043;
+@define-color color3 #76946A;
+@define-color color4 #C0A36E;
+@define-color color5 #7E9CD8;
+@define-color color6 #957FB8;
+@define-color color7 #6A9589;
+@define-color color8 #C8C093;
+@define-color color9 #98BB6C;
+
 * {
   font-family: "Mononoki Nerd Font Mono";
   font-size: 12pt;
-  font-weight: bold;
-  border-radius: 0px;
-  transition-property: background-color;
-  transition-duration: 0.5s;
 }
 
-@keyframes blink_red {
-  to {
-    background-color: rgb(242, 143, 173);
-    color: rgb(26, 24, 38);
-  }
+window#waybar {
+  all: unset;
 }
 
-.warning,
-.critical,
-.urgent {
-  animation-name: blink_red;
-  animation-duration: 1s;
+.modules-left {
+  padding: 7px;
+  margin: 8 0 0 8;
+  border-radius: 10px;
+  background: alpha(@background, 0.95);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.6);
+}
+
+.modules-center {
+  padding: 7px;
+  margin: 8 0 0 0;
+  border-radius: 10px;
+  background: alpha(@background, 0.95);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.6);
+}
+
+.modules-right {
+  padding: 7px;
+  margin: 8 8 0 0;
+  border-radius: 10px;
+  background: alpha(@background, 0.95);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.6);
+}
+
+tooltip {
+  background: @background;
+  color: @color7;
+}
+
+#clock:hover,
+#custom-pacman:hover,
+#custom-notification:hover,
+#bluetooth:hover,
+#network:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#pulseaudio:hover #temperature:hover {
+  transition: all 0.3s ease;
+  color: @color9;
+}
+
+#custom-notification {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+  color: @color7;
+}
+
+#clock {
+  padding: 0px 5px;
+  color: @color7;
+  transition: all 0.3s ease;
+}
+
+#custom-pacman {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+  color: @color7;
+}
+
+#workspaces {
+  padding: 0px 5px;
+}
+
+#workspaces button {
+  all: unset;
+  padding: 0px 5px;
+  color: alpha(@color9, 0.4);
+  transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+  color: rgba(0, 0, 0, 0);
+  border: none;
+  text-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.5);
+  transition: all 1s ease;
+}
+
+#workspaces button.active {
+  color: @color9;
+  border: none;
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+}
+
+#workspaces button.empty {
+  color: rgba(0, 0, 0, 0);
+  border: none;
+  text-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.empty:hover {
+  color: rgba(0, 0, 0, 0);
+  border: none;
+  text-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.5);
+  transition: all 1s ease;
+}
+
+#workspaces button.empty.active {
+  color: @color9;
+  border: none;
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+}
+
+#bluetooth {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+  color: @color7;
+}
+
+#network {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+  color: @color7;
+}
+
+#pulseaudio {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+  color: @color7;
+}
+
+#battery {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+  color: @color7;
+}
+
+#battery.charging {
+  color: #26a65b;
+}
+
+#battery.warning:not(.charging) {
+  color: #ffbe61;
+}
+
+#battery.critical:not(.charging) {
+  color: #f53c3c;
+  animation-name: blink;
+  animation-duration: 0.5s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
 
-window#waybar {
-  background-color: transparent;
+#group-expand {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
 }
 
-window>box {
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 10px;
-  background-color: rgb(30, 30, 46);
+#custom-expand {
+  padding: 0px 5px;
+  color: alpha(@foreground, 0.2);
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.7);
+  transition: all 0.3s ease;
 }
 
-#mode {
-  color: rgb(217, 224, 238);
+#custom-expand:hover {
+  color: rgba(255, 255, 255, 0.2);
+  text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.5);
 }
 
-#workspaces {
-  padding-left: 0px;
-  padding-right: 4px;
+#custom-colorpicker {
+  padding: 0px 5px;
 }
 
-#workspaces button {
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 2px;
-  padding-right: 2px;
-  background-color: rgb(16, 74, 94);
-  color: rgb(26, 24, 38);
-}
-
-#workspaces button.focused {
-  background-color: rgb(181, 232, 224);
-  color: rgb(26, 24, 38);
-}
-
-#workspaces button.urgent {
-  color: rgb(26, 24, 38);
-}
-
-#workspaces button:hover {
-  background-color: rgb(248, 189, 150);
-  color: rgb(26, 24, 38);
-}
-
-tooltip {
-  background: rgb(48, 45, 65);
-}
-
-tooltip label {
-  color: rgb(217, 224, 238);
-}
-
-#mode,
-#clock,
-#memory,
-#temperature,
 #cpu,
-#temperature,
-#backlight,
-#pulseaudio,
-#network,
-#battery {
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-#memory {
-  color: rgb(181, 232, 224);
-}
-
-#cpu {
-  color: rgb(245, 194, 231);
-}
-
-#clock {
-  color: rgb(217, 224, 238);
-}
-
+#memory,
 #temperature {
-  color: rgb(150, 205, 251);
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+  color: @color7;
 }
 
-#backlight {
-  color: rgb(248, 189, 150);
-}
-
-#pulseaudio {
-  color: rgb(245, 224, 220);
-}
-
-#network {
-  color: #abe9b3;
-}
-
-#network.disconnected {
-  color: rgb(255, 255, 255);
-}
-
-#battery.charging,
-#battery.full,
-#battery.discharging {
-  color: rgb(250, 227, 176);
-}
-
-#battery.critical:not(.charging) {
-  color: rgb(242, 143, 173);
+#custom-endpoint {
+  color: transparent;
+  text-shadow: 0px 0px 1.5px rgba(0, 0, 0, 1);
 }
 
 #tray {
-  padding-right: 8px;
-  padding-left: 10px;
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+}
+
+#tray menu * {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+}
+
+#tray menu separator {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
 }
