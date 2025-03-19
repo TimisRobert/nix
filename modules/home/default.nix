@@ -472,15 +472,16 @@
             "modules" = ["custom/expand" "custom/colorpicker" "cpu" "memory" "temperature" "custom/endpoint"];
           };
           cpu = {
-            format = "󰻠";
+            "format" = "󰻠 {usage}%";
             tooltip = true;
           };
           memory = {
-            format = "";
+            format = " {percentage}%";
           };
           temperature = {
             critical-threshold = 80;
-            format = "";
+            "format" = " {temperatureC}°C";
+            tooltip = false;
           };
           tray = {
             icon-size = 14;
