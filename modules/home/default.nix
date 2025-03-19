@@ -73,6 +73,17 @@
     xwayland.enable = true;
     systemd.enable = false;
 
+    extraConfig = ''
+      bind = $mainMod, r, submap, resize
+      submap=resize
+      binde = , h, resizeactive, -10 0
+      binde = , l, resizeactive, 10 0
+      binde = , k, resizeactive, 0 -10
+      binde = , j, resizeactive, 0 10
+      bind = , escape, submap, reset
+      submap=reset
+    '';
+
     settings = {
       "$mainMod" = "SUPER";
       "$terminal" = "kitty";
@@ -81,7 +92,25 @@
       monitor = ",preferred,auto,auto";
 
       general = {
-        border_size = 0;
+        border_size = 1;
+        "col.active_border" = "0x76946AF1";
+      };
+
+      decoration = {
+        rounding = 4;
+      };
+
+      animations = {
+        enabled = true;
+        bezier = ["fluid, 0.15, 0.85, 0.25, 1" "snappy, 0.3, 1, 0.4, 1"];
+        animation = [
+          "windows, 1, 3, fluid, popin 5%"
+          "windowsOut, 1, 2.5, snappy"
+          "fade, 1, 4, snappy"
+          "workspaces, 1, 1.7, snappy, slide"
+          "specialWorkspace, 1, 4, fluid, slidefadevert -35%"
+          "layers, 1, 2, snappy, popin 70%"
+        ];
       };
 
       misc = {
@@ -99,11 +128,20 @@
         accel_profile = "flat";
       };
 
+      dwindle = {
+        force_split = 2;
+        preserve_split = true;
+      };
+
       bind = [
-        "$mainMod, Return, exec, $terminal"
+        "$mainMod, return, exec, $terminal"
         "$mainMod, d, exec, $menu"
 
         "$mainMod, c, killactive,"
+
+        "$mainMod, space, togglesplit,"
+        "$mainMod, v, layoutmsg, preselect d"
+        "$mainMod, b, layoutmsg, preselect r"
 
         # Move focus with mainMod + arrow keys
         "$mainMod, h, movefocus, l"

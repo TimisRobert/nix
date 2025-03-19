@@ -160,11 +160,12 @@
     udisks2.enable = true;
     greetd = {
       enable = true;
-      settings = {
-        default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd hyprland";
-          user = "greeter";
+      settings = rec {
+        initial_session = {
+          command = "uwsm start hyprland-uwsm.desktop";
+          user = "rob";
         };
+        default_session = initial_session;
       };
     };
     pipewire = {
