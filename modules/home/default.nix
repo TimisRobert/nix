@@ -46,7 +46,6 @@
     };
     packages = [
       pkgs.riffdiff
-      pkgs.teams-for-linux
       pkgs.devenv
       pkgs.xdg-utils
       pkgs.pamixer
@@ -100,6 +99,10 @@
         rounding = 4;
       };
 
+      layerrule = [
+        "noanim,selection"
+      ];
+
       animations = {
         enabled = true;
         bezier = ["fluid, 0.15, 0.85, 0.25, 1" "snappy, 0.3, 1, 0.4, 1"];
@@ -138,6 +141,8 @@
         "$mainMod, d, exec, $menu"
 
         "$mainMod, c, killactive,"
+
+        "$mainMod, f, fullscreen,"
 
         "$mainMod, space, togglesplit,"
         "$mainMod, v, layoutmsg, preselect d"
@@ -362,8 +367,8 @@
         }
       ];
       functions = {
-        printscreen = "grim -g $(slurp -d) - | wl-copy -t image/png";
-        screenshot = "grim -g $(slurp) $argv";
+        printscreen = "grim -g $(slurp -d -w 0) - | wl-copy -t image/png";
+        screenshot = "grim -g $(slurp -w 0) $argv";
       };
     };
     hyprlock = {
