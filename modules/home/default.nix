@@ -88,7 +88,7 @@
       "$terminal" = "kitty";
       "$menu" = "rofi -show drun";
       "$fileManager" = "dolphin";
-      monitor = ",preferred,auto,auto";
+      monitor = ",preferred,auto,1";
 
       general = {
         border_size = 1;
@@ -129,6 +129,7 @@
 
       input = {
         kb_layout = "us";
+        kb_options = "ctrl:nocaps";
         accel_profile = "flat";
       };
 
