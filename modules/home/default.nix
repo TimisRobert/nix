@@ -92,6 +92,7 @@
 
       general = {
         border_size = 1;
+        gaps_out = 10;
         "col.active_border" = "0x76946AF1";
       };
 
