@@ -97,7 +97,7 @@
       };
 
       decoration = {
-        rounding = 4;
+        rounding = 8;
       };
 
       layerrule = [
