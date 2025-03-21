@@ -86,6 +86,8 @@
       binde = , j, resizeactive, 0 10
       bind = , escape, submap, reset
       submap=reset
+
+      exec-once = hyprlock
     '';
 
     settings = {
