@@ -143,6 +143,7 @@
         "$mainMod, d, exec, $menu"
 
         "$mainMod, c, killactive,"
+        # "$mainMod, l, exec, hyprlock"
 
         "$mainMod, f, fullscreen,"
 
