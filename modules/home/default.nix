@@ -67,7 +67,12 @@
     mimeApps.enable = true;
   };
 
-  wayland.windowManager.hyprland = {
+  wayland.windowManager.hyprland = let
+    hyprlock-blur = pkgs.writeShellScriptBin "hyprlock-blur" ''
+      grim -l 0 /tmp/screenshot.png
+      hyprlock
+    '';
+  in {
     enable = true;
     xwayland.enable = true;
     systemd.enable = false;
@@ -143,7 +148,7 @@
         "$mainMod, d, exec, $menu"
 
         "$mainMod, c, killactive,"
-        # "$mainMod, l, exec, hyprlock"
+        "$mainMod ALT, l, exec, ${hyprlock-blur}/bin/hyprlock-blur"
 
         "$mainMod, f, fullscreen,"
 
@@ -376,6 +381,67 @@
     };
     hyprlock = {
       enable = true;
+      settings = {
+        background = {
+          monitor = "";
+          path = "/tmp/screenshot.png";
+          blur_passes = 1;
+          blur_size = 7;
+          noise = 1.17e-2;
+        };
+
+        # General
+        general = {
+          no_fade_in = false;
+          grace = 0;
+          disable_loading_bar = false;
+        };
+
+        # Input field
+        input-field = {
+          monitor = "";
+          size = "250, 60";
+          outline_thickness = 2;
+          dots_size = 0.2;
+          dots_spacing = 0.2;
+          dots_center = true;
+          outer_color = "rgba(0, 0, 0, 0)";
+          inner_color = "rgba(100, 114, 125, 0.4)";
+          font_color = "rgb(200, 200, 200)";
+          fade_on_empty = false;
+          font_family = "Mononoki Mono";
+          placeholder_text = ''<i><span foreground="##ffffff99">Input password...</span></i>'';
+          hide_input = false;
+          position = "0, -225";
+          halign = "center";
+          valign = "center";
+        };
+
+        label = [
+          # Time
+          {
+            monitor = "";
+            text = ''cmd[update:1000] echo "<span>$(date +"%H:%M")</span>"'';
+            color = "rgba(216, 222, 233, 0.70)";
+            font_size = 130;
+            font_family = "Mononoki Mono";
+            position = "0, 240";
+            halign = "center";
+            valign = "center";
+          }
+          # Date
+          {
+            monitor = "";
+            text = ''cmd[update:1000] echo -e "$(date +"%A, %d %B")"'';
+            color = "rgba(216, 222, 233, 0.70)";
+            font_size = 30;
+            font_family = "Mononoki Mono";
+            position = "0, 105";
+            halign = "center";
+            valign = "center";
+          }
+        ];
+      };
     };
     waybar = {
       enable = true;
