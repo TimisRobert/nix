@@ -40,6 +40,7 @@
 
     initrd = {
       verbose = false;
+      kernelModules = ["amdgpu"];
       systemd = {
         enable = true;
         services.rollback = {
