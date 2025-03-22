@@ -67,12 +67,7 @@
     mimeApps.enable = true;
   };
 
-  wayland.windowManager.hyprland = let
-    hyprlock-blur = pkgs.writeShellScriptBin "hyprlock-blur" ''
-      grim -l 0 /tmp/screenshot.png
-      hyprlock
-    '';
-  in {
+  wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
     systemd.enable = false;
@@ -150,7 +145,7 @@
         "$mainMod, d, exec, $menu"
 
         "$mainMod, c, killactive,"
-        "$mainMod ALT, l, exec, ${hyprlock-blur}/bin/hyprlock-blur"
+        "$mainMod ALT, l, exec, hyprlock"
 
         "$mainMod, f, fullscreen,"
 
@@ -386,7 +381,7 @@
       settings = {
         background = {
           monitor = "";
-          path = "/tmp/screenshot.png";
+          path = "screenshot";
           blur_passes = 1;
           blur_size = 7;
           noise = 1.17e-2;
