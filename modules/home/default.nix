@@ -29,13 +29,12 @@
       "/persist/home/rob" = {
         directories = [
           ".local/state/nvim"
+          ".local/state/syncthing"
           ".local/share/nvim"
           ".local/share/direnv"
           ".local/share/zoxide"
           ".local/share/fish"
           ".config/discord"
-          ".config/teams-for-linux"
-          ".config/obs-studio"
           ".mozilla"
           ".ssh"
           ".aws"
@@ -193,6 +192,27 @@
   };
 
   services = {
+    syncthing = {
+      enable = true;
+      settings = {
+        devices = {
+          laptop = {
+            name = "laptop";
+            id = "35ELMGT-5KD6MCC-DDSOQ4X-LRDY5UV-ENVCDOF-YHWUMSC-YJSG5TN-CWGJFQ6";
+          };
+        };
+        folders = {
+          "/home/rob/projects" = {
+            id = "projects";
+            devices = ["laptop"];
+          };
+          "/home/rob/documents" = {
+            id = "documents";
+            devices = ["laptop"];
+          };
+        };
+      };
+    };
     gammastep = {
       enable = true;
       provider = "manual";
