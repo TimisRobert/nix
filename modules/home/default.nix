@@ -200,15 +200,19 @@
             name = "laptop";
             id = "35ELMGT-5KD6MCC-DDSOQ4X-LRDY5UV-ENVCDOF-YHWUMSC-YJSG5TN-CWGJFQ6";
           };
+          desktop = {
+            name = "desktop";
+            id = "OUGAWJA-BVKVAZC-2FHY5V2-NLTVVCU-LWN5DJY-MTO3UEE-CQDWG2D-QEI2BA6";
+          };
         };
         folders = {
           "/home/rob/projects" = {
             id = "projects";
-            devices = ["laptop"];
+            devices = ["laptop" "desktop"];
           };
           "/home/rob/documents" = {
             id = "documents";
-            devices = ["laptop"];
+            devices = ["laptop" "desktop"];
           };
         };
       };
