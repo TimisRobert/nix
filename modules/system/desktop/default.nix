@@ -95,7 +95,7 @@
             snapshotting = {
               type = "periodic";
               prefix = "zrepl_";
-              interval = "30m";
+              interval = "10m";
               timestamp_format = "iso-8601";
             };
             pruning = {

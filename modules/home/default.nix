@@ -49,8 +49,7 @@
       pkgs.xdg-utils
       pkgs.pamixer
       pkgs.wl-clipboard
-      pkgs.grim
-      pkgs.slurp
+      pkgs.grimblast
       pkgs.unzip
       pkgs.zip
       pkgs.lsd
@@ -151,6 +150,8 @@
         "$mainMod, space, togglesplit,"
         "$mainMod, v, layoutmsg, preselect d"
         "$mainMod, b, layoutmsg, preselect r"
+
+        "$mainMod, p, exec, grimblast copy area"
 
         # Move focus with mainMod + arrow keys
         "$mainMod, h, movefocus, l"
@@ -395,10 +396,6 @@
             pkgs.fishPlugins.plugin-git.src;
         }
       ];
-      functions = {
-        printscreen = "grim -g $(slurp -d -w 0) - | wl-copy -t image/png";
-        screenshot = "grim -g $(slurp -w 0) $argv";
-      };
     };
     hyprlock = {
       enable = true;
