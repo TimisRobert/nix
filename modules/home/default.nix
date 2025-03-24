@@ -194,7 +194,7 @@
 
   services = {
     syncthing = {
-      enable = true;
+      enable = false;
       settings = {
         devices = {
           laptop = {
