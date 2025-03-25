@@ -44,6 +44,7 @@
       };
     };
     packages = [
+      pkgs.httpie
       pkgs.riffdiff
       pkgs.devenv
       pkgs.xdg-utils
