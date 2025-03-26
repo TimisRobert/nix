@@ -44,6 +44,11 @@
       };
     };
     packages = [
+      pkgs.bat
+      pkgs.jq
+      pkgs.ncdu
+      pkgs.htop
+      pkgs.prettyping
       pkgs.httpie
       pkgs.riffdiff
       pkgs.devenv
@@ -389,6 +394,8 @@
         ls = "lsd";
         lg = "lazygit";
         diff = "riff";
+        ping = "prettyping --nolegend";
+        du = "ncdu";
       };
       plugins = [
         {
