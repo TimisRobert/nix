@@ -1,4 +1,5 @@
 -- You can also add or configure plugins by creating files in this `plugins/` folder
+-- PLEASE REMOVE THE EXAMPLES YOU HAVE NO INTEREST IN BEFORE ENABLING THIS FILE
 -- Here are some examples:
 
 ---@type LazySpec
@@ -6,6 +7,7 @@ return {
 
   -- == Examples of Adding Plugins ==
 
+  "andweeb/presence.nvim",
   {
     "ray-x/lsp_signature.nvim",
     event = "BufRead",
@@ -14,26 +16,28 @@ return {
 
   -- == Examples of Overriding Plugins ==
 
-  -- customize alpha options
+  -- customize dashboard options
   {
-    "goolord/alpha-nvim",
-    opts = function(_, opts)
-      -- customize the dashboard header
-      opts.section.header.val = {
-        " █████  ███████ ████████ ██████   ██████",
-        "██   ██ ██         ██    ██   ██ ██    ██",
-        "███████ ███████    ██    ██████  ██    ██",
-        "██   ██      ██    ██    ██   ██ ██    ██",
-        "██   ██ ███████    ██    ██   ██  ██████",
-        " ",
-        "    ███    ██ ██    ██ ██ ███    ███",
-        "    ████   ██ ██    ██ ██ ████  ████",
-        "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
-        "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
-        "    ██   ████   ████   ██ ██      ██",
-      }
-      return opts
-    end,
+    "folke/snacks.nvim",
+    opts = {
+      dashboard = {
+        preset = {
+          header = table.concat({
+            " █████  ███████ ████████ ██████   ██████ ",
+            "██   ██ ██         ██    ██   ██ ██    ██",
+            "███████ ███████    ██    ██████  ██    ██",
+            "██   ██      ██    ██    ██   ██ ██    ██",
+            "██   ██ ███████    ██    ██   ██  ██████ ",
+            "",
+            "███    ██ ██    ██ ██ ███    ███",
+            "████   ██ ██    ██ ██ ████  ████",
+            "██ ██  ██ ██    ██ ██ ██ ████ ██",
+            "██  ██ ██  ██  ██  ██ ██  ██  ██",
+            "██   ████   ████   ██ ██      ██",
+          }, "\n"),
+        },
+      },
+    },
   },
 
   -- You can disable default plugins as follows:
@@ -78,12 +82,5 @@ return {
         Rule("a", "a", "-vim")
       )
     end,
-  },
-
-  {
-    "nvim-treesitter/nvim-treesitter-context",
-    opts = {
-      max_lines = 5,
-    },
   },
 }
