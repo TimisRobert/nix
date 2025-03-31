@@ -259,6 +259,7 @@
       defaultEditor = true;
       vimAlias = true;
       extraPackages = [
+        pkgs.ghostscript
         pkgs.nodejs
         pkgs.ripgrep
         pkgs.bottom
