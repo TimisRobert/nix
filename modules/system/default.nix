@@ -72,25 +72,62 @@
 
   powerManagement.cpuFreqGovernor = "performance";
 
-  virtualisation = {
-    containers.enable = true;
-    podman = {
-      enable = true;
-      dockerSocket.enable = true;
-      dockerCompat = true;
-      autoPrune = {
-        enable = true;
-        dates = "weekly";
-        flags = ["--all"];
-      };
-      defaultNetwork.settings = {dns_enabled = true;};
-    };
-  };
-
   networking = {
     networkmanager.enable = true;
     nftables.enable = true;
     nameservers = ["1.1.1.1" "2606:4700:4700::1111"];
+    firewall.interfaces.incusbr0.allowedTCPPorts = [53 67];
+    firewall.interfaces.incusbr0.allowedUDPPorts = [53 67];
+  };
+
+  virtualisation = {
+    incus = {
+      enable = true;
+      ui.enable = true;
+      package = pkgs.incus;
+      preseed = {
+        networks = [
+          {
+            config = {
+              "ipv4.address" = "10.0.0.1/24";
+              "ipv4.nat" = "true";
+            };
+            name = "incusbr0";
+            type = "bridge";
+          }
+        ];
+        profiles = [
+          {
+            config = {
+              "security.idmap.isolated" = true;
+            };
+            devices = {
+              eth0 = {
+                name = "eth0";
+                network = "incusbr0";
+                type = "nic";
+              };
+              root = {
+                path = "/";
+                pool = "default";
+                size = "35GiB";
+                type = "disk";
+              };
+            };
+            name = "default";
+          }
+        ];
+        storage_pools = [
+          {
+            config = {
+              source = "zpool/incus";
+            };
+            driver = "zfs";
+            name = "default";
+          }
+        ];
+      };
+    };
   };
 
   time.timeZone = "Europe/Rome";
@@ -120,7 +157,7 @@
     users.rob = {
       shell = pkgs.fish;
       isNormalUser = true;
-      extraGroups = ["networkmanager" "video" "wheel" "docker"];
+      extraGroups = ["networkmanager" "video" "wheel" "incus-admin"];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBvR28lwcOKIk7VRo/bXzxQGnA5evdsGcNZCy3BA6DDR rob@RobertTimis"
       ];
@@ -136,6 +173,7 @@
           "/var/log"
           "/var/lib/bluetooth"
           "/var/lib/nixos"
+          "/var/lib/incus"
           "/etc/NetworkManager"
         ];
         files = [
