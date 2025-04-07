@@ -31,6 +31,7 @@
       systemd-boot = {
         enable = true;
         configurationLimit = 3;
+        consoleMode = "max";
       };
       timeout = 0;
       efi.canTouchEfiVariables = true;
@@ -76,8 +77,7 @@
     networkmanager.enable = true;
     nftables.enable = true;
     nameservers = ["1.1.1.1" "2606:4700:4700::1111"];
-    firewall.interfaces.incusbr0.allowedTCPPorts = [53 67];
-    firewall.interfaces.incusbr0.allowedUDPPorts = [53 67];
+    firewall.trustedInterfaces = ["vlan" "br0" "macvlan"];
   };
 
   virtualisation = {
@@ -85,48 +85,7 @@
       enable = true;
       ui.enable = true;
       package = pkgs.incus;
-      preseed = {
-        networks = [
-          {
-            config = {
-              "ipv4.address" = "10.0.0.1/24";
-              "ipv4.nat" = "true";
-            };
-            name = "incusbr0";
-            type = "bridge";
-          }
-        ];
-        profiles = [
-          {
-            config = {
-              "security.idmap.isolated" = true;
-            };
-            devices = {
-              eth0 = {
-                name = "eth0";
-                network = "incusbr0";
-                type = "nic";
-              };
-              root = {
-                path = "/";
-                pool = "default";
-                size = "35GiB";
-                type = "disk";
-              };
-            };
-            name = "default";
-          }
-        ];
-        storage_pools = [
-          {
-            config = {
-              source = "zpool/incus";
-            };
-            driver = "zfs";
-            name = "default";
-          }
-        ];
-      };
+      preseed = {};
     };
   };
 
