@@ -350,6 +350,7 @@
       enable = true;
       settings = {
         disableStartupPopups = true;
+        git.overrideGpg = true;
       };
     };
     direnv = {
