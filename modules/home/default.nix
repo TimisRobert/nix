@@ -44,11 +44,8 @@
     packages = [
       pkgs.bat
       pkgs.jq
-      pkgs.ncdu
       pkgs.htop
-      pkgs.prettyping
       pkgs.httpie
-      pkgs.riffdiff
       pkgs.devenv
       pkgs.xdg-utils
       pkgs.pamixer
@@ -56,7 +53,6 @@
       pkgs.grimblast
       pkgs.unzip
       pkgs.zip
-      pkgs.lsd
     ];
   };
 
@@ -311,6 +307,11 @@
         pull.rebase = true;
         rebase.updateRefs = true;
         credential.helper = "cache --timeout 604800";
+        core.pager = "${pkgs.delta}/bin/delta";
+        interactive.diffFilter = "${pkgs.delta}/bin/delta --color-only";
+        delta.dark = true;
+        delta.navigate = true;
+        merge.conflictStyle = "zdiff3";
       };
     };
     kitty = {
@@ -351,6 +352,8 @@
       settings = {
         disableStartupPopups = true;
         git.overrideGpg = true;
+        git.paging.pager = "${pkgs.delta}/bin/delta --dark --paging=never";
+        git.paging.colorArg = "always";
       };
     };
     direnv = {
@@ -366,11 +369,11 @@
         fish_config theme choose Kanagawa
       '';
       shellAliases = {
-        ls = "lsd";
+        ls = "${pkgs.lsd}/bin/lsd";
         lg = "lazygit";
-        diff = "riff";
-        ping = "prettyping --nolegend";
-        du = "ncdu";
+        diff = "${pkgs.riff}/bin/riff";
+        ping = "${pkgs.prettyping}/bin/prettyping --nolegend";
+        du = "${pkgs.ncdu}/bin/ncdu";
       };
       plugins = [
         {
