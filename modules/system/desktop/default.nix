@@ -11,6 +11,8 @@
     extraCompatPackages = [pkgs.proton-ge-bin];
   };
 
+  boot.initrd.kernelModules = ["amdgpu"];
+
   hardware = {
     keyboard.qmk.enable = true;
   };

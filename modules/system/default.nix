@@ -63,11 +63,13 @@
       ];
     };
 
-    consoleLogLevel = 0;
+    consoleLogLevel = 3;
     kernelParams = [
       "quiet"
       "splash"
-      "plymouth.use-simpledrm"
+      "boot.shell_on_fail"
+      "udev.log_priority=3"
+      "rd.systemd.show_status=auto"
     ];
   };
 
