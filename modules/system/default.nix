@@ -86,6 +86,21 @@
   };
 
   virtualisation = {
+    containers = {
+      enable = true;
+    };
+    podman = {
+      enable = true;
+      dockerSocket.enable = true;
+      dockerCompat = true;
+      autoPrune = {
+        enable = true;
+        dates = "weekly";
+        flags = ["--all"];
+      };
+      extraPackages = [pkgs.zfs];
+      defaultNetwork.settings = {dns_enabled = true;};
+    };
     incus = {
       enable = true;
       ui.enable = true;
