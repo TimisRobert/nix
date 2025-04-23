@@ -255,11 +255,11 @@
       defaultEditor = true;
       vimAlias = true;
       extraPackages = [
+        pkgs.pyright
         pkgs.ghostscript
         pkgs.nodejs
         pkgs.ripgrep
         pkgs.bottom
-        pkgs.python312Packages.python-lsp-server
         pkgs.black
         pkgs.terraform-ls
         pkgs.gnumake
