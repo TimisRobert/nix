@@ -114,6 +114,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   programs = {
+    wireshark.enable = true;
     nix-ld.enable = true;
     light.enable = true;
     fuse.userAllowOther = true;
@@ -136,7 +137,7 @@
     users.rob = {
       shell = pkgs.fish;
       isNormalUser = true;
-      extraGroups = ["networkmanager" "video" "wheel" "incus-admin"];
+      extraGroups = ["networkmanager" "video" "wheel" "incus-admin" "wireshark"];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBvR28lwcOKIk7VRo/bXzxQGnA5evdsGcNZCy3BA6DDR rob@RobertTimis"
       ];
@@ -145,7 +146,7 @@
   };
 
   environment = {
-    systemPackages = [pkgs.vim];
+    systemPackages = [pkgs.vim pkgs.wireshark];
     persistence = {
       "/persist" = {
         directories = [

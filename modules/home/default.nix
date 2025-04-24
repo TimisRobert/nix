@@ -257,6 +257,7 @@
       defaultEditor = true;
       vimAlias = true;
       extraPackages = [
+        pkgs.shellcheck
         pkgs.pyright
         pkgs.ghostscript
         pkgs.nodejs
