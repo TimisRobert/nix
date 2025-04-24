@@ -25,6 +25,7 @@
     };
     file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/nix/assets/astronvim";
     file.".config/fish/themes/Kanagawa.theme".source = ../../assets/kanagawa.theme;
+    file.".config/pnpm/rc".text = "store-dir=${config.home.homeDirectory}/.local/share/pnpm";
     persistence = {
       "/persist/home/rob" = {
         directories = [
@@ -33,6 +34,7 @@
           ".local/share/direnv"
           ".local/share/zoxide"
           ".local/share/fish"
+          ".local/share/pnpm"
           ".mozilla"
           ".ssh"
           ".aws"
@@ -269,7 +271,7 @@
         pkgs.yaml-language-server
         pkgs.tailwindcss-language-server
         pkgs.emmet-ls
-        pkgs.vscode-langservers-extracted
+        pkgs.eslint
         pkgs.vtsls
         pkgs.prettierd
         pkgs.svelte-language-server

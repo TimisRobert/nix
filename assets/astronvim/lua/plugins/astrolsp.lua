@@ -51,7 +51,6 @@ return {
       "lexical",
       "nixd",
       "astro",
-      "eslint",
       "terraformls",
       "rust_analyzer",
     },

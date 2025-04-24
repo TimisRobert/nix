@@ -3,6 +3,9 @@
 ---@type LazySpec
 return {
   "nvimtools/none-ls.nvim",
+  dependencies = {
+    "nvimtools/none-ls-extras.nvim",
+  },
   opts = function(_, opts)
     -- opts variable is the default configuration table for the setup function call
     local null_ls = require "null-ls"
@@ -23,30 +26,7 @@ return {
       null_ls.builtins.formatting.alejandra,
       null_ls.builtins.diagnostics.deadnix,
       null_ls.builtins.formatting.shfmt,
-      null_ls.builtins.formatting.prettierd.with {
-        filetypes = {
-          "javascript",
-          "javascriptreact",
-          "typescript",
-          "typescriptreact",
-          "vue",
-          "css",
-          "scss",
-          "less",
-          "html",
-          "edge",
-          "json",
-          "jsonc",
-          "yaml",
-          "markdown",
-          "markdown.mdx",
-          "graphql",
-          "handlebars",
-          "svelte",
-          "astro",
-          "htmlangular",
-        },
-      },
+      null_ls.builtins.formatting.prettierd,
       null_ls.builtins.diagnostics.credo.with {
         condition = function(utils) return utils.root_has_file { ".credo.exs" } end,
       },
