@@ -374,7 +374,7 @@
       shellAliases = {
         ls = "${pkgs.lsd}/bin/lsd";
         lg = "lazygit";
-        diff = "${pkgs.riff}/bin/riff";
+        diff = "${pkgs.riffdiff}/bin/riff";
         ping = "${pkgs.prettyping}/bin/prettyping --nolegend";
         du = "${pkgs.ncdu}/bin/ncdu";
       };
