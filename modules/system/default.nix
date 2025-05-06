@@ -78,7 +78,7 @@
   networking = {
     networkmanager.enable = true;
     nftables.enable = true;
-    nameservers = ["1.1.1.1" "2606:4700:4700::1111"];
+    # nameservers = ["1.1.1.1" "2606:4700:4700::1111"];
     firewall = {
       trustedInterfaces = ["br0" "lan"];
       checkReversePath = false;
