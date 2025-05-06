@@ -183,7 +183,6 @@
     };
     resolved = {
       enable = true;
-      dnssec = "true";
       domains = ["~."];
     };
     devmon.enable = true;
