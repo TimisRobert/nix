@@ -52,6 +52,7 @@ return {
       "nixd",
       "astro",
       "terraformls",
+      "dockerls",
       "rust_analyzer",
     },
     -- customize language server configuration options passed to `lspconfig`

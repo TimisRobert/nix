@@ -257,6 +257,7 @@
       defaultEditor = true;
       vimAlias = true;
       extraPackages = [
+        pkgs.docker-language-server
         pkgs.shellcheck
         pkgs.pyright
         pkgs.ghostscript
