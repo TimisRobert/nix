@@ -22,6 +22,7 @@
       MOZ_ENABLE_WAYLAND = "1";
       NIXOS_OZONE_WL = "1";
       ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
+      DOCKER_HOST = "/run/user/1000/podman/podman.sock";
     };
     file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/nix/assets/astronvim";
     file.".config/fish/themes/Kanagawa.theme".source = ../../assets/kanagawa.theme;
