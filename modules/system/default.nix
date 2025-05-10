@@ -27,8 +27,8 @@
 
   boot = {
     binfmt = {
-      emulatedSystems = ["aarch64-linux"];
-      preferStaticEmulators = true;
+      # emulatedSystems = ["aarch64-linux"];
+      # preferStaticEmulators = true;
     };
     loader = {
       systemd-boot = {
