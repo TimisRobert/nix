@@ -275,8 +275,8 @@
         pkgs.tailwindcss-language-server
         pkgs.emmet-ls
         pkgs.eslint
-        pkgs.vtsls
-        pkgs.prettierd
+        pkgs.typescript-language-server
+        pkgs.nodePackages.prettier
         pkgs.svelte-language-server
         pkgs.bash-language-server
         pkgs.shfmt

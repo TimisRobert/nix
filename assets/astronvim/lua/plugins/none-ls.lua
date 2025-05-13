@@ -26,7 +26,7 @@ return {
       null_ls.builtins.formatting.alejandra,
       null_ls.builtins.diagnostics.deadnix,
       null_ls.builtins.formatting.shfmt,
-      null_ls.builtins.formatting.prettierd,
+      null_ls.builtins.formatting.prettier,
       null_ls.builtins.diagnostics.credo.with {
         condition = function(utils) return utils.root_has_file { ".credo.exs" } end,
       },

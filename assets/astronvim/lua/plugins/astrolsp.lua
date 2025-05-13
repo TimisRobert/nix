@@ -42,7 +42,7 @@ return {
       "lua_ls",
       "bashls",
       "svelte",
-      "vtsls",
+      "ts_ls",
       "emmet_ls",
       "tailwindcss",
       "yamlls",
