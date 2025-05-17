@@ -83,6 +83,12 @@
       bind = , escape, submap, reset
       submap=reset
 
+      binds {
+          drag_threshold = 10
+      }
+      bindm = ALT, mouse:272, movewindow
+      bindc = ALT, mouse:272, togglefloating
+
       exec-once = hyprlock
     '';
 
@@ -92,6 +98,8 @@
       "$menu" = "rofi -show drun";
       "$fileManager" = "dolphin";
       monitor = ",preferred,auto,1";
+
+      ecosystem.no_update_news = true;
 
       general = {
         border_size = 1;
