@@ -104,12 +104,6 @@
       extraPackages = [pkgs.zfs];
       defaultNetwork.settings = {dns_enabled = true;};
     };
-    incus = {
-      enable = true;
-      ui.enable = true;
-      package = pkgs.incus;
-      preseed = {};
-    };
   };
 
   time.timeZone = "Europe/Rome";
@@ -140,7 +134,7 @@
     users.rob = {
       shell = pkgs.fish;
       isNormalUser = true;
-      extraGroups = ["networkmanager" "video" "wheel" "incus-admin" "wireshark"];
+      extraGroups = ["networkmanager" "video" "wheel"];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBvR28lwcOKIk7VRo/bXzxQGnA5evdsGcNZCy3BA6DDR rob@RobertTimis"
       ];
@@ -156,7 +150,6 @@
           "/var/log"
           "/var/lib/bluetooth"
           "/var/lib/nixos"
-          "/var/lib/incus"
           "/etc/NetworkManager"
         ];
         files = [
