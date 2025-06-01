@@ -97,7 +97,7 @@
       "$terminal" = "kitty";
       "$menu" = "rofi -show drun";
       "$fileManager" = "dolphin";
-      monitor = ",preferred,auto,1";
+      monitor = ",highres,auto,1";
 
       ecosystem.no_update_news = true;
 

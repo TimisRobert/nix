@@ -19,6 +19,8 @@
 
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
+      "nvidia-x11"
+      "nvidia-settings"
       "steam"
       "steam-original"
       "steam-run"
@@ -73,7 +75,6 @@
       "boot.shell_on_fail"
       "udev.log_priority=3"
       "rd.systemd.show_status=auto"
-      "amdgpu.dcdebugmask=0x10"
     ];
   };
 

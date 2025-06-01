@@ -11,10 +11,18 @@
     extraCompatPackages = [pkgs.proton-ge-bin];
   };
 
-  boot.initrd.kernelModules = ["amdgpu"];
+  boot.initrd.kernelModules = ["nvidia"];
+  # boot.extraModulePackages = [config.boot.kernelPackages.nvidia_x11];
 
   hardware = {
     keyboard.qmk.enable = true;
+    nvidia = {
+      open = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      nvidiaSettings = true;
+      powerManagement.enable = true;
+      modesetting.enable = true;
+    };
   };
 
   networking = {
@@ -23,6 +31,7 @@
   };
 
   services = {
+    xserver.videoDrivers = ["nvidia"];
     zrepl = {
       enable = true;
       settings = {
