@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   imports = [
@@ -97,7 +98,7 @@
       "$terminal" = "kitty";
       "$menu" = "rofi -show drun";
       "$fileManager" = "dolphin";
-      monitor = ",highres,auto,1";
+      monitor = lib.mkDefault ",highres,auto,1";
 
       ecosystem.no_update_news = true;
 
@@ -205,7 +206,7 @@
 
   services = {
     gammastep = {
-      enable = true;
+      enable = false;
       provider = "manual";
       temperature = {
         day = 6500;
