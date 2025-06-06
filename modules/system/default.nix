@@ -81,9 +81,16 @@
   powerManagement.cpuFreqGovernor = "performance";
 
   networking = {
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      dns = "systemd-resolved";
+    };
     nftables.enable = true;
     nameservers = ["1.1.1.1" "2606:4700:4700::1111"];
+    firewall = {
+      checkReversePath = false;
+      allowedUDPPorts = [51820];
+    };
   };
 
   virtualisation = {
@@ -175,10 +182,7 @@
       };
       trim.enable = true;
     };
-    resolved = {
-      enable = true;
-      domains = ["~."];
-    };
+    resolved.enable = true;
     devmon.enable = true;
     udisks2.enable = true;
     greetd = {
