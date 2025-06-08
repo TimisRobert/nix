@@ -87,8 +87,8 @@
       binds {
           drag_threshold = 10
       }
-      bindm = ALT, mouse:272, movewindow
-      bindc = ALT, mouse:272, togglefloating
+      bindm = $mainMod ALT, mouse:272, movewindow
+      bindc = $mainMod ALT, mouse:272, togglefloating
 
       exec-once = hyprlock
     '';
@@ -206,7 +206,7 @@
 
   services = {
     gammastep = {
-      enable = false;
+      enable = true;
       provider = "manual";
       temperature = {
         day = 6500;
