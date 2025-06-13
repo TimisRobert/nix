@@ -38,6 +38,7 @@
           ".local/share/fish"
           ".local/share/pnpm"
           ".mozilla"
+          ".duckdb"
           ".ssh"
           ".aws"
         ];
@@ -46,6 +47,7 @@
       };
     };
     packages = [
+      pkgs.duckdb
       pkgs.bat
       pkgs.jq
       pkgs.htop
