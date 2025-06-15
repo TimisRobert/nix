@@ -42,7 +42,10 @@
           ".ssh"
           ".aws"
         ];
-        files = [];
+        files = [
+          ".duckdbrc"
+          ".duckdb_history"
+        ];
         allowOther = true;
       };
     };

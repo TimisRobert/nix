@@ -34,6 +34,7 @@
                   extraSpecialArgs = {inherit inputs;};
                   useGlobalPkgs = true;
                   useUserPackages = true;
+                  backupFileExtension = "backup";
                   users.rob = import ./modules/home/desktop;
                 };
               }
@@ -55,6 +56,7 @@
                   extraSpecialArgs = {inherit inputs;};
                   useGlobalPkgs = true;
                   useUserPackages = true;
+                  backupFileExtension = "backup";
                   users.rob = import ./modules/home/laptop;
                 };
               }
