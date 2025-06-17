@@ -416,7 +416,7 @@
         # General
         general = {
           no_fade_in = false;
-          grace = 3;
+          grace = 0;
           disable_loading_bar = false;
         };
 
