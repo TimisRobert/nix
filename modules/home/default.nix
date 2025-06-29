@@ -13,7 +13,7 @@
   home = {
     username = "rob";
     homeDirectory = "/home/rob";
-    stateVersion = "25.05";
+    stateVersion = "25.11";
     pointerCursor = {
       package = pkgs.simp1e-cursors;
       name = "Simp1e";
@@ -25,14 +25,11 @@
       ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
       DOCKER_HOST = "unix:///run/user/1000/podman/podman.sock";
     };
-    file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/nix/assets/astronvim";
-    file.".config/fish/themes/Kanagawa.theme".source = ../../assets/kanagawa.theme;
-    file.".config/pnpm/rc".text = "store-dir=${config.home.homeDirectory}/.local/share/pnpm";
     persistence = {
       "/persist/home/rob" = {
         directories = [
-          ".local/state/nvim"
-          ".local/share/nvim"
+          { directory = ".local/state/nvim"; method = "symlink"; }
+          { directory = ".local/share/nvim"; method = "symlink"; }
           ".local/share/direnv"
           ".local/share/zoxide"
           ".local/share/fish"
@@ -70,6 +67,11 @@
     userDirs = {
       documents = "${config.home.homeDirectory}/documents";
       download = "${config.home.homeDirectory}/downloads";
+    };
+    configFile = {
+      "fish/themes/Kanagawa.theme".source = ../../assets/kanagawa.theme;
+      "pnpm/rc".text = "store-dir=${config.home.homeDirectory}/.local/share/pnpm";
+      nvim.source = config.lib.file.mkOutOfStoreSymlink "/home/rob/projects/nix/assets/astronvim";
     };
     mimeApps.enable = true;
   };
