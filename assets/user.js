@@ -234,6 +234,7 @@ user_pref("layout.word_select.eat_space_to_next_word", false);
 // Enter your personal overrides below this line:
 user_pref("browser.newtabpage.pinned", false);
 user_pref("browser.search.suggest.enabled", true);
+user_pref("browser.urlbar.openViewOnFocus", false);
 
 /****************************************************************************
  * SECTION: SMOOTHFOX                                                       *
