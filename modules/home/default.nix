@@ -7,7 +7,7 @@
 }: {
   imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
-    inputs.nix-index-database.hmModules.nix-index
+    inputs.nix-index-database.homeModules.nix-index
   ];
 
   home = {
@@ -28,8 +28,14 @@
     persistence = {
       "/persist/home/rob" = {
         directories = [
-          { directory = ".local/state/nvim"; method = "symlink"; }
-          { directory = ".local/share/nvim"; method = "symlink"; }
+          {
+            directory = ".local/state/nvim";
+            method = "symlink";
+          }
+          {
+            directory = ".local/share/nvim";
+            method = "symlink";
+          }
           ".local/share/direnv"
           ".local/share/zoxide"
           ".local/share/fish"
