@@ -8,6 +8,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
+    agenix.url = "github:ryantm/agenix";
 
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
@@ -22,6 +23,7 @@
             system = "x86_64-linux";
             specialArgs = {
               inherit inputs;
+              system = "x86_64-linux";
             };
             modules = [
               inputs.impermanence.nixosModules.impermanence
@@ -44,6 +46,7 @@
             system = "x86_64-linux";
             specialArgs = {
               inherit inputs;
+              system = "x86_64-linux";
             };
             modules = [
               inputs.impermanence.nixosModules.impermanence

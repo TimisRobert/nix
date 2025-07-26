@@ -8,6 +8,7 @@
   imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
     inputs.nix-index-database.homeModules.nix-index
+    inputs.agenix.homeManagerModules.default
   ];
 
   home = {
@@ -36,6 +37,7 @@
             directory = ".local/share/nvim";
             method = "symlink";
           }
+          ".config/aichat"
           ".local/share/direnv"
           ".local/share/zoxide"
           ".local/share/fish"
@@ -68,6 +70,15 @@
     ];
   };
 
+  age = {
+    identityPaths = ["${config.home.homeDirectory}/.ssh/id_ed25519"];
+    secrets = {
+      openrouter = {
+        file = ../../secrets/openrouter.age;
+      };
+    };
+  };
+
   xdg = {
     enable = true;
     userDirs = {
@@ -75,6 +86,7 @@
       download = "${config.home.homeDirectory}/downloads";
     };
     configFile = {
+      "aichat/config.yaml".source = ../../assets/aichat.yaml;
       "fish/themes/Kanagawa.theme".source = ../../assets/kanagawa.theme;
       "pnpm/rc".text = "store-dir=${config.home.homeDirectory}/.local/share/pnpm";
       nvim.source = config.lib.file.mkOutOfStoreSymlink "/home/rob/projects/nix/assets/astronvim";
@@ -396,6 +408,7 @@
         fish_config theme choose Kanagawa
       '';
       shellAliases = {
+        aichat = "OPENROUTER_API_KEY=$(cat $XDG_RUNTIME_DIR/agenix/openrouter) ${pkgs.aichat}/bin/aichat";
         ls = "${pkgs.lsd}/bin/lsd";
         lg = "lazygit";
         diff = "${pkgs.riffdiff}/bin/riff";

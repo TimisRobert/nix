@@ -1,6 +1,8 @@
 {
   pkgs,
   lib,
+  inputs,
+  system,
   ...
 }: {
   nix = {
@@ -148,7 +150,7 @@
   };
 
   environment = {
-    systemPackages = [pkgs.vim pkgs.wireshark];
+    systemPackages = [pkgs.vim pkgs.wireshark inputs.agenix.packages.${system}.default];
     persistence = {
       "/persist" = {
         directories = [
