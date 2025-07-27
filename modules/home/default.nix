@@ -85,6 +85,7 @@
       download = "${config.home.homeDirectory}/downloads";
     };
     configFile = {
+      "aichat/config.yaml".source = ../../assets/aichat.yaml;
       "fish/themes/Kanagawa.theme".source = ../../assets/kanagawa.theme;
       "pnpm/rc".text = "store-dir=${config.home.homeDirectory}/.local/share/pnpm";
       nvim.source = config.lib.file.mkOutOfStoreSymlink "/home/rob/projects/nix/assets/astronvim";
