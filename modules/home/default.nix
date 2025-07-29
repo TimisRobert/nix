@@ -37,6 +37,7 @@
             directory = ".local/share/nvim";
             method = "symlink";
           }
+          ".aider"
           ".local/share/direnv"
           ".local/share/zoxide"
           ".local/share/fish"
@@ -86,6 +87,7 @@
     };
     configFile = {
       "aider/config.yaml".source = ../../assets/aider.yaml;
+      "aichat/config.yaml".source = ../../assets/aichat.yaml;
       "fish/themes/Kanagawa.theme".source = ../../assets/kanagawa.theme;
       "pnpm/rc".text = "store-dir=${config.home.homeDirectory}/.local/share/pnpm";
       nvim.source = config.lib.file.mkOutOfStoreSymlink "/home/rob/projects/nix/assets/astronvim";
@@ -412,6 +414,7 @@
           withBrowser = true;
           withHelp = true;
         })}/bin/aider --config ${config.home.homeDirectory}/.config/aider/config.yaml";
+        aichat = "OPENROUTER_API_KEY=$(cat $XDG_RUNTIME_DIR/agenix/openrouter) ${pkgs.aichat}/bin/aichat";
         ls = "${pkgs.lsd}/bin/lsd";
         lg = "lazygit";
         diff = "${pkgs.riffdiff}/bin/riff";
