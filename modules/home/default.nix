@@ -85,7 +85,7 @@
       download = "${config.home.homeDirectory}/downloads";
     };
     configFile = {
-      "aichat/config.yaml".source = ../../assets/aichat.yaml;
+      "aider/config.yaml".source = ../../assets/aider.yaml;
       "fish/themes/Kanagawa.theme".source = ../../assets/kanagawa.theme;
       "pnpm/rc".text = "store-dir=${config.home.homeDirectory}/.local/share/pnpm";
       nvim.source = config.lib.file.mkOutOfStoreSymlink "/home/rob/projects/nix/assets/astronvim";
@@ -407,7 +407,11 @@
         fish_config theme choose Kanagawa
       '';
       shellAliases = {
-        aichat = "OPENROUTER_API_KEY=$(cat $XDG_RUNTIME_DIR/agenix/openrouter) ${pkgs.aichat}/bin/aichat";
+        aider = "OPENROUTER_API_KEY=$(cat $XDG_RUNTIME_DIR/agenix/openrouter) ${(pkgs.aider-chat.withOptional {
+          withPlaywright = true;
+          withBrowser = true;
+          withHelp = true;
+        })}/bin/aider --config ${config.home.homeDirectory}/.config/aider/config.yaml";
         ls = "${pkgs.lsd}/bin/lsd";
         lg = "lazygit";
         diff = "${pkgs.riffdiff}/bin/riff";
