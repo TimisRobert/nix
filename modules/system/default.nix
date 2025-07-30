@@ -3,8 +3,13 @@
   lib,
   inputs,
   system,
+  config,
   ...
 }: {
+  imports = [
+    inputs.agenix.nixosModules.default
+  ];
+
   nix = {
     extraOptions = ''
       experimental-features = nix-command flakes
@@ -21,6 +26,7 @@
 
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
+      "claude-code"
       "nvidia-x11"
       "nvidia-settings"
       "steam"
@@ -157,6 +163,10 @@
           "/var/log"
           "/var/lib/bluetooth"
           "/var/lib/nixos"
+          {
+            directory = "/var/lib/private/litellm";
+            mode = "0700";
+          }
           "/etc/NetworkManager"
         ];
         files = [
@@ -175,7 +185,53 @@
     polkit.enable = true;
   };
 
+  age = {
+    identityPaths = ["/persist/home/rob/.ssh/id_ed25519"];
+    secrets = {
+      litellm = {
+        file = ../../secrets/litellm.age;
+      };
+    };
+  };
+
   services = {
+    litellm = {
+      enable = true;
+      port = 10000;
+      environmentFile = config.age.secrets.litellm.path;
+      settings = {
+        model_list = [
+          {
+            model_name = "qwen/qwen3-235b-a22b-2507";
+            litellm_params = {
+              model = "openrouter/qwen/qwen3-235b-a22b-2507";
+              api_key = "os.environ/OPENROUTER_API_KEY";
+            };
+          }
+          {
+            model_name = "qwen/qwen2.5-vl-72b-instruct";
+            litellm_params = {
+              model = "nebius/Qwen/Qwen2.5-VL-72B-Instruct";
+              api_key = "os.environ/NEBIUS_API_KEY";
+            };
+          }
+          {
+            model_name = "anthropic/claude-opus-4";
+            litellm_params = {
+              model = "openrouter/anthropic/claude-opus-4";
+              api_key = "os.environ/OPENROUTER_API_KEY";
+            };
+          }
+          {
+            model_name = "anthropic/claude-sonnet-4";
+            litellm_params = {
+              model = "openrouter/anthropic/claude-sonnet-4";
+              api_key = "os.environ/OPENROUTER_API_KEY";
+            };
+          }
+        ];
+      };
+    };
     fwupd.enable = true;
     zfs = {
       autoScrub = {

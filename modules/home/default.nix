@@ -8,7 +8,6 @@
   imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
     inputs.nix-index-database.homeModules.nix-index
-    inputs.agenix.homeManagerModules.default
   ];
 
   home = {
@@ -37,7 +36,7 @@
             directory = ".local/share/nvim";
             method = "symlink";
           }
-          ".aider"
+          ".claude"
           ".local/share/direnv"
           ".local/share/zoxide"
           ".local/share/fish"
@@ -55,6 +54,7 @@
       };
     };
     packages = [
+      pkgs.litellm
       pkgs.duckdb
       pkgs.bat
       pkgs.jq
@@ -70,15 +70,6 @@
     ];
   };
 
-  age = {
-    identityPaths = ["${config.home.homeDirectory}/.ssh/id_ed25519"];
-    secrets = {
-      openrouter = {
-        file = ../../secrets/openrouter.age;
-      };
-    };
-  };
-
   xdg = {
     enable = true;
     userDirs = {
@@ -86,8 +77,6 @@
       download = "${config.home.homeDirectory}/downloads";
     };
     configFile = {
-      "aider/config.yaml".source = ../../assets/aider.yaml;
-      "aichat/config.yaml".source = ../../assets/aichat.yaml;
       "fish/themes/Kanagawa.theme".source = ../../assets/kanagawa.theme;
       "pnpm/rc".text = "store-dir=${config.home.homeDirectory}/.local/share/pnpm";
       nvim.source = config.lib.file.mkOutOfStoreSymlink "/home/rob/projects/nix/assets/astronvim";
@@ -409,12 +398,7 @@
         fish_config theme choose Kanagawa
       '';
       shellAliases = {
-        aider = "OPENROUTER_API_KEY=$(cat $XDG_RUNTIME_DIR/agenix/openrouter) ${(pkgs.aider-chat.withOptional {
-          withPlaywright = true;
-          withBrowser = true;
-          withHelp = true;
-        })}/bin/aider --config ${config.home.homeDirectory}/.config/aider/config.yaml";
-        aichat = "OPENROUTER_API_KEY=$(cat $XDG_RUNTIME_DIR/agenix/openrouter) ${pkgs.aichat}/bin/aichat";
+        claude = "ANTHROPIC_MODEL=qwen/qwen3-coder ANTHROPIC_API_KEY=sk-111 ANTHROPIC_BASE_URL=http://localhost:10000 ${pkgs.claude-code}/bin/claude";
         ls = "${pkgs.lsd}/bin/lsd";
         lg = "lazygit";
         diff = "${pkgs.riffdiff}/bin/riff";
