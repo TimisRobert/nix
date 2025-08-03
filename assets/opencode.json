@@ -1,0 +1,38 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "autoshare": false,
+  "autoupdate": false,
+  "theme": "default",
+  "model": "litellm/qwen/qwen3-coder",
+  "small_model": "litellm/qwen/qwen3-235b-a22b-2507",
+  "provider": {
+    "litellm": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LiteLLM",
+      "options": {
+        "baseURL": "http://localhost:10000/v1",
+        "apiKey": "sk-1111"
+      },
+      "models": {
+        "qwen/qwen3-coder": {
+          "name": "openrouter qwen3 coder"
+        },
+        "qwen/qwen3-coder-turbo": {
+          "name": "cerebras qwen3 coder"
+        },
+        "qwen/qwen3-235b-a22b-2507": {
+          "name": "openrouter qwen3 instruct"
+        },
+        "qwen/qwen3-30b-a3b-instruct-2507": {
+          "name": "openrouter qwen3 small instruct"
+        },
+        "local/qwen3-coder": {
+          "name": "local qwen3 coder"
+        },
+        "local/qwen3-instruct": {
+          "name": "local qwen3 instruct"
+        }
+      }
+    }
+  }
+}

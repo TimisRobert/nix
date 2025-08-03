@@ -1,0 +1,19 @@
+# see https://github.com/sigoden/aichat/blob/main/config.example.yaml
+
+model: LiteLLM:qwen/qwen3-235b-a22b-2507
+
+clients:
+  - type: openai-compatible
+    name: LiteLLM
+    api_base: http://localhost:10000
+    api_key: sk-1111
+    models:
+      - name: local/qwen3-coder
+      - name: local/qwen3-instruct
+      - name: qwen/qwen3-coder-turbo
+      - name: qwen/qwen3-30b-a3b-instruct-2507
+      - name: qwen/qwen3-235b-a22b-2507
+      - name: qwen/qwen2.5-vl-72b-instruct
+        supports_vision: true
+      - name: qwen/qwen3-embedding-8b
+        type: embedding

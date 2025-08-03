@@ -32,6 +32,17 @@
 
   services = {
     xserver.videoDrivers = ["nvidia"];
+    ollama = {
+      enable = true;
+      acceleration = "cuda";
+      environmentVariables = {
+        OLLAMA_FLASH_ATTENTION = "1";
+      };
+      loadModels = [
+        "hf.co/unsloth/Qwen3-30B-A3B-Instruct-2507-GGUF:UD-Q3_K_XL"
+        "hf.co/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF:UD-Q3_K_XL"
+      ];
+    };
     zrepl = {
       enable = true;
       settings = {

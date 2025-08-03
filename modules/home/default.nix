@@ -36,7 +36,7 @@
             directory = ".local/share/nvim";
             method = "symlink";
           }
-          ".claude"
+          ".config/aichat"
           ".local/share/direnv"
           ".local/share/zoxide"
           ".local/share/fish"
@@ -54,6 +54,8 @@
       };
     };
     packages = [
+      pkgs.opencode
+      pkgs.aichat
       pkgs.litellm
       pkgs.duckdb
       pkgs.bat
@@ -77,6 +79,8 @@
       download = "${config.home.homeDirectory}/downloads";
     };
     configFile = {
+      "opencode/opencode.json".source = ../../assets/opencode.json;
+      "aichat/config.yaml".source = ../../assets/aichat.yaml;
       "fish/themes/Kanagawa.theme".source = ../../assets/kanagawa.theme;
       "pnpm/rc".text = "store-dir=${config.home.homeDirectory}/.local/share/pnpm";
       nvim.source = config.lib.file.mkOutOfStoreSymlink "/home/rob/projects/nix/assets/astronvim";
@@ -398,7 +402,6 @@
         fish_config theme choose Kanagawa
       '';
       shellAliases = {
-        claude = "ANTHROPIC_MODEL=qwen/qwen3-coder ANTHROPIC_API_KEY=sk-111 ANTHROPIC_BASE_URL=http://localhost:10000 ${pkgs.claude-code}/bin/claude";
         ls = "${pkgs.lsd}/bin/lsd";
         lg = "lazygit";
         diff = "${pkgs.riffdiff}/bin/riff";

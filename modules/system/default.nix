@@ -26,7 +26,10 @@
 
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
-      "claude-code"
+      "libcublas"
+      "cuda_nvcc"
+      "cuda_cccl"
+      "cuda_cudart"
       "nvidia-x11"
       "nvidia-settings"
       "steam"
@@ -167,6 +170,10 @@
             directory = "/var/lib/private/litellm";
             mode = "0700";
           }
+          {
+            directory = "/var/lib/private/ollama";
+            mode = "0700";
+          }
           "/etc/NetworkManager"
         ];
         files = [
@@ -200,7 +207,30 @@
       port = 10000;
       environmentFile = config.age.secrets.litellm.path;
       settings = {
+        general_settings = {
+          master_key = "sk-1111";
+        };
+        litellm_settings = {
+          # enable_preview_features = true;
+          drop_params = true;
+          cache = true;
+          cache_params = {
+            type = "local";
+          };
+        };
         model_list = [
+          {
+            model_name = "local/qwen3-coder";
+            litellm_params = {
+              model = "ollama_chat/hf.co/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF:UD-Q3_K_XL";
+            };
+          }
+          {
+            model_name = "local/qwen3-instruct";
+            litellm_params = {
+              model = "ollama_chat/hf.co/unsloth/Qwen3-30B-A3B-Instruct-2507-GGUF:UD-Q3_K_XL";
+            };
+          }
           {
             model_name = "qwen/qwen3-235b-a22b-2507";
             litellm_params = {
@@ -209,9 +239,37 @@
             };
           }
           {
+            model_name = "qwen/qwen3-30b-a3b-instruct-2507";
+            litellm_params = {
+              model = "openrouter/qwen/qwen3-30b-a3b-instruct-2507";
+              api_key = "os.environ/OPENROUTER_API_KEY";
+            };
+          }
+          {
+            model_name = "qwen/qwen3-coder";
+            litellm_params = {
+              model = "openrouter/qwen/qwen3-coder";
+              api_key = "os.environ/OPENROUTER_API_KEY";
+            };
+          }
+          {
+            model_name = "qwen/qwen3-coder-turbo";
+            litellm_params = {
+              model = "cerebras/qwen-3-coder-480b";
+              api_key = "os.environ/CEREBRAS_API_KEY";
+            };
+          }
+          {
             model_name = "qwen/qwen2.5-vl-72b-instruct";
             litellm_params = {
               model = "nebius/Qwen/Qwen2.5-VL-72B-Instruct";
+              api_key = "os.environ/NEBIUS_API_KEY";
+            };
+          }
+          {
+            model_name = "qwen/qwen3-embedding-8b";
+            litellm_params = {
+              model = "nebius/Qwen/Qwen3-Embedding-8B";
               api_key = "os.environ/NEBIUS_API_KEY";
             };
           }
