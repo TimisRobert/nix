@@ -3,8 +3,8 @@
   "autoshare": false,
   "autoupdate": false,
   "theme": "default",
-  "model": "litellm/qwen/qwen3-coder",
-  "small_model": "litellm/qwen/qwen3-235b-a22b-2507",
+  "model": "litellm/zai/glm-4.5",
+  "small_model": "litellm/zai/glm-4.5-flash",
   "provider": {
     "litellm": {
       "npm": "@ai-sdk/openai-compatible",
@@ -14,17 +14,20 @@
         "apiKey": "sk-1111"
       },
       "models": {
-        "qwen/qwen3-coder": {
-          "name": "openrouter qwen3 coder"
+        "novita/qwen/qwen3-coder-480b-a35b-instruct": {
+          "name": "novita qwen3 coder"
         },
-        "qwen/qwen3-coder-turbo": {
-          "name": "cerebras qwen3 coder"
+        "novita/qwen/qwen3-30b-a3b-fp8": {
+          "name": "novita qwen3 small"
         },
-        "qwen/qwen3-235b-a22b-2507": {
-          "name": "openrouter qwen3 instruct"
+        "novita/zai-org/glm-4.5": {
+          "name": "novita z.ai glm 4.5"
         },
-        "qwen/qwen3-30b-a3b-instruct-2507": {
-          "name": "openrouter qwen3 small instruct"
+        "zai/glm-4.5": {
+          "name": "z.ai glm 4.5"
+        },
+        "zai/glm-4.5-flash": {
+          "name": "novita z.ai glm 4.5 flash"
         },
         "local/qwen3-coder": {
           "name": "local qwen3 coder"

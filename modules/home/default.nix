@@ -24,6 +24,13 @@
       NIXOS_OZONE_WL = "1";
       ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
       DOCKER_HOST = "unix:///run/user/1000/podman/podman.sock";
+      # Goose
+      GOOSE_PROVIDER = "openai";
+      GOOSE_LEAD_MODEL = "zai/glm-4.5";
+      GOOSE_MODEL = "zai/glm-4.5-flash";
+      OPENAI_API_KEY = "sk-1111";
+      OPENAI_HOST = "http://localhost:10000";
+      GOOSE_DISABLE_KEYRING = "1";
     };
     persistence = {
       "/persist/home/rob" = {
@@ -36,11 +43,14 @@
             directory = ".local/share/nvim";
             method = "symlink";
           }
-          ".config/aichat"
+          ".config/goose"
           ".local/share/direnv"
           ".local/share/zoxide"
           ".local/share/fish"
           ".local/share/pnpm"
+          ".local/share/uv"
+          ".local/share/goose"
+          ".cache/uv"
           ".mozilla"
           ".duckdb"
           ".ssh"
@@ -54,8 +64,10 @@
       };
     };
     packages = [
+      pkgs.portaudio
+      pkgs.goose-cli
+      pkgs.uv
       pkgs.opencode
-      pkgs.aichat
       pkgs.litellm
       pkgs.duckdb
       pkgs.bat
@@ -69,6 +81,33 @@
       pkgs.grimblast
       pkgs.unzip
       pkgs.zip
+      # LSP
+      pkgs.dockerfile-language-server-nodejs
+      pkgs.shellcheck
+      pkgs.pyright
+      pkgs.black
+      pkgs.terraform-ls
+      pkgs.nodePackages."@astrojs/language-server"
+      pkgs.zls
+      pkgs.yaml-language-server
+      pkgs.tailwindcss-language-server
+      pkgs.emmet-ls
+      pkgs.eslint
+      pkgs.typescript-language-server
+      pkgs.nodePackages.prettier
+      pkgs.svelte-language-server
+      pkgs.bash-language-server
+      pkgs.shfmt
+      pkgs.statix
+      pkgs.alejandra
+      pkgs.deadnix
+      pkgs.nixd
+      pkgs.lua-language-server
+      pkgs.stylua
+      pkgs.selene
+      pkgs.rust-analyzer
+      pkgs.lexical
+      pkgs.clang-tools
     ];
   };
 
@@ -79,11 +118,11 @@
       download = "${config.home.homeDirectory}/downloads";
     };
     configFile = {
+      "goose/config.yaml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/nix/assets/goose.yaml";
       "opencode/opencode.json".source = ../../assets/opencode.json;
-      "aichat/config.yaml".source = ../../assets/aichat.yaml;
       "fish/themes/Kanagawa.theme".source = ../../assets/kanagawa.theme;
       "pnpm/rc".text = "store-dir=${config.home.homeDirectory}/.local/share/pnpm";
-      nvim.source = config.lib.file.mkOutOfStoreSymlink "/home/rob/projects/nix/assets/astronvim";
+      nvim.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/nix/assets/astronvim";
     };
     mimeApps.enable = true;
   };
@@ -286,38 +325,9 @@
       defaultEditor = true;
       vimAlias = true;
       extraPackages = [
-        pkgs.dockerfile-language-server-nodejs
-        pkgs.shellcheck
-        pkgs.pyright
         pkgs.ghostscript
         pkgs.nodejs
-        pkgs.ripgrep
         pkgs.bottom
-        pkgs.black
-        pkgs.terraform-ls
-        pkgs.gnumake
-        pkgs.gcc
-        pkgs.nodePackages."@astrojs/language-server"
-        pkgs.zls
-        pkgs.yaml-language-server
-        pkgs.tailwindcss-language-server
-        pkgs.emmet-ls
-        pkgs.eslint
-        pkgs.typescript-language-server
-        pkgs.nodePackages.prettier
-        pkgs.svelte-language-server
-        pkgs.bash-language-server
-        pkgs.shfmt
-        pkgs.statix
-        pkgs.alejandra
-        pkgs.deadnix
-        pkgs.nixd
-        pkgs.lua-language-server
-        pkgs.stylua
-        pkgs.selene
-        pkgs.rust-analyzer
-        pkgs.lexical
-        pkgs.clang-tools
       ];
     };
     firefox = {
