@@ -8,6 +8,7 @@
   imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
     inputs.nix-index-database.homeModules.nix-index
+    inputs.agenix.homeManagerModules.default
   ];
 
   home = {
@@ -67,6 +68,8 @@
       pkgs.portaudio
       pkgs.goose-cli
       pkgs.uv
+      pkgs.pnpm
+      pkgs.nodejs
       pkgs.opencode
       pkgs.litellm
       pkgs.duckdb
@@ -109,6 +112,16 @@
       pkgs.lexical
       pkgs.clang-tools
     ];
+  };
+
+  age = {
+    identityPaths = ["${config.home.homeDirectory}/.ssh/id_ed25519"];
+    secrets = {
+      goose = {
+        file = ../../secrets/goose.age;
+        path = "${config.home.homeDirectory}/.config/goose/secrets.yaml";
+      };
+    };
   };
 
   xdg = {
