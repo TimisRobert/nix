@@ -37,7 +37,8 @@
       acceleration = "cuda";
       environmentVariables = {
         OLLAMA_FLASH_ATTENTION = "1";
-        OLLAMA_CONTEXT_LENGTH = "32000";
+        OLLAMA_CONTEXT_LENGTH = "128000";
+        GGML_CUDA_ENABLE_UNIFIED_MEMORY = "1";
       };
       loadModels = [
         "hf.co/unsloth/Qwen3-30B-A3B-Instruct-2507-GGUF:UD-Q3_K_XL"
