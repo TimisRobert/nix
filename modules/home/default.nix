@@ -16,8 +16,11 @@
     homeDirectory = "/home/rob";
     stateVersion = "25.11";
     pointerCursor = {
-      package = pkgs.simp1e-cursors;
       name = "Simp1e";
+      package = pkgs.simp1e-cursors;
+      size = 16;
+      x11.enable = true;
+      hyprcursor.enable = true;
     };
     sessionVariables = {
       WLR_RENDERER = "vulkan";
@@ -25,13 +28,6 @@
       NIXOS_OZONE_WL = "1";
       ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
       DOCKER_HOST = "unix:///run/user/1000/podman/podman.sock";
-      # Goose
-      GOOSE_PROVIDER = "openai";
-      GOOSE_LEAD_MODEL = "zai/glm-4.5";
-      GOOSE_MODEL = "zai/glm-4.5-flash";
-      OPENAI_API_KEY = "sk-1111";
-      OPENAI_HOST = "http://localhost:10000";
-      GOOSE_DISABLE_KEYRING = "1";
     };
     persistence = {
       "/persist/home/rob" = {
@@ -44,13 +40,11 @@
             directory = ".local/share/nvim";
             method = "symlink";
           }
-          ".config/goose"
           ".local/share/direnv"
           ".local/share/zoxide"
           ".local/share/fish"
           ".local/share/pnpm"
           ".local/share/uv"
-          ".local/share/goose"
           ".cache/uv"
           ".mozilla"
           ".duckdb"
@@ -65,8 +59,6 @@
       };
     };
     packages = [
-      pkgs.portaudio
-      pkgs.goose-cli
       pkgs.uv
       pkgs.pnpm
       pkgs.nodejs
@@ -117,10 +109,18 @@
   age = {
     identityPaths = ["${config.home.homeDirectory}/.ssh/id_ed25519"];
     secrets = {
-      goose = {
-        file = ../../secrets/goose.age;
-        path = "${config.home.homeDirectory}/.config/goose/secrets.yaml";
+      gitlab = {
+        file = ../../secrets/gitlab.age;
       };
+    };
+  };
+
+  gtk = {
+    enable = true;
+    cursorTheme = {
+      name = "Simp1e";
+      package = pkgs.simp1e-cursors;
+      size = config.home.pointerCursor.size;
     };
   };
 
@@ -131,7 +131,7 @@
       download = "${config.home.homeDirectory}/downloads";
     };
     configFile = {
-      "goose/config.yaml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/nix/assets/goose.yaml";
+      "opencode/agent".source = ../../assets/agents;
       "opencode/opencode.json".source = ../../assets/opencode.json;
       "fish/themes/Kanagawa.theme".source = ../../assets/kanagawa.theme;
       "pnpm/rc".text = "store-dir=${config.home.homeDirectory}/.local/share/pnpm";
@@ -160,8 +160,6 @@
       }
       bindm = $mainMod ALT, mouse:272, movewindow
       bindc = $mainMod ALT, mouse:272, togglefloating
-
-      exec-once = hyprlock
     '';
 
     settings = {
@@ -170,6 +168,12 @@
       "$menu" = "rofi -show drun";
       "$fileManager" = "dolphin";
       monitor = lib.mkDefault ",highres,auto,1";
+
+      exec-once = [
+        "dconf write /org/gnome/desktop/interface/cursor-theme '${config.home.pointerCursor.name}'"
+        "dconf write /org/gnome/desktop/interface/cursor-size ${toString config.home.pointerCursor.size}"
+        "hyprlock"
+      ];
 
       ecosystem.no_update_news = true;
 

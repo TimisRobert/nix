@@ -3,5 +3,5 @@ let
   users = [rob];
 in {
   "litellm.age".publicKeys = users;
-  "goose.age".publicKeys = users;
+  "gitlab.age".publicKeys = users;
 }

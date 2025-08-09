@@ -2,9 +2,7 @@
   "$schema": "https://opencode.ai/config.json",
   "autoshare": false,
   "autoupdate": false,
-  "theme": "default",
-  "model": "litellm/zai/glm-4.5",
-  "small_model": "litellm/zai/glm-4.5-flash",
+  "theme": "system",
   "provider": {
     "litellm": {
       "npm": "@ai-sdk/openai-compatible",
@@ -14,28 +12,70 @@
         "apiKey": "sk-1111"
       },
       "models": {
-        "novita/qwen/qwen3-coder-480b-a35b-instruct": {
-          "name": "novita qwen3 coder"
-        },
-        "novita/qwen/qwen3-30b-a3b-fp8": {
-          "name": "novita qwen3 small"
-        },
-        "novita/zai-org/glm-4.5": {
-          "name": "novita z.ai glm 4.5"
-        },
         "zai/glm-4.5": {
           "name": "z.ai glm 4.5"
         },
+        "zai/glm-4.5-air": {
+          "name": "z.ai glm 4.5 air"
+        },
         "zai/glm-4.5-flash": {
-          "name": "novita z.ai glm 4.5 flash"
-        },
-        "local/qwen3-coder": {
-          "name": "local qwen3 coder"
-        },
-        "local/qwen3-instruct": {
-          "name": "local qwen3 instruct"
+          "name": "z.ai glm 4.5 flash"
         }
       }
+    }
+  },
+  "agent": {
+    "plan": {
+      "mode": "primary",
+      "model": "litellm/zai/glm-4.5",
+      "tools": {
+        "write": false,
+        "edit": false,
+        "bash": false
+      }
+    },
+    "build": {
+      "mode": "primary",
+      "model": "litellm/zai/glm-4.5-air",
+      "tools": {}
+    }
+  },
+  "mcp": {
+    "context7": {
+      "type": "local",
+      "enabled": true,
+      "command": ["pnpx", "@upstash/context7-mcp"]
+    },
+    "gitlab": {
+      "type": "local",
+      "enabled": true,
+      "command": ["pnpx", "@zereight/mcp-gitlab"],
+      "environment": {
+        "GITLAB_PERSONAL_ACCESS_TOKEN": "{file:/run/user/1000/agenix/gitlab}",
+        "USE_MILESTONE": "true",
+        "USE_PIPELINE": "true",
+        "USE_GITLAB_WIKI": "true"
+      }
+    },
+    "awslabs.aws-api-mcp-server": {
+      "type": "local",
+      "enabled": false,
+      "command": ["uvx", "awslabs.aws-api-mcp-server"]
+    },
+    "awslabs.aws-documentation-mcp-server": {
+      "type": "local",
+      "enabled": false,
+      "command": ["uvx", "awslabs.aws-documentation-mcp-server"]
+    },
+    "awslabs.cloudwatch-mcp-server": {
+      "type": "local",
+      "enabled": false,
+      "command": ["uvx", "awslabs.cloudwatch-mcp-server"]
+    },
+    "awslabs.terraform-mcp-server": {
+      "type": "local",
+      "enabled": false,
+      "command": ["uvx", "awslabs.terraform-mcp-server"]
     }
   }
 }
