@@ -27,7 +27,7 @@
   "agent": {
     "plan": {
       "mode": "primary",
-      "model": "litellm/zai/glm-4.5",
+      "model": "litellm/zai/glm-4.5-air",
       "tools": {
         "write": false,
         "edit": false,
@@ -36,7 +36,7 @@
     },
     "build": {
       "mode": "primary",
-      "model": "litellm/zai/glm-4.5-air",
+      "model": "litellm/zai/glm-4.5",
       "tools": {}
     }
   },

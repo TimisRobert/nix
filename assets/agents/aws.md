@@ -4,6 +4,8 @@ mode: subagent
 model: litellm/zai/glm-4.5-air
 tools:
   bash: false
+  read: false
+  list: false
   edit: false
   write: false
   patch: false

@@ -1,8 +1,10 @@
 ---
 description: Looks up documentation for libraries or tools
 mode: subagent
-model: litellm/zai/glm-4.5-air
+model: litellm/zai/glm-4.5-flash
 tools:
+  read: false
+  list: false
   write: false
   patch: false
   todoread: false
