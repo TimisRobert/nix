@@ -48,7 +48,7 @@
     },
     "gitlab": {
       "type": "local",
-      "enabled": true,
+      "enabled": false,
       "command": ["pnpx", "@zereight/mcp-gitlab"],
       "environment": {
         "GITLAB_PERSONAL_ACCESS_TOKEN": "{file:/run/user/1000/agenix/gitlab}",

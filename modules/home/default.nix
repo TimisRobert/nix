@@ -100,7 +100,7 @@
       pkgs.lua-language-server
       pkgs.stylua
       pkgs.selene
-      pkgs.rust-analyzer
+      # pkgs.rust-analyzer
       pkgs.lexical
       pkgs.clang-tools
     ];
@@ -280,6 +280,14 @@
   };
 
   services = {
+    podman = {
+      enable = true;
+      settings.storage = {
+        storage = {
+          graphroot = "${config.home.homeDirectory}/containers";
+        };
+      };
+    };
     gammastep = {
       enable = true;
       provider = "manual";
