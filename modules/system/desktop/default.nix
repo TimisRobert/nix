@@ -3,12 +3,15 @@
   config,
   ...
 }: {
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-    localNetworkGameTransfers.openFirewall = true;
-    extraCompatPackages = [pkgs.proton-ge-bin];
+  programs = {
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+      localNetworkGameTransfers.openFirewall = true;
+      extraCompatPackages = [pkgs.proton-ge-bin];
+    };
+    gamemode.enable = true;
   };
 
   boot.initrd.kernelModules = ["nvidia"];
