@@ -40,6 +40,7 @@
             directory = ".local/share/nvim";
             method = "symlink";
           }
+          ".local/share/opencode"
           ".local/share/direnv"
           ".local/share/zoxide"
           ".local/share/fish"
@@ -47,11 +48,13 @@
           ".local/share/uv"
           ".cache/uv"
           ".mozilla"
+          ".claude"
           ".duckdb"
           ".ssh"
           ".aws"
         ];
         files = [
+          ".claude.json"
           ".duckdbrc"
           ".duckdb_history"
         ];
@@ -59,6 +62,7 @@
       };
     };
     packages = [
+      pkgs.claude-code
       pkgs.uv
       pkgs.pnpm
       pkgs.nodejs
@@ -131,8 +135,6 @@
       download = "${config.home.homeDirectory}/downloads";
     };
     configFile = {
-      "opencode/agent".source = ../../assets/agents;
-      "opencode/opencode.json".source = ../../assets/opencode.json;
       "fish/themes/Kanagawa.theme".source = ../../assets/kanagawa.theme;
       "pnpm/rc".text = "store-dir=${config.home.homeDirectory}/.local/share/pnpm";
       nvim.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/nix/assets/astronvim";
@@ -218,6 +220,7 @@
         kb_layout = "us";
         kb_options = "ctrl:nocaps";
         accel_profile = "flat";
+        sensitivity = -0.75;
       };
 
       dwindle = {
