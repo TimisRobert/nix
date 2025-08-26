@@ -39,10 +39,10 @@
     ];
 
   boot = {
-    binfmt = {
-      emulatedSystems = ["aarch64-linux"];
-      preferStaticEmulators = true;
-    };
+    # binfmt = {
+    # emulatedSystems = ["aarch64-linux"];
+    # preferStaticEmulators = true;
+    # };
     loader = {
       systemd-boot = {
         enable = true;
