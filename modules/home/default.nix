@@ -63,11 +63,7 @@
     };
     packages = [
       pkgs.claude-code
-      pkgs.uv
-      pkgs.pnpm
-      pkgs.nodejs
       pkgs.opencode
-      pkgs.litellm
       pkgs.duckdb
       pkgs.bat
       pkgs.jq
@@ -80,33 +76,6 @@
       pkgs.grimblast
       pkgs.unzip
       pkgs.zip
-      # LSP
-      pkgs.dockerfile-language-server-nodejs
-      pkgs.shellcheck
-      pkgs.pyright
-      pkgs.black
-      pkgs.terraform-ls
-      pkgs.nodePackages."@astrojs/language-server"
-      pkgs.zls
-      pkgs.yaml-language-server
-      pkgs.tailwindcss-language-server
-      pkgs.emmet-ls
-      pkgs.eslint
-      pkgs.typescript-language-server
-      pkgs.nodePackages.prettier
-      pkgs.svelte-language-server
-      pkgs.bash-language-server
-      pkgs.shfmt
-      pkgs.statix
-      pkgs.alejandra
-      pkgs.deadnix
-      pkgs.nixd
-      pkgs.lua-language-server
-      pkgs.stylua
-      pkgs.selene
-      # pkgs.rust-analyzer
-      pkgs.lexical
-      pkgs.clang-tools
     ];
   };
 
@@ -356,6 +325,33 @@
         pkgs.ghostscript
         pkgs.nodejs
         pkgs.bottom
+        # LSP
+        pkgs.dockerfile-language-server-nodejs
+        pkgs.shellcheck
+        pkgs.pyright
+        pkgs.black
+        pkgs.terraform-ls
+        pkgs.nodePackages."@astrojs/language-server"
+        pkgs.zls
+        pkgs.yaml-language-server
+        pkgs.tailwindcss-language-server
+        pkgs.emmet-ls
+        pkgs.eslint
+        pkgs.typescript-language-server
+        pkgs.nodePackages.prettier
+        pkgs.svelte-language-server
+        pkgs.bash-language-server
+        pkgs.shfmt
+        pkgs.statix
+        pkgs.alejandra
+        pkgs.deadnix
+        pkgs.nixd
+        pkgs.lua-language-server
+        pkgs.stylua
+        pkgs.selene
+        # pkgs.rust-analyzer
+        pkgs.lexical
+        pkgs.clang-tools
       ];
     };
     firefox = {

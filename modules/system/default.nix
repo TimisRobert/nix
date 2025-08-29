@@ -167,14 +167,6 @@
           "/var/log"
           "/var/lib/bluetooth"
           "/var/lib/nixos"
-          {
-            directory = "/var/lib/private/litellm";
-            mode = "0700";
-          }
-          {
-            directory = "/var/lib/private/ollama";
-            mode = "0700";
-          }
           "/etc/NetworkManager"
         ];
         files = [
@@ -191,15 +183,6 @@
   security = {
     rtkit.enable = true;
     polkit.enable = true;
-  };
-
-  age = {
-    identityPaths = ["/persist/home/rob/.ssh/id_ed25519"];
-    secrets = {
-      litellm = {
-        file = ../../secrets/litellm.age;
-      };
-    };
   };
 
   services = {
