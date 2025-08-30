@@ -27,7 +27,7 @@
       MOZ_ENABLE_WAYLAND = "1";
       NIXOS_OZONE_WL = "1";
       ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
-      DOCKER_HOST = "unix:///run/user/1000/podman/podman.sock";
+      DOCKER_HOST = "unix:///$XDG_RUNTIME_DIR/podman/podman.sock";
     };
     persistence = {
       "/persist/home/rob" = {
