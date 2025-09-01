@@ -47,6 +47,7 @@
           ".local/share/pnpm"
           ".local/share/uv"
           ".cache/uv"
+          ".cache/huggingface"
           ".mozilla"
           ".claude"
           ".duckdb"
@@ -72,6 +73,7 @@
       pkgs.devenv
       pkgs.xdg-utils
       pkgs.pamixer
+      pkgs.pulseaudio
       pkgs.wl-clipboard
       pkgs.grimblast
       pkgs.unzip
@@ -247,6 +249,9 @@
         "$mainMod SHIFT, 8, movetoworkspace, 8"
         "$mainMod SHIFT, 9, movetoworkspace, 9"
         "$mainMod SHIFT, 0, movetoworkspace, 10"
+
+        # Microphone toggle
+        ", F12, exec, pamixer --default-source -t"
       ];
     };
   };
@@ -303,9 +308,7 @@
     };
     mako = {
       enable = true;
-      settings = {
-        default-timeout = 5;
-      };
+      settings.default-timeout = 5000;
     };
   };
 
@@ -530,7 +533,7 @@
           reload_style_on_change = true;
           modules-left = ["hyprland/workspaces"];
           modules-center = ["clock"];
-          modules-right = ["group/expand" "pulseaudio" "bluetooth" "network" "battery" "tray"];
+          modules-right = ["group/expand" "pulseaudio" "custom/microphone" "bluetooth" "network" "battery" "tray"];
           "hyprland/workspaces" = {
             "format" = "{icon}";
             "format-icons" = {
@@ -626,6 +629,15 @@
             critical-threshold = 80;
             "format" = " {temperatureC}°C";
             tooltip = false;
+          };
+          "custom/microphone" = {
+            "format" = "{text}";
+            "return-type" = "json";
+            "exec" = "bash -c 'if pamixer --default-source --get-mute | grep -q true; then icon=\"󰍭\"; else icon=\"󰍬\"; fi; source_name=$(pactl info | grep \"Default Source\" | cut -d: -f2- | sed \"s/^[[:space:]]*//\"); tooltip=$(pactl list sources | awk \"/Name: $source_name/{f=1} f&&/Description:/{print \\$0; exit}\" | cut -d: -f2- | sed \"s/^[[:space:]]*//\"); echo \"{\\\"text\\\":\\\"$icon\\\",\\\"tooltip\\\":\\\"$tooltip\\\"}\"'";
+            "on-click" = "pamixer --default-source -t";
+            "on-click-right" = "bash -c 'sources=$(pactl list sources | awk \"/Name:.*alsa_input/{name=\\$2} /Description:/{if(name) print substr(\\$0, index(\\$0,\\$2)); name=\\\"\\\"}\"); selected=$(echo \"$sources\" | rofi -dmenu -p \"Select Mic\"); if [ -n \"$selected\" ]; then source_name=$(pactl list sources | awk \"BEGIN{found=0} /Name:.*alsa_input/{name=\\$2} /Description:.*$selected/{if(name) {print name; exit}}\"); pactl set-default-source \"$source_name\"; notify-send \"Microphone\" \"Switched to: $selected\"; fi'";
+            "interval" = 1;
+            "tooltip" = true;
           };
           tray = {
             icon-size = 14;

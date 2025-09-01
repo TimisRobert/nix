@@ -51,6 +51,7 @@ tooltip {
 #clock:hover,
 #custom-pacman:hover,
 #custom-notification:hover,
+#custom-microphone:hover,
 #bluetooth:hover,
 #network:hover,
 #battery:hover,
@@ -129,6 +130,12 @@ tooltip {
 }
 
 #network {
+  padding: 0px 5px;
+  transition: all 0.3s ease;
+  color: @color7;
+}
+
+#custom-microphone {
   padding: 0px 5px;
   transition: all 0.3s ease;
   color: @color7;
