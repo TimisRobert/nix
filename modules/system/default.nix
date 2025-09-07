@@ -128,6 +128,10 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   programs = {
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };
     wireshark.enable = true;
     nix-ld.enable = true;
     light.enable = true;

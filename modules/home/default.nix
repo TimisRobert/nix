@@ -40,7 +40,6 @@
             directory = ".local/share/nvim";
             method = "symlink";
           }
-          ".local/share/opencode"
           ".local/share/direnv"
           ".local/share/zoxide"
           ".local/share/fish"
@@ -64,10 +63,10 @@
     };
     packages = [
       pkgs.claude-code
-      pkgs.opencode
       pkgs.duckdb
       pkgs.bat
       pkgs.jq
+      pkgs.yq
       pkgs.htop
       pkgs.httpie
       pkgs.devenv
@@ -78,6 +77,36 @@
       pkgs.grimblast
       pkgs.unzip
       pkgs.zip
+      pkgs.ast-grep
+      pkgs.fd
+      pkgs.gcr
+      # LSP
+      pkgs.dockerfile-language-server-nodejs
+      pkgs.shellcheck
+      pkgs.pyright
+      pkgs.black
+      pkgs.terraform-ls
+      pkgs.nodePackages."@astrojs/language-server"
+      pkgs.zls
+      pkgs.yaml-language-server
+      pkgs.tailwindcss-language-server
+      pkgs.emmet-ls
+      pkgs.eslint
+      pkgs.typescript-language-server
+      pkgs.nodePackages.prettier
+      pkgs.svelte-language-server
+      pkgs.bash-language-server
+      pkgs.shfmt
+      pkgs.statix
+      pkgs.alejandra
+      pkgs.deadnix
+      pkgs.nixd
+      pkgs.lua-language-server
+      pkgs.stylua
+      pkgs.selene
+      # pkgs.rust-analyzer
+      pkgs.lexical
+      pkgs.clang-tools
     ];
   };
 
@@ -257,6 +286,7 @@
   };
 
   services = {
+    ssh-agent.enable = true;
     podman = {
       enable = true;
       settings.storage = {
@@ -313,9 +343,6 @@
   };
 
   programs = {
-    nix-index = {
-      enable = true;
-    };
     nix-index-database = {
       comma.enable = true;
     };
@@ -333,33 +360,6 @@
         pkgs.ghostscript
         pkgs.nodejs
         pkgs.bottom
-        # LSP
-        pkgs.dockerfile-language-server-nodejs
-        pkgs.shellcheck
-        pkgs.pyright
-        pkgs.black
-        pkgs.terraform-ls
-        pkgs.nodePackages."@astrojs/language-server"
-        pkgs.zls
-        pkgs.yaml-language-server
-        pkgs.tailwindcss-language-server
-        pkgs.emmet-ls
-        pkgs.eslint
-        pkgs.typescript-language-server
-        pkgs.nodePackages.prettier
-        pkgs.svelte-language-server
-        pkgs.bash-language-server
-        pkgs.shfmt
-        pkgs.statix
-        pkgs.alejandra
-        pkgs.deadnix
-        pkgs.nixd
-        pkgs.lua-language-server
-        pkgs.stylua
-        pkgs.selene
-        # pkgs.rust-analyzer
-        pkgs.lexical
-        pkgs.clang-tools
       ];
     };
     firefox = {
@@ -445,7 +445,7 @@
       '';
       shellAliases = {
         ls = "${pkgs.lsd}/bin/lsd";
-        lg = "lazygit";
+        lg = "${pkgs.lazygit}/bin/lazygit";
         diff = "${pkgs.riffdiff}/bin/riff";
         ping = "${pkgs.prettyping}/bin/prettyping --nolegend";
         du = "${pkgs.ncdu}/bin/ncdu";
