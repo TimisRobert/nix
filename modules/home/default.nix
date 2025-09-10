@@ -49,6 +49,7 @@
           ".cache/huggingface"
           ".mozilla"
           ".claude"
+          ".codex"
           ".duckdb"
           ".ssh"
           ".aws"
@@ -63,6 +64,7 @@
     };
     packages = [
       pkgs.claude-code
+      pkgs.codex
       pkgs.duckdb
       pkgs.bat
       pkgs.jq
