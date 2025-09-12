@@ -35,6 +35,23 @@
 
   services = {
     xserver.videoDrivers = ["nvidia"];
+    pipewire.wireplumber.extraConfig.defaultMicrophone = {
+      "monitor.alsa.rules" = [
+        {
+          matches = [
+            {
+              "media.class" = "equals:Audio/Source";
+              "node.name" = "matches:alsa_input.usb-Kingston_HyperX*";
+            }
+          ];
+          actions = {
+            update-props = {
+              "priority.session" = 2000;
+            };
+          };
+        }
+      ];
+    };
     zrepl = {
       enable = true;
       settings = {

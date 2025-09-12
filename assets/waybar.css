@@ -49,35 +49,20 @@ tooltip {
 }
 
 #clock:hover,
-#custom-pacman:hover,
-#custom-notification:hover,
-#custom-microphone:hover,
 #bluetooth:hover,
 #network:hover,
 #battery:hover,
 #cpu:hover,
 #memory:hover,
-#pulseaudio:hover #temperature:hover {
+#wireplumber:hover #temperature:hover {
   transition: all 0.3s ease;
   color: @color9;
-}
-
-#custom-notification {
-  padding: 0px 5px;
-  transition: all 0.3s ease;
-  color: @color7;
 }
 
 #clock {
   padding: 0px 5px;
   color: @color7;
   transition: all 0.3s ease;
-}
-
-#custom-pacman {
-  padding: 0px 5px;
-  transition: all 0.3s ease;
-  color: @color7;
 }
 
 #workspaces {
@@ -135,13 +120,7 @@ tooltip {
   color: @color7;
 }
 
-#custom-microphone {
-  padding: 0px 5px;
-  transition: all 0.3s ease;
-  color: @color7;
-}
-
-#pulseaudio {
+#wireplumber {
   padding: 0px 5px;
   transition: all 0.3s ease;
   color: @color7;
@@ -185,10 +164,6 @@ tooltip {
 #custom-expand:hover {
   color: rgba(255, 255, 255, 0.2);
   text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.5);
-}
-
-#custom-colorpicker {
-  padding: 0px 5px;
 }
 
 #cpu,

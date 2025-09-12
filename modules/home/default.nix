@@ -73,15 +73,12 @@
       pkgs.httpie
       pkgs.devenv
       pkgs.xdg-utils
-      pkgs.pamixer
-      pkgs.pulseaudio
       pkgs.wl-clipboard
       pkgs.grimblast
       pkgs.unzip
       pkgs.zip
       pkgs.ast-grep
       pkgs.fd
-      pkgs.gcr
       # LSP
       pkgs.dockerfile-language-server-nodejs
       pkgs.shellcheck
@@ -282,7 +279,7 @@
         "$mainMod SHIFT, 0, movetoworkspace, 10"
 
         # Microphone toggle
-        ", F12, exec, pamixer --default-source -t"
+        ", F12, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
       ];
     };
   };
@@ -535,7 +532,7 @@
           reload_style_on_change = true;
           modules-left = ["hyprland/workspaces"];
           modules-center = ["clock"];
-          modules-right = ["group/expand" "pulseaudio" "custom/microphone" "bluetooth" "network" "battery" "tray"];
+          modules-right = ["group/expand" "wireplumber" "wireplumber#source" "bluetooth" "network" "battery" "tray"];
           "hyprland/workspaces" = {
             "format" = "{icon}";
             "format-icons" = {
@@ -574,21 +571,28 @@
             "format-on" = "󰂯";
             "format-off" = "BT-off";
             "format-disabled" = "󰂲";
-            "format-connected-battery" = "{device_battery_percentage}% 󰂯";
-            "format-alt" = "{device_alias} 󰂯";
+            "format-connected-battery" = "󰂯 {device_battery_percentage}%";
+            "format-alt" = "󰂯 {device_alias}";
             "tooltip-format" = "{controller_alias}\t{controller_address}\n\n{num_connections} connected";
             "tooltip-format-connected" = "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}";
             "tooltip-format-enumerate-connected" = "{device_alias}\n{device_address}";
             "tooltip-format-enumerate-connected-battery" = "{device_alias}\n{device_address}\n{device_battery_percentage}%";
             "on-click-right" = "blueman-manager";
           };
-          "pulseaudio" = {
+          "wireplumber" = {
             "scroll-step" = 1;
             "format" = "{icon} {volume}%";
             "format-muted" = "󰖁 Muted";
             "format-icons" = {"default" = ["" "" ""];};
-            "on-click" = "pamixer -t";
+            "on-click" = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
             "tooltip" = false;
+          };
+          "wireplumber#source" = {
+            "node-type" = "Audio/Source";
+            "format" = "󰍬 {volume}%";
+            "format-muted" = "󰍭";
+            "on-click-right" = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+            "scroll-step" = 5;
           };
           "battery" = {
             "interval" = 30;
@@ -618,7 +622,7 @@
               "transition-to-left" = true;
               "click-to-reveal" = true;
             };
-            "modules" = ["custom/expand" "custom/colorpicker" "cpu" "memory" "temperature" "custom/endpoint"];
+            "modules" = ["custom/expand" "cpu" "memory" "temperature" "custom/endpoint"];
           };
           cpu = {
             "format" = "󰻠 {usage}%";
@@ -631,15 +635,6 @@
             critical-threshold = 80;
             "format" = " {temperatureC}°C";
             tooltip = false;
-          };
-          "custom/microphone" = {
-            "format" = "{text}";
-            "return-type" = "json";
-            "exec" = "bash -c 'if pamixer --default-source --get-mute | grep -q true; then icon=\"󰍭\"; else icon=\"󰍬\"; fi; source_name=$(pactl info | grep \"Default Source\" | cut -d: -f2- | sed \"s/^[[:space:]]*//\"); tooltip=$(pactl list sources | awk \"/Name: $source_name/{f=1} f&&/Description:/{print \\$0; exit}\" | cut -d: -f2- | sed \"s/^[[:space:]]*//\"); echo \"{\\\"text\\\":\\\"$icon\\\",\\\"tooltip\\\":\\\"$tooltip\\\"}\"'";
-            "on-click" = "pamixer --default-source -t";
-            "on-click-right" = "bash -c 'sources=$(pactl list sources | awk \"/Name:.*alsa_input/{name=\\$2} /Description:/{if(name) print substr(\\$0, index(\\$0,\\$2)); name=\\\"\\\"}\"); selected=$(echo \"$sources\" | rofi -dmenu -p \"Select Mic\"); if [ -n \"$selected\" ]; then source_name=$(pactl list sources | awk \"BEGIN{found=0} /Name:.*alsa_input/{name=\\$2} /Description:.*$selected/{if(name) {print name; exit}}\"); pactl set-default-source \"$source_name\"; notify-send \"Microphone\" \"Switched to: $selected\"; fi'";
-            "interval" = 1;
-            "tooltip" = true;
           };
           tray = {
             icon-size = 14;

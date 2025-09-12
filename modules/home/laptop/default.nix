@@ -3,10 +3,10 @@
 
   wayland.windowManager.hyprland.settings = {
     bind = [
-      " , XF86AudioRaiseVolume, exec, pamixer -i 5 "
-      " , XF86AudioLowerVolume, exec, pamixer -d 5 "
-      " , XF86AudioMicMute, exec, pamixer --default-source -t"
-      " , XF86AudioMute, exec, pamixer -t"
+      " , XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+      " , XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+      " , XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+      " , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
       " , XF86AudioPlay, exec, playerctl play-pause"
       " , XF86AudioPause, exec, playerctl play-pause"
       " , XF86AudioNext, exec, playerctl next"
