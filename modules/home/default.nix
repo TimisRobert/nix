@@ -580,7 +580,7 @@
             "on-click-right" = "blueman-manager";
           };
           "wireplumber" = {
-            "scroll-step" = 1;
+            "scroll-step" = 5;
             "format" = "{icon} {volume}%";
             "format-muted" = "󰖁 Muted";
             "format-icons" = {"default" = ["" "" ""];};
