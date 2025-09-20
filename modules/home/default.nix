@@ -27,7 +27,7 @@
       MOZ_ENABLE_WAYLAND = "1";
       NIXOS_OZONE_WL = "1";
       ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
-      DOCKER_HOST = "unix:///$XDG_RUNTIME_DIR/podman/podman.sock";
+      DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/podman/podman.sock";
     };
     persistence = {
       "/persist/home/rob" = {
@@ -48,14 +48,12 @@
           ".cache/uv"
           ".cache/huggingface"
           ".mozilla"
-          ".claude"
           ".codex"
           ".duckdb"
           ".ssh"
           ".aws"
         ];
         files = [
-          ".claude.json"
           ".duckdbrc"
           ".duckdb_history"
         ];
@@ -63,7 +61,6 @@
       };
     };
     packages = [
-      pkgs.claude-code
       pkgs.codex
       pkgs.duckdb
       pkgs.bat
@@ -80,10 +77,10 @@
       pkgs.ast-grep
       pkgs.fd
       # LSP
-      pkgs.dockerfile-language-server-nodejs
+      pkgs.dockerfile-language-server
       pkgs.shellcheck
       pkgs.pyright
-      pkgs.black
+      pkgs.ruff
       pkgs.terraform-ls
       pkgs.nodePackages."@astrojs/language-server"
       pkgs.zls
@@ -103,7 +100,7 @@
       pkgs.lua-language-server
       pkgs.stylua
       pkgs.selene
-      # pkgs.rust-analyzer
+      pkgs.rust-analyzer
       pkgs.lexical
       pkgs.clang-tools
     ];

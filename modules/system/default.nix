@@ -25,11 +25,6 @@
 
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
-      "claude-code"
-      "libcublas"
-      "cuda_nvcc"
-      "cuda_cccl"
-      "cuda_cudart"
       "nvidia-x11"
       "nvidia-settings"
       "steam"
@@ -39,10 +34,10 @@
     ];
 
   boot = {
-    # binfmt = {
-    # emulatedSystems = ["aarch64-linux"];
-    # preferStaticEmulators = true;
-    # };
+    binfmt = {
+      emulatedSystems = ["aarch64-linux"];
+      preferStaticEmulators = true;
+    };
     loader = {
       systemd-boot = {
         enable = true;
@@ -221,7 +216,7 @@
           "bluez5.enable-sbc-xq" = true;
           "bluez5.enable-msbc" = true;
           "bluez5.enable-hw-volume" = true;
-          "bluez5.codecs" = ["sbc_xq" "sbc"];
+          "bluez5.codecs" = ["aac" "sbc_xq" "sbc"];
         };
       };
     };
