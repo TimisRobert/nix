@@ -85,6 +85,8 @@
     ];
   };
 
+  zramSwap.enable = true;
+
   powerManagement.cpuFreqGovernor = "performance";
 
   networking = {
