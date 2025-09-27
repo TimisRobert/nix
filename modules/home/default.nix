@@ -7,7 +7,6 @@
 }: {
   imports = [
     inputs.nix-index-database.homeModules.nix-index
-    inputs.agenix.homeManagerModules.default
   ];
 
   home = {
@@ -72,15 +71,6 @@
       pkgs.lexical
       pkgs.clang-tools
     ];
-  };
-
-  age = {
-    identityPaths = ["${config.home.homeDirectory}/.ssh/id_ed25519"];
-    secrets = {
-      gitlab = {
-        file = ../../secrets/gitlab.age;
-      };
-    };
   };
 
   gtk = {

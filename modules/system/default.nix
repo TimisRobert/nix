@@ -1,14 +1,8 @@
 {
   pkgs,
   lib,
-  inputs,
-  system,
   ...
 }: {
-  imports = [
-    inputs.agenix.nixosModules.default
-  ];
-
   nix = {
     extraOptions = ''
       experimental-features = nix-command flakes
@@ -161,7 +155,7 @@
   };
 
   environment = {
-    systemPackages = [pkgs.vim pkgs.wireshark inputs.agenix.packages.${system}.default];
+    systemPackages = [pkgs.vim pkgs.wireshark];
     persistence = {
       "/persist" = {
         directories = [
