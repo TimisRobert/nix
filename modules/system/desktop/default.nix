@@ -82,8 +82,7 @@
               client_identity = config.networking.hostName;
             };
             filesystems = {
-              "zpool/projects" = true;
-              "zpool/documents" = true;
+              "zpool/home" = true;
             };
             replication = {
               protection = {
@@ -114,8 +113,7 @@
             name = "snapshot";
             type = "snap";
             filesystems = {
-              "zpool/projects" = true;
-              "zpool/documents" = true;
+              "zpool/home" = true;
             };
             snapshotting = {
               type = "periodic";

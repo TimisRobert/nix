@@ -30,6 +30,11 @@
     neededForBoot = true;
   };
 
+  fileSystems."/home" = {
+    device = "zpool/home";
+    fsType = "zfs";
+  };
+
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/0FDD-DC72";
     fsType = "vfat";

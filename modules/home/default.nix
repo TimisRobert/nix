@@ -6,7 +6,6 @@
   ...
 }: {
   imports = [
-    inputs.impermanence.nixosModules.home-manager.impermanence
     inputs.nix-index-database.homeModules.nix-index
     inputs.agenix.homeManagerModules.default
   ];
@@ -28,37 +27,6 @@
       NIXOS_OZONE_WL = "1";
       ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
       DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/podman/podman.sock";
-    };
-    persistence = {
-      "/persist/home/rob" = {
-        directories = [
-          {
-            directory = ".local/state/nvim";
-            method = "symlink";
-          }
-          {
-            directory = ".local/share/nvim";
-            method = "symlink";
-          }
-          ".local/share/direnv"
-          ".local/share/zoxide"
-          ".local/share/fish"
-          ".local/share/pnpm"
-          ".local/share/uv"
-          ".cache/uv"
-          ".cache/huggingface"
-          ".mozilla"
-          ".codex"
-          ".duckdb"
-          ".ssh"
-          ".aws"
-        ];
-        files = [
-          ".duckdbrc"
-          ".duckdb_history"
-        ];
-        allowOther = true;
-      };
     };
     packages = [
       pkgs.codex
@@ -283,14 +251,6 @@
 
   services = {
     ssh-agent.enable = true;
-    podman = {
-      enable = true;
-      settings.storage = {
-        storage = {
-          graphroot = "${config.home.homeDirectory}/containers";
-        };
-      };
-    };
     gammastep = {
       enable = true;
       provider = "manual";
