@@ -8,6 +8,7 @@
     };
     packages = [
       pkgs.godot
+      pkgs.blender
     ];
   };
 }

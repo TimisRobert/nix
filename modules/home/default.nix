@@ -17,7 +17,6 @@
       name = "Simp1e";
       package = pkgs.simp1e-cursors;
       size = 16;
-      x11.enable = true;
       hyprcursor.enable = true;
     };
     sessionVariables = {
@@ -126,8 +125,6 @@
       monitor = lib.mkDefault ",highres,auto,1";
 
       exec-once = [
-        "dconf write /org/gnome/desktop/interface/cursor-theme '${config.home.pointerCursor.name}'"
-        "dconf write /org/gnome/desktop/interface/cursor-size ${toString config.home.pointerCursor.size}"
         "hyprlock"
       ];
 
@@ -303,6 +300,7 @@
       defaultEditor = true;
       vimAlias = true;
       extraPackages = [
+        pkgs.gcc
         pkgs.ghostscript
         pkgs.nodejs
         pkgs.bottom
@@ -538,7 +536,7 @@
             "node-type" = "Audio/Source";
             "format" = "󰍬 {volume}%";
             "format-muted" = "󰍭";
-            "on-click-right" = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+            "on-click-left" = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
             "scroll-step" = 5;
           };
           "battery" = {
