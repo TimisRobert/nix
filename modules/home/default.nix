@@ -30,10 +30,7 @@
       # pkgs.codex
       (pkgs.callPackage ../packages/codex.nix {})
       pkgs.duckdb
-      pkgs.bat
-      pkgs.jq
       pkgs.yq
-      pkgs.htop
       pkgs.httpie
       pkgs.devenv
       pkgs.xdg-utils
@@ -42,7 +39,6 @@
       pkgs.unzip
       pkgs.zip
       pkgs.ast-grep
-      pkgs.fd
       # LSP
       pkgs.dockerfile-language-server
       pkgs.shellcheck
@@ -287,14 +283,31 @@
   };
 
   programs = {
-    nix-index-database = {
-      comma.enable = true;
-    };
-    nnn = {
+    nix-index-database.comma.enable = true;
+    bat.enable = true;
+    jq.enable = true;
+    nnn.enable = true;
+    zathura.enable = true;
+    zoxide.enable = true;
+    fzf.enable = true;
+    fd.enable = true;
+    htop.enable = true;
+    direnv.enable = true;
+    ripgrep.enable = true;
+    jujutsu = {
       enable = true;
-    };
-    zathura = {
-      enable = true;
+      settings = {
+        user = {
+          name = "TimisRobert";
+          email = "roberttimis@proton.me";
+        };
+        signing = {
+          behavior = "own";
+          backend = "ssh";
+          key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBvR28lwcOKIk7VRo/bXzxQGnA5evdsGcNZCy3BA6DDR rob@RobertTimis";
+        };
+        git.sign-on-push = true;
+      };
     };
     neovim = {
       enable = true;
@@ -346,9 +359,6 @@
         modify_font = "cell_height +1px";
       };
     };
-    zoxide = {
-      enable = true;
-    };
     starship = {
       enable = true;
       enableTransience = true;
@@ -364,9 +374,6 @@
       enable = true;
       theme = ../../assets/rofi.rasi;
     };
-    fzf = {
-      enable = true;
-    };
     lazygit = {
       enable = true;
       settings = {
@@ -375,12 +382,6 @@
         git.paging.pager = "${pkgs.delta}/bin/delta --dark --paging=never";
         git.paging.colorArg = "always";
       };
-    };
-    direnv = {
-      enable = true;
-    };
-    ripgrep = {
-      enable = true;
     };
     fish = {
       enable = true;
