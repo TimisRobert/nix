@@ -27,7 +27,8 @@
       DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/podman/podman.sock";
     };
     packages = [
-      pkgs.codex
+      # pkgs.codex
+      (pkgs.callPackage ../packages/codex.nix {})
       pkgs.duckdb
       pkgs.bat
       pkgs.jq
