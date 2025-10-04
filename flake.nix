@@ -31,7 +31,10 @@
               ./modules/hardware/desktop
               {
                 home-manager = {
-                  extraSpecialArgs = {inherit inputs;};
+                  extraSpecialArgs = {
+                    inherit inputs;
+                    system = "x86_64-linux";
+                  };
                   useGlobalPkgs = true;
                   useUserPackages = true;
                   backupFileExtension = "backup";
@@ -54,7 +57,10 @@
               ./modules/hardware/laptop
               {
                 home-manager = {
-                  extraSpecialArgs = {inherit inputs;};
+                  extraSpecialArgs = {
+                    inherit inputs;
+                    system = "x86_64-linux";
+                  };
                   useGlobalPkgs = true;
                   useUserPackages = true;
                   backupFileExtension = "backup";
