@@ -118,7 +118,7 @@
       "$mainMod" = "SUPER";
       "$terminal" = "kitty";
       "$menu" = "rofi -show drun";
-      "$fileManager" = "dolphin";
+      "$fileManager" = "nnn";
       monitor = lib.mkDefault ",highres,auto,1";
 
       exec-once = [
