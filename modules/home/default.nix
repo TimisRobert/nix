@@ -297,6 +297,9 @@
     jujutsu = {
       enable = true;
       settings = {
+        ui = {
+          default-command = "log";
+        };
         user = {
           name = "TimisRobert";
           email = "roberttimis@proton.me";
@@ -409,7 +412,7 @@
       settings = {
         background = {
           monitor = "";
-          path = "screenshot";
+          path = "/home/rob/projects/nix/assets/bg.png";
           blur_passes = 1;
           blur_size = 7;
           noise = 1.17e-2;
