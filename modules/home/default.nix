@@ -284,6 +284,7 @@
 
   programs = {
     nix-index-database.comma.enable = true;
+    lsd.enable = true;
     bat.enable = true;
     jq.enable = true;
     nnn.enable = true;
@@ -331,6 +332,13 @@
       enable = true;
       userName = "TimisRobert";
       userEmail = "roberttimis@proton.me";
+      delta = {
+        enable = true;
+        options = {
+          dark = true;
+          navigate = true;
+        };
+      };
       signing = {
         format = "ssh";
         signByDefault = true;
@@ -343,10 +351,6 @@
         pull.rebase = true;
         rebase.updateRefs = true;
         credential.helper = "cache --timeout 604800";
-        core.pager = "${pkgs.delta}/bin/delta";
-        interactive.diffFilter = "${pkgs.delta}/bin/delta --color-only";
-        delta.dark = true;
-        delta.navigate = true;
         merge.conflictStyle = "zdiff3";
       };
     };
@@ -393,19 +397,12 @@
         fish_config theme choose Kanagawa
       '';
       shellAliases = {
-        ls = "${pkgs.lsd}/bin/lsd";
-        lg = "${pkgs.lazygit}/bin/lazygit";
+        cat = "bat --paging=never";
+        lg = "lazygit";
         diff = "${pkgs.riffdiff}/bin/riff";
         ping = "${pkgs.prettyping}/bin/prettyping --nolegend";
         du = "${pkgs.ncdu}/bin/ncdu";
       };
-      plugins = [
-        {
-          name = "plugin-git";
-          src =
-            pkgs.fishPlugins.plugin-git.src;
-        }
-      ];
     };
     hyprlock = {
       enable = true;
