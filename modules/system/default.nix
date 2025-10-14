@@ -91,7 +91,8 @@
     nftables.enable = true;
     nameservers = ["1.1.1.1" "2606:4700:4700::1111"];
     firewall = {
-      allowedTCPPorts = [6443];
+      allowedTCPPorts = [6443 10250];
+      allowedUDPPorts = [8472 51820 51821];
     };
   };
 
@@ -154,19 +155,10 @@
 
   environment = {
     systemPackages = [pkgs.vim];
-    persistence = {
-      "/persist" = {
-        directories = [
-          "/etc/NetworkManager"
-        ];
-        files = [
-          "/etc/machine-id"
-          "/etc/ssh/ssh_host_rsa_key"
-          "/etc/ssh/ssh_host_rsa_key.pub"
-          "/etc/ssh/ssh_host_ed25519_key"
-          "/etc/ssh/ssh_host_ed25519_key.pub"
-        ];
-      };
+    etc = {
+      machine-id.source = "/persist/etc/machine-id";
+      rancher.source = "/persist/etc/rancher/";
+      "NetworkManager/system-connections".source = "/persist/etc/NetworkManager/system-connections/";
     };
   };
 
