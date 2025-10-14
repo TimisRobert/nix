@@ -34,6 +34,10 @@
   };
 
   services = {
+    k3s = {
+      enable = true;
+      role = "server";
+    };
     xserver.videoDrivers = ["nvidia"];
     pipewire.wireplumber.extraConfig.defaultMicrophone = {
       "monitor.alsa.rules" = [

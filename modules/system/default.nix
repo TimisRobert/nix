@@ -91,8 +91,7 @@
     nftables.enable = true;
     nameservers = ["1.1.1.1" "2606:4700:4700::1111"];
     firewall = {
-      checkReversePath = false;
-      allowedUDPPorts = [51820];
+      allowedTCPPorts = [6443];
     };
   };
 

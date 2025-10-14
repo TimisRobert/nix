@@ -29,6 +29,7 @@
     packages = [
       # pkgs.codex
       (pkgs.callPackage ../packages/codex.nix {})
+      pkgs.kubectl
       pkgs.duckdb
       pkgs.yq
       pkgs.httpie
@@ -284,6 +285,7 @@
 
   programs = {
     nix-index-database.comma.enable = true;
+    k9s.enable = true;
     lsd.enable = true;
     bat.enable = true;
     jq.enable = true;
