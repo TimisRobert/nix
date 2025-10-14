@@ -123,7 +123,6 @@
       enable = true;
       binfmt = true;
     };
-    wireshark.enable = true;
     nix-ld.enable = true;
     light.enable = true;
     fuse.userAllowOther = true;
@@ -155,13 +154,10 @@
   };
 
   environment = {
-    systemPackages = [pkgs.vim pkgs.wireshark];
+    systemPackages = [pkgs.vim];
     persistence = {
       "/persist" = {
         directories = [
-          "/var/log"
-          "/var/lib/bluetooth"
-          "/var/lib/nixos"
           "/etc/NetworkManager"
         ];
         files = [

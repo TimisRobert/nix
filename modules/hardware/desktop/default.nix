@@ -24,6 +24,16 @@
     fsType = "zfs";
   };
 
+  fileSystems."/var/log" = {
+    device = "zpool/var/log";
+    fsType = "zfs";
+  };
+
+  fileSystems."/var/lib" = {
+    device = "zpool/var/lib";
+    fsType = "zfs";
+  };
+
   fileSystems."/persist" = {
     device = "zpool/persist";
     fsType = "zfs";
