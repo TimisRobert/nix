@@ -30,6 +30,7 @@
       # pkgs.codex
       (pkgs.callPackage ../packages/codex.nix {})
       pkgs.kubectl
+      pkgs.kubernetes-helm
       pkgs.duckdb
       pkgs.yq
       pkgs.httpie
@@ -285,7 +286,17 @@
 
   programs = {
     nix-index-database.comma.enable = true;
-    k9s.enable = true;
+    k9s = {
+      enable = true;
+      settings = {
+        k9s = {
+          ui.skin = "kanagawa";
+        };
+      };
+      skins = {
+        kanagawa = ../../assets/k9s_kanagawa.yaml;
+      };
+    };
     lsd.enable = true;
     bat.enable = true;
     jq.enable = true;

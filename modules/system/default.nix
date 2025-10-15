@@ -89,8 +89,9 @@
       dns = "systemd-resolved";
     };
     nftables.enable = true;
-    nameservers = ["1.1.1.1" "2606:4700:4700::1111"];
+    nameservers = ["1.1.1.1#one.one.one.one" "2606:4700:4700::1111#one.one.one.one"];
     firewall = {
+      checkReversePath = "loose";
       allowedTCPPorts = [6443 10250];
       allowedUDPPorts = [8472 51820 51821];
     };
@@ -168,6 +169,7 @@
   };
 
   services = {
+    tailscale.enable = true;
     fwupd.enable = true;
     zfs = {
       autoScrub = {
@@ -176,7 +178,21 @@
       };
       trim.enable = true;
     };
-    resolved.enable = true;
+    resolved = {
+      enable = true;
+      dnssec = "true";
+      dnsovertls = "opportunistic";
+      fallbackDns = ["1.1.1.1#one.one.one.one" "2606:4700:4700::1111#one.one.one.one"];
+    };
+    dnsmasq = {
+      enable = true;
+      settings = {
+        port = 5454;
+        no-resolv = true;
+        listen-address = ["127.0.0.1"];
+        address = ["/cluster.internal/127.0.0.1"];
+      };
+    };
     devmon.enable = true;
     udisks2.enable = true;
     greetd = {
