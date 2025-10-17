@@ -92,8 +92,6 @@
     nameservers = ["1.1.1.1#one.one.one.one" "2606:4700:4700::1111#one.one.one.one"];
     firewall = {
       checkReversePath = "loose";
-      allowedTCPPorts = [6443 10250];
-      allowedUDPPorts = [8472 51820 51821];
     };
   };
 
@@ -111,7 +109,7 @@
         flags = ["--all"];
       };
       extraPackages = [pkgs.zfs];
-      defaultNetwork.settings = {dns_enabled = true;};
+      defaultNetwork.settings.dns_enabled = true;
     };
   };
 
@@ -146,7 +144,7 @@
     users.rob = {
       shell = pkgs.fish;
       isNormalUser = true;
-      extraGroups = ["networkmanager" "video" "wheel"];
+      extraGroups = ["networkmanager" "video" "wheel" "docker"];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBvR28lwcOKIk7VRo/bXzxQGnA5evdsGcNZCy3BA6DDR rob@RobertTimis"
       ];
@@ -158,7 +156,6 @@
     systemPackages = [pkgs.vim];
     etc = {
       machine-id.source = "/persist/etc/machine-id";
-      rancher.source = "/persist/etc/rancher/";
       "NetworkManager/system-connections".source = "/persist/etc/NetworkManager/system-connections/";
     };
   };
@@ -183,15 +180,6 @@
       dnssec = "true";
       dnsovertls = "opportunistic";
       fallbackDns = ["1.1.1.1#one.one.one.one" "2606:4700:4700::1111#one.one.one.one"];
-    };
-    dnsmasq = {
-      enable = true;
-      settings = {
-        port = 5454;
-        no-resolv = true;
-        listen-address = ["127.0.0.1"];
-        address = ["/cluster.internal/127.0.0.1"];
-      };
     };
     devmon.enable = true;
     udisks2.enable = true;

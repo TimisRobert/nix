@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }: {
   programs = {
@@ -31,6 +32,18 @@
   networking = {
     hostId = "d5a63149";
     hostName = "desktop";
+    firewall = {
+      allowedTCPPorts = [6443 10250];
+      allowedUDPPorts = [8472 51820 51821];
+    };
+  };
+
+  systemd.services.k3s.wantedBy = lib.mkForce [];
+
+  environment = {
+    etc = {
+      rancher.source = "/persist/etc/rancher/";
+    };
   };
 
   services = {
@@ -108,7 +121,7 @@
               keep_receiver = [
                 {
                   type = "grid";
-                  grid = "1x1h(keep=all) | 24x1h | 14x1d | 3x30d";
+                  grid = "1x1h(keep=all) | 24x1h | 1x1d";
                   regex = "^zrepl_.*";
                 }
               ];
@@ -130,7 +143,7 @@
               keep = [
                 {
                   type = "grid";
-                  grid = "1x1h(keep=all) | 24x1h | 14x1d | 3x30d";
+                  grid = "1x1h(keep=all) | 24x1h | 1x1d";
                   regex = "^zrepl_.*";
                 }
               ];

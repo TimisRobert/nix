@@ -32,8 +32,11 @@
       pkgs.kubectl
       pkgs.kubernetes-helm
       pkgs.duckdb
+      pkgs.delta
+      pkgs.duf
+      pkgs.xh
+      pkgs.doggo
       pkgs.yq
-      pkgs.httpie
       pkgs.devenv
       pkgs.xdg-utils
       pkgs.wl-clipboard
@@ -88,7 +91,6 @@
     };
     configFile = {
       "fish/themes/Kanagawa.theme".source = ../../assets/kanagawa.theme;
-      "pnpm/rc".text = "store-dir=${config.home.homeDirectory}/.local/share/pnpm";
       nvim.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/nix/assets/astronvim";
     };
     mimeApps.enable = true;
@@ -251,20 +253,25 @@
       enable = true;
       settings = {
         general = {
-          after_sleep_cmd = "hyprctl dispatch dpms on";
           ignore_dbus_inhibit = false;
-          lock_cmd = "hyprlock";
+          lock_cmd = "pidof hyprlock || hyprlock";
+          after_sleep_cmd = "hyprctl dispatch dpms on";
+          before_sleep_cmd = "loginctl lock-session";
         };
 
         listener = [
           {
             timeout = 900;
-            on-timeout = "hyprlock";
+            on-timeout = "loginctl lock-session";
           }
           {
             timeout = 1200;
             on-timeout = "hyprctl dispatch dpms off";
             on-resume = "hyprctl dispatch dpms on";
+          }
+          {
+            timeout = 1800;
+            on-timeout = "systemctl suspend";
           }
         ];
       };
@@ -297,6 +304,7 @@
         kanagawa = ../../assets/k9s_kanagawa.yaml;
       };
     };
+    bottom.enable = true;
     lsd.enable = true;
     bat.enable = true;
     jq.enable = true;
@@ -334,7 +342,6 @@
         pkgs.gcc
         pkgs.ghostscript
         pkgs.nodejs
-        pkgs.bottom
       ];
     };
     firefox = {
@@ -399,7 +406,7 @@
       settings = {
         disableStartupPopups = true;
         git.overrideGpg = true;
-        git.paging.pager = "${pkgs.delta}/bin/delta --dark --paging=never";
+        git.paging.pager = "delta --dark --paging=never";
         git.paging.colorArg = "always";
       };
     };
@@ -409,20 +416,13 @@
         set fish_greeting
         fish_config theme choose Kanagawa
       '';
-      shellAliases = {
-        cat = "bat --paging=never";
-        lg = "lazygit";
-        diff = "${pkgs.riffdiff}/bin/riff";
-        ping = "${pkgs.prettyping}/bin/prettyping --nolegend";
-        du = "${pkgs.ncdu}/bin/ncdu";
-      };
     };
     hyprlock = {
       enable = true;
       settings = {
         background = {
           monitor = "";
-          path = "/home/rob/projects/nix/assets/bg.png";
+          path = "screenshot";
           blur_passes = 1;
           blur_size = 7;
           noise = 1.17e-2;
