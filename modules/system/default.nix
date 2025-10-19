@@ -163,9 +163,26 @@
   security = {
     rtkit.enable = true;
     polkit.enable = true;
+    pam = {
+      u2f = {
+        enable = true;
+        settings = {
+          origin = "pam://yubi";
+          authfile = pkgs.writeText "u2f-mappings" "rob:tYZ1q1LPiaIpSpc1XQLMowi0+fDIZ6vlYPuXUNfZjDrGYcJQww720iaCKkeOoILtDmMx2JtYrLSyEobF7549ZA==,aaliofoBZbTsvvCziNJzp8rjU60hKFBut9/PG4Fp5seOTNMBeyfBBSPqkHVa8tmEslsNGPJ2mMmGe409eTJ7ZA==,es256,+presence";
+          pinverification = 1;
+        };
+      };
+      services = {
+        hyprlock.enable = true;
+        login.u2fAuth = true;
+        sudo.u2fAuth = true;
+      };
+    };
   };
 
   services = {
+    udev.packages = [pkgs.yubikey-personalization];
+    pcscd.enable = true;
     tailscale.enable = true;
     fwupd.enable = true;
     zfs = {

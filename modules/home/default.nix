@@ -27,8 +27,7 @@
       DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/podman/podman.sock";
     };
     packages = [
-      # pkgs.codex
-      (pkgs.callPackage ../packages/codex.nix {})
+      pkgs.codex
       pkgs.kubectl
       pkgs.kubernetes-helm
       pkgs.duckdb
@@ -44,33 +43,6 @@
       pkgs.unzip
       pkgs.zip
       pkgs.ast-grep
-      # LSP
-      pkgs.dockerfile-language-server
-      pkgs.shellcheck
-      pkgs.pyright
-      pkgs.ruff
-      pkgs.terraform-ls
-      pkgs.nodePackages."@astrojs/language-server"
-      pkgs.zls
-      pkgs.yaml-language-server
-      pkgs.tailwindcss-language-server
-      pkgs.emmet-ls
-      pkgs.eslint
-      pkgs.typescript-language-server
-      pkgs.nodePackages.prettier
-      pkgs.svelte-language-server
-      pkgs.bash-language-server
-      pkgs.shfmt
-      pkgs.statix
-      pkgs.alejandra
-      pkgs.deadnix
-      pkgs.nixd
-      pkgs.lua-language-server
-      pkgs.stylua
-      pkgs.selene
-      pkgs.rust-analyzer
-      pkgs.lexical
-      pkgs.clang-tools
     ];
   };
 
@@ -239,6 +211,14 @@
 
   services = {
     ssh-agent.enable = true;
+    gpg-agent = {
+      enable = true;
+      enableSshSupport = true;
+      pinentry = {
+        package = pkgs.pinentry-rofi;
+        program = "pinentry-rofi";
+      };
+    };
     gammastep = {
       enable = true;
       provider = "manual";
@@ -292,6 +272,12 @@
   };
 
   programs = {
+    gpg = {
+      enable = true;
+      scdaemonSettings = {
+        disable-ccid = true;
+      };
+    };
     nix-index-database.comma.enable = true;
     k9s = {
       enable = true;
@@ -327,9 +313,7 @@
           email = "roberttimis@proton.me";
         };
         signing = {
-          behavior = "own";
-          backend = "ssh";
-          key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBvR28lwcOKIk7VRo/bXzxQGnA5evdsGcNZCy3BA6DDR rob@RobertTimis";
+          key = "FE811FD66FA2D5EE";
         };
         git.sign-on-push = true;
       };
@@ -342,6 +326,33 @@
         pkgs.gcc
         pkgs.ghostscript
         pkgs.nodejs
+        pkgs.helm-ls
+        pkgs.dockerfile-language-server
+        pkgs.shellcheck
+        pkgs.pyright
+        pkgs.ruff
+        pkgs.terraform-ls
+        pkgs.nodePackages."@astrojs/language-server"
+        pkgs.zls
+        pkgs.yaml-language-server
+        pkgs.tailwindcss-language-server
+        pkgs.emmet-ls
+        pkgs.eslint
+        pkgs.typescript-language-server
+        pkgs.nodePackages.prettier
+        pkgs.svelte-language-server
+        pkgs.bash-language-server
+        pkgs.shfmt
+        pkgs.statix
+        pkgs.alejandra
+        pkgs.deadnix
+        pkgs.nixd
+        pkgs.lua-language-server
+        pkgs.stylua
+        pkgs.selene
+        pkgs.rust-analyzer
+        pkgs.lexical
+        pkgs.clang-tools
       ];
     };
     firefox = {
@@ -360,11 +371,10 @@
         };
       };
       signing = {
-        format = "ssh";
+        key = "FE811FD66FA2D5EE";
         signByDefault = true;
       };
       extraConfig = {
-        user.signingKey = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
         fetch.prune = true;
         init.defaultBranch = "main";
         push.autoSetupRemote = true;
@@ -449,6 +459,7 @@
           fade_on_empty = false;
           font_family = "Mononoki Mono";
           placeholder_text = ''<i><span foreground="##ffffff99">Input password...</span></i>'';
+          fail_text = ''<i><span foreground="##ffffff99">$PAMFAIL</span></i>'';
           hide_input = false;
           position = "0, -225";
           halign = "center";
