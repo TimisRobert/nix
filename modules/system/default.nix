@@ -68,7 +68,6 @@
       ];
     };
 
-    kernel.sysctl."vm.max_map_count" = 2147483642;
     consoleLogLevel = 3;
     kernelParams = [
       "quiet"
@@ -144,10 +143,7 @@
     users.rob = {
       shell = pkgs.fish;
       isNormalUser = true;
-      extraGroups = ["networkmanager" "video" "wheel" "docker"];
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBvR28lwcOKIk7VRo/bXzxQGnA5evdsGcNZCy3BA6DDR rob@RobertTimis"
-      ];
+      extraGroups = ["networkmanager" "video" "wheel"];
       initialHashedPassword = "$6$j/pzPQRWiXIb13xT$KWBX22k/90J1RWpB8iUjeqTHpPO0Ip8eGE4K8UOfJYqLgbvzhK1reLBJfIUWAVc6rhRN1i7VeF4v8prrVOUzx/";
     };
   };
