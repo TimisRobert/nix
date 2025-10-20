@@ -311,6 +311,7 @@
           email = "roberttimis@proton.me";
         };
         signing = {
+          backend = "gpg";
           key = "06CEA7F23ADCA705";
         };
         git.sign-on-push = true;
