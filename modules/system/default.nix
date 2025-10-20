@@ -139,7 +139,7 @@
   sops = {
     defaultSopsFile = ../../secrets.yaml;
     age = {
-      keyFile = "/var/lib/sops/key.txt";
+      keyFile = "/persist/sops/key.txt";
       plugins = [pkgs.age-plugin-yubikey];
     };
     secrets = {

@@ -1,5 +1,5 @@
 keys:
-  - &user age1yubikey1qdgq4jv7cmeqcp7cxvwkdk8v3hljneqj3057vlhljznxgutqylggj4g5k6n
+  - &user age1yubikey1qwj0mx2rgw2y0mkrm6nsr3yyjd4esnuwnx8z88kyevmsa0ejgcn3wlc33x2
 
 creation_rules:
   - path_regex: '[^/]+\.(yaml|json|env|ini)$'
