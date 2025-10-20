@@ -214,8 +214,7 @@
       enable = true;
       enableSshSupport = true;
       pinentry = {
-        package = pkgs.pinentry-rofi;
-        program = "pinentry-rofi";
+        package = pkgs.pinentry-qt;
       };
     };
     gammastep = {
@@ -312,7 +311,7 @@
           email = "roberttimis@proton.me";
         };
         signing = {
-          key = "FE811FD66FA2D5EE";
+          key = "06CEA7F23ADCA705";
         };
         git.sign-on-push = true;
       };
@@ -370,7 +369,7 @@
         };
       };
       signing = {
-        key = "FE811FD66FA2D5EE";
+        key = "06CEA7F23ADCA705";
         signByDefault = true;
       };
       extraConfig = {
