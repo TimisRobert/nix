@@ -94,7 +94,29 @@
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "nix-index-database": "nix-index-database",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "sops-nix": "sops-nix"
+      }
+    },
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1759786598,
+        "narHash": "sha256-O3wbCScJRu92+ruD4pRwgALc3TzV/z2g+Tnr3n5wH5k=",
+        "owner": "NovaViper",
+        "repo": "sops-nix",
+        "rev": "2d57b9dd0715242540285134387ca819a2ac7182",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NovaViper",
+        "ref": "age-plugin",
+        "repo": "sops-nix",
+        "type": "github"
       }
     }
   },

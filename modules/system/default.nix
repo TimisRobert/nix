@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: {
   nix = {
@@ -135,21 +136,35 @@
     };
   };
 
+  sops = {
+    defaultSopsFile = ../../secrets.yaml;
+    age = {
+      keyFile = "/var/lib/sops/key.txt";
+      plugins = [pkgs.age-plugin-yubikey];
+    };
+    secrets = {
+      hashed_password = {
+        neededForUsers = true;
+      };
+      zfs_key = {};
+    };
+  };
+
   users = {
     mutableUsers = false;
     users.root = {
-      initialHashedPassword = "$6$j/pzPQRWiXIb13xT$KWBX22k/90J1RWpB8iUjeqTHpPO0Ip8eGE4K8UOfJYqLgbvzhK1reLBJfIUWAVc6rhRN1i7VeF4v8prrVOUzx/";
+      hashedPassword = "!";
     };
     users.rob = {
       shell = pkgs.fish;
       isNormalUser = true;
       extraGroups = ["networkmanager" "video" "wheel"];
-      initialHashedPassword = "$6$j/pzPQRWiXIb13xT$KWBX22k/90J1RWpB8iUjeqTHpPO0Ip8eGE4K8UOfJYqLgbvzhK1reLBJfIUWAVc6rhRN1i7VeF4v8prrVOUzx/";
+      hashedPasswordFile = config.sops.secrets.hashed_password.path;
     };
   };
 
   environment = {
-    systemPackages = [pkgs.vim];
+    systemPackages = [pkgs.vim pkgs.age-plugin-yubikey];
     etc = {
       machine-id.source = "/persist/etc/machine-id";
       "NetworkManager/system-connections".source = "/persist/etc/NetworkManager/system-connections/";
@@ -165,7 +180,6 @@
         settings = {
           origin = "pam://yubi";
           authfile = pkgs.writeText "u2f-mappings" "rob:tYZ1q1LPiaIpSpc1XQLMowi0+fDIZ6vlYPuXUNfZjDrGYcJQww720iaCKkeOoILtDmMx2JtYrLSyEobF7549ZA==,aaliofoBZbTsvvCziNJzp8rjU60hKFBut9/PG4Fp5seOTNMBeyfBBSPqkHVa8tmEslsNGPJ2mMmGe409eTJ7ZA==,es256,+presence";
-          pinverification = 1;
         };
       };
       services = {

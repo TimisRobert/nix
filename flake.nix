@@ -7,6 +7,9 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    sops-nix.url = "github:NovaViper/sops-nix/age-plugin";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -24,6 +27,7 @@
             };
             modules = [
               inputs.home-manager.nixosModules.home-manager
+              inputs.sops-nix.nixosModules.sops
               ./modules/system
               ./modules/system/desktop
               ./modules/hardware/desktop
@@ -49,6 +53,7 @@
             };
             modules = [
               inputs.home-manager.nixosModules.home-manager
+              inputs.sops-nix.nixosModules.sops
               ./modules/system
               ./modules/system/laptop
               ./modules/hardware/laptop
