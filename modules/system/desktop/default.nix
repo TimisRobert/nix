@@ -38,7 +38,12 @@
     };
   };
 
-  systemd.services.k3s.wantedBy = lib.mkForce [];
+  systemd = {
+    sleep.extraConfig = ''
+      SuspendState=mem
+    '';
+    services.k3s.wantedBy = lib.mkForce [];
+  };
 
   environment = {
     etc = {
