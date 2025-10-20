@@ -139,14 +139,12 @@
   sops = {
     defaultSopsFile = ../../secrets.yaml;
     age = {
-      keyFile = "/persist/sops/key.txt";
-      plugins = [pkgs.age-plugin-yubikey];
+      sshKeyPaths = ["/persist/ssh/ssh_host_ed25519_key"];
     };
     secrets = {
       hashed_password = {
         neededForUsers = true;
       };
-      zfs_key = {};
     };
   };
 
@@ -164,7 +162,7 @@
   };
 
   environment = {
-    systemPackages = [pkgs.vim pkgs.age-plugin-yubikey];
+    systemPackages = [pkgs.vim];
     etc = {
       machine-id.source = "/persist/etc/machine-id";
       "NetworkManager/system-connections".source = "/persist/etc/NetworkManager/system-connections/";
@@ -191,6 +189,15 @@
   };
 
   services = {
+    openssh = {
+      enable = true;
+      hostKeys = [
+        {
+          path = "/persist/ssh/ssh_host_ed25519_key";
+          type = "ed25519";
+        }
+      ];
+    };
     udev.packages = [pkgs.yubikey-personalization];
     pcscd.enable = true;
     tailscale.enable = true;
@@ -239,6 +246,7 @@
   };
 
   hardware = {
+    gpgSmartcards.enable = true;
     graphics = {
       enable = true;
       enable32Bit = true;

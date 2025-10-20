@@ -5,9 +5,9 @@
   };
 
   environment = {
-    persistence = {
-      "/persist/laptop" = {directories = ["/var/cache/powertop"];};
-    };
+    # persistence = {
+    #   "/persist/laptop" = {directories = ["/var/cache/powertop"];};
+    # };
   };
 
   networking = {

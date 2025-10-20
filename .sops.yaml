@@ -1,8 +1,11 @@
 keys:
-  - &user age1yubikey1qwj0mx2rgw2y0mkrm6nsr3yyjd4esnuwnx8z88kyevmsa0ejgcn3wlc33x2
+  - &user 06CEA7F23ADCA705
+  - &desktop age1z5vvm6gk09jfqxcwpdw6l8hxjteqn8z4vwd6es0qsuuf6slj732qcu9fsh
 
 creation_rules:
   - path_regex: '[^/]+\.(yaml|json|env|ini)$'
     key_groups:
-      - age:
+      - pgp:
           - *user
+        age:
+          - *desktop
