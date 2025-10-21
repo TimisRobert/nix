@@ -212,7 +212,7 @@
     };
     resolved = {
       enable = true;
-      dnssec = "true";
+      # dnssec = "true";
       dnsovertls = "opportunistic";
       fallbackDns = ["1.1.1.1#one.one.one.one" "2606:4700:4700::1111#one.one.one.one"];
     };

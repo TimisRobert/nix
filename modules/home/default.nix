@@ -31,7 +31,7 @@
       pkgs.kubectl
       pkgs.kubernetes-helm
       pkgs.duckdb
-      pkgs.delta
+      pkgs.gping
       pkgs.duf
       pkgs.xh
       pkgs.doggo
@@ -62,6 +62,7 @@
       download = "${config.home.homeDirectory}/downloads";
     };
     configFile = {
+      "jjui/themes/kanagawa.toml".source = ../../assets/jjui_kanagawa.toml;
       "fish/themes/Kanagawa.theme".source = ../../assets/kanagawa.theme;
       nvim.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/nix/assets/astronvim";
     };
@@ -304,6 +305,8 @@
       enable = true;
       settings = {
         ui = {
+          pager = "delta";
+          diff-formatter = ":git";
           default-command = "log";
         };
         user = {
@@ -314,7 +317,14 @@
           backend = "gpg";
           key = "06CEA7F23ADCA705";
         };
+        diff.tool = "delta";
         git.sign-on-push = true;
+      };
+    };
+    jjui = {
+      enable = true;
+      settings = {
+        ui.theme = "kanagawa";
       };
     };
     neovim = {
@@ -358,22 +368,19 @@
       enable = true;
       profiles.default.extraConfig = builtins.readFile ../../assets/user.js;
     };
+    delta = {
+      enable = true;
+      enableGitIntegration = true;
+      options = {
+        dark = true;
+        navigate = true;
+      };
+    };
     git = {
       enable = true;
-      userName = "TimisRobert";
-      userEmail = "roberttimis@proton.me";
-      delta = {
-        enable = true;
-        options = {
-          dark = true;
-          navigate = true;
-        };
-      };
-      signing = {
-        key = "06CEA7F23ADCA705";
-        signByDefault = true;
-      };
-      extraConfig = {
+      settings = {
+        user.name = "TimisRobert";
+        user.email = "roberttimis@proton.me";
         fetch.prune = true;
         init.defaultBranch = "main";
         push.autoSetupRemote = true;
@@ -381,6 +388,10 @@
         rebase.updateRefs = true;
         credential.helper = "cache --timeout 604800";
         merge.conflictStyle = "zdiff3";
+      };
+      signing = {
+        key = "06CEA7F23ADCA705";
+        signByDefault = true;
       };
     };
     kitty = {
