@@ -28,6 +28,7 @@
     };
     packages = [
       pkgs.codex
+      pkgs.docker-compose
       pkgs.kubectl
       pkgs.kubernetes-helm
       pkgs.duckdb

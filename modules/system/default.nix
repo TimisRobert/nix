@@ -103,11 +103,6 @@
       enable = true;
       dockerSocket.enable = true;
       dockerCompat = true;
-      autoPrune = {
-        enable = true;
-        dates = "weekly";
-        flags = ["--all"];
-      };
       extraPackages = [pkgs.zfs];
       defaultNetwork.settings.dns_enabled = true;
     };
@@ -236,9 +231,10 @@
       wireplumber.extraConfig.bluetoothEnhancements = {
         "monitor.bluez.properties" = {
           "bluez5.enable-sbc-xq" = true;
-          "bluez5.enable-msbc" = true;
+          "bluez5.enable-msbc" = false;
           "bluez5.enable-hw-volume" = true;
-          "bluez5.codecs" = ["aac" "sbc_xq" "sbc"];
+          "bluez5.auto-connect" = ["a2dp_sink"];
+          "bluez5.roles" = ["a2dp_sink" "a2dp_source"];
         };
       };
     };
@@ -252,7 +248,15 @@
       enable = true;
       enable32Bit = true;
     };
-    bluetooth.enable = true;
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      settings = {
+        General = {
+          Experimental = true;
+        };
+      };
+    };
     enableRedistributableFirmware = true;
   };
 
