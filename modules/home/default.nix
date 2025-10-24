@@ -514,7 +514,7 @@
           reload_style_on_change = true;
           modules-left = ["hyprland/workspaces"];
           modules-center = ["clock"];
-          modules-right = ["group/expand" "wireplumber" "wireplumber#source" "bluetooth" "network" "battery" "tray"];
+          modules-right = ["cpu" "memory" "temperature" "wireplumber" "wireplumber#source" "bluetooth" "network" "battery" "tray"];
           "hyprland/workspaces" = {
             "format" = "{icon}";
             "format-icons" = {
@@ -588,23 +588,6 @@
             "format-plugged" = "{capacity}% 󰂄 ";
             "format-alt" = "{time} {icon}";
             "format-icons" = ["󰁻" "󰁼" "󰁾" "󰂀" "󰂂" "󰁹"];
-          };
-          "custom/expand" = {
-            "format" = "";
-            "tooltip" = false;
-          };
-          "custom/endpoint" = {
-            "format" = "|";
-            "tooltip" = false;
-          };
-          "group/expand" = {
-            "orientation" = "horizontal";
-            "drawer" = {
-              "transition-duration" = 600;
-              "transition-to-left" = true;
-              "click-to-reveal" = true;
-            };
-            "modules" = ["custom/expand" "cpu" "memory" "temperature" "custom/endpoint"];
           };
           cpu = {
             "format" = "󰻠 {usage}%";
