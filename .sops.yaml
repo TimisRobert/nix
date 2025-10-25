@@ -1,6 +1,7 @@
 keys:
   - &user 06CEA7F23ADCA705
   - &desktop age1z5vvm6gk09jfqxcwpdw6l8hxjteqn8z4vwd6es0qsuuf6slj732qcu9fsh
+  - &laptop age16nnyf77ynqhdacvz30hvcsehz3kdxu8zrrpnf9rgw3es7nqv3g3scaf5g6
 
 creation_rules:
   - path_regex: '[^/]+\.(yaml|json|env|ini)$'
@@ -9,3 +10,4 @@ creation_rules:
           - *user
         age:
           - *desktop
+          - *laptop

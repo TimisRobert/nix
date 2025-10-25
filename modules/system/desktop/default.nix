@@ -15,7 +15,7 @@
     gamemode.enable = true;
   };
 
-  boot.initrd.kernelModules = ["nvidia"];
+  boot.initrd.kernelModules = ["nvidia" "nct6683"];
   # boot.extraModulePackages = [config.boot.kernelPackages.nvidia_x11];
 
   hardware = {
