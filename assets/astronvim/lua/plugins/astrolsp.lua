@@ -50,7 +50,7 @@ return {
       "yamlls",
       "zls",
       "cssls",
-      "lexical",
+      "expert",
       "nixd",
       "astro",
       "terraformls",
@@ -103,8 +103,14 @@ return {
           },
         },
       },
-      lexical = {
-        cmd = { "lexical" },
+      expert = {
+        cmd = { "expert" },
+        root_dir = function(fname)
+          return require("lspconfig").util.root_pattern("mix.exs", ".git")(fname) or vim.loop.cwd()
+        end,
+        filetypes = { "elixir", "eelixir", "heex" },
+        -- optional settings
+        settings = {},
       },
       tailwindcss = {
         settings = {

@@ -333,6 +333,7 @@
       vimAlias = true;
       extraPackages = [
         pkgs.gcc
+        pkgs.inotify-tools
         pkgs.ghostscript
         pkgs.nodejs
         pkgs.helm-ls
@@ -360,7 +361,6 @@
         pkgs.stylua
         pkgs.selene
         pkgs.rust-analyzer
-        pkgs.lexical
         pkgs.clang-tools
       ];
     };

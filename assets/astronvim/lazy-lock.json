@@ -49,7 +49,7 @@
   "quickgd.nvim": { "branch": "main", "commit": "36be4f408b055f75c878daf38143b217e176b2db" },
   "resession.nvim": { "branch": "master", "commit": "cc819b0489938d03e4f3532a583354f0287c015b" },
   "smart-splits.nvim": { "branch": "master", "commit": "ddb23c1a1cf1507bda487cda7f6e4690965ef9f5" },
-  "snacks.nvim": { "branch": "main", "commit": "d1eaa30b1b6760d9a33b783d7a20b5ba6167b625" },
+  "snacks.nvim": { "branch": "main", "commit": "fc84ed42a44247a99846f6e8d87f0482f15c1787" },
   "telescope-undo.nvim": { "branch": "main", "commit": "928d0c2dc9606e01e2cc547196f48d2eaecf58e5" },
   "telescope.nvim": { "branch": "master", "commit": "b4da76be54691e854d3e0e02c36b0245f945c2c7" },
   "todo-comments.nvim": { "branch": "main", "commit": "304a8d204ee787d2544d8bc23cd38d2f929e7cc5" },
