@@ -146,7 +146,6 @@
         kb_layout = "us";
         kb_options = "ctrl:nocaps";
         accel_profile = "flat";
-        sensitivity = -0.75;
       };
 
       dwindle = {

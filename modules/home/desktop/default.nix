@@ -12,6 +12,10 @@
     ];
   };
 
+  wayland.windowManager.hyprland.settings = {
+    input.sensitivity = -0.75;
+  };
+
   programs = {
     waybar = {
       enable = true;
