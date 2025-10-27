@@ -27,7 +27,7 @@
       DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/podman/podman.sock";
     };
     packages = [
-      pkgs.codex
+      pkgs.claude-code
       pkgs.docker-compose
       pkgs.kubectl
       pkgs.kubernetes-helm
