@@ -20,7 +20,6 @@
 
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
-      "claude-code"
       "nvidia-x11"
       "nvidia-settings"
       "steam"

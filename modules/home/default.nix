@@ -26,8 +26,10 @@
       ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
       DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/podman/podman.sock";
     };
+    sessionPath = [
+      "$HOME/.local/bin"
+    ];
     packages = [
-      pkgs.claude-code
       pkgs.docker-compose
       pkgs.kubectl
       pkgs.kubernetes-helm
@@ -214,6 +216,8 @@
     gpg-agent = {
       enable = true;
       enableSshSupport = true;
+      defaultCacheTtlSsh = 14400;
+      defaultCacheTtl = 14400;
       pinentry = {
         package = pkgs.pinentry-qt;
       };

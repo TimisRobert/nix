@@ -104,7 +104,7 @@ return {
         },
       },
       expert = {
-        cmd = { "/home/rob/bin/expert" },
+        cmd = { "expert" },
         root_dir = function(fname)
           return require("lspconfig").util.root_pattern("mix.exs", ".git")(fname) or vim.loop.cwd()
         end,
