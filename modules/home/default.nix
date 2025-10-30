@@ -216,8 +216,8 @@
     gpg-agent = {
       enable = true;
       enableSshSupport = true;
-      defaultCacheTtlSsh = 14400;
-      defaultCacheTtl = 14400;
+      defaultCacheTtlSsh = 86400;
+      defaultCacheTtl = 86400;
       pinentry = {
         package = pkgs.pinentry-qt;
       };
