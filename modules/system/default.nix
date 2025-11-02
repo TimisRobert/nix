@@ -222,13 +222,32 @@
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
-      wireplumber.extraConfig.bluetoothEnhancements = {
-        "monitor.bluez.properties" = {
-          "bluez5.enable-sbc-xq" = true;
-          "bluez5.enable-msbc" = false;
-          "bluez5.enable-hw-volume" = true;
-          "bluez5.auto-connect" = ["a2dp_sink"];
-          "bluez5.roles" = ["a2dp_sink" "a2dp_source"];
+      wireplumber.extraConfig = {
+        bluetoothEnhancements = {
+          "monitor.bluez.properties" = {
+            "bluez5.enable-sbc-xq" = true;
+            "bluez5.enable-msbc" = false;
+            "bluez5.enable-hw-volume" = true;
+            "bluez5.auto-connect" = ["a2dp_sink"];
+            "bluez5.roles" = ["a2dp_sink" "a2dp_source"];
+          };
+        };
+        defaultMicrophone = {
+          "monitor.alsa.rules" = [
+            {
+              matches = [
+                {
+                  "media.class" = "equals:Audio/Source";
+                  "node.name" = "matches:rnnoise_source";
+                }
+              ];
+              actions = {
+                update-props = {
+                  "priority.session" = 2000;
+                };
+              };
+            }
+          ];
         };
       };
     };

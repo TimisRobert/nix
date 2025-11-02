@@ -67,6 +67,47 @@
     configFile = {
       "jjui/themes/kanagawa.toml".source = ../../assets/jjui_kanagawa.toml;
       "fish/themes/Kanagawa.theme".source = ../../assets/kanagawa.theme;
+      "pipewire/pipewire.conf.d/99-rnnoise.conf" = {
+        text = builtins.toJSON {
+          "context.modules" = [
+            {
+              name = "libpipewire-module-filter-chain";
+              args = {
+                "node.description" = "Noise Canceling source";
+                "media.name" = "Noise Canceling source";
+
+                "filter.graph" = {
+                  nodes = [
+                    {
+                      type = "ladspa";
+                      name = "rnnoise";
+                      plugin = "${pkgs.rnnoise-plugin}/lib/ladspa/librnnoise_ladspa.so";
+                      label = "noise_suppressor_mono";
+                      control = {
+                        "VAD Threshold (%)" = 90.0;
+                        "VAD Grace Period (ms)" = 200;
+                        "Retroactive VAD Grace (ms)" = 0;
+                      };
+                    }
+                  ];
+                };
+
+                "capture.props" = {
+                  "node.name" = "capture.rnnoise_source";
+                  "node.passive" = true;
+                  "audio.rate" = 44100;
+                };
+
+                "playback.props" = {
+                  "node.name" = "rnnoise_source";
+                  "media.class" = "Audio/Source";
+                  "audio.rate" = 44100;
+                };
+              };
+            }
+          ];
+        };
+      };
       nvim.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/nix/assets/astronvim";
     };
     mimeApps.enable = true;

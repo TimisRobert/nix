@@ -57,22 +57,5 @@
       extraFlags = ["--write-kubeconfig-mode 644"];
     };
     xserver.videoDrivers = ["nvidia"];
-    pipewire.wireplumber.extraConfig.defaultMicrophone = {
-      "monitor.alsa.rules" = [
-        {
-          matches = [
-            {
-              "media.class" = "equals:Audio/Source";
-              "node.name" = "matches:alsa_input.usb-Kingston_HyperX*";
-            }
-          ];
-          actions = {
-            update-props = {
-              "priority.session" = 2000;
-            };
-          };
-        }
-      ];
-    };
   };
 }
