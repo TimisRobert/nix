@@ -95,13 +95,13 @@
                 "capture.props" = {
                   "node.name" = "capture.rnnoise_source";
                   "node.passive" = true;
-                  "audio.rate" = 44100;
+                  "audio.rate" = 48000;
                 };
 
                 "playback.props" = {
                   "node.name" = "rnnoise_source";
                   "media.class" = "Audio/Source";
-                  "audio.rate" = 44100;
+                  "audio.rate" = 48000;
                 };
               };
             }
@@ -378,6 +378,7 @@
       vimAlias = true;
       extraPackages = [
         pkgs.gcc
+        pkgs.gnumake
         pkgs.inotify-tools
         pkgs.ghostscript
         pkgs.nodejs
