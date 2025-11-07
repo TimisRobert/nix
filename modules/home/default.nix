@@ -472,8 +472,12 @@
       settings = {
         disableStartupPopups = true;
         git.overrideGpg = true;
-        git.paging.pager = "delta --dark --paging=never";
-        git.paging.colorArg = "always";
+        git.pagers = [
+          {
+            pager = "delta --dark --paging=never";
+            colorArg = "always";
+          }
+        ];
       };
     };
     fish = {
