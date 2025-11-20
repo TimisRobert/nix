@@ -30,7 +30,7 @@
       "$HOME/.local/bin"
     ];
     packages = [
-      pkgs.codex
+      (pkgs.callPackage ../packages/codex.nix {})
       pkgs.docker-compose
       pkgs.kubectl
       pkgs.kubernetes-helm
