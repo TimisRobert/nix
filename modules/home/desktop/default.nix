@@ -90,7 +90,7 @@
             critical-threshold = 80;
             format = " {temperatureC}°C";
             tooltip = false;
-            hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
+            # hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
           };
           cpu = {
             format = "󰻠 {usage}%";

@@ -30,7 +30,7 @@
       "$HOME/.local/bin"
     ];
     packages = [
-      (pkgs.callPackage ../packages/codex.nix {})
+      pkgs.quickemu
       pkgs.docker-compose
       pkgs.kubectl
       pkgs.kubernetes-helm
@@ -386,7 +386,7 @@
         pkgs.helm-ls
         pkgs.dockerfile-language-server
         pkgs.shellcheck
-        pkgs.pyright
+        pkgs.ty
         pkgs.ruff
         pkgs.terraform-ls
         pkgs.nodePackages."@astrojs/language-server"

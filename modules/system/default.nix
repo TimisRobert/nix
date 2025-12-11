@@ -185,6 +185,7 @@
   };
 
   services = {
+    spice-vdagentd.enable = true;
     udev.packages = [pkgs.yubikey-personalization];
     pcscd.enable = true;
     tailscale.enable = true;
