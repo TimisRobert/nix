@@ -9,7 +9,7 @@
   };
 
   wayland.windowManager.hyprland.settings = {
-    input.sensitivity = -0.75;
+    input.sensitivity = 0.5;
   };
 
   programs = {

@@ -378,6 +378,7 @@
       defaultEditor = true;
       vimAlias = true;
       extraPackages = [
+        pkgs.taplo
         pkgs.gcc
         pkgs.gnumake
         pkgs.inotify-tools
@@ -386,7 +387,7 @@
         pkgs.helm-ls
         pkgs.dockerfile-language-server
         pkgs.shellcheck
-        pkgs.ty
+        pkgs.pyright
         pkgs.ruff
         pkgs.terraform-ls
         pkgs.nodePackages."@astrojs/language-server"

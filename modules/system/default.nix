@@ -4,6 +4,10 @@
   config,
   ...
 }: {
+  imports = [
+    ./pam_keyinit.nix
+  ];
+
   nix = {
     extraOptions = ''
       experimental-features = nix-command flakes

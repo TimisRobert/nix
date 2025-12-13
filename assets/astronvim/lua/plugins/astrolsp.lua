@@ -39,7 +39,8 @@ return {
     servers = {
       "helm_ls",
       "ruff",
-      "ty",
+      "pyright",
+      "taplo",
       "clangd",
       "lua_ls",
       "bashls",
@@ -60,6 +61,20 @@ return {
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
+      pyright = {
+        settings = {
+          pyright = {
+            -- Using Ruff's import organizer
+            disableOrganizeImports = true,
+          },
+          python = {
+            analysis = {
+              -- Ignore all files for analysis to exclusively use Ruff for linting
+              ignore = { "*" },
+            },
+          },
+        },
+      },
       html = {
         filetypes = { "html", "edge" },
       },
