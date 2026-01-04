@@ -30,6 +30,7 @@
       "$HOME/.local/bin"
     ];
     packages = [
+      pkgs.protonvpn-gui
       pkgs.quickemu
       pkgs.docker-compose
       pkgs.kubectl
@@ -160,7 +161,7 @@
       };
 
       layerrule = [
-        "noanim,selection"
+        "no_anim on, match:namespace selection"
       ];
 
       animations = {
@@ -304,9 +305,11 @@
     hyprpaper = {
       enable = true;
       settings = {
-        preload = ["/home/rob/projects/nix/assets/bg.png"];
         wallpaper = [
-          ",/home/rob/projects/nix/assets/bg.png"
+          {
+            monitor = "";
+            path = "/home/rob/projects/nix/assets/bg.png";
+          }
         ];
       };
     };
