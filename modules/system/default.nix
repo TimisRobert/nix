@@ -216,7 +216,7 @@
       enable = true;
       settings = rec {
         initial_session = {
-          command = "uwsm start hyprland-uwsm.desktop";
+          command = "uwsm start ${config.programs.hyprland.package}/share/wayland-sessions/hyprland.desktop";
           user = "rob";
         };
         default_session = initial_session;

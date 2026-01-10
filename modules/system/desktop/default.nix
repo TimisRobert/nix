@@ -33,7 +33,7 @@
     hostName = "desktop";
     firewall = {
       allowedTCPPorts = [6443 10250];
-      allowedUDPPorts = [8472 51820 51821];
+      allowedUDPPorts = [8472];
     };
   };
 
