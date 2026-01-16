@@ -12,21 +12,27 @@
       localNetworkGameTransfers.openFirewall = true;
       extraCompatPackages = [pkgs.proton-ge-bin];
     };
-    gamemode.enable = true;
+    gamemode = {
+      enable = true;
+      settings.cpu.park_cores = "yes";
+    };
   };
 
   boot.initrd.kernelModules = ["nvidia" "nct6683"];
+  boot.kernelParams = ["nvidia.NVreg_EnableResizableBar=1"];
 
   hardware = {
     keyboard.qmk.enable = true;
     nvidia = {
       open = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
       nvidiaSettings = true;
       powerManagement.enable = true;
       modesetting.enable = true;
     };
   };
+
+  users.users.rob.extraGroups = ["gamemode"];
 
   networking = {
     hostId = "d5a63149";

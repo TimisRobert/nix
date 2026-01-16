@@ -6,6 +6,10 @@
       pkgs.godot
       pkgs.blender
     ];
+    sessionVariables = {
+      PROTON_ENABLE_WAYLAND = "1";
+      PROTON_DLSS_UPGRADE = "1";
+    };
   };
 
   wayland.windowManager.hyprland.settings = {
