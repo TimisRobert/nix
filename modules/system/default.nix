@@ -93,15 +93,17 @@
       dns = "systemd-resolved";
     };
     nftables.enable = true;
-    nameservers = ["1.1.1.1#one.one.one.one" "2606:4700:4700::1111#one.one.one.one"];
     firewall = {
       checkReversePath = "loose";
     };
   };
 
+  systemd.services."user@".serviceConfig.Delegate = "cpu cpuset io memory pids";
+
   virtualisation = {
     containers = {
       enable = true;
+      registries.insecure = ["localhost"];
     };
     podman = {
       enable = true;
@@ -206,9 +208,12 @@
     };
     resolved = {
       enable = true;
-      # dnssec = "true";
-      dnsovertls = "opportunistic";
-      fallbackDns = ["1.1.1.1#one.one.one.one" "2606:4700:4700::1111#one.one.one.one"];
+      settings = {
+        Resolve = {
+          DNSOverTLS = "opportunistic";
+          # DNSSEC = "true";
+        };
+      };
     };
     devmon.enable = true;
     udisks2.enable = true;

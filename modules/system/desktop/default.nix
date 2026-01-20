@@ -1,16 +1,10 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: {
+{config, ...}: {
   programs = {
     steam = {
       enable = true;
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
       localNetworkGameTransfers.openFirewall = true;
-      extraCompatPackages = [pkgs.proton-ge-bin];
     };
     gamemode = {
       enable = true;
@@ -47,21 +41,9 @@
     sleep.extraConfig = ''
       SuspendState=mem
     '';
-    services.k3s.wantedBy = lib.mkForce [];
-  };
-
-  environment = {
-    etc = {
-      rancher.source = "/persist/etc/rancher/";
-    };
   };
 
   services = {
-    k3s = {
-      enable = true;
-      role = "server";
-      extraFlags = ["--write-kubeconfig-mode 644"];
-    };
     xserver.videoDrivers = ["nvidia"];
   };
 }

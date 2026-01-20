@@ -30,6 +30,39 @@
       "$HOME/.local/bin"
     ];
     packages = [
+      pkgs.taplo
+      pkgs.gcc
+      pkgs.gnumake
+      pkgs.inotify-tools
+      pkgs.ghostscript
+      pkgs.nodejs
+      pkgs.helm-ls
+      pkgs.dockerfile-language-server
+      pkgs.shellcheck
+      pkgs.pyright
+      pkgs.ruff
+      pkgs.terraform-ls
+      pkgs.nodePackages."@astrojs/language-server"
+      pkgs.zls
+      pkgs.yaml-language-server
+      pkgs.tailwindcss-language-server
+      pkgs.emmet-ls
+      pkgs.eslint
+      pkgs.typescript-language-server
+      pkgs.nodePackages.prettier
+      pkgs.svelte-language-server
+      pkgs.bash-language-server
+      pkgs.shfmt
+      pkgs.statix
+      pkgs.alejandra
+      pkgs.deadnix
+      pkgs.nixd
+      pkgs.lua-language-server
+      pkgs.stylua
+      pkgs.selene
+      pkgs.rust-analyzer
+      pkgs.clang-tools
+      # ---
       pkgs.protonvpn-gui
       pkgs.quickemu
       pkgs.docker-compose
@@ -380,40 +413,6 @@
       enable = true;
       defaultEditor = true;
       vimAlias = true;
-      extraPackages = [
-        pkgs.taplo
-        pkgs.gcc
-        pkgs.gnumake
-        pkgs.inotify-tools
-        pkgs.ghostscript
-        pkgs.nodejs
-        pkgs.helm-ls
-        pkgs.dockerfile-language-server
-        pkgs.shellcheck
-        pkgs.pyright
-        pkgs.ruff
-        pkgs.terraform-ls
-        pkgs.nodePackages."@astrojs/language-server"
-        pkgs.zls
-        pkgs.yaml-language-server
-        pkgs.tailwindcss-language-server
-        pkgs.emmet-ls
-        pkgs.eslint
-        pkgs.typescript-language-server
-        pkgs.nodePackages.prettier
-        pkgs.svelte-language-server
-        pkgs.bash-language-server
-        pkgs.shfmt
-        pkgs.statix
-        pkgs.alejandra
-        pkgs.deadnix
-        pkgs.nixd
-        pkgs.lua-language-server
-        pkgs.stylua
-        pkgs.selene
-        pkgs.rust-analyzer
-        pkgs.clang-tools
-      ];
     };
     firefox = {
       enable = true;
