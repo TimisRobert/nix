@@ -19,6 +19,7 @@
     };
     settings = {
       trusted-users = ["rob"];
+      download-buffer-size = 500 * 1024 * 1024;
     };
   };
 
