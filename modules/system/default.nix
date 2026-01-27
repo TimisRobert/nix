@@ -23,15 +23,9 @@
     };
   };
 
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "nvidia-x11"
-      "nvidia-settings"
-      "steam"
-      "steam-original"
-      "steam-run"
-      "steam-unwrapped"
-    ];
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
 
   boot = {
     binfmt = {
@@ -96,12 +90,17 @@
     nftables.enable = true;
     firewall = {
       checkReversePath = "loose";
+      trustedInterfaces = ["virbr0"];
     };
   };
 
   systemd.services."user@".serviceConfig.Delegate = "cpu cpuset io memory pids";
 
   virtualisation = {
+    libvirtd = {
+      enable = true;
+      qemu.swtpm.enable = true;
+    };
     containers = {
       enable = true;
       registries.insecure = ["localhost"];
@@ -120,6 +119,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   programs = {
+    virt-manager.enable = true;
     appimage = {
       enable = true;
       binfmt = true;
@@ -158,13 +158,13 @@
     users.rob = {
       shell = pkgs.fish;
       isNormalUser = true;
-      extraGroups = ["networkmanager" "video" "wheel"];
+      extraGroups = ["networkmanager" "video" "wheel" "libvirtd"];
       hashedPasswordFile = config.sops.secrets.hashed_password.path;
     };
   };
 
   environment = {
-    systemPackages = [pkgs.vim];
+    systemPackages = [pkgs.vim pkgs.dnsmasq];
     etc = {
       machine-id.source = "/persist/etc/machine-id";
       "NetworkManager/system-connections".source = "/persist/etc/NetworkManager/system-connections/";

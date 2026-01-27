@@ -7,6 +7,7 @@
 }: {
   imports = [
     inputs.nix-index-database.homeModules.nix-index
+    ./dictate.nix
   ];
 
   home = {
@@ -15,9 +16,10 @@
     stateVersion = "25.11";
     pointerCursor = {
       name = "Simp1e";
+      gtk.enable = true;
+      hyprcursor.enable = true;
       package = pkgs.simp1e-cursors;
       size = 16;
-      hyprcursor.enable = true;
     };
     sessionVariables = {
       WLR_RENDERER = "vulkan";
@@ -25,11 +27,14 @@
       NIXOS_OZONE_WL = "1";
       ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
       DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/podman/podman.sock";
+      ENABLE_LSP_TOOL = "1";
     };
     sessionPath = [
       "$HOME/.local/bin"
     ];
     packages = [
+      pkgs.socat
+      pkgs.bubblewrap
       pkgs.taplo
       pkgs.gcc
       pkgs.gnumake
@@ -73,7 +78,7 @@
       pkgs.duf
       pkgs.xh
       pkgs.doggo
-      pkgs.yq
+      pkgs.yq-go
       pkgs.devenv
       pkgs.xdg-utils
       pkgs.wl-clipboard
@@ -82,15 +87,6 @@
       pkgs.zip
       pkgs.ast-grep
     ];
-  };
-
-  gtk = {
-    enable = true;
-    cursorTheme = {
-      name = "Simp1e";
-      package = pkgs.simp1e-cursors;
-      size = config.home.pointerCursor.size;
-    };
   };
 
   xdg = {
@@ -401,6 +397,7 @@
         };
         diff.tool = "delta";
         git.sign-on-push = true;
+        remotes.origin.auto-track-bookmarks = "glob:*";
       };
     };
     jjui = {
