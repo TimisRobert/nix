@@ -11,8 +11,8 @@
   ];
 
   home = {
-    username = "rob";
     homeDirectory = "/home/rob";
+    username = "rob";
     stateVersion = "25.11";
     pointerCursor = {
       name = "Simp1e";
@@ -28,6 +28,7 @@
       ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
       DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/podman/podman.sock";
       ENABLE_LSP_TOOL = "1";
+      TF_PLUGIN_CACHE_DIR = "$HOME/.terraform.d/plugin-cache";
     };
     sessionPath = [
       "$HOME/.local/bin"
@@ -337,7 +338,7 @@
         wallpaper = [
           {
             monitor = "";
-            path = "/home/rob/projects/nix/assets/bg.png";
+            path = "${config.home.homeDirectory}/projects/nix/assets/bg.png";
           }
         ];
       };
@@ -349,6 +350,12 @@
   };
 
   programs = {
+    nh = {
+      enable = true;
+      clean.enable = true;
+      clean.extraArgs = "--keep-since 4d --keep 3";
+      flake = "${config.home.homeDirectory}/projects/nix";
+    };
     gpg = {
       enable = true;
       scdaemonSettings = {

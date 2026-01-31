@@ -13,7 +13,7 @@
   "friendly-snippets": { "branch": "main", "commit": "6cd7280adead7f586db6fccbd15d2cac7e2188b9" },
   "gitsigns.nvim": { "branch": "main", "commit": "7010000889bfb6c26065e0b0f7f1e6aa9163edd9" },
   "godot-server.nvim": { "branch": "main", "commit": "e9a34f77d63168094f41bb4751ffd10767e01baa" },
-  "grug-far.nvim": { "branch": "main", "commit": "1f7a722a9b9f0206a345377c13e62542f484398a" },
+  "grug-far.nvim": { "branch": "main", "commit": "14babc9b4520184d9696ef282eb7ac20687d4373" },
   "guess-indent.nvim": { "branch": "main", "commit": "84a4987ff36798c2fc1169cbaff67960aed9776f" },
   "heirline.nvim": { "branch": "master", "commit": "fae936abb5e0345b85c3a03ecf38525b0828b992" },
   "helm-ls.nvim": { "branch": "main", "commit": "f0b9a1723890971a6d84890b50dbf5f40974ea1b" },

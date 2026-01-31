@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   config,
   ...
 }: {
@@ -12,12 +11,7 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    gc = {
-      automatic = true;
-      dates = "12:00";
-      options = "--delete-older-than 14d";
-    };
-    settings = {
+        settings = {
       trusted-users = ["rob"];
       download-buffer-size = 500 * 1024 * 1024;
     };
