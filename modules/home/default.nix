@@ -26,7 +26,6 @@
       MOZ_ENABLE_WAYLAND = "1";
       NIXOS_OZONE_WL = "1";
       ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
-      DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/podman/podman.sock";
       ENABLE_LSP_TOOL = "1";
       TF_PLUGIN_CACHE_DIR = "$HOME/.terraform.d/plugin-cache";
     };
@@ -291,6 +290,8 @@
       enableSshSupport = true;
       defaultCacheTtlSsh = 86400;
       defaultCacheTtl = 86400;
+      maxCacheTtl = 86400;
+      maxCacheTtlSsh = 86400;
       pinentry = {
         package = pkgs.pinentry-qt;
       };

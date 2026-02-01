@@ -11,7 +11,7 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-        settings = {
+    settings = {
       trusted-users = ["rob"];
       download-buffer-size = 500 * 1024 * 1024;
     };
@@ -99,12 +99,17 @@
       enable = true;
       registries.insecure = ["localhost"];
     };
-    podman = {
-      enable = true;
-      dockerSocket.enable = true;
-      dockerCompat = true;
-      extraPackages = [pkgs.zfs];
-      defaultNetwork.settings.dns_enabled = true;
+    docker = {
+      enable = false;
+
+      rootless = {
+        enable = true;
+        setSocketVariable = true;
+        daemon.settings = {
+          features.cdi = true;
+          dns = ["1.1.1.1" "8.8.8.8"];
+        };
+      };
     };
   };
 
