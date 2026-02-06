@@ -8,7 +8,10 @@
     };
     gamemode = {
       enable = true;
-      settings.cpu.park_cores = "yes";
+      settings = {
+        general.renice = 10;
+        cpu.park_cores = "yes";
+      };
     };
   };
 

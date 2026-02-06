@@ -277,6 +277,10 @@
       settings = {
         General = {
           Experimental = true;
+          FastConnectable = true;
+          Enable = "Source,Sink,Media,Socket";
+          AutoEnable = true;
+          ControllerMode = "bredr";
         };
       };
     };
