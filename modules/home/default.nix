@@ -33,11 +33,8 @@
       "$HOME/.local/bin"
     ];
     packages = [
-      pkgs.socat
-      pkgs.bubblewrap
+      # LSPs
       pkgs.taplo
-      pkgs.gcc
-      pkgs.gnumake
       pkgs.inotify-tools
       pkgs.ghostscript
       pkgs.nodejs
@@ -48,7 +45,7 @@
       pkgs.ruff
       pkgs.terraform-ls
       pkgs.nodePackages."@astrojs/language-server"
-      pkgs.zls
+      # pkgs.zls
       pkgs.yaml-language-server
       pkgs.tailwindcss-language-server
       pkgs.emmet-ls
@@ -67,6 +64,7 @@
       pkgs.selene
       pkgs.rust-analyzer
       pkgs.clang-tools
+      pkgs.just-lsp
       # ---
       pkgs.protonvpn-gui
       pkgs.quickemu
@@ -277,9 +275,6 @@
         "$mainMod SHIFT, 8, movetoworkspace, 8"
         "$mainMod SHIFT, 9, movetoworkspace, 9"
         "$mainMod SHIFT, 0, movetoworkspace, 10"
-
-        # Microphone toggle
-        ", F12, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
       ];
     };
   };
@@ -351,6 +346,14 @@
   };
 
   programs = {
+    nushell = {
+      enable = true;
+      plugins = [
+        pkgs.nushellPlugins.polars
+        pkgs.nushellPlugins.formats
+        pkgs.nushellPlugins.query
+      ];
+    };
     nh = {
       enable = true;
       clean.enable = true;
@@ -418,6 +421,10 @@
       enable = true;
       defaultEditor = true;
       vimAlias = true;
+      extraPackages = [
+        pkgs.gcc
+        pkgs.gnumake
+      ];
     };
     firefox = {
       enable = true;

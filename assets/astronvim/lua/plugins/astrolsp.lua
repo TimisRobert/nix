@@ -49,7 +49,7 @@ return {
       "emmet_ls",
       "tailwindcss",
       "yamlls",
-      "zls",
+      -- "zls",
       "cssls",
       "expert",
       "nixd",
@@ -57,6 +57,7 @@ return {
       "terraformls",
       "dockerls",
       "rust_analyzer",
+      "just",
     },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
