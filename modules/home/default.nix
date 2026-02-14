@@ -7,6 +7,7 @@
 }: {
   imports = [
     inputs.nix-index-database.homeModules.nix-index
+    inputs.stylix.homeModules.stylix
     ./dictate.nix
   ];
 
@@ -14,13 +15,6 @@
     homeDirectory = "/home/rob";
     username = "rob";
     stateVersion = "25.11";
-    pointerCursor = {
-      name = "Simp1e";
-      gtk.enable = true;
-      hyprcursor.enable = true;
-      package = pkgs.simp1e-cursors;
-      size = 16;
-    };
     sessionVariables = {
       WLR_RENDERER = "vulkan";
       MOZ_ENABLE_WAYLAND = "1";
@@ -94,8 +88,6 @@
       download = "${config.home.homeDirectory}/downloads";
     };
     configFile = {
-      "jjui/themes/kanagawa.toml".source = ../../assets/jjui_kanagawa.toml;
-      "fish/themes/Kanagawa.theme".source = ../../assets/kanagawa.theme;
       "pipewire/pipewire.conf.d/99-rnnoise.conf" = {
         text = builtins.toJSON {
           "context.modules" = [
@@ -142,6 +134,36 @@
     mimeApps.enable = true;
   };
 
+  stylix = {
+    enable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
+    image = ../../assets/bg.png;
+    cursor = {
+      name = "Simp1e";
+      package = pkgs.simp1e-cursors;
+      size = 16;
+    };
+    fonts = {
+      monospace = {
+        name = "Mononoki Nerd Font Mono";
+        package = pkgs.nerd-fonts.mononoki;
+      };
+      sizes = {
+        terminal = 12;
+        desktop = 12;
+        popups = 10;
+        applications = 11;
+      };
+    };
+    opacity.terminal = 0.95;
+    polarity = "dark";
+    targets = {
+      neovim.enable = false;
+      waybar.addCss = false;
+      firefox.profileNames = ["default"];
+    };
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -156,19 +178,13 @@
       binde = , j, resizeactive, 0 10
       bind = , escape, submap, reset
       submap=reset
-
-      binds {
-          drag_threshold = 10
-      }
-      bindm = $mainMod ALT, mouse:272, movewindow
-      bindc = $mainMod ALT, mouse:272, togglefloating
     '';
 
     settings = {
       "$mainMod" = "SUPER";
       "$terminal" = "kitty";
       "$menu" = "rofi -show drun";
-      "$fileManager" = "nnn";
+      "$fileManager" = "lf";
       monitor = lib.mkDefault ",highres,auto,1";
 
       exec-once = [
@@ -180,7 +196,6 @@
       general = {
         border_size = 1;
         gaps_out = 10;
-        "col.active_border" = "0x76946AF1";
       };
 
       decoration = {
@@ -193,7 +208,10 @@
 
       animations = {
         enabled = true;
-        bezier = ["fluid, 0.15, 0.85, 0.25, 1" "snappy, 0.3, 1, 0.4, 1"];
+        bezier = [
+          "fluid, 0.15, 0.85, 0.25, 1"
+          "snappy, 0.3, 1, 0.4, 1"
+        ];
         animation = [
           "windows, 1, 3, fluid, popin 5%"
           "windowsOut, 1, 2.5, snappy"
@@ -224,6 +242,14 @@
         force_split = 2;
         preserve_split = true;
       };
+
+      bindm = [
+        "$mainMod ALT, mouse:272, movewindow"
+      ];
+
+      bindc = [
+        "$mainMod ALT, mouse:272, togglefloating"
+      ];
 
       bind = [
         "$mainMod, return, exec, $terminal"
@@ -330,14 +356,6 @@
     };
     hyprpaper = {
       enable = true;
-      settings = {
-        wallpaper = [
-          {
-            monitor = "";
-            path = "${config.home.homeDirectory}/projects/nix/assets/bg.png";
-          }
-        ];
-      };
     };
     mako = {
       enable = true;
@@ -367,22 +385,12 @@
       };
     };
     nix-index-database.comma.enable = true;
-    k9s = {
-      enable = true;
-      settings = {
-        k9s = {
-          ui.skin = "kanagawa";
-        };
-      };
-      skins = {
-        kanagawa = ../../assets/k9s_kanagawa.yaml;
-      };
-    };
+    k9s.enable = true;
     bottom.enable = true;
     lsd.enable = true;
     bat.enable = true;
     jq.enable = true;
-    nnn.enable = true;
+    lf.enable = true;
     zathura.enable = true;
     zoxide.enable = true;
     fzf.enable = true;
@@ -411,12 +419,7 @@
         remotes.origin.auto-track-bookmarks = "glob:*";
       };
     };
-    jjui = {
-      enable = true;
-      settings = {
-        ui.theme = "kanagawa";
-      };
-    };
+    jjui.enable = true;
     neovim = {
       enable = true;
       defaultEditor = true;
@@ -458,13 +461,7 @@
     };
     kitty = {
       enable = true;
-      themeFile = "kanagawa";
-      font = {
-        name = "Mononoki Mono";
-        size = 12;
-      };
       settings = {
-        background_opacity = 0.95;
         modify_font = "cell_height +1px";
       };
     };
@@ -481,7 +478,6 @@
     };
     rofi = {
       enable = true;
-      theme = ../../assets/rofi.rasi;
     };
     lazygit = {
       enable = true;
@@ -500,7 +496,7 @@
       enable = true;
       interactiveShellInit = ''
         set fish_greeting
-        fish_config theme choose Kanagawa
+        set -U fish_color_param ${config.lib.stylix.colors.base06}
       '';
     };
     hyprlock = {
@@ -508,7 +504,7 @@
       settings = {
         background = {
           monitor = "";
-          path = "screenshot";
+          path = lib.mkForce "screenshot";
           blur_passes = 1;
           blur_size = 7;
           noise = 1.17e-2;
@@ -529,11 +525,7 @@
           dots_size = 0.2;
           dots_spacing = 0.2;
           dots_center = true;
-          outer_color = "rgba(0, 0, 0, 0)";
-          inner_color = "rgba(100, 114, 125, 0.4)";
-          font_color = "rgb(200, 200, 200)";
           fade_on_empty = false;
-          font_family = "Mononoki Mono";
           placeholder_text = ''<i><span foreground="##ffffff99">Input password...</span></i>'';
           fail_text = ''<i><span foreground="##ffffff99">$PAMFAIL</span></i>'';
           hide_input = false;
@@ -547,9 +539,7 @@
           {
             monitor = "";
             text = ''cmd[update:1000] echo "<span>$(date +"%H:%M")</span>"'';
-            color = "rgba(216, 222, 233, 0.70)";
             font_size = 130;
-            font_family = "Mononoki Mono";
             position = "0, 240";
             halign = "center";
             valign = "center";
@@ -558,9 +548,7 @@
           {
             monitor = "";
             text = ''cmd[update:1000] echo -e "$(date +"%A, %d %B")"'';
-            color = "rgba(216, 222, 233, 0.70)";
             font_size = 30;
-            font_family = "Mononoki Mono";
             position = "0, 105";
             halign = "center";
             valign = "center";

@@ -23,7 +23,7 @@
     waybar = {
       enable = true;
       systemd.enable = true;
-      style = ../../../assets/waybar.css;
+      style = builtins.readFile ../../../assets/waybar.css;
       settings = [
         {
           layer = "top";

@@ -1,20 +1,3 @@
-@define-color background #1F1F28;
-@define-color foreground #DCD7BA;
-@define-color color1 #16161D;
-@define-color color2 #C34043;
-@define-color color3 #C0A36E;
-@define-color color4 #76946A;
-@define-color color5 #7E9CD8;
-@define-color color6 #957FB8;
-@define-color color7 #dcd7ba;
-@define-color color8 #6A9589;
-@define-color color9 #98BB6C;
-
-* {
-  font-family: "Mononoki Nerd Font Mono";
-  font-size: 12pt;
-}
-
 window#waybar {
   all: unset;
 }
@@ -23,7 +6,7 @@ window#waybar {
   padding: 7px;
   margin: 8 0 0 8;
   border-radius: 10px;
-  background: alpha(@background, 0.95);
+  background: alpha(@base00, 0.95);
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.6);
 }
 
@@ -31,7 +14,7 @@ window#waybar {
   padding: 7px;
   margin: 8 0 0 0;
   border-radius: 10px;
-  background: alpha(@background, 0.95);
+  background: alpha(@base00, 0.95);
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.6);
 }
 
@@ -39,13 +22,13 @@ window#waybar {
   padding: 7px;
   margin: 8 8 0 0;
   border-radius: 10px;
-  background: alpha(@background, 0.95);
+  background: alpha(@base00, 0.95);
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.6);
 }
 
 tooltip {
-  background: @background;
-  color: @color7;
+  background: @base00;
+  color: @base05;
 }
 
 #clock:hover,
@@ -56,12 +39,12 @@ tooltip {
 #memory:hover,
 #wireplumber:hover #temperature:hover {
   transition: all 0.3s ease;
-  color: @color9;
+  color: @base0B;
 }
 
 #clock {
   padding: 0px 5px;
-  color: @color7;
+  color: @base05;
   transition: all 0.3s ease;
 }
 
@@ -72,12 +55,12 @@ tooltip {
 #workspaces button {
   all: unset;
   padding: 0px 5px;
-  color: alpha(@color9, 0.4);
+  color: alpha(@base0B, 0.4);
   transition: all 0.2s ease;
 }
 
 #workspaces button.active {
-  color: @color9;
+  color: @base0B;
   border: none;
   text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
 }
@@ -89,7 +72,7 @@ tooltip {
 }
 
 #workspaces button.empty.active {
-  color: @color9;
+  color: @base0B;
   border: none;
   text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
 }
@@ -120,7 +103,7 @@ tooltip {
 #temperature {
   padding: 0px 7px;
   transition: all 0.3s ease;
-  color: @color7;
+  color: @base05;
 }
 
 #tray {

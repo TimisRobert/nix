@@ -12,6 +12,9 @@
 
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
+    stylix.url = "github:nix-community/stylix";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {nixpkgs, ...}:
@@ -37,8 +40,6 @@
                     inherit inputs;
                     system = "x86_64-linux";
                   };
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
                   backupFileExtension = "backup";
                   users.rob = import ./modules/home/desktop;
                 };
@@ -63,8 +64,6 @@
                     inherit inputs;
                     system = "x86_64-linux";
                   };
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
                   backupFileExtension = "backup";
                   users.rob = import ./modules/home/laptop;
                 };
