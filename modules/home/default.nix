@@ -2,7 +2,6 @@
   config,
   pkgs,
   inputs,
-  lib,
   ...
 }: {
   imports = [
@@ -60,21 +59,18 @@
       pkgs.clang-tools
       pkgs.just-lsp
       # ---
+      pkgs.xwayland-satellite
       pkgs.protonvpn-gui
-      pkgs.quickemu
       pkgs.docker-compose
       pkgs.kubectl
-      pkgs.kubernetes-helm
+      pkgs.awscli2
       pkgs.duckdb
       pkgs.gping
       pkgs.duf
       pkgs.xh
       pkgs.doggo
       pkgs.yq-go
-      pkgs.devenv
       pkgs.xdg-utils
-      pkgs.wl-clipboard
-      pkgs.grimblast
       pkgs.unzip
       pkgs.zip
       pkgs.ast-grep
@@ -139,7 +135,7 @@
     base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
     image = ../../assets/bg.png;
     cursor = {
-      name = "Simp1e";
+      name = "Simp1e-Adw-Dark";
       package = pkgs.simp1e-cursors;
       size = 16;
     };
@@ -164,147 +160,6 @@
     };
   };
 
-  wayland.windowManager.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-    systemd.enable = false;
-
-    extraConfig = ''
-      bind = $mainMod, r, submap, resize
-      submap=resize
-      binde = , h, resizeactive, -10 0
-      binde = , l, resizeactive, 10 0
-      binde = , k, resizeactive, 0 -10
-      binde = , j, resizeactive, 0 10
-      bind = , escape, submap, reset
-      submap=reset
-    '';
-
-    settings = {
-      "$mainMod" = "SUPER";
-      "$terminal" = "kitty";
-      "$menu" = "rofi -show drun";
-      "$fileManager" = "lf";
-      monitor = lib.mkDefault ",highres,auto,1";
-
-      exec-once = [
-        "hyprlock"
-      ];
-
-      ecosystem.no_update_news = true;
-
-      general = {
-        border_size = 1;
-        gaps_out = 10;
-      };
-
-      decoration = {
-        rounding = 8;
-      };
-
-      layerrule = [
-        "no_anim on, match:namespace selection"
-      ];
-
-      animations = {
-        enabled = true;
-        bezier = [
-          "fluid, 0.15, 0.85, 0.25, 1"
-          "snappy, 0.3, 1, 0.4, 1"
-        ];
-        animation = [
-          "windows, 1, 3, fluid, popin 5%"
-          "windowsOut, 1, 2.5, snappy"
-          "fade, 1, 4, snappy"
-          "workspaces, 1, 1.7, snappy, slide"
-          "specialWorkspace, 1, 4, fluid, slidefadevert -35%"
-          "layers, 1, 2, snappy, popin 70%"
-        ];
-      };
-
-      misc = {
-        disable_hyprland_logo = true;
-        disable_splash_rendering = true;
-      };
-
-      cursor = {
-        inactive_timeout = 5;
-        persistent_warps = true;
-      };
-
-      input = {
-        kb_layout = "us";
-        kb_options = "ctrl:nocaps";
-        accel_profile = "flat";
-      };
-
-      dwindle = {
-        force_split = 2;
-        preserve_split = true;
-      };
-
-      bindm = [
-        "$mainMod ALT, mouse:272, movewindow"
-      ];
-
-      bindc = [
-        "$mainMod ALT, mouse:272, togglefloating"
-      ];
-
-      bind = [
-        "$mainMod, return, exec, $terminal"
-        "$mainMod, d, exec, $menu"
-
-        "$mainMod, c, killactive,"
-        "$mainMod ALT, l, exec, hyprlock"
-
-        "$mainMod, f, fullscreen,"
-
-        "$mainMod, space, togglesplit,"
-        "$mainMod, v, layoutmsg, preselect d"
-        "$mainMod, b, layoutmsg, preselect r"
-
-        "$mainMod, p, exec, grimblast copy area"
-
-        # Move focus with mainMod + arrow keys
-        "$mainMod, h, movefocus, l"
-        "$mainMod, l, movefocus, r"
-        "$mainMod, k, movefocus, u"
-        "$mainMod, j, movefocus, d"
-
-        # Move window
-        "$mainMod SHIFT, h, movewindow, l"
-        "$mainMod SHIFT, l, movewindow, r"
-        "$mainMod SHIFT, k, movewindow, u"
-        "$mainMod SHIFT, j, movewindow, d"
-
-        # Switch workspaces with mainMod + [0-9]
-        "$mainMod, 1, workspace, 1"
-        "$mainMod, 2, workspace, 2"
-        "$mainMod, 3, workspace, 3"
-        "$mainMod, 4, workspace, 4"
-        "$mainMod, 5, workspace, 5"
-        "$mainMod, 6, workspace, 6"
-        "$mainMod, 7, workspace, 7"
-        "$mainMod, 8, workspace, 8"
-        "$mainMod, 9, workspace, 9"
-        "$mainMod, 0, workspace, 10"
-
-        # Move active window to a workspace with mainMod + SHIFT + [0-9]
-        "$mainMod SHIFT, 1, movetoworkspace, 1"
-        "$mainMod SHIFT, 2, movetoworkspace, 2"
-        "$mainMod SHIFT, 3, movetoworkspace, 3"
-        "$mainMod SHIFT, 4, movetoworkspace, 4"
-        "$mainMod SHIFT, 5, movetoworkspace, 5"
-        "$mainMod SHIFT, 6, movetoworkspace, 6"
-        "$mainMod SHIFT, 7, movetoworkspace, 7"
-        "$mainMod SHIFT, 8, movetoworkspace, 8"
-        "$mainMod SHIFT, 9, movetoworkspace, 9"
-        "$mainMod SHIFT, 0, movetoworkspace, 10"
-      ];
-    };
-  };
-
   services = {
     gpg-agent = {
       enable = true;
@@ -316,50 +171,6 @@
       pinentry = {
         package = pkgs.pinentry-qt;
       };
-    };
-    gammastep = {
-      enable = true;
-      provider = "manual";
-      temperature = {
-        day = 6500;
-        night = 4500;
-      };
-      latitude = 45.30;
-      longitude = 9.5;
-    };
-    hypridle = {
-      enable = true;
-      settings = {
-        general = {
-          ignore_dbus_inhibit = false;
-          lock_cmd = "pidof hyprlock || hyprlock";
-          after_sleep_cmd = "hyprctl dispatch dpms on";
-          before_sleep_cmd = "loginctl lock-session";
-        };
-
-        listener = [
-          {
-            timeout = 900;
-            on-timeout = "loginctl lock-session";
-          }
-          {
-            timeout = 1200;
-            on-timeout = "hyprctl dispatch dpms off";
-            on-resume = "hyprctl dispatch dpms on";
-          }
-          {
-            timeout = 18000;
-            on-timeout = "systemctl suspend";
-          }
-        ];
-      };
-    };
-    hyprpaper = {
-      enable = true;
-    };
-    mako = {
-      enable = true;
-      settings.default-timeout = 5000;
     };
   };
 
@@ -386,7 +197,6 @@
     };
     nix-index-database.comma.enable = true;
     k9s.enable = true;
-    bottom.enable = true;
     lsd.enable = true;
     bat.enable = true;
     jq.enable = true;
@@ -395,7 +205,6 @@
     zoxide.enable = true;
     fzf.enable = true;
     fd.enable = true;
-    htop.enable = true;
     direnv.enable = true;
     ripgrep.enable = true;
     jujutsu = {
@@ -461,9 +270,6 @@
     };
     kitty = {
       enable = true;
-      settings = {
-        modify_font = "cell_height +1px";
-      };
     };
     starship = {
       enable = true;
@@ -475,9 +281,6 @@
           truncation_length = 0;
         };
       };
-    };
-    rofi = {
-      enable = true;
     };
     lazygit = {
       enable = true;
@@ -498,63 +301,6 @@
         set fish_greeting
         set -U fish_color_param ${config.lib.stylix.colors.base06}
       '';
-    };
-    hyprlock = {
-      enable = true;
-      settings = {
-        background = {
-          monitor = "";
-          path = lib.mkForce "screenshot";
-          blur_passes = 1;
-          blur_size = 7;
-          noise = 1.17e-2;
-        };
-
-        # General
-        general = {
-          no_fade_in = false;
-          grace = 0;
-          disable_loading_bar = false;
-        };
-
-        # Input field
-        input-field = {
-          monitor = "";
-          size = "250, 60";
-          outline_thickness = 2;
-          dots_size = 0.2;
-          dots_spacing = 0.2;
-          dots_center = true;
-          fade_on_empty = false;
-          placeholder_text = ''<i><span foreground="##ffffff99">Input password...</span></i>'';
-          fail_text = ''<i><span foreground="##ffffff99">$PAMFAIL</span></i>'';
-          hide_input = false;
-          position = "0, -225";
-          halign = "center";
-          valign = "center";
-        };
-
-        label = [
-          # Time
-          {
-            monitor = "";
-            text = ''cmd[update:1000] echo "<span>$(date +"%H:%M")</span>"'';
-            font_size = 130;
-            position = "0, 240";
-            halign = "center";
-            valign = "center";
-          }
-          # Date
-          {
-            monitor = "";
-            text = ''cmd[update:1000] echo -e "$(date +"%A, %d %B")"'';
-            font_size = 30;
-            position = "0, 105";
-            halign = "center";
-            valign = "center";
-          }
-        ];
-      };
     };
   };
 }

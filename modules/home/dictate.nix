@@ -12,8 +12,4 @@
   '';
 in {
   home.packages = [dictate];
-
-  wayland.windowManager.hyprland.settings.bind = [
-    "$mainMod, z, exec, dictate"
-  ];
 }

@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  inputs,
   ...
 }: {
   imports = [
@@ -130,10 +131,21 @@
       enable = true;
       vendor.config.enable = false;
     };
-    hyprland = {
+    niri = {
       enable = true;
-      xwayland.enable = true;
-      withUWSM = true;
+    };
+    dms-shell = {
+      enable = true;
+      quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
+      systemd = {
+        enable = true;
+        restartIfChanged = true;
+      };
+      enableDynamicTheming = false;
+    };
+    dsearch = {
+      enable = true;
+      systemd.enable = true;
     };
   };
 
@@ -163,7 +175,7 @@
   };
 
   environment = {
-    systemPackages = [pkgs.vim pkgs.dnsmasq];
+    systemPackages = [pkgs.vim pkgs.dnsmasq pkgs.simp1e-cursors];
     etc = {
       machine-id.source = "/persist/etc/machine-id";
       "NetworkManager/system-connections".source = "/persist/etc/NetworkManager/system-connections/";
@@ -183,7 +195,6 @@
         };
       };
       services = {
-        hyprlock.enable = true;
         login.u2fAuth = true;
         sudo.u2fAuth = true;
       };
@@ -217,15 +228,34 @@
     };
     devmon.enable = true;
     udisks2.enable = true;
-    greetd = {
+    displayManager.dms-greeter = {
       enable = true;
-      settings = rec {
-        initial_session = {
-          command = "uwsm start ${config.programs.hyprland.package}/share/wayland-sessions/hyprland.desktop";
-          user = "rob";
-        };
-        default_session = initial_session;
-      };
+      compositor.name = "niri";
+      compositor.customConfig = ''
+        hotkey-overlay {
+          skip-at-startup
+        }
+        environment {
+          DMS_RUN_GREETER "1"
+        }
+        gestures {
+          hot-corners {
+            off
+          }
+        }
+        layout {
+          background-color "#000000"
+        }
+        cursor {
+          xcursor-theme "Simp1e-Adw-Dark"
+          xcursor-size 16
+        }
+        output "DP-5" {
+          mode "5120x1440@239.761"
+          scale 1
+        }
+      '';
+      configHome = "/home/rob";
     };
     pipewire = {
       enable = true;
