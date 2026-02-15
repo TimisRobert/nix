@@ -195,14 +195,15 @@
         };
       };
       services = {
-        login.u2fAuth = true;
+        login = {
+          u2fAuth = true;
+        };
         sudo.u2fAuth = true;
       };
     };
   };
 
   services = {
-    spice-vdagentd.enable = true;
     udev.packages = [pkgs.yubikey-personalization];
     pcscd.enable = true;
     tailscale.enable = true;

@@ -61,6 +61,8 @@
       # ---
       pkgs.xwayland-satellite
       pkgs.protonvpn-gui
+      pkgs.proton-pass-cli
+      pkgs.wl-clipboard
       pkgs.docker-compose
       pkgs.kubectl
       pkgs.awscli2
@@ -80,8 +82,13 @@
   xdg = {
     enable = true;
     userDirs = {
+      enable = true;
+      desktop = "${config.home.homeDirectory}/desktop";
       documents = "${config.home.homeDirectory}/documents";
       download = "${config.home.homeDirectory}/downloads";
+      music = "${config.home.homeDirectory}/music";
+      pictures = "${config.home.homeDirectory}/pictures";
+      videos = "${config.home.homeDirectory}/videos";
     };
     configFile = {
       "pipewire/pipewire.conf.d/99-rnnoise.conf" = {
@@ -133,7 +140,6 @@
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
-    image = ../../assets/bg.png;
     cursor = {
       name = "Simp1e-Adw-Dark";
       package = pkgs.simp1e-cursors;

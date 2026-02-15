@@ -43,6 +43,7 @@
                     inherit inputs;
                     system = "x86_64-linux";
                   };
+                  useGlobalPkgs = true;
                   backupFileExtension = "backup";
                   users.rob = import ./modules/home/desktop;
                 };
@@ -67,6 +68,7 @@
                     inherit inputs;
                     system = "x86_64-linux";
                   };
+                  useGlobalPkgs = true;
                   backupFileExtension = "backup";
                   users.rob = import ./modules/home/laptop;
                 };
