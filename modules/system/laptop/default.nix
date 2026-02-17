@@ -10,8 +10,5 @@
     # };
   };
 
-  networking = {
-    hostId = "f7c80e5b";
-    hostName = "laptop";
-  };
+  networking.hostName = "laptop";
 }

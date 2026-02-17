@@ -6,6 +6,8 @@
 }: {
   imports = [
     ./pam_keyinit.nix
+    inputs.dms.nixosModules.dank-material-shell
+    inputs.dms.nixosModules.greeter
   ];
 
   nix = {
@@ -36,23 +38,9 @@
       timeout = 0;
       efi.canTouchEfiVariables = true;
     };
-    supportedFilesystems = ["zfs"];
-
     initrd = {
       verbose = false;
-      systemd = {
-        enable = true;
-        services.rollback = {
-          wantedBy = ["initrd.target"];
-          after = ["zfs-import-zpool.service"];
-          before = ["sysroot.mount"];
-          path = [pkgs.zfs];
-          description = "Rollback ZFS datasets";
-          serviceConfig.Type = "oneshot";
-          unitConfig.DefaultDependencies = "no";
-          script = "zfs rollback -r zpool/root@blank";
-        };
-      };
+      systemd.enable = true;
     };
 
     plymouth = {
@@ -134,14 +122,41 @@
     niri = {
       enable = true;
     };
-    dms-shell = {
+    dank-material-shell = {
       enable = true;
-      quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
       systemd = {
         enable = true;
         restartIfChanged = true;
       };
-      enableDynamicTheming = false;
+    };
+    dank-material-shell.greeter = {
+      enable = true;
+      compositor.name = "niri";
+      compositor.customConfig = ''
+        hotkey-overlay {
+          skip-at-startup
+        }
+        environment {
+          DMS_RUN_GREETER "1"
+        }
+        gestures {
+          hot-corners {
+            off
+          }
+        }
+        layout {
+          background-color "#000000"
+        }
+        cursor {
+          xcursor-theme "Simp1e-Adw-Dark"
+          xcursor-size 16
+        }
+        output "DP-5" {
+          mode "5120x1440@239.761"
+          scale 1
+        }
+      '';
+      configHome = "/home/rob";
     };
     dsearch = {
       enable = true;
@@ -208,16 +223,6 @@
     pcscd.enable = true;
     tailscale.enable = true;
     fwupd.enable = true;
-    zfs = {
-      autoSnapshot = {
-        enable = true;
-      };
-      autoScrub = {
-        enable = true;
-        interval = "14:00 Europe/Rome";
-      };
-      trim.enable = true;
-    };
     resolved = {
       enable = true;
       settings = {
@@ -229,35 +234,6 @@
     };
     devmon.enable = true;
     udisks2.enable = true;
-    displayManager.dms-greeter = {
-      enable = true;
-      compositor.name = "niri";
-      compositor.customConfig = ''
-        hotkey-overlay {
-          skip-at-startup
-        }
-        environment {
-          DMS_RUN_GREETER "1"
-        }
-        gestures {
-          hot-corners {
-            off
-          }
-        }
-        layout {
-          background-color "#000000"
-        }
-        cursor {
-          xcursor-theme "Simp1e-Adw-Dark"
-          xcursor-size 16
-        }
-        output "DP-5" {
-          mode "5120x1440@239.761"
-          scale 1
-        }
-      '';
-      configHome = "/home/rob";
-    };
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -319,8 +295,11 @@
 
   fonts = {
     enableDefaultPackages = true;
-    packages = [pkgs.mononoki pkgs.nerd-fonts.mononoki];
-    fontconfig.defaultFonts = {monospace = ["Mononoki Nerd Font Mono"];};
+    packages = [pkgs.mononoki pkgs.nerd-fonts.mononoki pkgs.inter];
+    fontconfig.defaultFonts = {
+      monospace = ["Mononoki Nerd Font Mono"];
+      sansSerif = ["Inter"];
+    };
   };
 
   system = {

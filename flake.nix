@@ -16,8 +16,13 @@
     stylix.url = "github:nix-community/stylix";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
 
-    quickshell.url = "git+https://git.outfoxxed.me/quickshell/quickshell";
-    quickshell.inputs.nixpkgs.follows = "nixpkgs";
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
+
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {nixpkgs, ...}:
@@ -59,6 +64,8 @@
             modules = [
               inputs.home-manager.nixosModules.home-manager
               inputs.sops-nix.nixosModules.sops
+              inputs.disko.nixosModules.disko
+              ./modules/disko/laptop.nix
               ./modules/system
               ./modules/system/laptop
               ./modules/hardware/laptop
