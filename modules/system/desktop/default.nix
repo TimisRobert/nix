@@ -1,5 +1,29 @@
 {config, pkgs, ...}: {
   programs = {
+    dank-material-shell.greeter.compositor.customConfig = ''
+      hotkey-overlay {
+        skip-at-startup
+      }
+      environment {
+        DMS_RUN_GREETER "1"
+      }
+      gestures {
+        hot-corners {
+          off
+        }
+      }
+      layout {
+        background-color "#000000"
+      }
+      cursor {
+        xcursor-theme "Simp1e-Adw-Dark"
+        xcursor-size 16
+      }
+      output "DP-5" {
+        mode "5120x1440@239.761"
+        scale 1
+      }
+    '';
     steam = {
       enable = true;
       remotePlay.openFirewall = true;
