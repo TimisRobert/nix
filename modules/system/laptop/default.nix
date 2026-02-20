@@ -1,14 +1,10 @@
 {...}: {
+  boot.kernelParams = ["systemd.machine_id=REPLACEME"];
   powerManagement = {
     enable = true;
     powertop.enable = true;
   };
 
-  environment = {
-    # persistence = {
-    #   "/persist/laptop" = {directories = ["/var/cache/powertop"];};
-    # };
-  };
 
   programs.dank-material-shell.greeter.compositor.customConfig = ''
     hotkey-overlay {

@@ -1,28 +1,22 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
 
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts.url = "https://flakehub.com/f/hercules-ci/flake-parts/0.1";
 
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "https://flakehub.com/f/nix-community/home-manager/0.1";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    sops-nix.url = "github:Mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-
-    nix-index-database.url = "github:nix-community/nix-index-database";
-    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
-
-    stylix.url = "github:nix-community/stylix";
+    stylix.url = "https://flakehub.com/f/nix-community/stylix/0.1";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
 
-    disko.url = "github:nix-community/disko";
+    disko.url = "https://flakehub.com/f/nix-community/disko/*";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
-    dms = {
-      url = "github:AvengeMedia/DankMaterialShell/stable";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    dms.url = "github:AvengeMedia/DankMaterialShell/stable";
+    dms.inputs.nixpkgs.follows = "nixpkgs";
+
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
   };
 
   outputs = inputs @ {nixpkgs, ...}:
@@ -37,8 +31,8 @@
               system = "x86_64-linux";
             };
             modules = [
+              inputs.determinate.nixosModules.default
               inputs.home-manager.nixosModules.home-manager
-              inputs.sops-nix.nixosModules.sops
               inputs.disko.nixosModules.disko
               ./modules/disko/desktop.nix
               ./modules/system
@@ -64,8 +58,8 @@
               system = "x86_64-linux";
             };
             modules = [
+              inputs.determinate.nixosModules.default
               inputs.home-manager.nixosModules.home-manager
-              inputs.sops-nix.nixosModules.sops
               inputs.disko.nixosModules.disko
               ./modules/disko/laptop.nix
               ./modules/system

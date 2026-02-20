@@ -5,10 +5,8 @@
   ...
 }: {
   imports = [
-    inputs.nix-index-database.homeModules.nix-index
     inputs.stylix.homeModules.stylix
     ./dms.nix
-    ./dictate.nix
   ];
 
   home = {
@@ -59,7 +57,8 @@
       pkgs.rust-analyzer
       pkgs.clang-tools
       pkgs.just-lsp
-      # ---
+      # Misc
+      pkgs.mpc
       pkgs.xwayland-satellite
       pkgs.protonvpn-gui
       pkgs.proton-pass-cli
@@ -201,6 +200,17 @@
         package = pkgs.pinentry-qt;
       };
     };
+    mpd = {
+      enable = true;
+      network.startWhenNeeded = true;
+      extraConfig = ''
+        audio_output {
+          type "pipewire"
+          name "PipeWire Sound Server"
+        }
+      '';
+    };
+    mpd-mpris.enable = true;
   };
 
   programs = {
@@ -224,7 +234,6 @@
         disable-ccid = true;
       };
     };
-    nix-index-database.comma.enable = true;
     k9s.enable = true;
     lsd.enable = true;
     bat.enable = true;

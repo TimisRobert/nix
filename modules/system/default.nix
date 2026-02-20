@@ -1,6 +1,5 @@
 {
   pkgs,
-  config,
   inputs,
   ...
 }: {
@@ -11,9 +10,6 @@
   ];
 
   nix = {
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
     settings = {
       trusted-users = ["rob"];
       download-buffer-size = 500 * 1024 * 1024;
@@ -69,6 +65,7 @@
     networkmanager = {
       enable = true;
       dns = "systemd-resolved";
+      settings.keyfile.path = "/var/lib/NetworkManager/system-connections";
     };
     nftables.enable = true;
     firewall = {
@@ -128,27 +125,15 @@
         enable = true;
         restartIfChanged = true;
       };
-    };
-    dank-material-shell.greeter = {
-      enable = true;
-      compositor.name = "niri";
-      configHome = "/home/rob";
+      greeter = {
+        enable = true;
+        compositor.name = "niri";
+        configHome = "/home/rob";
+      };
     };
     dsearch = {
       enable = true;
       systemd.enable = true;
-    };
-  };
-
-  sops = {
-    defaultSopsFile = ../../secrets.yaml;
-    age = {
-      sshKeyPaths = ["/persist/ssh/ssh_host_ed25519_key"];
-    };
-    secrets = {
-      hashed_password = {
-        neededForUsers = true;
-      };
     };
   };
 
@@ -161,16 +146,12 @@
       shell = pkgs.fish;
       isNormalUser = true;
       extraGroups = ["networkmanager" "video" "wheel" "libvirtd"];
-      hashedPasswordFile = config.sops.secrets.hashed_password.path;
+      hashedPassword = "$6$/Tnn1OsR9WY/nlF/$AO2RGm.2NYUeh9LIPH8Zl2IachZXSnG/iRM1y0R.TkD00BnwztAQrYOS/XcVQfSy7MYqRDK5mvhDGLQDzm2AU/";
     };
   };
 
   environment = {
     systemPackages = [pkgs.vim pkgs.dnsmasq pkgs.simp1e-cursors];
-    etc = {
-      machine-id.source = "/persist/etc/machine-id";
-      "NetworkManager/system-connections".source = "/persist/etc/NetworkManager/system-connections/";
-    };
   };
 
   security = {
@@ -195,6 +176,19 @@
   };
 
   services = {
+    btrbk.instances.local = {
+      onCalendar = "*:0/10";
+      settings = {
+        snapshot_preserve_min = "2h";
+        snapshot_preserve = "24h 30d";
+        snapshot_dir = "/.snapshots";
+        subvolume."/home" = {};
+      };
+    };
+    btrfs.autoScrub = {
+      enable = true;
+      fileSystems = ["/nix"];
+    };
     udev.packages = [pkgs.yubikey-personalization];
     pcscd.enable = true;
     tailscale.enable = true;
