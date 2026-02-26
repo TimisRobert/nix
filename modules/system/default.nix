@@ -20,6 +20,53 @@
     allowUnfree = true;
   };
 
+  stylix = {
+    enable = true;
+    base16Scheme = {
+      scheme = "Kanagawa";
+      author = "rebelot (https://github.com/rebelot)";
+      base00 = "1F1F28";
+      base01 = "2A2A37";
+      base02 = "223249";
+      base03 = "727169";
+      base04 = "C8C093";
+      base05 = "DCD7BA";
+      base06 = "938AA9";
+      base07 = "363646";
+      base08 = "C34043";
+      base09 = "FFA066";
+      base0A = "DCA561";
+      base0B = "98BB6C";
+      base0C = "7FB4CA";
+      base0D = "7E9CD8";
+      base0E = "957FB8";
+      base0F = "D27E99";
+    };
+    cursor = {
+      name = "Simp1e-Adw-Dark";
+      package = pkgs.simp1e-cursors;
+      size = 16;
+    };
+    fonts = {
+      monospace = {
+        name = "Mononoki Nerd Font Mono";
+        package = pkgs.nerd-fonts.mononoki;
+      };
+      sansSerif = {
+        name = "Inter";
+        package = pkgs.inter;
+      };
+      sizes = {
+        terminal = 12;
+        desktop = 12;
+        popups = 10;
+        applications = 11;
+      };
+    };
+    opacity.terminal = 0.95;
+    polarity = "dark";
+  };
+
   boot = {
     binfmt = {
       emulatedSystems = ["aarch64-linux"];
@@ -39,13 +86,7 @@
       systemd.enable = true;
     };
 
-    plymouth = {
-      enable = true;
-      theme = "hexagon_red";
-      themePackages = [
-        (pkgs.adi1090x-plymouth-themes.override {selected_themes = ["hexagon_red"];})
-      ];
-    };
+    plymouth.enable = true;
 
     consoleLogLevel = 3;
     kernelParams = [

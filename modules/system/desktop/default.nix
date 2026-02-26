@@ -1,4 +1,8 @@
-{config, pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   programs = {
     dank-material-shell.greeter.compositor.customConfig = ''
       hotkey-overlay {
@@ -29,6 +33,9 @@
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
       localNetworkGameTransfers.openFirewall = true;
+      extraCompatPackages = [
+        pkgs.proton-ge-bin
+      ];
     };
     gamemode = {
       enable = true;
@@ -70,13 +77,15 @@
     sleep.extraConfig = ''
       SuspendState=mem
     '';
-    mounts = [{
-      what = "/dev/mapper/external";
-      where = "/mnt/external";
-      type = "btrfs";
-      options = "subvolid=5,compress=zstd,noatime";
-      wantedBy = ["dev-mapper-external.device"];
-    }];
+    mounts = [
+      {
+        what = "/dev/mapper/external";
+        where = "/mnt/external";
+        type = "btrfs";
+        options = "subvolid=5,compress=zstd,noatime";
+        wantedBy = ["dev-mapper-external.device"];
+      }
+    ];
     services.btrbk-external-backup = {
       description = "btrbk backup to external disk";
       after = ["mnt-external.mount"];
@@ -97,6 +106,7 @@
   };
 
   services = {
+    power-profiles-daemon.enable = false;
     btrbk.instances.external = {
       onCalendar = null;
       settings = {

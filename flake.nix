@@ -33,6 +33,7 @@
             modules = [
               inputs.determinate.nixosModules.default
               inputs.home-manager.nixosModules.home-manager
+              inputs.stylix.nixosModules.stylix
               inputs.disko.nixosModules.disko
               ./modules/disko/desktop.nix
               ./modules/system
@@ -60,6 +61,7 @@
             modules = [
               inputs.determinate.nixosModules.default
               inputs.home-manager.nixosModules.home-manager
+              inputs.stylix.nixosModules.stylix
               inputs.disko.nixosModules.disko
               ./modules/disko/laptop.nix
               ./modules/system
