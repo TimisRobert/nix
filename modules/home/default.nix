@@ -234,6 +234,13 @@
         "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin
         "ghmbeldphafepmbegfdlkpapadhbakde" # proton pass
       ];
+      commandLineArgs = [
+        "--enable-features=AcceleratedVideoEncoder,VaapiOnNvidiaGPUs,VaapiIgnoreDriverChecks,Vulkan,DefaultANGLEVulkan,VulkanFromANGLE"
+        "--enable-features=VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport"
+        "--enable-features=UseMultiPlaneFormatForHardwareVideo"
+        "--ignore-gpu-blocklist"
+        "--enable-zero-copy"
+      ];
     };
     delta = {
       enable = true;

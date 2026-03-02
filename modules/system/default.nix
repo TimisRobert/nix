@@ -304,15 +304,6 @@
     enableRedistributableFirmware = true;
   };
 
-  fonts = {
-    enableDefaultPackages = true;
-    packages = [pkgs.mononoki pkgs.nerd-fonts.mononoki pkgs.inter];
-    fontconfig.defaultFonts = {
-      monospace = ["Mononoki Nerd Font Mono"];
-      sansSerif = ["Inter"];
-    };
-  };
-
   system = {
     stateVersion = "25.05";
   };
