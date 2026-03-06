@@ -74,9 +74,7 @@
   };
 
   systemd = {
-    sleep.extraConfig = ''
-      SuspendState=mem
-    '';
+    sleep.settings.Sleep.SuspendState = "mem";
     mounts = [
       {
         what = "/dev/mapper/external";

@@ -16,8 +16,9 @@
     };
   };
 
-  nixpkgs.config = {
-    allowUnfree = true;
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = [(import ../../packages)];
   };
 
   stylix = {
@@ -118,10 +119,6 @@
   systemd.services."user@".serviceConfig.Delegate = "cpu cpuset io memory pids";
 
   virtualisation = {
-    libvirtd = {
-      enable = true;
-      qemu.swtpm.enable = true;
-    };
     containers = {
       enable = true;
       registries.insecure = ["localhost"];
@@ -145,13 +142,11 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   programs = {
-    virt-manager.enable = true;
     appimage = {
       enable = true;
       binfmt = true;
     };
     nix-ld.enable = true;
-    light.enable = true;
     fuse.userAllowOther = true;
     fish = {
       enable = true;
@@ -186,7 +181,7 @@
     users.rob = {
       shell = pkgs.fish;
       isNormalUser = true;
-      extraGroups = ["networkmanager" "video" "wheel" "libvirtd"];
+      extraGroups = ["networkmanager" "video" "wheel"];
       hashedPassword = "$6$/Tnn1OsR9WY/nlF/$AO2RGm.2NYUeh9LIPH8Zl2IachZXSnG/iRM1y0R.TkD00BnwztAQrYOS/XcVQfSy7MYqRDK5mvhDGLQDzm2AU/";
     };
   };
@@ -210,6 +205,7 @@
       services = {
         login = {
           u2fAuth = true;
+          enableGnomeKeyring = true;
         };
         sudo.u2fAuth = true;
       };
