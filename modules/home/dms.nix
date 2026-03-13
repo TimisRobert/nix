@@ -6,7 +6,6 @@
   programs.dank-material-shell = {
     enable = true;
 
-
     settings = {
       registryThemeVariants = {};
       matugenScheme = "scheme-tonal-spot";
@@ -78,14 +77,46 @@
       privacyShowCameraIcon = false;
       privacyShowScreenShareIcon = false;
       controlCenterWidgets = [
-        {id = "volumeSlider"; enabled = true; width = 50;}
-        {id = "brightnessSlider"; enabled = true; width = 50;}
-        {id = "wifi"; enabled = true; width = 50;}
-        {id = "bluetooth"; enabled = true; width = 50;}
-        {id = "audioOutput"; enabled = true; width = 50;}
-        {id = "audioInput"; enabled = true; width = 50;}
-        {id = "nightMode"; enabled = true; width = 50;}
-        {id = "darkMode"; enabled = true; width = 50;}
+        {
+          id = "volumeSlider";
+          enabled = true;
+          width = 50;
+        }
+        {
+          id = "brightnessSlider";
+          enabled = true;
+          width = 50;
+        }
+        {
+          id = "wifi";
+          enabled = true;
+          width = 50;
+        }
+        {
+          id = "bluetooth";
+          enabled = true;
+          width = 50;
+        }
+        {
+          id = "audioOutput";
+          enabled = true;
+          width = 50;
+        }
+        {
+          id = "audioInput";
+          enabled = true;
+          width = 50;
+        }
+        {
+          id = "nightMode";
+          enabled = true;
+          width = 50;
+        }
+        {
+          id = "darkMode";
+          enabled = true;
+          width = 50;
+        }
       ];
       showWorkspaceIndex = false;
       showWorkspaceName = false;
@@ -401,9 +432,16 @@
       desktopClockTransparency = 0.8;
       desktopClockColorMode = "primary";
       desktopClockCustomColor = {
-        r = 1; g = 1; b = 1; a = 1;
-        hsvHue = -1; hsvSaturation = 0; hsvValue = 1;
-        hslHue = -1; hslSaturation = 0; hslLightness = 1;
+        r = 1;
+        g = 1;
+        b = 1;
+        a = 1;
+        hsvHue = -1;
+        hsvSaturation = 0;
+        hsvValue = 1;
+        hslHue = -1;
+        hslSaturation = 0;
+        hslLightness = 1;
         valid = true;
       };
       desktopClockShowDate = true;
@@ -419,9 +457,16 @@
       systemMonitorTransparency = 0.8;
       systemMonitorColorMode = "primary";
       systemMonitorCustomColor = {
-        r = 1; g = 1; b = 1; a = 1;
-        hsvHue = -1; hsvSaturation = 0; hsvValue = 1;
-        hslHue = -1; hslSaturation = 0; hslLightness = 1;
+        r = 1;
+        g = 1;
+        b = 1;
+        a = 1;
+        hsvHue = -1;
+        hsvSaturation = 0;
+        hsvValue = 1;
+        hslHue = -1;
+        hslSaturation = 0;
+        hslLightness = 1;
         valid = true;
       };
       systemMonitorShowCpu = true;

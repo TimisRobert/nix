@@ -20,6 +20,8 @@ return {
       -- Set a formatter
       null_ls.builtins.formatting.opentofu_fmt,
       null_ls.builtins.formatting.stylua,
+      null_ls.builtins.formatting.buf,
+      null_ls.builtins.diagnostics.buf,
       null_ls.builtins.diagnostics.selene,
       null_ls.builtins.code_actions.statix,
       null_ls.builtins.formatting.alejandra,

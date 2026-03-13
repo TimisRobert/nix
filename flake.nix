@@ -31,7 +31,6 @@
               system = "x86_64-linux";
             };
             modules = [
-
               inputs.determinate.nixosModules.default
               inputs.home-manager.nixosModules.home-manager
               inputs.stylix.nixosModules.stylix
@@ -60,7 +59,6 @@
               system = "x86_64-linux";
             };
             modules = [
-
               inputs.determinate.nixosModules.default
               inputs.home-manager.nixosModules.home-manager
               inputs.stylix.nixosModules.stylix

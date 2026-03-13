@@ -50,6 +50,7 @@ return {
       "tailwindcss",
       "yamlls",
       -- "zls",
+      "buf_ls",
       "cssls",
       "expert",
       "nixd",
@@ -62,6 +63,9 @@ return {
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
+      clangd = {
+        filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "hpp" },
+      },
       pyright = {
         settings = {
           pyright = {
