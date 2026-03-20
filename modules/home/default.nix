@@ -246,7 +246,7 @@
         "ghmbeldphafepmbegfdlkpapadhbakde" # proton pass
       ];
       commandLineArgs = [
-        "--enable-features=AcceleratedVideoEncoder,VaapiOnNvidiaGPUs,VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport,UseMultiPlaneFormatForHardwareVideo"
+        "--enable-features=AcceleratedVideoEncoder,VaapiOnNvidiaGPUs,VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport"
         "--ignore-gpu-blocklist"
         "--enable-zero-copy"
         "--password-store=basic"

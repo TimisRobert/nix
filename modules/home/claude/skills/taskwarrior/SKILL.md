@@ -1,9 +1,14 @@
 ---
 name: taskwarrior
-description: Manage tasks using Taskwarrior. Use when the user mentions "taskwarrior" or "task warrior" explicitly.
+description: Manage tasks using Taskwarrior. Use when the user mentions "taskwarrior" or "task warrior" explicitly, or asks to work on the next task.
+user_invocable: true
 ---
 
 Use the `task` CLI (Taskwarrior 3) via Bash to manage tasks. Always show output after mutations.
+
+The `task` command works within the sandbox — do not disable it.
+
+For any operation that requires confirmation (delete, undo, bulk modifications, etc.), pass `rc.confirmation=off` to suppress interactive prompts. Example: `task rc.confirmation=off ID delete`.
 
 ## Adding Tasks
 
@@ -32,6 +37,13 @@ task ID annotate "note"
 task ID delete
 ```
 
-## Reminders
+## Next Task
 
-Taskwarrior hooks automatically schedule desktop notifications via `systemd-run` for any task with a `due` date. Modifying or completing a task updates/cancels the notification. No manual notification setup needed — just set a due date.
+When asked to work on the next task or pick a task:
+
+1. Filter by the current directory name as the project: `task project:<dirname> next limit:1` (get dirname from `basename` of cwd). NEVER run `task next` without a project filter.
+2. Read task details and annotations: `task <ID> info`
+3. Analyze the codebase to understand what's needed
+4. Enter plan mode with a step-by-step implementation plan
+5. Wait for user approval before starting work
+

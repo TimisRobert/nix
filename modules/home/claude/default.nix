@@ -28,9 +28,20 @@ in {
             const path = require("path");
 
             const green = "\x1b[32m";
+            const yellow = "\x1b[33m";
+            const red = "\x1b[31m";
             const magenta = "\x1b[35m";
             const blue = "\x1b[34m";
+            const dim = "\x1b[2m";
             const reset = "\x1b[0m";
+
+            const miniBar = (pct, len) => {
+              const filled = Math.floor(pct * len / 100);
+              return Array.from({ length: len }, (_, i) => {
+                const c = i < filled ? (pct < 50 ? green : pct < 80 ? yellow : red) : dim;
+                return c + "▮" + reset;
+              }).join("");
+            };
 
             let input = "";
             process.stdin.on("data", (c) => (input += c));
@@ -52,15 +63,21 @@ in {
                 if (label) jjInfo = " (" + magenta + label + reset + ")";
               } catch {}
 
-              const pct = Math.floor(data.context_window?.used_percentage || 0);
-              const dots = 10;
-              const filled = Math.floor(pct * dots / 100);
-              const bar = Array.from({ length: dots }, (_, i) => {
-                const c = i < filled ? (i < 5 ? green : i < 8 ? "\x1b[33m" : "\x1b[31m") : "\x1b[2m";
-                return c + "●" + reset;
-              }).join("");
+              const ctxPct = Math.floor(data.context_window?.used_percentage || 0);
+              const ctxBar = miniBar(ctxPct, 10);
 
-              process.stdout.write(green + dir + reset + jjInfo + " " + bar + " " + blue + pct + "%" + reset);
+              const rl = data.rate_limits;
+              let rateInfo = "";
+              if (rl) {
+                const h5 = Math.round(rl.five_hour?.used_percentage ?? 0);
+                const d7 = Math.round(rl.seven_day?.used_percentage ?? 0);
+                const col = (p) => p < 50 ? green : p < 80 ? yellow : red;
+                rateInfo = dim + " │ " + reset
+                  + dim + "5h " + reset + miniBar(h5, 5) + " " + col(h5) + h5 + "%" + reset
+                  + dim + " 7d " + reset + miniBar(d7, 5) + " " + col(d7) + d7 + "%" + reset;
+              }
+
+              process.stdout.write(green + dir + reset + jjInfo + dim + " │ " + reset + ctxBar + " " + blue + ctxPct + "%" + reset + rateInfo);
             });
           '');
       };

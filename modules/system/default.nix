@@ -68,6 +68,10 @@
     polarity = "dark";
   };
 
+  fonts.packages = [
+    pkgs.noto-fonts-cjk-sans
+  ];
+
   boot = {
     binfmt = {
       emulatedSystems = ["aarch64-linux"];
