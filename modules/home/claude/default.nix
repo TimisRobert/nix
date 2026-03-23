@@ -13,7 +13,6 @@ in {
       effort = "auto";
       permissions = {
         allow = [
-          "Bash(ctx7 *)"
         ];
         deny = [];
         ask = [];
@@ -93,6 +92,7 @@ in {
         filesystem = {
           allowWrite = [
             "~/.local/share/task"
+            "~/.claude/projects"
           ];
         };
         seccomp = {

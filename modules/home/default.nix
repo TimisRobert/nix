@@ -11,7 +11,7 @@
   home = {
     homeDirectory = "/home/rob";
     username = "rob";
-    stateVersion = "25.11";
+    stateVersion = "26.05";
     sessionVariables = {
       WLR_RENDERER = "vulkan";
       MOZ_ENABLE_WAYLAND = "1";
@@ -56,9 +56,8 @@
       pkgs.rust-analyzer
       pkgs.clang-tools
       pkgs.just-lsp
-      pkgs.ctx7
-      pkgs.sandbox-runtime
       # Misc
+      pkgs.sandbox-runtime
       pkgs.bubblewrap
       pkgs.socat
       pkgs.mpc
@@ -80,7 +79,6 @@
       pkgs.zip
       pkgs.ast-grep
       pkgs.just
-      pkgs.devenv
       pkgs.sox
     ];
   };
@@ -206,7 +204,10 @@
     zoxide.enable = true;
     fzf.enable = true;
     fd.enable = true;
-    direnv.enable = true;
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
     ripgrep.enable = true;
     jujutsu = {
       enable = true;
