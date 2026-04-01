@@ -17,8 +17,8 @@
       MOZ_ENABLE_WAYLAND = "1";
       NIXOS_OZONE_WL = "1";
       ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
-      ENABLE_LSP_TOOL = "1";
       TF_PLUGIN_CACHE_DIR = "$HOME/.terraform.d/plugin-cache";
+      PROTON_PASS_LINUX_KEYRING = "dbus";
     };
     sessionPath = [
       "$HOME/.local/bin"
@@ -35,14 +35,15 @@
       pkgs.pyright
       pkgs.ruff
       pkgs.terraform-ls
-      pkgs.nodePackages."@astrojs/language-server"
+      # pkgs.nodePackages."@astrojs/language-server"
+      pkgs.beamPackages.expert
       # pkgs.zls
       pkgs.yaml-language-server
       pkgs.tailwindcss-language-server
       pkgs.emmet-ls
       pkgs.eslint
       pkgs.typescript-language-server
-      pkgs.nodePackages.prettier
+      pkgs.prettier
       pkgs.svelte-language-server
       pkgs.bash-language-server
       pkgs.shfmt
@@ -56,13 +57,13 @@
       pkgs.rust-analyzer
       pkgs.clang-tools
       pkgs.just-lsp
+      pkgs.gopls
       # Misc
-      pkgs.sandbox-runtime
       pkgs.bubblewrap
       pkgs.socat
       pkgs.mpc
       pkgs.xwayland-satellite
-      pkgs.protonvpn-gui
+      pkgs.proton-vpn-cli
       pkgs.proton-pass-cli
       pkgs.wl-clipboard
       pkgs.docker-compose
@@ -142,6 +143,23 @@
   };
 
   stylix.targets.neovim.enable = false;
+
+  systemd.user.services.gnome-keyring-unlock = {
+    Unit = {
+      Description = "Unlock GNOME Keyring with empty password";
+      After = ["dbus.socket" "graphical-session.target"];
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = pkgs.writeShellScript "unlock-keyring" ''
+        ${pkgs.dbus}/bin/dbus-send --session --dest=org.freedesktop.secrets --print-reply \
+          /org/freedesktop/secrets \
+          org.freedesktop.Secret.Service.Unlock \
+          array:objpath:/org/freedesktop/secrets/aliases/default
+      '';
+    };
+    Install.WantedBy = ["graphical-session.target"];
+  };
 
   services = {
     gpg-agent = {
@@ -247,7 +265,7 @@
         "ghmbeldphafepmbegfdlkpapadhbakde" # proton pass
       ];
       commandLineArgs = [
-        "--enable-features=AcceleratedVideoEncoder,VaapiOnNvidiaGPUs,VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport"
+        "--enable-features=AcceleratedVideoEncoder"
         "--ignore-gpu-blocklist"
         "--enable-zero-copy"
         "--password-store=basic"

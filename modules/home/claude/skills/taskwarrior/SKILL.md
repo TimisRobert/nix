@@ -41,7 +41,7 @@ task ID delete
 
 When asked to work on the next task or pick a task:
 
-1. Filter by the current directory name as the project: `task project:<dirname> next limit:1` (get dirname from `basename` of cwd). NEVER run `task next` without a project filter.
+1. Filter by the current directory name as the project: `task project:<dirname> next limit:1`. NEVER run `task next` without a project filter.
 2. Read task details and annotations: `task <ID> info`
 3. Analyze the codebase to understand what's needed
 4. Enter plan mode with a step-by-step implementation plan

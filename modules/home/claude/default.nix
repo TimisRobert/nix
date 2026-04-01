@@ -1,7 +1,4 @@
-{pkgs, ...}: let
-  srt = pkgs.sandbox-runtime;
-  srtLib = "${srt}/lib/node_modules/@anthropic-ai/sandbox-runtime";
-in {
+{pkgs, ...}: {
   programs.claude-code = {
     enable = true;
     package = null;
@@ -10,13 +7,15 @@ in {
     settings = {
       includeCoAuthoredBy = false;
       voiceEnabled = true;
-      effort = "auto";
+      effortLevel = "auto";
       permissions = {
-        allow = [
-        ];
+        allow = [];
         deny = [];
         ask = [];
         defaultMode = "default";
+      };
+      env = {
+        CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1";
       };
       statusLine = {
         type = "command";
@@ -82,28 +81,24 @@ in {
       };
       enabledPlugins = {
         "pyright-lsp@claude-plugins-official" = true;
+        "gopls-lsp@claude-plugins-official" = true;
         "typescript-lsp@claude-plugins-official" = true;
         "rust-analyzer-lsp@claude-plugins-official" = true;
+        "frontend-design@claude-plugins-official" = true;
       };
       spinnerTipsEnabled = true;
       autoUpdatesChannel = "latest";
       sandbox = {
         enabled = true;
         filesystem = {
+          denyRead = [];
           allowWrite = [
             "~/.local/share/task"
-            "~/.claude/projects"
+            "~/.claude/plans"
           ];
-        };
-        seccomp = {
-          bpfPath = "${srtLib}/vendor/seccomp/x64/unix-block.bpf";
-          applyPath = "${srtLib}/vendor/seccomp/x64/apply-seccomp";
         };
         network = {
-          allowedDomains = [
-            "*.context7.com"
-            "context7.com"
-          ];
+          allowedDomains = [];
         };
       };
     };

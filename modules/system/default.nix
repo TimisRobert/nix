@@ -4,7 +4,6 @@
   ...
 }: {
   imports = [
-    ./pam_keyinit.nix
     inputs.dms.nixosModules.dank-material-shell
     inputs.dms.nixosModules.greeter
   ];
@@ -18,7 +17,6 @@
 
   nixpkgs = {
     config.allowUnfree = true;
-    overlays = [(import ../../packages)];
   };
 
   stylix = {
@@ -134,7 +132,7 @@
         enable = true;
         setSocketVariable = true;
         daemon.settings = {
-          features.cdi = true;
+          # features.cdi = true;
           dns = ["1.1.1.1" "8.8.8.8"];
         };
       };
@@ -207,10 +205,7 @@
         };
       };
       services = {
-        login = {
-          u2fAuth = true;
-          enableGnomeKeyring = true;
-        };
+        login.u2fAuth = true;
         sudo.u2fAuth = true;
       };
     };

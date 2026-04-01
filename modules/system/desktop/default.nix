@@ -60,7 +60,7 @@
       powerManagement.enable = true;
       modesetting.enable = true;
     };
-    nvidia-container-toolkit.enable = true;
+    # nvidia-container-toolkit.enable = true;
   };
 
   users.users.rob.extraGroups = ["gamemode"];
