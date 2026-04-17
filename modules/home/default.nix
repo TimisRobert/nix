@@ -59,6 +59,56 @@
       pkgs.just-lsp
       pkgs.gopls
       # Misc
+      (pkgs.writers.writePython3Bin "unlock-keyring" {
+          libraries = [pkgs.python3Packages.pygobject3];
+          flakeIgnore = ["E501" "E402"];
+        } ''
+          import subprocess
+          import sys
+          from pathlib import Path
+
+          import gi
+          gi.require_version("Gio", "2.0")
+          gi.require_version("GLib", "2.0")
+          from gi.repository import Gio, GLib
+
+          secret_file = Path.home() / ".local/share/keyring-secret.gpg"
+          if not secret_file.exists():
+              print(f"No encrypted keyring secret found at {secret_file}", file=sys.stderr)
+              sys.exit(1)
+
+          pw = subprocess.check_output(
+              ["${pkgs.gnupg}/bin/gpg", "--quiet", "--yes", "--batch", "--decrypt", str(secret_file)]
+          ).decode().strip()
+
+          bus = Gio.bus_get_sync(Gio.BusType.SESSION)
+
+          result = bus.call_sync(
+              "org.freedesktop.secrets",
+              "/org/freedesktop/secrets",
+              "org.freedesktop.Secret.Service",
+              "OpenSession",
+              GLib.Variant("(sv)", ("plain", GLib.Variant("s", ""))),
+              GLib.VariantType("(vo)"),
+              Gio.DBusCallFlags.NONE,
+              -1,
+              None,
+          )
+          _, session_path = result.unpack()
+
+          secret = (session_path, bytes(), pw.encode(), "text/plain")
+          bus.call_sync(
+              "org.freedesktop.secrets",
+              "/org/freedesktop/secrets",
+              "org.gnome.keyring.InternalUnsupportedGuiltRiddenInterface",
+              "UnlockWithMasterPassword",
+              GLib.Variant("(o(oayays))", ("/org/freedesktop/secrets/collection/login", secret)),
+              None,
+              Gio.DBusCallFlags.NONE,
+              -1,
+              None,
+          )
+        '')
       pkgs.bubblewrap
       pkgs.socat
       pkgs.mpc
@@ -110,7 +160,7 @@
                     {
                       type = "ladspa";
                       name = "rnnoise";
-                      plugin = "${pkgs.rnnoise-plugin}/lib/ladspa/librnnoise_ladspa.so";
+                      plugin = "librnnoise_ladspa";
                       label = "noise_suppressor_mono";
                       control = {
                         "VAD Threshold (%)" = 95.0;
@@ -143,23 +193,6 @@
   };
 
   stylix.targets.neovim.enable = false;
-
-  systemd.user.services.gnome-keyring-unlock = {
-    Unit = {
-      Description = "Unlock GNOME Keyring with empty password";
-      After = ["dbus.socket" "graphical-session.target"];
-    };
-    Service = {
-      Type = "oneshot";
-      ExecStart = pkgs.writeShellScript "unlock-keyring" ''
-        ${pkgs.dbus}/bin/dbus-send --session --dest=org.freedesktop.secrets --print-reply \
-          /org/freedesktop/secrets \
-          org.freedesktop.Secret.Service.Unlock \
-          array:objpath:/org/freedesktop/secrets/aliases/default
-      '';
-    };
-    Install.WantedBy = ["graphical-session.target"];
-  };
 
   services = {
     gpg-agent = {
@@ -213,6 +246,7 @@
       enable = true;
       package = pkgs.taskwarrior3;
     };
+    btop.enable = true;
     k9s.enable = true;
     lsd.enable = true;
     bat.enable = true;
@@ -253,6 +287,7 @@
       enable = true;
       defaultEditor = true;
       vimAlias = true;
+      sideloadInitLua = true;
       extraPackages = [
         pkgs.gcc
         pkgs.gnumake

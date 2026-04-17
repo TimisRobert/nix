@@ -35,7 +35,7 @@ return {
       "expert",
       "nixd",
       "astro",
-      "terraformls",
+      -- "terraformls",
       "dockerls",
       "rust_analyzer",
       "just",

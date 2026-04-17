@@ -114,7 +114,7 @@
     nftables.enable = true;
     firewall = {
       checkReversePath = "loose";
-      trustedInterfaces = ["virbr0"];
+      trustedInterfaces = ["virbr*"];
     };
   };
 
@@ -132,7 +132,10 @@
         enable = true;
         setSocketVariable = true;
         daemon.settings = {
-          # features.cdi = true;
+          features = {
+            "cdi" = true;
+            "containerd-snapshotter" = true;
+          };
           dns = ["1.1.1.1" "8.8.8.8"];
         };
       };
@@ -176,7 +179,7 @@
   };
 
   users = {
-    mutableUsers = false;
+    mutableUsers = true;
     users.root = {
       hashedPassword = "!";
     };
@@ -184,12 +187,11 @@
       shell = pkgs.fish;
       isNormalUser = true;
       extraGroups = ["networkmanager" "video" "wheel"];
-      hashedPassword = "$6$/Tnn1OsR9WY/nlF/$AO2RGm.2NYUeh9LIPH8Zl2IachZXSnG/iRM1y0R.TkD00BnwztAQrYOS/XcVQfSy7MYqRDK5mvhDGLQDzm2AU/";
     };
   };
 
   environment = {
-    systemPackages = [pkgs.vim pkgs.dnsmasq pkgs.simp1e-cursors];
+    systemPackages = [pkgs.vim pkgs.simp1e-cursors];
   };
 
   security = {
@@ -234,6 +236,7 @@
       settings = {
         Resolve = {
           DNSOverTLS = "opportunistic";
+          FallbackDNS = ["1.1.1.1"];
           # DNSSEC = "true";
         };
       };
@@ -244,6 +247,7 @@
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
+      extraLadspaPackages = [pkgs.rnnoise-plugin.ladspa];
       pulse.enable = true;
       wireplumber.extraConfig = {
         bluetoothEnhancements = {
@@ -279,6 +283,7 @@
   };
 
   hardware = {
+    ksm.enable = true;
     gpgSmartcards.enable = true;
     graphics = {
       enable = true;

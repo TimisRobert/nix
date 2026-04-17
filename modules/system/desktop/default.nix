@@ -44,11 +44,15 @@
         cpu.park_cores = "yes";
       };
     };
+    virt-manager.enable = true;
   };
 
   boot = {
     kernelParams = ["nvidia.NVreg_EnableResizableBar=1" "systemd.machine_id=d5a63149336448f8be8455db3d62dd47"];
     initrd.kernelModules = ["nvidia" "nct6683"];
+    extraModprobeConfig = ''
+      options kvm_amd nested=1
+    '';
   };
 
   hardware = {
@@ -60,20 +64,26 @@
       powerManagement.enable = true;
       modesetting.enable = true;
     };
-    # nvidia-container-toolkit.enable = true;
+    nvidia-container-toolkit.enable = true;
   };
 
-  users.users.rob.extraGroups = ["gamemode"];
+  users.users.rob.extraGroups = ["gamemode" "libvirtd"];
 
   networking = {
     hostName = "desktop";
-    firewall = {
-      allowedTCPPorts = [6443 10250];
-      allowedUDPPorts = [8472];
+  };
+
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      qemu = {
+        swtpm.enable = true;
+      };
     };
   };
 
   systemd = {
+    tmpfiles.rules = ["L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware"];
     sleep.settings.Sleep.SuspendState = "mem";
     mounts = [
       {

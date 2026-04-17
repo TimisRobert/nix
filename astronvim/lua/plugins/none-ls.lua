@@ -8,7 +8,7 @@ return {
     local null_ls = require "null-ls"
 
     opts.sources = require("astrocore").list_insert_unique(opts.sources, {
-      null_ls.builtins.formatting.opentofu_fmt,
+      -- null_ls.builtins.formatting.opentofu_fmt,
       null_ls.builtins.formatting.stylua,
       null_ls.builtins.formatting.buf,
       null_ls.builtins.diagnostics.buf,

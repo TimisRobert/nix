@@ -2,8 +2,8 @@
   programs.claude-code = {
     enable = true;
     package = null;
-    skillsDir = ./skills;
-    memory.source = ./CLAUDE.md;
+    skills = ./skills;
+    context = ./CLAUDE.md;
     settings = {
       includeCoAuthoredBy = false;
       voiceEnabled = true;
@@ -15,7 +15,7 @@
         defaultMode = "default";
       };
       env = {
-        CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1";
+        DISABLE_AUTOUPDATER = "1";
       };
       statusLine = {
         type = "command";

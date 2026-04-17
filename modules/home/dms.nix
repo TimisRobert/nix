@@ -18,7 +18,7 @@
       cornerRadius = 12;
       niriLayoutGapsOverride = 8;
       niriLayoutRadiusOverride = 4;
-      niriLayoutBorderSize = 1;
+      niriLayoutBorderSize = 2;
       hyprlandLayoutGapsOverride = -1;
       hyprlandLayoutRadiusOverride = 4;
       hyprlandLayoutBorderSize = 1;

@@ -22,11 +22,15 @@ Infer project/tags/priority from context when not explicit. "remind me to review
 
 `today`, `tomorrow`, `monday`, `friday`, `eow` (end of week), `eom` (end of month), `eoy` (end of year), `2026-03-15`, `3d` (in 3 days), `1w` (in 1 week).
 
+## Scope listings to the current project
+
+Any read operation that surfaces tasks — `list`, `next`, `count`, `summary` — should be scoped to the current directory by default: `task project:<cwd-basename> <op>`. Only drop the filter when the user explicitly asks for something cross-project ("list all tasks", "across all projects", "global next", etc.).
+
 ## Common Operations
 
 ```
-task list
-task project:work list
+task project:<dir> list
+task project:<dir> next limit:1
 task +OVERDUE list
 task due:today list
 task due.before:eow list
@@ -41,9 +45,8 @@ task ID delete
 
 When asked to work on the next task or pick a task:
 
-1. Filter by the current directory name as the project: `task project:<dirname> next limit:1`. NEVER run `task next` without a project filter.
+1. `task project:<dirname> next limit:1` (per the scoping rule above).
 2. Read task details and annotations: `task <ID> info`
 3. Analyze the codebase to understand what's needed
 4. Enter plan mode with a step-by-step implementation plan
 5. Wait for user approval before starting work
-

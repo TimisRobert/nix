@@ -31,10 +31,4 @@ return {
       max_lines = 5,
     },
   },
-
-  {
-    "qvalentin/helm-ls.nvim",
-    ft = "helm",
-    opts = {},
-  },
 }
