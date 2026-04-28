@@ -23,7 +23,7 @@
         xcursor-theme "Simp1e-Adw-Dark"
         xcursor-size 16
       }
-      output "DP-5" {
+      output "DP-4" {
         mode "5120x1440@239.761"
         scale 1
       }

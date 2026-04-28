@@ -295,15 +295,15 @@
     };
     chromium = {
       enable = true;
-      package = pkgs.brave;
+      package = pkgs.ungoogled-chromium;
       extensions = [
         "ghmbeldphafepmbegfdlkpapadhbakde" # proton pass
+        "ddkjiahejlhfcafbddmgiahcphecmpfh"
       ];
       commandLineArgs = [
         "--enable-features=AcceleratedVideoEncoder"
         "--ignore-gpu-blocklist"
         "--enable-zero-copy"
-        "--password-store=basic"
       ];
     };
     delta = {

@@ -2,9 +2,9 @@
   imports = [../.];
 
   programs.dank-material-shell.settings = {
-    hyprlandOutputSettings."DP-5".colorManagement = "auto";
+    hyprlandOutputSettings."DP-4".colorManagement = "auto";
     bluetoothDevicePins.preferredDevice = ["80:99:E7:3D:09:9C"];
-    desktopWidgetGridSettings."DP-5".enabled = true;
+    desktopWidgetGridSettings."DP-4".enabled = true;
     desktopWidgetInstances = [
       {
         id = "dw_1771197397994_r5e1u0fvl";
@@ -36,7 +36,7 @@
           showOnOverview = false;
           showOnOverviewOnly = true;
         };
-        positions."DP-5" = {
+        positions."DP-4" = {
           width = 440;
           height = 1320;
           x = 40;
