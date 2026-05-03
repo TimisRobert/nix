@@ -1,5 +1,5 @@
 {...}: {
-  boot.kernelParams = ["systemd.machine_id=REPLACEME"];
+  boot.kernelParams = ["systemd.machine_id=2f06f12a09c142fca4fa0bc2c7bec40e"];
   powerManagement = {
     enable = true;
     powertop.enable = true;
