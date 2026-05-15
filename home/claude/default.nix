@@ -85,6 +85,7 @@
         "typescript-lsp@claude-plugins-official" = true;
         "rust-analyzer-lsp@claude-plugins-official" = true;
         "frontend-design@claude-plugins-official" = true;
+        "ai@pydantic-skills" = true;
       };
       spinnerTipsEnabled = true;
       autoUpdatesChannel = "latest";

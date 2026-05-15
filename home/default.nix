@@ -27,7 +27,6 @@
       # LSPs
       pkgs.buf
       pkgs.taplo
-      pkgs.inotify-tools
       pkgs.helm-ls
       pkgs.dockerfile-language-server
       pkgs.shellcheck
@@ -36,7 +35,7 @@
       pkgs.terraform-ls
       # pkgs.nodePackages."@astrojs/language-server"
       pkgs.beamPackages.expert
-      # pkgs.zls
+      pkgs.zls
       pkgs.yaml-language-server
       pkgs.tailwindcss-language-server
       pkgs.emmet-ls
@@ -58,56 +57,7 @@
       pkgs.just-lsp
       pkgs.gopls
       # Misc
-      (pkgs.writers.writePython3Bin "unlock-keyring" {
-          libraries = [pkgs.python3Packages.pygobject3];
-          flakeIgnore = ["E501" "E402"];
-        } ''
-          import subprocess
-          import sys
-          from pathlib import Path
-
-          import gi
-          gi.require_version("Gio", "2.0")
-          gi.require_version("GLib", "2.0")
-          from gi.repository import Gio, GLib
-
-          secret_file = Path.home() / ".local/share/keyring-secret.gpg"
-          if not secret_file.exists():
-              print(f"No encrypted keyring secret found at {secret_file}", file=sys.stderr)
-              sys.exit(1)
-
-          pw = subprocess.check_output(
-              ["${pkgs.gnupg}/bin/gpg", "--quiet", "--yes", "--batch", "--decrypt", str(secret_file)]
-          ).decode().strip()
-
-          bus = Gio.bus_get_sync(Gio.BusType.SESSION)
-
-          result = bus.call_sync(
-              "org.freedesktop.secrets",
-              "/org/freedesktop/secrets",
-              "org.freedesktop.Secret.Service",
-              "OpenSession",
-              GLib.Variant("(sv)", ("plain", GLib.Variant("s", ""))),
-              GLib.VariantType("(vo)"),
-              Gio.DBusCallFlags.NONE,
-              -1,
-              None,
-          )
-          _, session_path = result.unpack()
-
-          secret = (session_path, bytes(), pw.encode(), "text/plain")
-          bus.call_sync(
-              "org.freedesktop.secrets",
-              "/org/freedesktop/secrets",
-              "org.gnome.keyring.InternalUnsupportedGuiltRiddenInterface",
-              "UnlockWithMasterPassword",
-              GLib.Variant("(o(oayays))", ("/org/freedesktop/secrets/collection/login", secret)),
-              None,
-              Gio.DBusCallFlags.NONE,
-              -1,
-              None,
-          )
-        '')
+      pkgs.inotify-tools
       pkgs.bubblewrap
       pkgs.socat
       pkgs.mpc
@@ -130,6 +80,7 @@
       pkgs.ast-grep
       pkgs.just
       pkgs.sox
+      pkgs.devenv
     ];
   };
 

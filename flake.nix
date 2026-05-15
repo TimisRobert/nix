@@ -35,10 +35,10 @@
               inputs.home-manager.nixosModules.home-manager
               inputs.stylix.nixosModules.stylix
               inputs.disko.nixosModules.disko
-              ./modules/disko/desktop.nix
-              ./modules/system
-              ./modules/system/desktop
-              ./modules/hardware/desktop
+              ./disko/desktop.nix
+              ./system
+              ./system/desktop
+              ./hardware/desktop
               {
                 home-manager = {
                   extraSpecialArgs = {
@@ -47,7 +47,7 @@
                   };
                   useGlobalPkgs = true;
                   backupFileExtension = "backup";
-                  users.rob = import ./modules/home/desktop;
+                  users.rob = import ./home/desktop;
                 };
               }
             ];
@@ -63,10 +63,10 @@
               inputs.home-manager.nixosModules.home-manager
               inputs.stylix.nixosModules.stylix
               inputs.disko.nixosModules.disko
-              ./modules/disko/laptop.nix
-              ./modules/system
-              ./modules/system/laptop
-              ./modules/hardware/laptop
+              ./disko/laptop.nix
+              ./system
+              ./system/laptop
+              ./hardware/laptop
               {
                 home-manager = {
                   extraSpecialArgs = {
@@ -75,7 +75,7 @@
                   };
                   useGlobalPkgs = true;
                   backupFileExtension = "backup";
-                  users.rob = import ./modules/home/laptop;
+                  users.rob = import ./home/laptop;
                 };
               }
             ];

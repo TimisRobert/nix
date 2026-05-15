@@ -36,6 +36,7 @@ return {
       "nixd",
       "astro",
       -- "terraformls",
+      "zls",
       "dockerls",
       "rust_analyzer",
       "just",
