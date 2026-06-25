@@ -225,12 +225,12 @@
       soundPluggedIn = true;
       acMonitorTimeout = 600;
       acLockTimeout = 300;
-      acSuspendTimeout = 0;
+      acSuspendTimeout = 3600;
       acSuspendBehavior = 0;
       acProfileName = "";
       batteryMonitorTimeout = 0;
       batteryLockTimeout = 0;
-      batterySuspendTimeout = 0;
+      batterySuspendTimeout = 1800;
       batterySuspendBehavior = 0;
       batteryProfileName = "";
       batteryChargeLimit = 100;
@@ -380,6 +380,11 @@
           rightWidgets = [
             "systemTray"
             "clipboard"
+            {
+              id = "cpuTemp";
+              enabled = true;
+              minimumWidth = true;
+            }
             "cpuUsage"
             {
               id = "memUsage";
@@ -513,8 +518,7 @@
       nightModeAutoMode = "location";
       latitude = 45.263268;
       longitude = 9.458357;
-      weatherLocation = "Pieve Fissiraga, 26854";
-      weatherCoordinates = "45.2632680,9.4583570";
+      weatherCoordinates = "45.69500,9.67000";
       hiddenTrayIds = ["blueman" "blueman::Bluetooth Enabled" "blueman::Bluetooth Active"];
       weatherHourlyDetailed = true;
     };

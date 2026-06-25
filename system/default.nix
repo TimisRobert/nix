@@ -12,6 +12,8 @@
     settings = {
       trusted-users = ["rob"];
       download-buffer-size = 500 * 1024 * 1024;
+      substituters = ["https://cache.nixos-cuda.org"];
+      trusted-public-keys = ["cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="];
     };
   };
 
@@ -21,6 +23,7 @@
 
   stylix = {
     enable = true;
+    targets.kmscon.enable = false;
     base16Scheme = {
       scheme = "Kanagawa";
       author = "rebelot (https://github.com/rebelot)";

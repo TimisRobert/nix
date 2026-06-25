@@ -98,7 +98,12 @@
     configFile = {
       nvim.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/nix/astronvim";
     };
-    mimeApps.enable = true;
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "application/pdf" = "org.pwmt.zathura-pdf-mupdf.desktop";
+      };
+    };
   };
 
   stylix.targets.neovim.enable = false;
@@ -279,6 +284,9 @@
       enable = true;
       interactiveShellInit = ''
         set fish_greeting
+      '';
+      shellInitLast = ''
+        devenv hook fish | source
       '';
     };
   };

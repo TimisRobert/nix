@@ -7,15 +7,16 @@
     settings = {
       includeCoAuthoredBy = false;
       voiceEnabled = true;
-      effortLevel = "auto";
+      effortLevel = "xhigh";
       permissions = {
         allow = [];
         deny = [];
         ask = [];
-        defaultMode = "default";
+        defaultMode = "auto";
       };
       env = {
         DISABLE_AUTOUPDATER = "1";
+        CLAUDE_CODE_EFFORT_LEVEL = "xhigh";
       };
       statusLine = {
         type = "command";
@@ -85,7 +86,6 @@
         "typescript-lsp@claude-plugins-official" = true;
         "rust-analyzer-lsp@claude-plugins-official" = true;
         "frontend-design@claude-plugins-official" = true;
-        "ai@pydantic-skills" = true;
       };
       spinnerTipsEnabled = true;
       autoUpdatesChannel = "latest";
@@ -95,7 +95,6 @@
           denyRead = [];
           allowWrite = [
             "~/.local/share/task"
-            "~/.claude/plans"
           ];
         };
         network = {
