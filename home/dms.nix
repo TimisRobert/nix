@@ -379,6 +379,7 @@
           centerWidgets = ["music" "clock" "weather"];
           rightWidgets = [
             "systemTray"
+            "idleInhibitor"
             "clipboard"
             {
               id = "cpuTemp";

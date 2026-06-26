@@ -29,8 +29,8 @@
       author = "rebelot (https://github.com/rebelot)";
       base00 = "1F1F28";
       base01 = "2A2A37";
-      base02 = "223249";
-      base03 = "727169";
+      base02 = "363646";
+      base03 = "54546D";
       base04 = "C8C093";
       base05 = "DCD7BA";
       base06 = "938AA9";
@@ -212,6 +212,10 @@
       services = {
         login.u2fAuth = true;
         sudo.u2fAuth = true;
+        greetd = {
+          u2fAuth = true;
+          fprintAuth = true;
+        };
       };
     };
   };

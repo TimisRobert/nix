@@ -4,7 +4,6 @@
   ...
 }: {
   imports = [
-    ./claude
     ./dms.nix
   ];
 
@@ -53,6 +52,8 @@
       pkgs.stylua
       pkgs.selene
       pkgs.rust-analyzer
+      pkgs.rustfmt
+      pkgs.clippy
       pkgs.clang-tools
       pkgs.just-lsp
       pkgs.gopls
@@ -80,7 +81,8 @@
       pkgs.ast-grep
       pkgs.just
       pkgs.sox
-      pkgs.devenv
+      pkgs.nodejs
+      pkgs.python3
     ];
   };
 
@@ -160,6 +162,7 @@
       enable = true;
       package = pkgs.taskwarrior3;
     };
+    yazi.enable = true;
     btop.enable = true;
     k9s.enable = true;
     lsd.enable = true;
@@ -284,9 +287,6 @@
       enable = true;
       interactiveShellInit = ''
         set fish_greeting
-      '';
-      shellInitLast = ''
-        devenv hook fish | source
       '';
     };
   };
