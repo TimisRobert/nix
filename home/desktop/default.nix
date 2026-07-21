@@ -42,49 +42,11 @@
     ];
   };
 
-  programs.dank-material-shell.settings = {
-    hyprlandOutputSettings."DP-4".colorManagement = "auto";
-    bluetoothDevicePins.preferredDevice = ["80:99:E7:3D:09:9C"];
-    desktopWidgetGridSettings."DP-4".enabled = true;
-    desktopWidgetInstances = [
-      {
-        id = "dw_1771197397994_r5e1u0fvl";
-        widgetType = "systemMonitor";
-        name = "System Monitor";
-        enabled = true;
-        config = {
-          showHeader = true;
-          transparency = 0.8;
-          colorMode = "primary";
-          customColor = "#ffffff";
-          showCpu = true;
-          showCpuGraph = true;
-          showCpuTemp = true;
-          showGpuTemp = true;
-          gpuPciId = "10de:2c02";
-          showMemory = true;
-          showMemoryGraph = true;
-          showNetwork = true;
-          showNetworkGraph = true;
-          showDisk = true;
-          showTopProcesses = true;
-          topProcessCount = 10;
-          topProcessSortBy = "cpu";
-          layoutMode = "auto";
-          graphInterval = 300;
-          displayPreferences = ["all"];
-          showOnOverlay = false;
-          showOnOverview = false;
-          showOnOverviewOnly = true;
-        };
-        positions."DP-4" = {
-          width = 440;
-          height = 1320;
-          x = 40;
-          y = 80;
-        };
-      }
-    ];
+  xdg.configFile."niri/host.kdl".source = ../niri/desktop.kdl;
+
+  programs.noctalia.settings = {
+    system.monitor.gpu_poll_seconds = 5.0;
+    desktop_widgets.enabled = false;
   };
 
   home = {

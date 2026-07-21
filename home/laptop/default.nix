@@ -1,5 +1,9 @@
-{...}: {
+{lib, ...}: {
   imports = [../.];
+
+  xdg.configFile."niri/host.kdl".source = ../niri/laptop.kdl;
+
+  programs.noctalia.settings.idle.behavior.suspend.timeout = lib.mkForce 1800;
 
   xdg.configFile."pipewire/pipewire.conf.d/99-rnnoise.conf".text = builtins.toJSON {
     "context.modules" = [

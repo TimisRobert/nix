@@ -4,7 +4,8 @@
   ...
 }: {
   imports = [
-    ./dms.nix
+    ./niri
+    ./noctalia.nix
   ];
 
   home = {
@@ -136,14 +137,6 @@
   };
 
   programs = {
-    nushell = {
-      enable = true;
-      plugins = [
-        pkgs.nushellPlugins.polars
-        pkgs.nushellPlugins.formats
-        pkgs.nushellPlugins.query
-      ];
-    };
     nh = {
       enable = true;
       clean = {

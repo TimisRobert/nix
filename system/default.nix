@@ -1,19 +1,25 @@
 {
+  lib,
   pkgs,
   inputs,
   ...
 }: {
   imports = [
-    inputs.dms.nixosModules.dank-material-shell
-    inputs.dms.nixosModules.greeter
+    inputs.noctalia-greeter.nixosModules.default
   ];
 
   nix = {
     settings = {
       trusted-users = ["rob"];
       download-buffer-size = 500 * 1024 * 1024;
-      substituters = ["https://cache.nixos-cuda.org"];
-      trusted-public-keys = ["cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="];
+      substituters = [
+        "https://cache.nixos-cuda.org"
+        "https://noctalia.cachix.org"
+      ];
+      trusted-public-keys = [
+        "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
+        "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+      ];
     };
   };
 
@@ -24,6 +30,7 @@
   stylix = {
     enable = true;
     targets.kmscon.enable = false;
+    targets.plymouth.enable = false;
     base16Scheme = {
       scheme = "Kanagawa";
       author = "rebelot (https://github.com/rebelot)";
@@ -163,21 +170,20 @@
     niri = {
       enable = true;
     };
-    dank-material-shell = {
+    noctalia-greeter = {
       enable = true;
-      systemd = {
-        enable = true;
-        restartIfChanged = true;
+      greeter-args = "--session niri";
+      settings = {
+        auth.allow_empty_password = true;
+        appearance.scheme = "Synced";
+        cursor = {
+          theme = "Simp1e-Adw-Dark";
+          size = 16;
+          package = pkgs.simp1e-cursors;
+        };
+        idle.timeout = 300;
+        keyboard.numlock = true;
       };
-      greeter = {
-        enable = true;
-        compositor.name = "niri";
-        configHome = "/home/rob";
-      };
-    };
-    dsearch = {
-      enable = true;
-      systemd.enable = true;
     };
   };
 
@@ -215,12 +221,16 @@
         greetd = {
           u2fAuth = true;
           fprintAuth = true;
+          enableGnomeKeyring = false;
         };
       };
     };
   };
 
   services = {
+    accounts-daemon.enable = true;
+    power-profiles-daemon.enable = lib.mkDefault true;
+    upower.enable = true;
     btrbk.instances.local = {
       onCalendar = "*:0/10";
       settings = {

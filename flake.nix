@@ -13,8 +13,10 @@
     disko.url = "https://flakehub.com/f/nix-community/disko/*";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
-    dms.url = "github:AvengeMedia/DankMaterialShell/stable";
-    dms.inputs.nixpkgs.follows = "nixpkgs";
+    noctalia.url = "github:noctalia-dev/noctalia/cachix";
+
+    noctalia-greeter.url = "github:noctalia-dev/noctalia-greeter";
+    noctalia-greeter.inputs.nixpkgs.follows = "nixpkgs";
 
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
   };

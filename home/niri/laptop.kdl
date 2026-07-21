@@ -1,0 +1,8 @@
+output "eDP-1" {
+    mode "1920x1200@60"
+    scale 1
+}
+
+switch-events {
+    lid-close { spawn "noctalia" "msg" "session" "lock-and-suspend"; }
+}

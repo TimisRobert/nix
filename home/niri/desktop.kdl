@@ -1,0 +1,11 @@
+output "DP-4" {
+    mode "5120x1440@239.761"
+    scale 1
+    position x=0 y=0
+}
+
+window-rule {
+    match app-id="kitty"
+    match app-id="org.pwmt.zathura"
+    default-column-width { proportion 0.25; }
+}
