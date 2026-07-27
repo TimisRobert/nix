@@ -25,6 +25,22 @@
 
   nixpkgs = {
     config.allowUnfree = true;
+    overlays = [
+      (final: prev: {
+        niri = prev.niri.override {
+          libdisplay-info = prev.libdisplay-info.overrideAttrs (_: rec {
+            version = "0.3.0";
+            src = prev.fetchFromGitLab {
+              domain = "gitlab.freedesktop.org";
+              owner = "emersion";
+              repo = "libdisplay-info";
+              rev = version;
+              hash = "sha256-nXf2KGovNKvcchlHlzKBkAOeySMJXgxMpbi5z9gLrdc=";
+            };
+          });
+        };
+      })
+    ];
   };
 
   stylix = {
@@ -133,7 +149,14 @@
   virtualisation = {
     containers = {
       enable = true;
-      registries.insecure = ["localhost"];
+      registries.settings.registry = [
+        {location = "docker.io";}
+        {location = "quay.io";}
+        {
+          location = "localhost";
+          insecure = true;
+        }
+      ];
     };
     docker = {
       enable = false;

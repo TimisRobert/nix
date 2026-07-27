@@ -97,7 +97,10 @@
         workspaces = {
           style = "regular";
           display = "none";
-          enable_scroll = false;
+          actions = {
+            scroll_up = "none";
+            scroll_down = "none";
+          };
         };
         active_window.title_scroll = "on_hover";
         clock = {
@@ -124,20 +127,14 @@
         bluetooth.show_label = false;
         volume = {
           device = "output";
-          enable_scroll = true;
-          scroll_step = 5;
           show_label = false;
         };
         "input-volume" = {
           type = "volume";
           device = "input";
-          enable_scroll = true;
-          scroll_step = 5;
           show_label = false;
         };
         brightness = {
-          enable_scroll = true;
-          scroll_step = 5;
           show_label = false;
         };
         lock_keys = {
