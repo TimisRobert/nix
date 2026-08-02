@@ -25,22 +25,6 @@
 
   nixpkgs = {
     config.allowUnfree = true;
-    overlays = [
-      (final: prev: {
-        niri = prev.niri.override {
-          libdisplay-info = prev.libdisplay-info.overrideAttrs (_: rec {
-            version = "0.3.0";
-            src = prev.fetchFromGitLab {
-              domain = "gitlab.freedesktop.org";
-              owner = "emersion";
-              repo = "libdisplay-info";
-              rev = version;
-              hash = "sha256-nXf2KGovNKvcchlHlzKBkAOeySMJXgxMpbi5z9gLrdc=";
-            };
-          });
-        };
-      })
-    ];
   };
 
   stylix = {
@@ -144,7 +128,14 @@
     };
   };
 
-  systemd.services."user@".serviceConfig.Delegate = "cpu cpuset io memory pids";
+  systemd = {
+    oomd = {
+      enable = true;
+      enableUserSlices = true;
+      enableRootSlice = true;
+    };
+    services."user@".serviceConfig.Delegate = "cpu cpuset io memory pids";
+  };
 
   virtualisation = {
     containers = {

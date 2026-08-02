@@ -14,6 +14,8 @@
     systemd.enable = true;
 
     settings = {
+      config_version = 12;
+
       theme = {
         mode = "dark";
         source = "wallpaper";
@@ -96,7 +98,7 @@
       widget = {
         workspaces = {
           style = "regular";
-          display = "none";
+          show_labels = false;
           actions = {
             scroll_up = "none";
             scroll_down = "none";
@@ -110,17 +112,20 @@
         "cpu-temp" = {
           type = "sysmon";
           stat = "cpu_temp";
-          display = "text";
+          visualization = "none";
+          show_value = true;
         };
         cpu = {
           type = "sysmon";
           stat = "cpu_usage";
-          display = "text";
+          visualization = "none";
+          show_value = true;
         };
         memory = {
           type = "sysmon";
           stat = "ram_pct";
-          display = "text";
+          visualization = "none";
+          show_value = true;
         };
         privacy.hide_inactive = true;
         network.show_label = false;
