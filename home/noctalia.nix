@@ -1,12 +1,7 @@
 {
   config,
-  inputs,
   ...
 }: {
-  imports = [
-    inputs.noctalia.homeModules.default
-  ];
-
   stylix.targets.noctalia.enable = false;
 
   programs.noctalia = {

@@ -3,13 +3,14 @@
   pkgs,
   ...
 }: {
+  services.displayManager.noctalia-greeter.settings.output = {
+    name = "DP-4";
+    width = 5120;
+    height = 1440;
+    scale = 1.0;
+  };
+
   programs = {
-    noctalia-greeter.settings.output = {
-      name = "DP-4";
-      width = 5120;
-      height = 1440;
-      scale = 1.0;
-    };
     steam = {
       enable = true;
       remotePlay.openFirewall = true;

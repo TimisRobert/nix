@@ -1,24 +1,17 @@
 {
   lib,
   pkgs,
-  inputs,
   ...
 }: {
-  imports = [
-    inputs.noctalia-greeter.nixosModules.default
-  ];
-
   nix = {
     settings = {
       trusted-users = ["rob"];
       download-buffer-size = 500 * 1024 * 1024;
       substituters = [
         "https://cache.nixos-cuda.org"
-        "https://noctalia.cachix.org"
       ];
       trusted-public-keys = [
         "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
-        "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
       ];
     };
   };
@@ -83,7 +76,7 @@
   boot = {
     binfmt = {
       emulatedSystems = ["aarch64-linux"];
-      preferStaticEmulators = true;
+      # preferStaticEmulators = true;
     };
     loader = {
       systemd-boot = {
@@ -184,20 +177,21 @@
     niri = {
       enable = true;
     };
-    noctalia-greeter = {
-      enable = true;
-      greeter-args = "--session niri";
-      settings = {
-        auth.allow_empty_password = true;
-        appearance.scheme = "Synced";
-        cursor = {
-          theme = "Simp1e-Adw-Dark";
-          size = 16;
-          package = pkgs.simp1e-cursors;
-        };
-        idle.timeout = 300;
-        keyboard.numlock = true;
-      };
+  };
+
+  services.displayManager.noctalia-greeter = {
+    enable = true;
+    extraArgs = ["--session" "niri"];
+    cursorTheme = {
+      name = "Simp1e-Adw-Dark";
+      package = pkgs.simp1e-cursors;
+    };
+    settings = {
+      auth.allow_empty_password = true;
+      appearance.scheme = "Synced";
+      cursor.size = 16;
+      idle.timeout = 300;
+      keyboard.numlock = true;
     };
   };
 

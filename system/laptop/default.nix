@@ -5,7 +5,7 @@
     powertop.enable = true;
   };
 
-  programs.noctalia-greeter.settings.output = {
+  services.displayManager.noctalia-greeter.settings.output = {
     name = "eDP-1";
     width = 1920;
     height = 1200;

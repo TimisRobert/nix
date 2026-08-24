@@ -84,6 +84,9 @@
       pkgs.sox
       pkgs.nodejs
       pkgs.python3
+      pkgs.nono
+      pkgs.ddgr
+      pkgs.wine
     ];
   };
 
@@ -137,6 +140,9 @@
   };
 
   programs = {
+    pi-coding-agent = {
+      enable = true;
+    };
     nh = {
       enable = true;
       clean = {
@@ -268,9 +274,9 @@
       settings = {
         disableStartupPopups = true;
         git.overrideGpg = true;
-        git.pagers = [
+        git.diffRenderers = [
           {
-            pager = "delta --dark --paging=never";
+            command = "delta --dark --paging=never";
             colorArg = "always";
           }
         ];
