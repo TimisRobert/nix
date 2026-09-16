@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
+    nixpkgs.url = "https://flakehub.com/f/DeterminateSystems/nixpkgs-weekly/0.1";
 
     flake-parts.url = "https://flakehub.com/f/hercules-ci/flake-parts/0.1";
 
@@ -12,6 +12,9 @@
 
     disko.url = "https://flakehub.com/f/nix-community/disko/*";
     disko.inputs.nixpkgs.follows = "nixpkgs";
+
+    llm-agents.url = "github:numtide/llm-agents.nix";
+    llm-agents.inputs.nixpkgs.follows = "nixpkgs";
 
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
   };
@@ -43,6 +46,7 @@
                     system = "x86_64-linux";
                   };
                   useGlobalPkgs = true;
+                  useUserPackages = true;
                   backupFileExtension = "backup";
                   users.rob = import ./home/desktop;
                 };
@@ -71,6 +75,7 @@
                     system = "x86_64-linux";
                   };
                   useGlobalPkgs = true;
+                  useUserPackages = true;
                   backupFileExtension = "backup";
                   users.rob = import ./home/laptop;
                 };

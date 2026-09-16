@@ -1,4 +1,6 @@
 {
+  inputs,
+  system,
   config,
   pkgs,
   ...
@@ -17,8 +19,17 @@
       MOZ_ENABLE_WAYLAND = "1";
       NIXOS_OZONE_WL = "1";
       ELIXIR_ERL_OPTIONS = "-kernel shell_history enabled";
-      TF_PLUGIN_CACHE_DIR = "$HOME/.terraform.d/plugin-cache";
+      TF_PLUGIN_CACHE_DIR = "$HOME/.cache/.terraform.d/plugin-cache";
       PROTON_PASS_LINUX_KEYRING = "dbus";
+      CARGO_HOME = "${config.xdg.dataHome}/cargo";
+      CLAUDE_CONFIG_DIR = "${config.xdg.configHome}/claude";
+      CUDA_CACHE_PATH = "${config.xdg.cacheHome}/nv";
+      DOCKER_CONFIG = "${config.xdg.configHome}/docker";
+      MIX_XDG = "1";
+      HEX_HOME = "${config.xdg.cacheHome}/hex";
+      NPM_CONFIG_CACHE = "${config.xdg.cacheHome}/npm";
+      NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";
+      WINEPREFIX = "${config.xdg.dataHome}/wine";
     };
     sessionPath = [
       "$HOME/.local/bin"
@@ -84,9 +95,12 @@
       pkgs.sox
       pkgs.nodejs
       pkgs.python3
-      pkgs.nono
-      pkgs.ddgr
       pkgs.wine
+      pkgs.dua
+      inputs.llm-agents.packages.${system}.claude-code
+      (inputs.llm-agents.packages.${system}.claude-desktop.override {
+        commandLineArgs = "--password-store=gnome-libsecret";
+      })
     ];
   };
 
@@ -101,6 +115,10 @@
       pictures = "${config.home.homeDirectory}/pictures";
       videos = "${config.home.homeDirectory}/videos";
     };
+    dataFile."cargo/config.toml".text = ''
+      [build]
+      target-dir = "${config.xdg.cacheHome}/cargo-target"
+    '';
     configFile = {
       nvim.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/nix/astronvim";
     };
@@ -113,6 +131,10 @@
   };
 
   stylix.targets.neovim.enable = false;
+
+  gtk.gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
+
+  xresources.path = "${config.xdg.configHome}/X11/xresources";
 
   services = {
     gpg-agent = {
@@ -140,19 +162,13 @@
   };
 
   programs = {
-    pi-coding-agent = {
-      enable = true;
-    };
     nh = {
       enable = true;
-      clean = {
-        enable = true;
-        extraArgs = "--keep-since 4d --keep 3";
-      };
       flake = "${config.home.homeDirectory}/projects/nix";
     };
     gpg = {
       enable = true;
+      homedir = "${config.xdg.dataHome}/gnupg";
       scdaemonSettings = {
         disable-ccid = true;
       };

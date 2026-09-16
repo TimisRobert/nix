@@ -7,11 +7,14 @@
     settings = {
       trusted-users = ["rob"];
       download-buffer-size = 500 * 1024 * 1024;
-      substituters = [
+      use-xdg-base-directories = true;
+      extra-substituters = [
         "https://cache.nixos-cuda.org"
+        "https://cache.numtide.com"
       ];
-      trusted-public-keys = [
+      extra-trusted-public-keys = [
         "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
+        "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
       ];
     };
   };
@@ -20,21 +23,31 @@
     config.allowUnfree = true;
   };
 
+  programs.nh = {
+    enable = true;
+    clean = {
+      enable = true;
+      extraArgs = "--keep-since 4d --keep 3";
+    };
+  };
+
   stylix = {
     enable = true;
-    targets.kmscon.enable = false;
-    targets.plymouth.enable = false;
+    targets = {
+      kmscon.enable = false;
+      plymouth.enable = false;
+    };
     base16Scheme = {
       scheme = "Kanagawa";
       author = "rebelot (https://github.com/rebelot)";
       base00 = "1F1F28";
       base01 = "2A2A37";
       base02 = "363646";
-      base03 = "54546D";
+      base03 = "727169";
       base04 = "C8C093";
       base05 = "DCD7BA";
-      base06 = "938AA9";
-      base07 = "363646";
+      base06 = "E5DDB0";
+      base07 = "F2ECBC";
       base08 = "C34043";
       base09 = "FFA066";
       base0A = "DCA561";
@@ -229,7 +242,6 @@
         greetd = {
           u2fAuth = true;
           fprintAuth = true;
-          enableGnomeKeyring = false;
         };
       };
     };
@@ -254,7 +266,6 @@
     };
     udev.packages = [pkgs.yubikey-personalization];
     pcscd.enable = true;
-    tailscale.enable = true;
     fwupd.enable = true;
     resolved = {
       enable = true;
