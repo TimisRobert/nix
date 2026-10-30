@@ -27,7 +27,6 @@
         cpu.park_cores = "yes";
       };
     };
-    virt-manager.enable = true;
   };
 
   boot = {
@@ -50,23 +49,13 @@
     nvidia-container-toolkit.enable = true;
   };
 
-  users.users.rob.extraGroups = ["gamemode" "libvirtd"];
+  users.users.rob.extraGroups = ["gamemode"];
 
   networking = {
     hostName = "desktop";
   };
 
-  virtualisation = {
-    libvirtd = {
-      enable = true;
-      qemu = {
-        swtpm.enable = true;
-      };
-    };
-  };
-
   systemd = {
-    tmpfiles.rules = ["L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware"];
     sleep.settings.Sleep.SuspendState = "mem";
     mounts = [
       {

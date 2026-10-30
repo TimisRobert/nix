@@ -100,11 +100,6 @@
       timeout = 0;
       efi.canTouchEfiVariables = true;
     };
-    initrd = {
-      verbose = false;
-      systemd.enable = true;
-    };
-
     plymouth.enable = true;
 
     consoleLogLevel = 3;
@@ -255,7 +250,7 @@
       onCalendar = "*:0/10";
       settings = {
         snapshot_preserve_min = "2h";
-        snapshot_preserve = "24h 30d";
+        snapshot_preserve = "24h";
         snapshot_dir = "/.snapshots";
         subvolume."/home" = {};
       };
