@@ -25,6 +25,7 @@
       CLAUDE_CONFIG_DIR = "${config.xdg.configHome}/claude";
       CUDA_CACHE_PATH = "${config.xdg.cacheHome}/nv";
       DOCKER_CONFIG = "${config.xdg.configHome}/docker";
+      DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/podman/podman.sock";
       MIX_XDG = "1";
       HEX_HOME = "${config.xdg.cacheHome}/hex";
       NPM_CONFIG_CACHE = "${config.xdg.cacheHome}/npm";
@@ -173,10 +174,10 @@
         disable-ccid = true;
       };
     };
-    taskwarrior = {
-      enable = true;
-      package = pkgs.taskwarrior3;
-    };
+    # taskwarrior = {
+    #   enable = true;
+    #   package = pkgs.taskwarrior3;
+    # };
     yazi.enable = true;
     btop.enable = true;
     k9s.enable = true;
@@ -210,7 +211,7 @@
           key = "06CEA7F23ADCA705";
         };
         diff.tool = "delta";
-        git.sign-on-push = true;
+        revsets.git.sign-on-push = "~signed() & mine()";
         remotes.origin.auto-track-bookmarks = "glob:*";
       };
     };

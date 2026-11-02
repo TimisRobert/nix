@@ -1,7 +1,4 @@
-{
-  config,
-  ...
-}: {
+{...}: {
   stylix.targets.noctalia.enable = false;
 
   programs.noctalia = {
@@ -30,7 +27,7 @@
         font_family = "Inter";
         time_format = "{:%H:%M:%S}";
         date_format = "%A, %x";
-        screenshot.directory = config.xdg.userDirs.pictures;
+        screenshot.directory = "/tmp";
         polkit_agent = true;
         setup_wizard_enabled = false;
         settings_show_advanced = true;

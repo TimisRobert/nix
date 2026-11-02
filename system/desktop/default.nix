@@ -51,6 +51,10 @@
 
   users.users.rob.extraGroups = ["gamemode"];
 
+  environment.etc.crypttab.text = ''
+    external UUID=93d9a8a9-1a05-4a55-a669-0e2f1f71836d - fido2-device=auto,nofail
+  '';
+
   networking = {
     hostName = "desktop";
   };
@@ -66,33 +70,17 @@
         wantedBy = ["dev-mapper-external.device"];
       }
     ];
-    services.btrbk-external-backup = {
-      description = "btrbk backup to external disk";
-      after = ["mnt-external.mount"];
-      requires = ["mnt-external.mount"];
-      wantedBy = ["mnt-external.mount"];
-      path = ["/run/wrappers"];
-      serviceConfig = {
-        Type = "oneshot";
-        User = "btrbk";
-        Group = "btrbk";
-        ExecStart = "${pkgs.btrbk}/bin/btrbk -c /etc/btrbk/external.conf resume";
-        ExecStartPost = [
-          "+${pkgs.util-linux}/bin/umount /mnt/external"
-          "+${pkgs.systemd}/bin/systemd-cryptsetup detach external"
-        ];
-      };
-    };
+    services.btrbk-external.unitConfig.RequiresMountsFor = "/mnt/external";
   };
 
   services = {
     power-profiles-daemon.enable = false;
     btrbk.instances.external = {
-      onCalendar = null;
+      onCalendar = "hourly";
       settings = {
         snapshot_create = "no";
-        target_preserve_min = "7d";
-        target_preserve = "30d";
+        target_preserve_min = "latest";
+        target_preserve = "7d *m";
         snapshot_dir = "/.snapshots";
         subvolume."/home".target = "/mnt/external";
       };

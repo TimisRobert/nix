@@ -5,7 +5,6 @@
 }: {
   nix = {
     settings = {
-      trusted-users = ["rob"];
       download-buffer-size = 500 * 1024 * 1024;
       use-xdg-base-directories = true;
       extra-substituters = [
@@ -141,6 +140,7 @@
   virtualisation = {
     containers = {
       enable = true;
+      containersConf.settings.engine.image_copy_tmp_dir = "/tmp";
       registries.settings.registry = [
         {location = "docker.io";}
         {location = "quay.io";}
@@ -150,22 +150,13 @@
         }
       ];
     };
-    docker = {
-      enable = false;
-
-      rootless = {
-        enable = true;
-        setSocketVariable = true;
-        daemon.settings = {
-          features = {
-            "cdi" = true;
-            "containerd-snapshotter" = true;
-          };
-          dns = ["1.1.1.1" "8.8.8.8"];
-        };
-      };
+    podman = {
+      enable = true;
+      dockerCompat = true;
     };
   };
+
+  xdg.portal.xdgOpenUsePortal = true;
 
   time.timeZone = "Europe/Rome";
 
@@ -249,8 +240,8 @@
     btrbk.instances.local = {
       onCalendar = "*:0/10";
       settings = {
-        snapshot_preserve_min = "2h";
-        snapshot_preserve = "24h";
+        snapshot_preserve_min = "1d";
+        snapshot_preserve = "7d";
         snapshot_dir = "/.snapshots";
         subvolume."/home" = {};
       };
@@ -258,6 +249,10 @@
     btrfs.autoScrub = {
       enable = true;
       fileSystems = ["/nix"];
+    };
+    smartd = {
+      enable = true;
+      notifications.systembus-notify.enable = true;
     };
     udev.packages = [pkgs.yubikey-personalization];
     pcscd.enable = true;
