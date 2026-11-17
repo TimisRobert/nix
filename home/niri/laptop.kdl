@@ -3,6 +3,19 @@ output "eDP-1" {
     scale 1
 }
 
+layout {
+    default-column-width { proportion 1.0; }
+}
+
+window-rule {
+    match app-id="kitty"
+    default-column-width { proportion 0.5; }
+}
+
 switch-events {
     lid-close { spawn "noctalia" "msg" "session" "lock-and-suspend"; }
+}
+
+binds {
+    Mod+1 hotkey-overlay-title="Half width" { set-column-width "50%"; }
 }

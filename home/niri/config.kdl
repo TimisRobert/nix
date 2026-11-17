@@ -10,7 +10,9 @@ gestures {
 
 input {
     keyboard {
-        xkb {}
+        xkb {
+            options "ctrl:nocaps"
+        }
         numlock
     }
 
@@ -205,10 +207,6 @@ binds {
     Mod+K hotkey-overlay-title="Focus up" { focus-window-or-workspace-up; }
     Mod+Shift+J hotkey-overlay-title="Move down" { move-window-down-or-to-workspace-down; }
     Mod+Shift+K hotkey-overlay-title="Move up" { move-window-up-or-to-workspace-up; }
-    Mod+1 hotkey-overlay-title="Quarter width" { set-column-width "25%"; }
-    Mod+2 hotkey-overlay-title="Third width" { set-column-width "33.333%"; }
-    Mod+3 hotkey-overlay-title="Half width" { set-column-width "50%"; }
-    Mod+4 hotkey-overlay-title="Two-thirds width" { set-column-width "66.667%"; }
     Mod+C hotkey-overlay-title="Center column" { center-column; }
     Mod+Comma hotkey-overlay-title="Consume/expel left" { consume-or-expel-window-left; }
     Mod+F hotkey-overlay-title="Maximize" { maximize-column; }

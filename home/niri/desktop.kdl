@@ -9,3 +9,10 @@ window-rule {
     match app-id="org.pwmt.zathura"
     default-column-width { proportion 0.25; }
 }
+
+binds {
+    Mod+1 hotkey-overlay-title="Quarter width" { set-column-width "25%"; }
+    Mod+2 hotkey-overlay-title="Third width" { set-column-width "33.333%"; }
+    Mod+3 hotkey-overlay-title="Half width" { set-column-width "50%"; }
+    Mod+4 hotkey-overlay-title="Two-thirds width" { set-column-width "66.667%"; }
+}
